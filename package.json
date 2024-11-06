@@ -1,0 +1,62 @@
+{
+    "name": "@timothejoubert/timothejoubert.com",
+    "version": "1.0.0",
+    "author": "Timothé Joubert",
+    "description": "Timothé joubert personal website",
+    "engines": {
+        "node": "^20"
+    },
+    "packageManager": "pnpm@8.15.1+sha1.8adba2d20330c02d3856e18c4eb3819d1d3ca6aa",
+    "scripts": {
+        "slicemachine": "start-slicemachine",
+        "dev": "nuxi dev",
+        "build": "nuxi build",
+        "analyze": "nuxi analyze",
+        "generate": "nuxi generate",
+        "preview": "nuxi preview",
+        "prepare": "nuxi prepare && husky .husky",
+        "postinstall": "nuxi prepare",
+        "lint": "pnpm lint:js && pnpm lint:css",
+        "lint-fix": "pnpm lint:js --fix && pnpm lint:css --fix",
+        "lint:js": "eslint .",
+        "lint:css": "stylelint \"**/*.{vue,css,scss}\""
+    },
+    "devDependencies": {
+        "@nuxt/devtools": "^1.6.0",
+        "@nuxt/eslint": "^0.5.7",
+        "@nuxt/image": "1.8.1",
+        "@nuxtjs/i18n": "^9.0.0",
+        "@nuxtjs/prismic": "^3.4.3",
+        "@nuxtjs/sitemap": "^6.1.2",
+        "@nuxtjs/svg-sprite": "^1.0.2",
+        "@prismicio/types": "^0.2.9",
+        "@rezo-zero/nuxt-stories": "^0.1.16",
+        "@slicemachine/adapter-nuxt": "^0.3.55",
+        "@types/lodash": "^4.17.12",
+        "@vueuse/core": "^11.2.0",
+        "@vueuse/nuxt": "^11.2.0",
+        "eslint": "^9.13.0",
+        "husky": "^9.1.6",
+        "include-media": "^2.0.0",
+        "nuxt": "^3.14.0",
+        "postcss-html": "^1.7.0",
+        "prettier": "^3.3.3",
+        "sass": "1.79.4",
+        "slice-machine-ui": "^2.10.0",
+        "stylelint": "^16.10.0",
+        "stylelint-config-css-modules": "^4.4.0",
+        "stylelint-config-idiomatic-order": "^10.0.0",
+        "stylelint-config-standard-scss": "^13.1.0",
+        "stylelint-config-standard-vue": "^1.0.0",
+        "typescript": "~5.5.4",
+        "vite-svg-loader": "^5.1.0"
+    },
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "plyr": "^3.7.8",
+        "tiny-emitter": "^2.1.0"
+    },
+    "imports": {
+        "#root/*": "./*"
+    }
+}

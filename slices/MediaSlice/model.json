@@ -1,0 +1,93 @@
+{
+  "id": "media_slice",
+  "type": "SharedSlice",
+  "name": "MediaSlice",
+  "description": "MediaSlice",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "content": {
+          "type": "Text",
+          "config": {
+            "label": "Content",
+            "placeholder": ""
+          }
+        },
+        "full_width": {
+          "type": "Boolean",
+          "config": {
+            "label": "Full width",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
+        }
+      },
+      "items": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "internal_video": {
+          "type": "Link",
+          "config": {
+            "label": "Internal video",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "video_id": {
+          "type": "Text",
+          "config": {
+            "label": "Embed id",
+            "placeholder": "L'identifiant vidéo de la plateforme de streaming vidéo "
+          }
+        },
+        "provider_name": {
+          "type": "Select",
+          "config": {
+            "label": "Embed platform",
+            "placeholder": "Le nom de la plateforme de streaming vidéo",
+            "options": [
+              "youtube",
+              "vimeo"
+            ]
+          }
+        },
+        "display_meta": {
+          "type": "Boolean",
+          "config": {
+            "label": "Display meta",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
+        },
+        "embed_video": {
+          "type": "Embed",
+          "config": {
+            "label": "Embed video",
+            "placeholder": "Exemple youtube: Copier le lien dans le button \"Partager\""
+          }
+        }
+      }
+    }
+  ]
+}
