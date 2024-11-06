@@ -3,19 +3,19 @@ import type { PrismicDocument } from '@prismicio/types'
 
 export async function usePrismicSeoMeta(webResponse?: PrismicDocument) {
     const nuxtApp = useNuxtApp()
-    const commonContent = await usePrismicSettingsDocument()
+    const settingDocument = (await usePrismicSettingsDocument()).value
     const runtimeConfig = useRuntimeConfig()
 
-    const siteName = commonContent.value?.data?.website_name || (nuxtApp.$config.siteName as string) || ''
+    const siteName = settingDocument?.data?.site_name || (nuxtApp.$config.siteName as string) || ''
     const title = webResponse?.data?.meta_title || webResponse?.data?.title || siteName
-    const description = webResponse?.data?.meta_description || (commonContent.value?.data as { metaDescription?: string })?.metaDescription
+    const description = webResponse?.data?.meta_description || (settingDocument?.data as { metaDescription?: string })?.metaDescription
 
     const img = useImage()
-    // TODO: change img provider
     const image = () => {
-        const image = commonContent.value?.data.meta_image.url
+        const image = settingDocument?.data?.meta_image?.url
 
         if (image) {
+        // TODO: change img provider
             return img(
                 image,
                 {
@@ -32,13 +32,6 @@ export async function usePrismicSeoMeta(webResponse?: PrismicDocument) {
             return joinURL(runtimeConfig.public.site.url, '/images/share.jpg')
         }
     }
-
-    console.log('usePrismicSeoMeta',
-        siteName,
-        title,
-        description,
-        image(),
-    )
 
     useServerSeoMeta({
         description,

@@ -12,27 +12,22 @@ interface prismicDocumentRoute {
 
 export const prismicDocumentRoutes: prismicDocumentRoute[] = [
     {
-        type: 'project_listing_page',
+        type: 'home_page',
         path: '/:lang?',
+    },
+    {
+        type: 'project_listing_page',
+        path: '/:lang?/projects',
         alias: ['/:lang?', '/:lang?/projects', '/:lang?/projets'],
     },
     {
-        type: 'archive',
-        path: '/:lang?/archive',
-    },
-    {
-        type: 'home_page',
-        path: '/not-exist',
-    },
-    {
-        type: 'about',
-        path: '/:lang?/a-propos',
-        alias: ['/:lang?/bio'],
-    },
-    {
-        type: 'project',
+        type: 'project_page',
         path: '/:lang?/projets/:uid',
         alias: ['/:lang?/projects/:uid'],
+    },
+    {
+        type: 'default_page',
+        path: '/:lang?/:uid',
     },
 ]
 

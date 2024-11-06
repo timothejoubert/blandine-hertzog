@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { PageComponentProps } from '~/types/app'
 
-const props = defineProps<PageComponentProps<'project'>>()
+const props = defineProps<PageComponentProps<'project_page'>>()
 const data = props.document.data
 </script>
 

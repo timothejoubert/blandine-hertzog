@@ -8,6 +8,7 @@ export const vPrismicLinkProps = {
     to: [Object, String] as PropType<PossibleRouteReference>,
     nuxtLinkProps: Object as PropType<NuxtLinkProps>,
     custom: Boolean, // use scoped slot
+    label: String,
 }
 
 export default defineComponent({
@@ -47,7 +48,7 @@ export default defineComponent({
         }
 
         // By default return a NuxtLink component
-        return () => h(NuxtLink, attributes.value, slots.default)
+        return () => h(NuxtLink, attributes.value, slots.default || props.label)
     },
 })
 </script>

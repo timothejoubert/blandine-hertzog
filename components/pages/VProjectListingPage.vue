@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { ProjectDocument } from '~/prismicio-types'
+import type { ProjectPageDocument } from '~/prismicio-types'
 import type { PageComponentProps } from '~/types/app'
 
 const props = defineProps<PageComponentProps<'project_listing_page'>>()
 const data = props.document.data
 
 const prismicFilter = usePrismic().filter
-const fetchListing = await usePrismicFetchDocuments<ProjectDocument>('project', {
+const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('project_page', {
     orderings: {
         field: 'my.project.date',
         direction: 'desc',

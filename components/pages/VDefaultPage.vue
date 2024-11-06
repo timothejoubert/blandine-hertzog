@@ -1,14 +1,14 @@
-<script  lang="ts" setup>
+<script lang="ts" setup>
 import type { PageComponentProps } from '~/types/app'
 
-const props = defineProps<PageComponentProps<'about'>>()
+const props = defineProps<PageComponentProps<'default_page'>>()
 const data = props.document.data
 </script>
 
 <template>
     <div :class="$style.root">
-        <h1>About page: {{ data.meta_title }}</h1>
-        <pre>{{ data }}</pre>
+        <h1>Default page</h1>
+        <pre> {{ data }}</pre>
     </div>
 </template>
 

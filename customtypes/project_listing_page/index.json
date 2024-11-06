@@ -1,14 +1,41 @@
 {
   "format": "page",
   "id": "project_listing_page",
+  "label": "Project listing page",
+  "repeatable": false,
+  "status": true,
   "json": {
     "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
+      },
+      "content": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Content",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "media": {
+        "type": "Image",
+        "config": {
+          "label": "Media",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
       "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
           "choices": {}
-        },
-        "fieldset": "Slice Zone",
-        "type": "Slices"
+        }
       }
     },
     "SEO & Metadata": {
@@ -38,8 +65,5 @@
         "type": "Image"
       }
     }
-  },
-  "label": "project_listing_page",
-  "repeatable": false,
-  "status": true
+  }
 }

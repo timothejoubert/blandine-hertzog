@@ -1,31 +1,28 @@
 <script lang="ts" setup>
-const linkList = computed(() => {
-    return [
-        { link: '/', label: 'Projets' },
-        { link: '/archive', label: 'Archive' },
-        { link: '/a-propos', label: 'À propos' },
-    ]
-})
+const menu = await usePrismicMenuDocument()
+
+const links = menu.value?.data.links
+console.log(links)
 </script>
 
 <template>
     <nav
-        v-if="linkList.length"
+        v-if="links.length"
         :class="$style.root"
         aria-label="Main"
     >
         <ul :class="$style.list">
             <li
-                v-for="(item, i) in linkList"
+                v-for="(link, i) in links"
                 :key="i"
                 :class="$style.item"
             >
                 <VPrismicLink
-                    :to="item.link"
+                    :to="link.internal_page"
+                    :url="link.external_page"
                     :class="$style.link"
-                >
-                    {{ item.label }}
-                </VPrismicLink>
+                    :label="link.label"
+                />
             </li>
         </ul>
     </nav>

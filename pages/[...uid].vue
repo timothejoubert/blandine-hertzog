@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { AboutDocument, ArchiveDocument, ProjectDocument, ProjectListingPageDocument } from '~/prismicio-types'
+import type {
+    DefaultPageDocument,
+    HomePageDocument,
+    ProjectListingPageDocument,
+    ProjectPageDocument,
+} from '~/prismicio-types'
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
-
-// import {defaultPageTransition} from "~/transitions/default-page-transition";
-// definePageMeta({
-// pageTransition: defaultPageTransition,
-// })
 
 const route = useRoute()
 const pageType = getDocumentTypeByUrl(route.path)
@@ -33,15 +33,15 @@ usePage({
     alternateLinks: webResponse?.alternate_languages,
 })
 
+const homeDocument = computed(() => pageType === 'home_page' && webResponse as HomePageDocument)
 const projectListingDocument = computed(() => pageType === 'project_listing_page' && webResponse as ProjectListingPageDocument)
-const archiveDocument = computed(() => pageType === 'archive' && webResponse as ArchiveDocument)
-const aboutDocument = computed(() => pageType === 'about' && webResponse as AboutDocument)
-const projectDocument = computed(() => pageType === 'project' && webResponse as ProjectDocument)
+const projectDocument = computed(() => pageType === 'project_page' && webResponse as ProjectPageDocument)
+const defaultPageDocument = computed(() => pageType === 'default_page' && webResponse as DefaultPageDocument)
 
 const documentFind = computed(() => {
     return !!projectListingDocument.value
-        || !!archiveDocument.value
-        || !!aboutDocument.value
+        || !!homeDocument.value
+        || !!defaultPageDocument.value
         || !!projectDocument.value
 })
 
@@ -54,20 +54,20 @@ if (!documentFind.value) {
 </script>
 
 <template>
+    <LazyVHomePage
+        v-if="homeDocument"
+        :document="homeDocument"
+    />
     <LazyVProjectListingPage
-        v-if="projectListingDocument"
+        v-else-if="projectListingDocument"
         :document="projectListingDocument"
-    />
-    <LazyVArchivePage
-        v-else-if="archiveDocument"
-        :document="archiveDocument"
-    />
-    <LazyVAboutPage
-        v-else-if="aboutDocument"
-        :document="aboutDocument"
     />
     <LazyVProjectPage
         v-else-if="projectDocument"
         :document="projectDocument"
+    />
+    <LazyVDefaultPage
+        v-else-if="defaultPageDocument"
+        :document="defaultPageDocument"
     />
 </template>
