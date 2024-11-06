@@ -1,14 +1,14 @@
 <script  lang="ts" setup>
-import type { ProjectDocument } from '~/prismicio-types'
+import type { ProjectPageDocument } from '~/prismicio-types'
 
 interface VProjectCardProps {
-    project: ProjectDocument | null
+    project: ProjectPageDocument | null
 }
 
 const props = defineProps<VProjectCardProps>()
 
 const data = computed(() => props.project?.data)
-const thumbnail = computed(() => data.value?.thumbnail)
+const thumbnail = computed(() => data.value?.media)
 const title = computed(() => data.value?.title)
 </script>
 

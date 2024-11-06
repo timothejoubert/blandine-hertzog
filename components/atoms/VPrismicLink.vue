@@ -17,11 +17,6 @@ export default defineComponent({
     setup(props, { attrs, slots }) {
         const { isRelative, isExternal, url } = useLinkResolver(props.to)
 
-        // A VPrismicLink without URL or reference will render slot
-        if (!url) {
-            return () => slots.default?.() || null
-        }
-
         // Define attributes
         const attributes = computed(() => {
             const result = { ...attrs, ...props.nuxtLinkProps }
@@ -40,15 +35,21 @@ export default defineComponent({
             return result
         })
 
-        // Render scoped slot data
-        if (props.custom) {
-            const vNode = slots.default?.({ ...attributes.value })
+        return () => {
+            // A VPrismicLink without URL or reference will render slot
+            if (!url.value) {
+                return slots.default?.() || null
+            }
+            else if (props.custom) {
+            // Render scoped slot data
+                const vNode = slots.default?.({ ...attributes.value })
 
-            if (vNode?.length) return () => vNode[0]
+                if (vNode?.length) return vNode[0]
+            }
+
+            // By default return a NuxtLink component
+            return h(NuxtLink, attributes.value, slots.default || props.label)
         }
-
-        // By default return a NuxtLink component
-        return () => h(NuxtLink, attributes.value, slots.default || props.label)
     },
 })
 </script>

@@ -40,8 +40,9 @@ export default defineComponent({
         const isPicture = computed(() => !!slots.default || props.tag === 'picture')
         const src = computed(() => {
             const src = document.value?.thumbnail?.relativePath || document.value?.url
-            const queryIndex = src.indexOf('?')
+            if (!src) return
 
+            const queryIndex = src.indexOf('?')
             return queryIndex === -1 ? src : src.substring(0, queryIndex)
         })
 
@@ -68,7 +69,7 @@ export default defineComponent({
                     || (!isPicture.value
                         && !props.densities
                         && ($img.options.presets?.default?.sizes || $img.options.screens))
-                        || undefined,
+                    || undefined,
                 provider: 'imgix',
                 modifiers: {
                     ...modifiers.value,

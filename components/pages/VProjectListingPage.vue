@@ -11,7 +11,7 @@ const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('projec
         field: 'my.project.date',
         direction: 'desc',
     },
-    filters: [prismicFilter.at('my.project.favorite', true)],
+    filters: [prismicFilter.at('my.project_page.archived', true)],
 })
 
 const isPending = computed(() => fetchListing.status.value === 'pending')
