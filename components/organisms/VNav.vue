@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const menu = await usePrismicMenuDocument()
 
-const links = menu.value?.data.links
+const links = menu.value?.data.links || []
 console.log(links)
 </script>
 
@@ -19,7 +19,7 @@ console.log(links)
             >
                 <VPrismicLink
                     :to="link.internal_page"
-                    :url="link.external_page"
+                    :url="link.external_url"
                     :class="$style.link"
                     :label="link.label"
                 />

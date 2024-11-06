@@ -1,16 +1,16 @@
 import type { PrismicDocumentWithoutUID, PrismicDocument, PrismicDocumentWithUID } from '@prismicio/types'
-import type { AllDocumentTypes, SettingsDocument } from '~/prismicio-types'
+import type { AllDocumentTypes, SettingsDocument, MenuDocument } from '~/prismicio-types'
 
 // Document data
 export type DocumentWithUid = IntersectDocument<AllDocumentTypes, PrismicDocumentWithUID>
 export type DocumentWithoutUid = IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>
-export type ReachableDocument = ExcludeDocument<AllDocumentTypes, (SettingsDocument)>
+export type ReachableDocument = ExcludeDocument<AllDocumentTypes, (SettingsDocument | MenuDocument)>
 
 // Document type
 export type PrismicDocumentType = ExtractDocumentType<AllDocumentTypes>
+export type PrismicReachableDocumentType = ExtractDocumentType<ReachableDocument>
 export type DocumentWithUidType = ExtractDocumentType<DocumentWithUid>
 export type DocumentWithoutUidType = ExtractDocumentType<IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>>
-export type ReachableDocumentType = ExtractDocumentType<ReachableDocument>
 
 //  UTILS
 type PickPrismicDocument<Type extends PrismicDocumentType> = Extract<ReachableDocument, { type: Type }>
