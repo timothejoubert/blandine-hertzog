@@ -48,7 +48,7 @@ export default defineComponent({
             }
 
             // By default return a NuxtLink component
-            return h(NuxtLink, attributes.value, slots.default || props.label)
+            return h(NuxtLink, attributes.value, () => (slots.default || props.label))
         }
     },
 })

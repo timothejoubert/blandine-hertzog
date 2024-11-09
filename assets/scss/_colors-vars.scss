@@ -1,0 +1,7 @@
+html {
+    @each $color-key, $value in $colors {
+        --color-#{$color-key}: #{$value};
+
+        @include color-mixes($color-key, var(--color-#{$color-key}));
+    }
+}
