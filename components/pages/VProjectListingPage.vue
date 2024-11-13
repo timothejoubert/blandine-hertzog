@@ -22,12 +22,10 @@ console.log(projects.value)
 
 <template>
     <div :class="$style.root">
-        <header :class="$style.header">
-            <VHeader
-                :title="data.title"
-                :content="data.content"
-            />
-        </header>
+        <VHeader
+            :title="data.title"
+            :content="data.content"
+        />
         <ul
             v-if="projects.length"
             :class="$style.list"
@@ -50,8 +48,6 @@ console.log(projects.value)
 .root {
     position: relative;
 }
-
-.header {}
 
 .title {
     margin-block: initial;

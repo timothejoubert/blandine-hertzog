@@ -21,7 +21,8 @@ const slices = computed(() => {
 <template>
     <div :class="$style.root">
         <NuxtLink to="/projects">
-            <VIcon name="fullscreen" />
+            Retour
+            <VIcon name="arrow-left" />
         </NuxtLink>
         <VHeader
             :title="data.title"

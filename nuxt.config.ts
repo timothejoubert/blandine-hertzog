@@ -124,11 +124,11 @@ export default defineNuxtConfig({
                     'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
                 },
             },
-            '/_stories/**': {
-                headers: {
-                    'X-Robots-Tag': 'noindex',
-                },
-            },
+            // '/_stories/**': {
+            //     headers: {
+            //         'X-Robots-Tag': 'noindex',
+            //     },
+            // },
         },
     },
     ignore: [
@@ -136,9 +136,9 @@ export default defineNuxtConfig({
         'assets/backup/**',
     ],
     modules: [
+        '@nuxtjs/svg-sprite',
         '@nuxt/image',
         '@nuxtjs/prismic',
-        '@nuxtjs/svg-sprite',
         '@nuxt/image',
         '@nuxtjs/i18n',
         '@nuxtjs/sitemap',
@@ -146,7 +146,6 @@ export default defineNuxtConfig({
         '@nuxt/eslint',
         '@rezo-zero/nuxt-stories',
     ],
-
     i18n: {
         strategy: 'prefix_except_default',
         // I18n issue, disabled detectBrowserLanguage work only with empty obj
@@ -170,7 +169,6 @@ export default defineNuxtConfig({
             '**/*.stories.vue',
         ],
     },
-
     prismic: {
         endpoint,
         preview: '/preview',
@@ -179,13 +177,11 @@ export default defineNuxtConfig({
             routes: prismicDocumentRoutes,
         },
     },
-
     // https://github.com/nuxt-modules/svg-sprite#options
     svgSprite: {
         input: '~/assets/images/icons',
         output: '~/assets/images/sprites',
     },
-
     // https://image.nuxt.com/get-started/configuration
     image: {
         imgix: {
@@ -216,6 +212,7 @@ export default defineNuxtConfig({
     //     enabled: !isGenerateMaintenance,
     //     sources: ['/api/sitemap'],
     // },
+
     // https://eslint.nuxt.com/packages/module
     eslint: {
         config: {
@@ -224,6 +221,5 @@ export default defineNuxtConfig({
             },
         },
     },
-
     compatibilityDate: '2024-07-09',
 })
