@@ -1,20 +1,15 @@
-.raw-grid {
-    @include raw-grid;
+.grid-width {
+    @include grid-width;
 }
 
 .grid {
     @include grid;
 }
 
-.container {
-    @include container;
+.grid-fullwidth {
+    @include grid-fullwidth;
 }
 
-.grid--fullwidth {
-    @include grid(100%);
-}
-
-/* stylelint-disable no-duplicate-selectors -- Breaking change: Mixed declarations for Sass since 1.77 https://sass-lang.com/documentation/breaking-changes/mixed-decls/  */
 :root {
     & {
         @each $breakpoint, $value in $grid-widths {
@@ -65,4 +60,3 @@
         }
     }
 }
-/* stylelint-enable no-duplicate-selectors */

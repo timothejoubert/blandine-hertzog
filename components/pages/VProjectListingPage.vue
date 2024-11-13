@@ -3,7 +3,7 @@ import type { ProjectPageDocument } from '~/prismicio-types'
 import type { PageComponentProps } from '~/types/app'
 
 const props = defineProps<PageComponentProps<'project_listing_page'>>()
-const data = props.document.data
+const data = computed(() => props.document.data)
 
 const prismicFilter = usePrismic().filter
 const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('project_page', {
@@ -11,31 +11,38 @@ const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('projec
         field: 'my.project.date',
         direction: 'desc',
     },
-    filters: [prismicFilter.at('my.project_page.archived', true)],
+    filters: [prismicFilter.at('my.project_page.archived', false)],
 })
 
 const isPending = computed(() => fetchListing.status.value === 'pending')
 const projects = computed(() => fetchListing.data.value?.results || [])
+
+console.log(projects.value)
 </script>
 
 <template>
     <div :class="$style.root">
-        <h1>Project listing page: {{ data.meta_title }}</h1>
-        <div>isPending: {{ isPending }}</div>
-        <ol
+        <header :class="$style.header">
+            <VHeader
+                :title="data.title"
+                :content="data.content"
+            />
+        </header>
+        <ul
             v-if="projects.length"
             :class="$style.list"
         >
             <li
                 v-for="(project, index) in projects"
                 :key="project?.uid || index"
+                :class="$style.item"
             >
                 <VProjectCard
                     :project="project"
                     :skeleton="isPending"
                 />
             </li>
-        </ol>
+        </ul>
     </div>
 </template>
 
@@ -44,10 +51,25 @@ const projects = computed(() => fetchListing.data.value?.results || [])
     position: relative;
 }
 
+.header {}
+
+.title {
+    margin-block: initial;
+}
+
 .list {
-    --v-project-listing-page-columns: 4;
+    --v-project-listing-page-columns: 1;
     display: grid;
     grid-template-columns: repeat(var(--v-project-listing-page-columns), minmax(0 , 1fr));
     gap: rem(24);
+
+    @include media('>=md') {
+        --v-project-listing-page-columns: 2;
+    }
+
+}
+
+.item {
+    list-style: none;
 }
 </style>

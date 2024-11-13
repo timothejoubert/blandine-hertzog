@@ -67,17 +67,6 @@
           "constraint": {},
           "thumbnails": []
         }
-      },
-      "meta_image": {
-        "type": "Image",
-        "config": {
-          "label": "Meta image",
-          "constraint": {
-            "width": 1920,
-            "height": 1080
-          },
-          "thumbnails": []
-        }
       }
     }
   }

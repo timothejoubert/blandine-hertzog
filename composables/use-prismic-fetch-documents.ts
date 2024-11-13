@@ -9,9 +9,12 @@ type PrismicFetchDocumentsOptions = Partial<BuildQueryURLArgs>
 const DEFAULT_SIZE = 10
 
 export function usePrismicFetchDocuments<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType, options: PrismicFetchDocumentsOptions = {}) {
-    const key = `fetched-pages-${prismicDocument}`
+    const filterHash = options.filters?.length && options.filters
+
+    const key = `fetched-pages-${prismicDocument}` + (filterHash || '')
 
     const size = options.pageSize || DEFAULT_SIZE
+
     return useAsyncData(key, async () => {
         const prismicClient = usePrismic().client
         const { fetchLocaleOption } = useLocale()

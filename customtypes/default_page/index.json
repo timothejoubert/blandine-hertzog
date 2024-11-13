@@ -28,10 +28,10 @@
           "multi": "paragraph,strong,em,hyperlink"
         }
       },
-      "media": {
+      "image": {
         "type": "Image",
         "config": {
-          "label": "Media",
+          "label": "Image",
           "constraint": {},
           "thumbnails": []
         }

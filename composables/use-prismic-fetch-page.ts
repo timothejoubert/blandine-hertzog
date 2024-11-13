@@ -5,7 +5,9 @@ export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) 
     const route = useRoute()
     const routeUid = route.params?.uid || ''
     const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid
-    const key = `fetched-page-${prismicDocument}-${uid || 'unique'}`
+    const key = `fetched-page-${prismicDocument}-${uid || 'unique'}` + 'tfwefwefew'
+
+    console.log('key', key)
 
     const { data } = await useAsyncData(key, async () => {
         try {

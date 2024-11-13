@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type {
+    ArchivePageDocument,
     DefaultPageDocument,
     HomePageDocument,
     ProjectListingPageDocument,
@@ -37,13 +38,15 @@ usePage({
 const homeDocument = computed(() => pageType === 'home_page' && webResponse as HomePageDocument)
 const projectListingDocument = computed(() => pageType === 'project_listing_page' && webResponse as ProjectListingPageDocument)
 const projectDocument = computed(() => pageType === 'project_page' && webResponse as ProjectPageDocument)
-const defaultPageDocument = computed(() => pageType === 'default_page' && webResponse as DefaultPageDocument)
+const archiveDocument = computed(() => pageType === 'archive_page' && webResponse as ArchivePageDocument)
+const defaultDocument = computed(() => pageType === 'default_page' && webResponse as DefaultPageDocument)
 
 const documentFind = computed(() => {
     return !!projectListingDocument.value
         || !!homeDocument.value
-        || !!defaultPageDocument.value
+        || !!defaultDocument.value
         || !!projectDocument.value
+        || !!archiveDocument.value
 })
 
 if (!documentFind.value) {
@@ -67,8 +70,12 @@ if (!documentFind.value) {
         v-else-if="projectDocument"
         :document="projectDocument"
     />
+    <LazyVArchivePage
+        v-else-if="archiveDocument"
+        :document="archiveDocument"
+    />
     <LazyVDefaultPage
-        v-else-if="defaultPageDocument"
-        :document="defaultPageDocument"
+        v-else-if="defaultDocument"
+        :document="defaultDocument"
     />
 </template>

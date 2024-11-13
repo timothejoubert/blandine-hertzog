@@ -1,0 +1,54 @@
+<script  lang="ts" setup>
+import type { ProjectPageDocument } from '~/prismicio-types'
+import { useProjectUtils } from '~/composables/use-project-utils'
+
+interface VProjectCardProps {
+    project: ProjectPageDocument | null
+}
+
+const props = defineProps<VProjectCardProps>()
+
+const {
+    title,
+    date,
+    tags,
+} = useProjectUtils(props.project)
+</script>
+
+<template>
+    <VPrismicLink
+        :to="props.project"
+        :class="$style.root"
+    >
+        <div :class="$style.title">
+            {{ title }}
+        </div>
+        <VTime
+            v-if="date"
+            :date="date"
+        />
+        <VTag
+            v-for="tag in tags"
+            :key="tag"
+            :label="tag"
+        />
+        <VIcon name="fullscreen" />
+    </VPrismicLink>
+</template>
+
+<style lang="scss" module>
+.root {
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    padding-block: rem(13);
+    gap: rem(14);
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.title {
+    margin-right: auto;
+}
+</style>

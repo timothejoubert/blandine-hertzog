@@ -16,6 +16,10 @@ export const prismicDocumentRoutes: prismicDocumentRoute[] = [
         path: '/:lang?',
     },
     {
+        type: 'archive_page',
+        path: '/:lang?/archive',
+    },
+    {
         type: 'project_listing_page',
         path: '/:lang?/projects',
         alias: ['/:lang?', '/:lang?/projects', '/:lang?/projets'],

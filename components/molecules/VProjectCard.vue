@@ -1,5 +1,6 @@
 <script  lang="ts" setup>
 import type { ProjectPageDocument } from '~/prismicio-types'
+import { useProjectUtils } from '~/composables/use-project-utils'
 
 interface VProjectCardProps {
     project: ProjectPageDocument | null
@@ -7,9 +8,7 @@ interface VProjectCardProps {
 
 const props = defineProps<VProjectCardProps>()
 
-const data = computed(() => props.project?.data)
-const thumbnail = computed(() => data.value?.media)
-const title = computed(() => data.value?.title)
+const { image, title, date, tags } = useProjectUtils(props.project)
 </script>
 
 <template>
@@ -18,23 +17,36 @@ const title = computed(() => data.value?.title)
         :class="$style.root"
     >
         <VPrismicImage
-            v-if="thumbnail"
-            :document="thumbnail"
+            v-if="image"
+            :document="image"
             fit="crop"
-            ar="1:1"
-            width="500"
-            height="500"
+            ar="460:248"
+            width="460"
+            height="248"
             :class="$style.image"
-            sizes="sm:100vw md:50vw lg:25vw xl:25vw xxl:25vw hq:25vw qhd:25vw"
+            sizes="xs:92vw sm:92vw md:32vw lg:32vw xl:32vw xxl:32vw hq:32vw qhd:32vw"
         />
         <div
             v-else
             :class="[$style.image, $style['image--placeholder']]"
         />
-        <div :class="$style.body">
-            <div :class="$style.title">
-                {{ title }}
-            </div>
+        <div :class="$style.title">
+            {{ title }}
+        </div>
+        <div :class="$style.footer">
+            <VTime
+                v-if="date"
+                :date="date"
+                :class="$style.date"
+            />
+            <template v-if="tags.length">
+                <VTag
+                    v-for="tag in tags"
+                    :key="tag"
+                    :class="$style.tag"
+                    :content="tag"
+                />
+            </template>
         </div>
     </VPrismicLink>
 </template>
@@ -43,52 +55,24 @@ const title = computed(() => data.value?.title)
 .root {
     position: relative;
     display: block;
-    border-radius: rem(8);
-    overflow: hidden;
-    color: white;
-
-    &::after {
-        position: absolute;
-        z-index: 1;
-        background: linear-gradient(45deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.15) 100%);
-        content: '';
-        inset: 0;
-        opacity: 1;
-        transition: opacity 0.4s ease(out-quad);
-    }
-
-    @media (hover: hover) {
-        &::after:hover {
-            opacity: 0.5;
-        }
-    }
 }
 
 .image {
-    filter: grayscale(1);
-    transition-duration: 0.4s;
-    transition-property: filter, scale;
-    transition-timing-function: ease(out-quad);
-
-    @media (hover: hover) {
-        .root:hover & {
-            filter: grayscale(0);
-            scale: 1.03;
-        }
-    }
-}
-
-.body {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: absolute;
-    inset: 0;
-    padding: rem(14);
-    z-index: 2;
+    width: 100%;
 }
 
 .title {
     font-weight: 800;
+    margin-block: rem(14)
+}
+
+.date {
+
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
 }
 </style>

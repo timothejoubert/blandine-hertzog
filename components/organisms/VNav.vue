@@ -2,7 +2,6 @@
 const menu = await usePrismicMenuDocument()
 
 const links = menu.value?.data.links || []
-console.log(links)
 </script>
 
 <template>
@@ -21,8 +20,9 @@ console.log(links)
                     :to="link.internal_page"
                     :url="link.external_url"
                     :class="$style.link"
-                    :label="link.label"
-                />
+                >
+                    <span :class="$style.label">{{ link.label }}</span>
+                </VPrismicLink>
             </li>
         </ul>
     </nav>
@@ -30,19 +30,14 @@ console.log(links)
 
 <style lang="scss" module>
 .root {
-    position: fixed;
-    bottom: rem(40);
-    left: 50%;
-    border-radius: rem(6);
-    background-color: black;
-    translate: -50% 0;
+    --v-nav-color: var(--color-main-darker-80);
 }
 
 .list {
     display: flex;
+    flex-direction: column;
     padding: initial;
     margin: initial;
-    gap: rem(4);
 }
 
 .item {
@@ -50,13 +45,57 @@ console.log(links)
 }
 
 .link {
+    --v-nav-item-gap: #{rem(14)};
+    --v-nav-item-active-symbol-width: #{rem(14)};
+
     display: flex;
-    height: rem(38);
     align-items: center;
-    justify-content: center;
-    border-radius: rem(3);
-    color: white;
-    padding-inline: rem(14);
+    gap: var(--v-nav-item-gap);
+
+    color: var(--v-nav-color);
+    border: 1px solid var(--v-nav-color);
+    border-bottom-width: 0;
     text-decoration: none;
+    padding: rem(9) rem(24);
+    font-family: $font-noi;
+    font-size: rem(18);
+    font-variation-settings: "wght" 600;
+    text-transform: uppercase;
+
+    .item:last-of-type & {
+        border-width: 1px;
+    }
+
+    &::before {
+        position: relative;
+        content: '';
+        background-color: currentColor;
+        width: var(--v-nav-item-active-symbol-width);
+        height: var(--v-nav-item-active-symbol-width);
+        flex-shrink: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease(out-quad);
+    }
+
+    &:global(.router-link-active) {
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+.label {
+    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1);
+    transition: translate 0.3s ease(out-quad);
+
+    .link:global(.router-link-active) & {
+        translate: 0;
+    }
+
+    @media (hover: hover) {
+        .link:not(:global(.router-link-active)):hover & {
+            translate: calc(var(--v-nav-item-active-symbol-width) * -0.8);
+        }
+    }
 }
 </style>

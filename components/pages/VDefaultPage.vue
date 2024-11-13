@@ -7,7 +7,10 @@ const data = props.document.data
 
 <template>
     <div :class="$style.root">
-        <h1>Default page</h1>
+        <VHeader
+            :title="data.title"
+            :content="data.content"
+        />
         <pre> {{ data }}</pre>
     </div>
 </template>

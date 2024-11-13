@@ -12,19 +12,7 @@ const { t } = useI18n()
 const statusCode = computed(() => props.error?.statusCode)
 
 const title = computed(() => {
-    if (statusCode.value === 404) {
-        return t('error_page.not_found.title')
-    }
-
-    if (statusCode.value === 401) return t('error_page.unauthenticated_user_error')
-
-    if (statusCode.value === 403) return t('error_page.unauthorized_access_error')
-
-    if (statusCode.value === 500 || statusCode.value === 501 || statusCode.value === 502) {
-        return t('error_page.title', { code: statusCode.value })
-    }
-
-    return t('error_page.unknown_error')
+    return t('error_code', { code: statusCode.value })
 })
 
 const message = computed(() => {
@@ -43,13 +31,22 @@ onMounted(() => {
     })
 })
 
+const runtimeConfig = useRuntimeConfig()
+const homeUrl = runtimeConfig.public.site.url
+
 // Log the error for debugging purposes
 console.error('Error page:', props.error)
 </script>
 
 <template>
-    <div>Error page: {{ title }}</div>
-    <div>{{ message }}</div>
+    <VHeader
+        :title="title"
+        :content="message"
+    />
+    <VPrismicLink
+        :to="homeUrl"
+        :label="$t('back_home')"
+    />
     <pre>{{ error }}</pre>
 </template>
 

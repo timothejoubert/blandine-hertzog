@@ -7,13 +7,14 @@ const data = props.document.data
 
 <template>
     <div :class="$style.root">
-        <h1>Home page: {{ data.meta_title }}</h1>
+        <VHeader
+            :title="data.title"
+        />
         <pre>{{ data }}</pre>
     </div>
 </template>
 
 <style lang="scss" module>
 .root {
-    position: relative;
 }
 </style>

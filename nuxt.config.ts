@@ -1,4 +1,5 @@
 import svgLoader from 'vite-svg-loader'
+import prismicData from './slicemachine.config.json'
 import { endpoint } from '#root/slicemachine.config.json'
 import { version } from '#root/package.json'
 import { hoistUseStatements } from '#root/utils/vite/hoist-use-statements'
@@ -25,11 +26,18 @@ export default defineNuxtConfig({
                 { hid: 'version', name: 'version', content: version || '' },
             ],
             link: [
+                { rel: 'icon', href: '/favicon/favicon.svg' },
+                { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },
                 { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },
-                { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png' },
-                { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
                 { rel: 'manifest', href: '/favicon/site.webmanifest' },
                 { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#fff' },
+            ],
+            script: [
+                {
+                    src: `https://static.cdn.prismic.io/prismic.js?new=true&repo=${prismicData.repositoryName}`,
+                    async: true,
+                    defer: true,
+                },
             ],
         },
     },

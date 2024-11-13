@@ -35,7 +35,8 @@
                   "home_page",
                   "default_page",
                   "project_listing_page",
-                  "project_page"
+                  "project_page",
+                  "archive_page"
                 ]
               }
             },

@@ -1,47 +1,21 @@
 {
+  "format": "page",
   "id": "project_page",
   "label": "Project page",
-  "format": "page",
   "repeatable": true,
   "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
       "title": {
         "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": ""
-        }
-      },
-      "link_label": {
-        "type": "Text",
-        "config": {
-          "label": "Link label",
-          "placeholder": ""
-        }
-      },
-      "archived": {
-        "type": "Boolean",
-        "config": {
-          "label": "Archived",
-          "placeholder_false": "false",
-          "placeholder_true": "true",
-          "default_value": false
-        }
-      },
-      "description": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Short description",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,strong,em,hyperlink"
-        }
-      },
-      "date": {
-        "type": "Date",
-        "config": {
-          "label": "Date",
           "placeholder": ""
         }
       },
@@ -51,13 +25,51 @@
           "label": "Content",
           "placeholder": "",
           "allowTargetBlank": true,
-          "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "short_content": {
+        "type": "Text",
+        "config": {
+          "label": "Short content",
+          "placeholder": ""
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "archived": {
+        "type": "Boolean",
+        "config": {
+          "label": "Archived",
+          "placeholder_false": "false",
+          "placeholder_true": "true",
+          "default_value": true
+        }
+      },
+      "creation_date": {
+        "type": "Date",
+        "config": {
+          "label": "Creation date",
+          "placeholder": ""
+        }
+      },
+      "external_url": {
+        "type": "Text",
+        "config": {
+          "label": "External url",
+          "placeholder": ""
         }
       },
       "attributes": {
         "type": "Group",
         "config": {
-          "label": "attributes",
+          "label": "Attributes",
           "repeat": true,
           "fields": {
             "label": {
@@ -77,29 +89,22 @@
           }
         }
       },
-      "uid": {
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
-          "label": "UID"
-        },
-        "type": "UID"
-      },
-      "media": {
-        "type": "Image",
-        "config": {
-          "label": "Thumbnail",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "external_url": {
-        "type": "Text",
-        "config": {
-          "label": "External url",
-          "placeholder": ""
+          "choices": {}
         }
       }
     },
     "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
       "meta_description": {
         "config": {
           "label": "Meta Description",
@@ -117,13 +122,19 @@
           "thumbnails": []
         },
         "type": "Image"
-      },
-      "meta_title": {
+      }
+    },
+    "Slices": {
+      "slices2": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
-          "label": "Meta Title",
-          "placeholder": "A title of the page used for social media and search engines"
-        },
-        "type": "Text"
+          "choices": {
+            "content_slice": {
+              "type": "SharedSlice"
+            }
+          }
+        }
       }
     }
   }
