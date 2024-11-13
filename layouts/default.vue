@@ -1,5 +1,5 @@
 <script  lang="ts" setup>
-const splashScreenState = useSplashScreen()
+// const splashScreenState = useSplashScreen()
 </script>
 
 <template>

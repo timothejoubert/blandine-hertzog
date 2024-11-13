@@ -15,16 +15,9 @@ const rootClasses = computed(() => {
 })
 
 watch(reveal, () => {
-    const elements = getHtmlElement(root)
+    const elements = getHtmlElement(root.value)
     console.log('elements', elements)
 })
-
-function onMounted(e) {
-    console.log('onMounted', e)
-}
-function onClicked(e) {
-    console.log('onClicked', e)
-}
 </script>
 
 <template>
@@ -33,8 +26,6 @@ function onClicked(e) {
         ref="root"
         :content="content"
         :class="rootClasses"
-        @custom-event="onClicked"
-        @on-custom-event="onClicked"
     />
 </template>
 
