@@ -13,6 +13,7 @@ export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) 
             const { fetchLocaleOption } = useLocale()
 
             if (uid && isDynamicDocument(prismicDocument)) {
+                console.log('fetch dynamic page', prismicDocument, uid)
                 return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })
             }
             else if (isExistingDocumentType(prismicDocument)) {

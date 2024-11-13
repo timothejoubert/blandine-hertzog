@@ -16,8 +16,6 @@ const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('projec
 
 const isPending = computed(() => fetchListing.status.value === 'pending')
 const projects = computed(() => fetchListing.data.value?.results || [])
-
-console.log(projects.value)
 </script>
 
 <template>
