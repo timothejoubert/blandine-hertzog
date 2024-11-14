@@ -1,5 +1,6 @@
 // Remove trailing slash from URL and redirect to the new URL
 // https://github.com/nuxt/nuxt/issues/15462#issuecomment-1407374859
+
 export default defineNuxtRouteMiddleware((to) => {
     if (to.path === '/' || !to.path.endsWith('/')) {
         return

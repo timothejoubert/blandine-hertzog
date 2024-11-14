@@ -1,19 +1,28 @@
 import type { PrismicDocumentType } from '~/types/api'
 import { isDynamicDocument, isExistingDocumentType } from '~/utils/prismic/document-type'
+import { usePrismicPreviewRoute } from '~/composables/use-prismic-preview-route'
 
+// TODO: enabled preview
 export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) {
     const route = useRoute()
     const routeUid = route.params?.uid || ''
+    // get last uid when has subPage route, ex: /project/project-uid => project-uid
     const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid
-    const key = `fetched-page-${prismicDocument}-${uid || 'unique'}`
+
+    const { documentId, isPreview } = usePrismicPreviewRoute()
+
+    const key = `fetched-page-${prismicDocument}-${uid || documentId || 'unique'}`
+
+    const prismicClient = usePrismic().client
 
     const { data } = await useAsyncData(key, async () => {
         try {
-            const prismicClient = usePrismic().client
             const { fetchLocaleOption } = useLocale()
 
-            if (uid && isDynamicDocument(prismicDocument)) {
-                console.log('fetch dynamic page', prismicDocument, uid)
+            if (isPreview && documentId) {
+                return await prismicClient.getByID(documentId, { ...fetchLocaleOption.value })
+            }
+            else if (uid && isDynamicDocument(prismicDocument)) {
                 return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })
             }
             else if (isExistingDocumentType(prismicDocument)) {
@@ -21,7 +30,6 @@ export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) 
             }
         }
         catch (error: unknown) {
-            console.error(`PrismicError in useFetchPage on ${prismicDocument} `, error)
             // @ts-expect-error cannot know the error type
             return { error: createError(error) }
         }
