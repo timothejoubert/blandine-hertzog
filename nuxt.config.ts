@@ -213,10 +213,10 @@ export default defineNuxtConfig({
     },
 
     // https://www.nuxtseo.com/sitemap/getting-started/installation
-    // sitemap: {
-    //     enabled: !isGenerateMaintenance,
-    //     sources: ['/api/sitemap'],
-    // },
+    sitemap: {
+        // enabled: !isGenerateMaintenance,
+        exclude: ['/slice-simulator'],
+    },
 
     // https://eslint.nuxt.com/packages/module
     eslint: {

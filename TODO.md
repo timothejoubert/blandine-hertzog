@@ -7,6 +7,7 @@
 - Reveal on intersectionObserver 
 - Prerender all page except Preview
 - Create VPageFactory ? 
+- Setup Github webhook on netlify
 
 ## Need review
 - Preview (Preview page should be build on fly and others prerender)
