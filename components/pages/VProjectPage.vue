@@ -1,20 +1,15 @@
 <script lang="ts" setup>
 import type { PageComponentProps } from '~/types/app'
 import { components } from '~/slices'
-import { useProjectUtils } from '~/composables/use-project-utils'
 
 const props = defineProps<PageComponentProps<'project_page'>>()
 const data = computed(() => props.document.data)
 
 const { tags, date } = useProjectUtils(props.document)
 
-const sliceKey = computed(() => {
-    const slideKey = Object.keys(data.value).findLast(dataKey => dataKey.includes('slice'))
-    return slideKey || 'slices'
-})
-
 const slices = computed(() => {
-    return data.value?.[sliceKey.value] || []
+    const sliceKey = Object.keys(data.value).findLast(dataKey => dataKey.includes('slice')) || 'slices'
+    return data.value?.[sliceKey] || []
 })
 </script>
 

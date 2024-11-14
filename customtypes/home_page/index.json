@@ -69,6 +69,18 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "intro_slice": {
+              "type": "SharedSlice"
+            },
+            "project_feed_slice": {
+              "type": "SharedSlice"
+            },
+            "about_slice": {
+              "type": "SharedSlice"
+            },
+            "contact_slice": {
+              "type": "SharedSlice"
+            },
             "content_slice": {
               "type": "SharedSlice"
             }

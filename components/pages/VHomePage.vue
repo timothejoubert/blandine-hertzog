@@ -1,20 +1,36 @@
 <script  lang="ts" setup>
 import type { PageComponentProps } from '~/types/app'
+import { components } from '~/slices'
 
 const props = defineProps<PageComponentProps<'home_page'>>()
-const data = props.document.data
+const data = computed(() => props.document.data)
+
+const slices = computed(() => {
+    const slideKey = Object.keys(data.value).findLast(dataKey => dataKey.includes('slice')) || 'slices'
+    return data.value?.[slideKey] || []
+})
 </script>
 
 <template>
-    <div :class="$style.root">
-        <VHeader
-            :title="data.title"
-        />
-        <pre>{{ data }}</pre>
-    </div>
+    <VHeader
+        :class="$style.header"
+        :title="data.title"
+    />
+    <LazySliceZone
+        v-if="slices?.length"
+        :slices="slices"
+        wrapper="main"
+        :components="components"
+        :class="$style.slices"
+    />
 </template>
 
 <style lang="scss" module>
-.root {
+.header {
+    grid-column: var(--left-grid-column);
+}
+
+.slices {
+    grid-column: var(--left-grid-column);
 }
 </style>

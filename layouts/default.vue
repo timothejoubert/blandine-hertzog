@@ -17,9 +17,15 @@
 
 <style lang="scss" module>
 .root {
+    --left-grid-column: 1 / -1;
+    --right-grid-column: 1 / -1;
+
     position: relative;
 
     @include media('>=md') {
+        --left-grid-column: 1 / 12;
+        --right-grid-column: 12 / -1;
+
         &::after {
             position: absolute;
             left: calc(var(--gutter) + #{flex-grid-value(11, 14, '%', false)});
@@ -32,20 +38,16 @@
     }
 }
 .page {
-    grid-column: 1 / -1;
+    grid-column: var(--left-grid-column);
     min-height: calc(100vh - ($v-footer-height + $v-footer-margin-bottom + $v-footer-margin-top));
-
-    @include media('>=md') {
-        grid-column: 1 / 12;
-    }
 }
 
 .nav {
     position: relative;
-    grid-column: 1 / -1;
+    grid-column: var(--right-grid-column);
+    grid-row: 1;
 
     @include media('>=md') {
-        grid-column: 12 / -1;
         width: calc(100% + var(--gutter));
     }
 }

@@ -202,7 +202,12 @@ export type DefaultPageDocument<Lang extends string = string> =
 
 type HomePageDocumentDataSlicesSlice = never
 
-type HomePageDocumentDataSlices2Slice = ContentSliceSlice
+type HomePageDocumentDataSlices2Slice =
+    | IntroSliceSlice
+    | ProjectFeedSliceSlice
+    | AboutSliceSlice
+    | ContactSliceSlice
+    | ContentSliceSlice
 
 /**
  * Content for Home page documents
@@ -798,6 +803,203 @@ export type AllDocumentTypes =
     | SettingsDocument
 
 /**
+ * Primary content in *AboutSlice → Default → Primary*
+ */
+export interface AboutSliceSliceDefaultPrimary {
+    /**
+   * Title field in *AboutSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_slice.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    title: prismic.KeyTextField
+
+    /**
+   * Content field in *AboutSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_slice.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+    content: prismic.RichTextField
+
+    /**
+   * Image field in *AboutSlice → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_slice.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+    image: prismic.ImageField<never>
+
+    /**
+   * Link label field in *AboutSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_slice.default.primary.link_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    link_label: prismic.KeyTextField
+
+    /**
+   * External url field in *AboutSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_slice.default.primary.external_url
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    external_url: prismic.KeyTextField
+
+    /**
+   * Internal page field in *AboutSlice → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: about_slice.default.primary.internal_page
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+    internal_page: prismic.ContentRelationshipField
+}
+
+/**
+ * Default variation for AboutSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutSliceSliceDefault = prismic.SharedSliceVariation<
+    'default',
+    Simplify<AboutSliceSliceDefaultPrimary>,
+    never
+>
+
+/**
+ * Slice variation for *AboutSlice*
+ */
+type AboutSliceSliceVariation = AboutSliceSliceDefault
+
+/**
+ * AboutSlice Shared Slice
+ *
+ * - **API ID**: `about_slice`
+ * - **Description**: AboutSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AboutSliceSlice = prismic.SharedSlice<
+    'about_slice',
+    AboutSliceSliceVariation
+>
+
+/**
+ * Item in *ContactSlice → Default → Primary → Attributs*
+ */
+export interface ContactSliceSliceDefaultPrimaryAttributsItem {
+    /**
+   * Label field in *ContactSlice → Default → Primary → Attributs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.attributs[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    label: prismic.KeyTextField
+
+    /**
+   * External url field in *ContactSlice → Default → Primary → Attributs*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.attributs[].external_url
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    external_url: prismic.KeyTextField
+
+    /**
+   * Icon field in *ContactSlice → Default → Primary → Attributs*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.attributs[].icon
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+    icon: prismic.SelectField<'Email' | 'Phone'>
+}
+
+/**
+ * Primary content in *ContactSlice → Default → Primary*
+ */
+export interface ContactSliceSliceDefaultPrimary {
+    /**
+   * Title field in *ContactSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    title: prismic.KeyTextField
+
+    /**
+   * Content field in *ContactSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+    content: prismic.RichTextField
+
+    /**
+   * Attributs field in *ContactSlice → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.attributs[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+    attributs: prismic.GroupField<
+        Simplify<ContactSliceSliceDefaultPrimaryAttributsItem>
+    >
+}
+
+/**
+ * Default variation for ContactSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSliceSliceDefault = prismic.SharedSliceVariation<
+    'default',
+    Simplify<ContactSliceSliceDefaultPrimary>,
+    never
+>
+
+/**
+ * Slice variation for *ContactSlice*
+ */
+type ContactSliceSliceVariation = ContactSliceSliceDefault
+
+/**
+ * ContactSlice Shared Slice
+ *
+ * - **API ID**: `contact_slice`
+ * - **Description**: ContactSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ContactSliceSlice = prismic.SharedSlice<
+    'contact_slice',
+    ContactSliceSliceVariation
+>
+
+/**
  * Item in *ContentSlice → Default → Primary → Contents*
  */
 export interface ContentSliceSliceDefaultPrimaryContentsItem {
@@ -899,6 +1101,143 @@ export type ContentSliceSlice = prismic.SharedSlice<
     ContentSliceSliceVariation
 >
 
+/**
+ * Primary content in *IntroSlice → Default → Primary*
+ */
+export interface IntroSliceSliceDefaultPrimary {
+    /**
+   * Content field in *IntroSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: intro_slice.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+    content: prismic.RichTextField
+}
+
+/**
+ * Default variation for IntroSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IntroSliceSliceDefault = prismic.SharedSliceVariation<
+    'default',
+    Simplify<IntroSliceSliceDefaultPrimary>,
+    never
+>
+
+/**
+ * Slice variation for *IntroSlice*
+ */
+type IntroSliceSliceVariation = IntroSliceSliceDefault
+
+/**
+ * IntroSlice Shared Slice
+ *
+ * - **API ID**: `intro_slice`
+ * - **Description**: IntroSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type IntroSliceSlice = prismic.SharedSlice<
+    'intro_slice',
+    IntroSliceSliceVariation
+>
+
+/**
+ * Item in *ProjectFeedSlice → Default → Primary → Custom projects*
+ */
+export interface ProjectFeedSliceSliceDefaultPrimaryCustomProjectsItem {
+    /**
+   * Project field in *ProjectFeedSlice → Default → Primary → Custom projects*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_feed_slice.default.primary.custom_projects[].project
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+    project: prismic.ContentRelationshipField<'project_page'>
+}
+
+/**
+ * Primary content in *ProjectFeedSlice → Default → Primary*
+ */
+export interface ProjectFeedSliceSliceDefaultPrimary {
+    /**
+   * Title field in *ProjectFeedSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_feed_slice.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    title: prismic.KeyTextField
+
+    /**
+   * Internal page field in *ProjectFeedSlice → Default → Primary*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_feed_slice.default.primary.internal_page
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+    internal_page: prismic.ContentRelationshipField<'project_listing_page'>
+
+    /**
+   * Link label field in *ProjectFeedSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_feed_slice.default.primary.link_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    link_label: prismic.KeyTextField
+
+    /**
+   * Custom projects field in *ProjectFeedSlice → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_feed_slice.default.primary.custom_projects[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+    custom_projects: prismic.GroupField<
+        Simplify<ProjectFeedSliceSliceDefaultPrimaryCustomProjectsItem>
+    >
+}
+
+/**
+ * Default variation for ProjectFeedSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectFeedSliceSliceDefault = prismic.SharedSliceVariation<
+    'default',
+    Simplify<ProjectFeedSliceSliceDefaultPrimary>,
+    never
+>
+
+/**
+ * Slice variation for *ProjectFeedSlice*
+ */
+type ProjectFeedSliceSliceVariation = ProjectFeedSliceSliceDefault
+
+/**
+ * ProjectFeedSlice Shared Slice
+ *
+ * - **API ID**: `project_feed_slice`
+ * - **Description**: ProjectFeedSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectFeedSliceSlice = prismic.SharedSlice<
+    'project_feed_slice',
+    ProjectFeedSliceSliceVariation
+>
+
 declare module '@prismicio/client' {
     interface CreateClient {
         (
@@ -945,11 +1284,29 @@ declare module '@prismicio/client' {
             SettingsDocumentData,
             SettingsDocumentDataSocialsItem,
             AllDocumentTypes,
+            AboutSliceSlice,
+            AboutSliceSliceDefaultPrimary,
+            AboutSliceSliceVariation,
+            AboutSliceSliceDefault,
+            ContactSliceSlice,
+            ContactSliceSliceDefaultPrimaryAttributsItem,
+            ContactSliceSliceDefaultPrimary,
+            ContactSliceSliceVariation,
+            ContactSliceSliceDefault,
             ContentSliceSlice,
             ContentSliceSliceDefaultPrimaryContentsItem,
             ContentSliceSliceDefaultPrimary,
             ContentSliceSliceVariation,
             ContentSliceSliceDefault,
+            IntroSliceSlice,
+            IntroSliceSliceDefaultPrimary,
+            IntroSliceSliceVariation,
+            IntroSliceSliceDefault,
+            ProjectFeedSliceSlice,
+            ProjectFeedSliceSliceDefaultPrimaryCustomProjectsItem,
+            ProjectFeedSliceSliceDefaultPrimary,
+            ProjectFeedSliceSliceVariation,
+            ProjectFeedSliceSliceDefault,
         }
     }
 }

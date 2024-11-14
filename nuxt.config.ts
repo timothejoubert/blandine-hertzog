@@ -124,11 +124,16 @@ export default defineNuxtConfig({
                     'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
                 },
             },
-            // '/_stories/**': {
-            //     headers: {
-            //         'X-Robots-Tag': 'noindex',
-            //     },
-            // },
+            '/preview': {
+                headers: {
+                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
+                },
+            },
+            '/_stories/**': {
+                headers: {
+                    'X-Robots-Tag': 'noindex',
+                },
+            },
         },
     },
     ignore: [

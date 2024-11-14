@@ -1,9 +1,8 @@
 <script  lang="ts" setup>
-import type { ProjectPageDocument } from '~/prismicio-types'
-import { useProjectUtils } from '~/composables/use-project-utils'
+import type { PossibleProjectPageDocument } from '~/types/app'
 
 interface VProjectCardProps {
-    project: ProjectPageDocument | null
+    project: PossibleProjectPageDocument | null
 }
 
 const props = defineProps<VProjectCardProps>()
@@ -44,7 +43,7 @@ const { image, title, date, tags } = useProjectUtils(props.project)
                     v-for="tag in tags"
                     :key="tag"
                     :class="$style.tag"
-                    :content="tag"
+                    :label="tag"
                 />
             </template>
         </div>

@@ -1,6 +1,5 @@
 <script  lang="ts" setup>
 import type { ProjectPageDocument } from '~/prismicio-types'
-import { useProjectUtils } from '~/composables/use-project-utils'
 
 interface VProjectCardProps {
     project: ProjectPageDocument | null

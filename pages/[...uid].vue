@@ -7,6 +7,7 @@ import type {
     ProjectPageDocument,
 } from '~/prismicio-types'
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
+import { components } from '~/slices'
 
 const route = useRoute()
 const pageType = getDocumentTypeByUrl(route.path)

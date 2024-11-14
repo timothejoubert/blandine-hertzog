@@ -7,7 +7,7 @@ export type VTextContent = string | RichTextField | KeyTextField | null
 interface VTextProps {
     tag?: string
     textClass?: string
-    content?: VTextContent | []
+    content?: VTextContent
 }
 
 const props = defineProps<VTextProps>()
@@ -18,9 +18,7 @@ const hasSlot = slots.default?.()
 const isString = computed(() => typeof props.content === 'string')
 
 const richText = computed(() => {
-    if (isRichTextFilled(props.content)) return props.content
-
-    return []
+    return (isRichTextFilled(props.content) && props.content) || []
 })
 
 const flatRichTextContent = computed(() => {
@@ -42,7 +40,7 @@ const flatRichTextContent = computed(() => {
         <slot>{{ flatRichTextContent ? flatRichTextContent : content }}</slot>
     </component>
     <PrismicRichText
-        v-else-if="richText.length"
+        v-else-if="!!richText[0]"
         :class="$style.root"
         :field="richText"
     />
@@ -50,8 +48,6 @@ const flatRichTextContent = computed(() => {
 
 <style lang="scss" module>
 .root {
-    font-family: $font-noi;
-
   strong {
     font-weight: bold;
   }
