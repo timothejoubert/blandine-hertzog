@@ -2,7 +2,6 @@
 import type { Content } from '@prismicio/client'
 import { usePrismic } from '@prismicio/vue'
 import type { ProjectPageDocument } from '~/prismicio-types'
-import type { PossibleProjectPageDocument } from '~/types/app'
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.

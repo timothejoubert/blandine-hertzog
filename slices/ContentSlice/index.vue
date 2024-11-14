@@ -77,10 +77,8 @@ const imgSizes = computed(() => {
 }
 
 .item {
-
     &--link {
-        align-self: center;
-        justify-self: center;
+        place-self: center center;
     }
 }
 </style>

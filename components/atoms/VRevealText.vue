@@ -34,18 +34,18 @@ watch(reveal, () => {
     > *[data-char-content] {
         position: relative;
         display: inline-block;
+        overflow: hidden;
         color: transparent;
         opacity: 1;
-        overflow: hidden;
     }
 
     > *[data-char-content]::after {
         position: absolute;
-        inset: 0;
-        content: attr(data-char-content);
-        translate: 0 112%;
         color: var(--color-main-darker-80);
+        content: attr(data-char-content);
+        inset: 0;
         transition: translate 0.3s calc(var(--data-char-index, 1) * 50ms) ease(out-quart);
+        translate: 0 112%;
     }
 
     &--reveal *[data-char-content]::after {

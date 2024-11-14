@@ -48,21 +48,22 @@ const data = computed(() => props.slice.primary)
 
     @include media('>=md') {
         column-gap: var(--gutter);
-        grid-template-columns: repeat(2, minmax(0 , 1fr));
         grid-template-areas:
             'title image'
             'content image'
             'link image';
+        grid-template-columns: repeat(2, minmax(0 , 1fr));
     }
 
 }
+
 .title {
     grid-area: title;
 }
 
 .image {
-    grid-area: image;
     margin-top: rem(24);
+    grid-area: image;
 
     @include media('>=md') {
         margin-top: initial;
@@ -70,9 +71,9 @@ const data = computed(() => props.slice.primary)
 }
 
 .content {
-    grid-area: content;
-    margin-top: rem(16);
     max-width: 48ch;
+    margin-top: rem(16);
+    grid-area: content;
 }
 
 .link {

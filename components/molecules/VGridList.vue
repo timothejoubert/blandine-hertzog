@@ -4,7 +4,7 @@ defineProps<{
 }>()
 
 defineSlots<{
-    default(props: { item: Item | null }): unknown
+    default(props: { item: Item }): unknown
 }>()
 </script>
 
@@ -27,8 +27,8 @@ defineSlots<{
     --v-grid-list-column: 1;
 
     display: grid;
-    grid-template-columns: repeat(var(--v-grid-list-column), minmax(0 , 1fr));
     gap: rem(24) var(--gutter);
+    grid-template-columns: repeat(var(--v-grid-list-column), minmax(0 , 1fr));
 
     @include media('>=md') {
         --v-grid-list-column: 2;

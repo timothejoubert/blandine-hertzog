@@ -28,18 +28,19 @@
 
         &::after {
             position: absolute;
-            left: calc(var(--gutter) + #{flex-grid-value(11, 14, '%', false)});
             top: 0;
-            height: 100%;
-            content: '';
+            left: calc(var(--gutter) + #{flex-grid-value(11, 14, '%', false)});
             width: 1px;
+            height: 100%;
             background-color: var(--color-main-darker-80);
+            content: '';
         }
     }
 }
+
 .page {
-    grid-column: var(--left-grid-column);
     min-height: calc(100vh - ($v-footer-height + $v-footer-margin-bottom + $v-footer-margin-top));
+    grid-column: var(--left-grid-column);
 }
 
 .nav {

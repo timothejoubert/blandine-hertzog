@@ -38,13 +38,13 @@ const {
 <style lang="scss" module>
 .root {
     position: relative;
-    width: 100%;
-    justify-content: space-between;
     display: flex;
-    padding-block: rem(13);
-    gap: rem(14);
+    width: 100%;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid black;
+    gap: rem(14);
+    padding-block: rem(13);
 }
 
 .title {

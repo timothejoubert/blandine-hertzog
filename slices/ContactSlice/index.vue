@@ -72,21 +72,22 @@ const attributes = computed(() => {
 
     @include media('>=md') {
         gap: rem(32) var(--gutter);
-        grid-template-columns: repeat(2, minmax(0 , 1fr));
         grid-template-areas:
             'title .'
             'content attributes'
             'link attributes';
+        grid-template-columns: repeat(2, minmax(0 , 1fr));
     }
 
 }
+
 .title {
     grid-area: title;
 }
 
 .attributes {
-    grid-area: attributes;
     margin-top: rem(24);
+    grid-area: attributes;
 
     @include media('>=md') {
         margin-top: initial;
@@ -95,15 +96,15 @@ const attributes = computed(() => {
 
 .attribute {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding-block: rem(10);
+    justify-content: space-between;
     border-bottom: 1px solid var(--color-main-lighter-10);
+    padding-block: rem(10);
 }
 
 .content {
-    grid-area: content;
     max-width: 48ch;
+    grid-area: content;
 }
 
 .link {

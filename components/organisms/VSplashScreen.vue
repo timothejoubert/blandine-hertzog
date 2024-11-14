@@ -47,26 +47,26 @@ const rootClasses = computed(() => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    inset: 0;
     background-color: var(--color-main);
+    inset: 0;
 }
 
 .text {
     > *[data-char-content] {
         position: relative;
         display: inline-block;
+        overflow: hidden;
         color: transparent;
         opacity: 1;
-        overflow: hidden;
     }
 
     > *[data-char-content]::after {
         position: absolute;
-        inset: 0;
-        content: attr(data-char-content);
-        translate: 0 110%;
         color: var(--color-main-darker-80);
+        content: attr(data-char-content);
+        inset: 0;
         transition: translate 0.3s calc(var(--data-char-index, 1) * 50ms) ease(out-quart);
+        translate: 0 110%;
     }
 
     .root--reveal & *[data-char-content]::after {

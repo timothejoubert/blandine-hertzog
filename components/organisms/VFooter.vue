@@ -36,19 +36,19 @@ const developerCopyright = computed(() => {
     --grid-width: 100%;
 
     position: relative;
-    align-items: center;
     height: $v-footer-height;
+    align-items: center;
     margin-top: $v-footer-margin-top;
     margin-bottom: $v-footer-margin-bottom;
 
     &::after {
         position: absolute;
-        bottom: 0;
-        content: '';
-        left: 0;
         right: calc(var(--gutter) * -1);
+        bottom: 0;
+        left: 0;
         height: 1px;
         background-color: var(--color-main-darker-80);
+        content: '';
     }
 }
 

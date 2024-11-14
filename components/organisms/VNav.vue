@@ -50,16 +50,15 @@ const links = menu.value?.data.links || []
 
     display: flex;
     align-items: center;
-    gap: var(--v-nav-item-gap);
-
-    color: var(--v-nav-color);
+    padding: rem(9) rem(24);
     border: 1px solid var(--v-nav-color);
     border-bottom-width: 0;
-    text-decoration: none;
-    padding: rem(9) rem(24);
+    color: var(--v-nav-color);
     font-family: $font-noi;
     font-size: rem(18);
     font-variation-settings: "wght" 600;
+    gap: var(--v-nav-item-gap);
+    text-decoration: none;
     text-transform: uppercase;
 
     .item:last-of-type & {
@@ -68,11 +67,11 @@ const links = menu.value?.data.links || []
 
     &::before {
         position: relative;
-        content: '';
-        background-color: currentColor;
         width: var(--v-nav-item-active-symbol-width);
         height: var(--v-nav-item-active-symbol-width);
         flex-shrink: 0;
+        background-color: currentcolor;
+        content: '';
         opacity: 0;
         transition: opacity 0.3s ease(out-quad);
     }
@@ -85,8 +84,8 @@ const links = menu.value?.data.links || []
 }
 
 .label {
-    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1);
     transition: translate 0.3s ease(out-quad);
+    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1);
 
     .link:global(.router-link-active) & {
         translate: 0;

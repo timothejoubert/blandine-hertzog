@@ -50,10 +50,10 @@ const rootClasses = computed(() => {
         position: absolute;
         bottom: 0;
         left: 0;
-        content: '';
-        height: 1px;
-        background-color: currentColor;
         width: calc(100% + var(--gutter));
+        height: 1px;
+        background-color: currentcolor;
+        content: '';
     }
 
     @include media('>=md') {
@@ -66,12 +66,13 @@ const rootClasses = computed(() => {
 .title {
     display: flex;
     flex-wrap: wrap;
+
     //gap: rem(24);
     margin-block: initial;
 }
 
 .content {
-    margin-block: rem(41) 0;
     width: calc(#{flex-grid-value(6, 11, '%', false)} + var(--gutter));
+    margin-block: rem(41) 0;
 }
 </style>

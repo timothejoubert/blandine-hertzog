@@ -53,9 +53,10 @@ const projects = computed(() => fetchListing.data.value?.results || [])
 
 .list {
     --v-project-listing-page-columns: 1;
+
     display: grid;
-    grid-template-columns: repeat(var(--v-project-listing-page-columns), minmax(0 , 1fr));
     gap: rem(24);
+    grid-template-columns: repeat(var(--v-project-listing-page-columns), minmax(0 , 1fr));
 
     @include media('>=md') {
         --v-project-listing-page-columns: 2;
