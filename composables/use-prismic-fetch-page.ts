@@ -1,17 +1,17 @@
-import type { PrismicDocumentType } from '~/types/api'
+import type { PrismicDocumentType, ReachableDocument } from '~/types/api'
 import { isDynamicDocument, isExistingDocumentType } from '~/utils/prismic/document-type'
 import { usePrismicPreviewRoute } from '~/composables/use-prismic-preview-route'
 
+export type PrismicWebResponse = Awaited<ReturnType<typeof usePrismicFetchPage>>['webResponse']
 // TODO: enabled preview
 export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) {
     const route = useRoute()
     const routeUid = route.params?.uid || ''
-    // get last uid when has subPage route, ex: /project/project-uid => project-uid
-    const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid
+    const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid // get the last uid when route has subPage,
 
     const { documentId, isPreview } = usePrismicPreviewRoute()
 
-    const key = `fetched-page-${prismicDocument}-${uid || documentId || 'unique'}`
+    const key = `page-${prismicDocument}-${uid || documentId || 'single-document'}`
 
     const prismicClient = usePrismic().client
 
@@ -38,7 +38,7 @@ export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) 
     const response = data.value
 
     return {
-        webResponse: (!!response && !('error' in response)) ? response : undefined,
+        webResponse: (!!response && !('error' in response)) ? response as ReachableDocument : undefined,
         error: (!!response && ('error' in response)) ? response.error : undefined,
     }
 }

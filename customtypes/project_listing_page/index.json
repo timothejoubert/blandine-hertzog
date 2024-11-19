@@ -22,7 +22,7 @@
           "multi": "paragraph,strong,em,hyperlink"
         }
       },
-      "Image": {
+      "image": {
         "type": "Image",
         "config": {
           "label": "Image",

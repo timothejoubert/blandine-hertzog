@@ -1,9 +1,10 @@
 <script  lang="ts" setup>
-const settings = await usePrismicSettingsDocument()
+const settingsDocument = await usePrismicSettingsDocument()
 const runtimeConfig = useRuntimeConfig()
 
 const appCopyright = computed(() => {
-    const name = settings.value?.data.site_name || runtimeConfig.public.site.name
+    const name = settingsDocument?.data.site_name || runtimeConfig.public.site.name
+
     const currentYear = new Date().getFullYear()
     return `${name} © ${currentYear}`
 })

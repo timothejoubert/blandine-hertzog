@@ -1,6 +1,6 @@
 import { joinURL } from 'ufo'
 
-function getLocaleLanguage(localeCode: string) {
+export function getFormattedLocale(localeCode: string) {
     if (localeCode.split('-').length) return localeCode.split('-')[0]
     else return localeCode
 }
@@ -11,7 +11,7 @@ export function useLocale() {
 
     const extractLocaleFromUrl = computed(() => {
         return $i18n.locales.value.find((locale) => {
-            return route.fullPath.includes(locale.code) || route.fullPath.includes(getLocaleLanguage(locale.code))
+            return route.fullPath.includes(locale.code) || route.fullPath.includes(getFormattedLocale(locale.code))
         })?.code
     })
 

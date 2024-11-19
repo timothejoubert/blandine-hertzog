@@ -15,3 +15,4 @@
 
 ## Done
 - Deploy preprod
+- attrs and seo meta 

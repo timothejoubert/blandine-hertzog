@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-const settings = await usePrismicSettingsDocument()
-const siteName = settings.value?.data.site_name
+const settingsDocument = await usePrismicSettingsDocument()
+const siteName = settingsDocument?.data.site_name
 
 const state = useSplashScreen()
 

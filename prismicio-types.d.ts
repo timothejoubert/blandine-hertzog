@@ -427,11 +427,11 @@ interface ProjectListingPageDocumentData {
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: project_listing_page.Image
+   * - **API ID Path**: project_listing_page.image
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-    Image: prismic.ImageField<never>
+    image: prismic.ImageField<never>
 
     /**
    * Slice Zone field in *Project listing page*

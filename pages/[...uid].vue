@@ -29,10 +29,22 @@ else if (!webResponse) {
 }
 
 await usePrismicSeoMeta(webResponse)
+const alternateLinks = usePrismicHead(webResponse)
+
+const runtimeConfig = useRuntimeConfig()
+const title = computed(() => {
+    const pageTitle = webResponse?.data.meta_title || webResponse?.data.title
+    return `${pageTitle} | ${runtimeConfig.public.site.name}`
+})
 
 usePage({
+    title: title.value,
     webResponse,
-    alternateLinks: webResponse?.alternate_languages,
+    alternateLinks,
+})
+
+useHead({
+    title: title.value,
 })
 
 const homeDocument = computed(() => pageType === 'home_page' && webResponse as HomePageDocument)

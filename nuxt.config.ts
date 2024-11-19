@@ -19,12 +19,6 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            htmlAttrs: {
-                lang: I18N_DEFAULT_LOCALE,
-            },
-            meta: [
-                { hid: 'version', name: 'version', content: version || '' },
-            ],
             link: [
                 { rel: 'icon', href: '/favicon/favicon.svg' },
                 { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },
