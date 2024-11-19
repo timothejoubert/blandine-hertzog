@@ -39,7 +39,7 @@ export default defineComponent({
 
         const isPicture = computed(() => !!slots.default || props.tag === 'picture')
         const src = computed(() => {
-            const src = document.value?.thumbnail?.relativePath || document.value?.url
+            const src = document.value?.thumbnail?.relativePath || document.value?.url || props.src
             if (!src) return
 
             const queryIndex = src.indexOf('?')
@@ -55,6 +55,12 @@ export default defineComponent({
         const $img = useImage()
         const getFormat = () => props.format || !document.value?.processable ? undefined : 'jpeg'
 
+        const sizes = computed(() => {
+            if (typeof props.sizes === 'string') return props.sizes
+            if (!isPicture.value && !props.densities) return $img.options.presets?.default?.sizes || $img.options.screens
+            return undefined
+        })
+
         const imageAttrs = computed(() => {
             return {
                 ...pick(props, Object.keys(isPicture.value ? pictureProps : imgProps)),
@@ -64,13 +70,8 @@ export default defineComponent({
                 alt: document.value?.alt || document.value?.name,
                 placeholder: document.value?.imageAverageColor || '#ddd',
                 format: getFormat(),
-                sizes:
-                    props.sizes
-                    || (!isPicture.value
-                        && !props.densities
-                        && ($img.options.presets?.default?.sizes || $img.options.screens))
-                    || undefined,
-                provider: 'imgix',
+                sizes: sizes.value,
+                provider: typeof props.provider === 'string' ? props.provider : 'imgix',
                 modifiers: {
                     ...modifiers.value,
                     auto: props.auto || 'format,compress',

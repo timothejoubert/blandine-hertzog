@@ -99,6 +99,8 @@ export default defineNuxtConfig({
         routeRules: {
             '/**': {
                 headers: {
+                    // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
+                    'Access-Control-Allow-Origin': '*',
                     // https://web.dev/articles/floc?hl=fr#can_websites_opt_out_of_being_included_in_the_floc_computation
                     'Permissions-Policy': 'interest-cohort=()',
                     // Hardening client security policies

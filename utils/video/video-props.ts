@@ -16,7 +16,7 @@ export const videoAttributes = {
 }
 
 export const videoFile = {
-    relativePath: { type: String, required: true },
+    relativePath: { type: String },
     mimeType: { type: String },
 }
 

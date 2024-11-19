@@ -7,6 +7,7 @@
 - Reveal on intersectionObserver 
 - Prerender all page except Preview
 - Create VPageFactory ? 
+- Color theme logic
 - Setup Github webhook on netlify
 
 ## Need review
