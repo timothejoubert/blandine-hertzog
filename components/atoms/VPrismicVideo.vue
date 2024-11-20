@@ -121,29 +121,29 @@ const onVideoEnded = () => (hadInteraction.value = false)
 
 <style lang="scss" module="">
 .root {
-  --v-player-position: absolute;
-  --v-player-height: 100%;
-  --v-player-width: 100%;
+    --v-player-position: absolute;
+    --v-player-height: 100%;
+    --v-player-width: 100%;
 
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
     --v-button-position: absolute;
 
     position: absolute;
-    cursor: pointer;
     z-index: 1;
     top: 50%;
     left: 50%;
-    border: none;
-    border-radius: 100%;
     width: rem(52);
     height: rem(52);
+    border: none;
+    border-radius: 100%;
     background-color: white;
+    cursor: pointer;
     transform: translate(-50%, -50%);
 
     .root--had-interaction & {
@@ -153,26 +153,27 @@ const onVideoEnded = () => (hadInteraction.value = false)
 }
 
 .thumbnail {
-  width: 100%;
-  cursor: pointer;
+    width: 100%;
+    cursor: pointer;
 
-  .root--had-interaction & {
-    pointer-events: none;
-    visibility: hidden;
-      display: none;
-  }
-
-  &--placeholder {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    //background-color: color(grey-50);
-
-    &::after {
-      position: absolute;
-      background: linear-gradient(45deg, rgba(0, 0, 0, 80%) 0%, transparent 100%);
-      content: '';
-      inset: 0;
+    .root--had-interaction & {
+        display: none;
+        pointer-events: none;
+        visibility: hidden;
     }
-  }
+
+    &--placeholder {
+        position: relative;
+        aspect-ratio: 16 / 9;
+
+        //background-color: color(grey-50);
+
+        &::after {
+            position: absolute;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 80%) 0%, transparent 100%);
+            content: '';
+            inset: 0;
+        }
+    }
 }
 </style>

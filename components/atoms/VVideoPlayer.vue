@@ -246,44 +246,44 @@ export default defineComponent({
 
 <style lang="scss" module>
 @mixin video-properties {
-  position: var(--v-player-video-position);
-  width: var(--v-player-video-width, 100%);
-  height: var(--v-player-video-height, 100%);
-  object-fit: var(--v-player-video-object-fit);
+    position: var(--v-player-video-position);
+    width: var(--v-player-video-width, 100%);
+    height: var(--v-player-video-height, 100%);
+    object-fit: var(--v-player-video-object-fit);
 }
 
 .root-initialized {
-  position: var(--v-player-position, relative);
-  width: var(--v-player-width, 100%);
-  height: var(--v-player-height);
+    position: var(--v-player-position, relative);
+    width: var(--v-player-width, 100%);
+    height: var(--v-player-height);
 
-  .iframe,
-  .video {
-    @include video-properties;
-  }
+    .iframe,
+    .video {
+        @include video-properties;
+    }
 }
 
 .iframe-wrapper {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  .video,
-  .iframe {
-    @include video-properties;
-  }
+    .video,
+    .iframe {
+        @include video-properties;
+    }
 }
 
 .iframe,
 .video {
-  @include video-properties;
+    @include video-properties;
 }
 
 .spinner {
-  position: absolute;
-  z-index: 10;
-  top: calc(50% - #{rem(35)});
-  left: calc(50% - #{rem(35)});
-  width: rem(70);
-  height: rem(70);
+    position: absolute;
+    z-index: 10;
+    top: calc(50% - #{rem(35)});
+    left: calc(50% - #{rem(35)});
+    width: rem(70);
+    height: rem(70);
 }
 </style>
