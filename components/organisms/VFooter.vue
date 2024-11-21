@@ -48,7 +48,7 @@ const developerCopyright = computed(() => {
         bottom: 0;
         left: 0;
         height: 1px;
-        background-color: var(--color-main-darker-80);
+        background-color: currentcolor;
         content: '';
     }
 }

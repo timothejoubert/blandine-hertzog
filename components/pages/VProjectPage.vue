@@ -14,42 +14,52 @@ const slices = computed(() => {
 </script>
 
 <template>
-    <div :class="$style.root">
-        <NuxtLink to="/projects">
-            Retour
-            <VIcon name="arrow-left" />
-        </NuxtLink>
-        <VHeader
-            :title="data.title"
-            :content="data.content"
+    <VHeader
+        :title="data.title"
+        :content="data.content"
+        class="grid-item-main"
+    >
+        <VArrow
+            to="/projects"
+            :aria-label="$t('back_to_project_listing')"
+            :class="$style.back"
         />
-        <div :class="$style.attributes">
-            <VTime
-                :date="date"
-                :class="$style.date"
+    </VHeader>
+    <div
+        :class="$style.attributes"
+        class="grid-item-main"
+    >
+        <VTime
+            :date="date"
+            :class="$style.date"
+        />
+        <template v-if="tags.length">
+            <VTag
+                v-for="tag in tags"
+                :key="tag"
+                :class="$style.tag"
+                :label="tag"
             />
-            <template v-if="tags.length">
-                <VTag
-                    v-for="tag in tags"
-                    :key="tag"
-                    :class="$style.tag"
-                    :label="tag"
-                />
-            </template>
-        </div>
-        <LazySliceZone
-            v-if="slices?.length"
-            :slices="slices"
-            wrapper="main"
-            :components="components"
-            :class="$style.slices"
-        />
+        </template>
     </div>
+
+    <LazySliceZone
+        v-if="slices?.length"
+        :slices="slices"
+        wrapper="main"
+        :components="components"
+        :class="$style.slices"
+        class="grid-item-main"
+    />
 </template>
 
 <style lang="scss" module>
 .root {
     position: relative;
+}
+
+.back {
+    margin-bottom: rem(32);
 }
 
 .attributes {

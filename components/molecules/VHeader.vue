@@ -25,9 +25,10 @@ const rootClasses = computed(() => {
     <header
         :class="rootClasses"
     >
+        <slot />
         <h1
             :class="$style.title"
-            class="text-h2"
+            class="text-h1"
         >
             {{ title }}
         </h1>

@@ -6,17 +6,12 @@ const data = props.document.data
 </script>
 
 <template>
-    <div :class="$style.root">
-        <VHeader
-            :title="data.title"
-            :content="data.content"
-        />
-        <pre> {{ data }}</pre>
-    </div>
+    <VHeader
+        :title="data.title"
+        :content="data.content"
+        class="grid-item-main"
+    />
+    <pre> {{ data }}</pre>
 </template>
 
-<style lang="scss" module>
-.root {
-    position: relative;
-}
-</style>
+<!-- <style lang="scss" module></style> -->

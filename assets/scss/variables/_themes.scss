@@ -1,0 +1,24 @@
+// Exported from variable2css figma plugin
+// https://www.figma.com/community/plugin/1261234393153346915/variables2css
+
+// Generated output is sass, need to convert to scss
+// CMD f + CMD r could help
+
+/* Tokens */
+$themes: (
+    light: (
+        color-background: #FFE6DB,
+        color-primary: #2E1F69,
+        color-primary-variant: #826F97,
+        color-secondary: #FFA974,
+        color-secondary-variant: #FFC8A7,
+    ),
+    dark: (
+        color-background: #05000D,
+        color-primary: #FFDCC3,
+        color-primary-variant: #372C31,
+        color-secondary: #FFDCC3,
+        color-secondary-variant: #372C31,
+    ),
+);
+$default-theme: light;

@@ -98,7 +98,7 @@ const attributes = computed(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--color-main-lighter-10);
+    border-bottom: 1px solid currentcolor;
     padding-block: rem(10);
 }
 

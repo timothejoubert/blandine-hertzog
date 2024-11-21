@@ -30,7 +30,6 @@ const links = menu.value?.data.links || []
 
 <style lang="scss" module>
 .root {
-    --v-nav-color: var(--color-main-darker-80);
 }
 
 .list {
@@ -51,9 +50,9 @@ const links = menu.value?.data.links || []
     display: flex;
     align-items: center;
     padding: rem(9) rem(24);
-    border: 1px solid var(--v-nav-color);
+    border: 1px solid currentcolor;
     border-bottom-width: 0;
-    color: var(--v-nav-color);
+    color: var(--theme-color-primary);
     font-family: $font-noi;
     font-size: rem(18);
     font-variation-settings: "wght" 600;

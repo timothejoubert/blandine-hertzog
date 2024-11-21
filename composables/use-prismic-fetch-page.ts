@@ -3,8 +3,9 @@ import { isDynamicDocument, isExistingDocumentType } from '~/utils/prismic/docum
 import { usePrismicPreviewRoute } from '~/composables/use-prismic-preview-route'
 
 export type PrismicWebResponse = Awaited<ReturnType<typeof usePrismicFetchPage>>['webResponse']
-// TODO: enabled preview
+
 export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) {
+    const nuxtApp = useNuxtApp()
     const route = useRoute()
     const routeUid = route.params?.uid || ''
     const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid // get the last uid when route has subPage,
@@ -33,6 +34,8 @@ export async function usePrismicFetchPage(prismicDocument: PrismicDocumentType) 
             // @ts-expect-error cannot know the error type
             return { error: createError(error) }
         }
+    }, {
+        getCachedData: key => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key], // no re-fetch data if the key is already in the payload
     })
 
     const response = data.value

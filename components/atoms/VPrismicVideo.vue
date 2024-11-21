@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import type { EmbedField, ImageField } from '@prismicio/types'
+import type { EmbedField, ImageField, LinkToMediaField } from '@prismicio/types'
 import { commonVideoProps, videoAttributes } from '~/utils/video/video-props'
 import type { PrismicVideoField } from '~/utils/prismic/prismic-media'
 
 const props = defineProps({
     ...commonVideoProps,
     ...videoAttributes,
+    linkToMediaField: { type: Object as PropType<LinkToMediaField> },
     embedField: { type: Object as PropType<EmbedField> },
     video: { type: Object as PropType<PrismicVideoField> },
     thumbnail: { type: Object as PropType<ImageField> },
@@ -31,27 +32,11 @@ const thumbnailProps = computed(() => {
             document: props.thumbnail,
         }
     }
-    // else if (props.embedField?.provider_url && props.embedField?.thumbnail_url) {
-    //     return {
-    //         src: props.embedField?.thumbnail_url,
-    //         width: props.embedField.width?.toString(),
-    //         height: props.embedField.height?.toString(),
-    //         provider: '',
-    //         sizes: '',
-    //         crossorigin: 'anonymous',
-    //         modifiers: {},
-    //     }
-    // }
 
     return undefined
 })
 
-const videoRatio = computed(() => {
-    const embedRatio = (Number(props.embedField?.width) || 16) / (Number(props.embedField?.height) || 9)
-    return embedRatio
-})
-
-const videoProps = computed(() => {
+const videoData = computed(() => {
     if (props.embedField?.embed_url) {
         const embedId = new URL(props.embedField.embed_url)?.pathname?.substring(1)
 
@@ -63,8 +48,42 @@ const videoProps = computed(() => {
             autoplay: hasLazyVideoPlayer.value,
         }
     }
+    else if (props.linkToMediaField?.url) {
+        return {
+            width: props.linkToMediaField?.width,
+            height: props.linkToMediaField?.height,
+            src: props.linkToMediaField?.url,
+        }
+    }
 
     return {}
+})
+
+const videoAttrs = computed(() => {
+    const width = props.embedField?.width || props.linkToMediaField?.width || props?.width || 1920
+    const height = props.embedField?.height || props.linkToMediaField?.height || props?.height || 1080
+
+    const attrs = Object.entries(props).reduce((acc, [key, value]) => {
+        if (key in commonVideoProps || key in videoAttributes) acc[key] = value
+        return acc
+    }, {})
+
+    return {
+        ...attrs,
+        width,
+        height,
+    }
+})
+
+const videoProps = computed(() => {
+    return {
+        ...videoData.value,
+        ...videoAttrs.value,
+    }
+})
+
+const videoRatio = computed(() => {
+    return Number(videoAttrs.value.width) / Number(videoAttrs.value.height)
 })
 
 // Video interaction
@@ -74,6 +93,7 @@ const onClick = (event: Event) => {
 
     hadInteraction.value = true
 }
+
 const onVideoEnded = () => (hadInteraction.value = false)
 </script>
 
@@ -111,11 +131,13 @@ const onVideoEnded = () => (hadInteraction.value = false)
             v-bind="videoProps"
             :autoplay="true"
             :plyr="{ listener: { ended: onVideoEnded } }"
+            :class="$style.video"
         />
     </div>
     <VVideoPlayer
         v-else
         v-bind="videoProps"
+        :class="$style.video"
     />
 </template>
 
@@ -175,5 +197,9 @@ const onVideoEnded = () => (hadInteraction.value = false)
             inset: 0;
         }
     }
+}
+
+.video {
+    display: block;
 }
 </style>

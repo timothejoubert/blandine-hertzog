@@ -11,27 +11,31 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 </script>
 
 <template>
-    <VPrismicLink
-        :to="props.project"
-        :class="$style.root"
-    >
-        <VPrismicImage
-            v-if="image"
-            :document="image"
-            fit="crop"
-            ar="460:248"
-            width="460"
-            height="248"
-            :class="$style.image"
-            sizes="xs:92vw sm:92vw md:32vw lg:32vw xl:32vw xxl:32vw hq:32vw qhd:32vw"
+    <div :class="$style.root">
+        <VPrismicLink
+            :to="props.project"
+            :class="$style['media-wrapper']"
+        >
+            <VPrismicImage
+                v-if="image"
+                :document="image"
+                fit="crop"
+                ar="460:248"
+                width="460"
+                height="248"
+                :class="$style.image"
+                sizes="xs:92vw sm:92vw md:32vw lg:32vw xl:32vw xxl:32vw hq:32vw qhd:32vw"
+            />
+            <div
+                v-else
+                :class="[$style.image, $style['image--placeholder']]"
+            />
+        </VPrismicLink>
+        <VPrismicLink
+            :to="props.project"
+            :class="$style.title"
+            :label="title"
         />
-        <div
-            v-else
-            :class="[$style.image, $style['image--placeholder']]"
-        />
-        <div :class="$style.title">
-            {{ title }}
-        </div>
         <div :class="$style.footer">
             <VTime
                 v-if="date"
@@ -47,7 +51,7 @@ const { image, title, date, tags } = useProjectUtils(props.project)
                 />
             </template>
         </div>
-    </VPrismicLink>
+    </div>
 </template>
 
 <style lang="scss" module>
@@ -61,8 +65,11 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 }
 
 .title {
+    display: block;
+    color: inherit;
     font-weight: 800;
-    margin-block: rem(14)
+    margin-block: rem(14);
+    text-decoration: none;
 }
 
 .date {

@@ -67,6 +67,15 @@
           "constraint": {},
           "thumbnails": []
         }
+      },
+      "showreel": {
+        "type": "Link",
+        "config": {
+          "label": "showreel",
+          "placeholder": "",
+          "select": "media",
+          "allowText": true
+        }
       }
     }
   }

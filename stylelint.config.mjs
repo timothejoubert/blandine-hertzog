@@ -10,7 +10,6 @@ export default {
     // plugins: ['stylelint-scss'],
     // https://stylelint.io/user-guide/configuration
     rules: {
-        'indentation': [4, { 'baseIndentLevel': 0 }],
         'no-descending-specificity': null,
         'at-rule-no-unknown': null,
         'scss/at-rule-no-unknown': true,

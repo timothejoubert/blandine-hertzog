@@ -15,6 +15,7 @@ const slices = computed(() => {
     <VHeader
         :class="$style.header"
         :title="data.title"
+        class="grid-item-main"
     />
     <LazySliceZone
         v-if="slices?.length"
@@ -22,6 +23,7 @@ const slices = computed(() => {
         wrapper="main"
         :components="components"
         :class="$style.slices"
+        class="grid-item-main"
     />
 </template>
 

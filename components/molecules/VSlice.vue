@@ -20,7 +20,7 @@ defineProps<{
 
 <style lang="scss" module>
 .root {
-    border-top: 1px solid var(--color-main-darker-80);
+    border-top: 1px solid currentcolor;
     padding-block: rem(72);
 }
 </style>

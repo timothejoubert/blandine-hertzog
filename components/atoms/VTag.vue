@@ -14,6 +14,6 @@ defineProps({
 .root {
     padding: rem(7) rem(14);
     border-radius: rem(2);
-    background-color: var(--color-main-lighter-60);
+    background-color: var(--theme-color-secondary-variant);
 }
 </style>

@@ -18,24 +18,24 @@ const projects = computed(() => fetchListing.data.value?.results || [])
 </script>
 
 <template>
-    <div :class="$style.root">
-        <VHeader
-            :title="data.title"
-            :content="data.content"
-        />
-        <ul
-            v-if="projects.length"
-            :class="$style.list"
+    <VHeader
+        :title="data.title"
+        :content="data.content"
+        class="grid-item-main"
+    />
+    <ul
+        v-if="projects.length"
+        :class="$style.list"
+        class="grid-item-main"
+    >
+        <li
+            v-for="(project, index) in projects"
+            :key="project?.uid || index"
+            :class="$style.item"
         >
-            <li
-                v-for="(project, index) in projects"
-                :key="project?.uid || index"
-                :class="$style.item"
-            >
-                <VProjectRow :project="project" />
-            </li>
-        </ul>
-    </div>
+            <VProjectRow :project="project" />
+        </li>
+    </ul>
 </template>
 
 <style lang="scss" module>
