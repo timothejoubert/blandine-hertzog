@@ -1,8 +1,8 @@
 <script  lang="ts" setup>
-import { getHtmlElement, type TemplateElementRef } from '~/utils/ref/get-html-element'
+import type { TemplateElementRef } from '~/utils/ref/get-html-element'
 
 defineProps({
-    content: [String, null, undefined],
+    content: [String, null],
 })
 
 const reveal = defineModel<boolean>({ default: false })
@@ -14,9 +14,9 @@ const rootClasses = computed(() => {
     return [$style.root, reveal.value && $style['root--reveal']]
 })
 
-watch(reveal, () => {
-    const elements = getHtmlElement(root.value)
-})
+// watch(reveal, () => {
+//     const elements = getHtmlElement(root.value)
+// })
 </script>
 
 <template>

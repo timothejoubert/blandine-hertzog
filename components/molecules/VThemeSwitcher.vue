@@ -22,12 +22,12 @@ function switchTheme() {
 
 <style lang="scss" module>
 .root {
+    z-index: 1;
     display: flex;
     height: $v-footer-height;
     align-items: center;
     justify-content: center;
     gap: rem(14);
-    z-index: 1;
 }
 
 .button {

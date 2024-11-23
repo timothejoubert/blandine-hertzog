@@ -29,8 +29,8 @@ const { toggleQuery } = useRouteQuery(props.queryKey)
 <style lang="scss" module>
 .root {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
     gap: rem(12);
 }
 </style>
