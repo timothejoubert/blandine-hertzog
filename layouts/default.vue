@@ -20,7 +20,8 @@ const rootClasses = computed(() => {
     >
         <!--        <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
         <!--        <VSplashScreen /> -->
-        <NuxtPage :class="$style.page" />
+        <NuxtLoadingIndicator />
+        <NuxtPage />
         <VPrismicVideo
             :link-to-media-field="showreelVideo"
             autoplay

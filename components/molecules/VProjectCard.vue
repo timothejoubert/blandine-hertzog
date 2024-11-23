@@ -35,12 +35,14 @@ const { image, title, date, tags } = useProjectUtils(props.project)
             :to="props.project"
             :class="$style.title"
             :label="title"
+            class="text-over-title-md"
         />
         <div :class="$style.footer">
             <VTime
                 v-if="date"
                 :date="date"
                 :class="$style.date"
+                class="text-over-title-sm"
             />
             <template v-if="tags.length">
                 <VTag

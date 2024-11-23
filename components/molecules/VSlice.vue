@@ -21,6 +21,6 @@ defineProps<{
 <style lang="scss" module>
 .root {
     border-top: 1px solid currentcolor;
-    padding-block: rem(72);
+    padding-block: rem(94);
 }
 </style>

@@ -1,6 +1,7 @@
 ## In progress
-- Color theme logic
-- Create VArrowButton 
+- VProjectsFilterBar
+- Create VArrowButton
+- redesign nav
 
 ## TODO
 - Nav on mobile
@@ -15,5 +16,7 @@
 - VPrismicLink slot warning
 
 ## Done
+- Color theme logic
+- Style typo
 - Deploy preprod
 - attrs and seo meta 

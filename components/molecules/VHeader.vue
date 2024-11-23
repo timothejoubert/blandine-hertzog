@@ -73,7 +73,7 @@ const rootClasses = computed(() => {
 }
 
 .content {
-    width: calc(#{flex-grid-value(6, 11, '%', false)} + var(--gutter));
-    margin-block: rem(41) 0;
+    width: calc(#{flex-grid-value(7, 11, '%', false)} + var(--gutter));
+    margin-block: rem(62) rem(22);
 }
 </style>

@@ -21,7 +21,7 @@ const slices = computed(() => {
     >
         <VArrow
             to="/projects"
-            :aria-label="$t('back_to_project_listing')"
+            :aria-label="$t('project_page.back')"
             :class="$style.back"
         />
     </VHeader>

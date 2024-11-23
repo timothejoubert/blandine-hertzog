@@ -5,14 +5,17 @@ defineProps({
 </script>
 
 <template>
-    <div :class="$style.root">
+    <div
+        :class="$style.root"
+        class="text-tag-md"
+    >
         {{ label }}
     </div>
 </template>
 
 <style lang="scss" module>
 .root {
-    padding: rem(7) rem(14);
+    padding: rem(5) rem(11);
     border-radius: rem(2);
     background-color: var(--theme-color-secondary-variant);
 }

@@ -33,6 +33,7 @@ const data = computed(() => props.slice.primary)
             v-if="data.content"
             :class="$style.content"
             :content="data.content"
+            class="text-body-md"
         />
     </VSlice>
 </template>

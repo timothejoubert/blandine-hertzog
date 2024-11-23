@@ -18,18 +18,7 @@
     @include text-h5;
 }
 
-.text-over-title-lg {
-    @include text-over-title-lg;
-}
-
-.text-over-title-md {
-    @include text-over-title-md;
-}
-
-.text-over-title-sm {
-    @include text-over-title-sm;
-}
-
+// Body
 .text-body-lg {
     @include text-body-lg;
 }
@@ -44,4 +33,18 @@
 
 .text-body-xs {
     @include text-body-xs;
+}
+
+// OverTitle
+.text-over-title-md {
+    @include text-over-title-md;
+}
+
+.text-over-title-sm {
+    @include text-over-title-sm;
+}
+
+// Components
+.text-tag-md {
+    @include text-tag-md;
 }

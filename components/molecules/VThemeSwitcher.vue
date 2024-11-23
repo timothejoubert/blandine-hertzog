@@ -23,10 +23,11 @@ function switchTheme() {
 <style lang="scss" module>
 .root {
     display: flex;
-    height: $v-footer-margin-bottom;
+    height: $v-footer-height;
     align-items: center;
     justify-content: center;
     gap: rem(14);
+    z-index: 1;
 }
 
 .button {

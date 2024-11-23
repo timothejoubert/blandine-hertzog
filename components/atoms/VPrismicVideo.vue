@@ -13,8 +13,6 @@ const props = defineProps({
     thumbnail: { type: Object as PropType<ImageField> },
 })
 
-console.log('ref', props.embedField)
-
 const slots = useSlots()
 const hasLazyVideoPlayer = computed(() => {
     return !!props.thumbnail?.url || !!slots.default?.()

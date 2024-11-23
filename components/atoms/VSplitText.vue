@@ -52,13 +52,10 @@ export default defineComponent({
             }
             else if (splitTextData.all.length === 1) {
                 renderNodes = renderLine(splitTextData.all[0])
-                console.log('render first line', renderNodes)
             }
             else {
                 renderNodes = splitTextData.all.map(line => renderLine(line))
             }
-
-            console.log('renderNodes', renderNodes)
 
             return renderNodes
         }

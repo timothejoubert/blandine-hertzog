@@ -45,7 +45,9 @@ const attributes = computed(() => {
                     :to="attribute.externalUrl"
                     :class="$style.attribute"
                 >
-                    <div>{{ attribute.label }}</div>
+                    <div class="text-over-title-sm">
+                        {{ attribute.label }}
+                    </div>
                     <VIcon
                         v-if="attribute.icon"
                         :name="attribute.icon"
@@ -57,6 +59,7 @@ const attributes = computed(() => {
             v-if="data.content"
             :class="$style.content"
             :content="data.content"
+            class="text-body-md"
         />
     </VSlice>
 </template>

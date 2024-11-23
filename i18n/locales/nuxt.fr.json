@@ -7,6 +7,9 @@
     "development":  "Développement",
     "play_video": "Lire la vidéo",
     "switch_theme_to": "Basculer vers le theme {theme}",
+    "filters": "Filtres",
+    "project_page.back": "Retour",
+
     "error_page.not_found.title": "Page introuvable",
     "error_page.unauthenticated_user_error": "Access non autorisé",
     "error_page.unauthorized_access_error":  "Access non autorisé",

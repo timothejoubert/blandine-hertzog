@@ -10,14 +10,17 @@ const appCopyright = computed(() => {
 })
 
 const developerCopyright = computed(() => {
-    return { label: 'Timothé Joubert', url: 'https://timothejoubert.com' }
+    return {
+        label: 'Timothé Joubert',
+        url: 'https://timothejoubert.com',
+    }
 })
 </script>
 
 <template>
     <footer
         :class="$style.root"
-        class="grid"
+        class="grid text-body-xs"
     >
         <div :class="$style['app-copyright']">
             {{ appCopyright }}
@@ -40,12 +43,11 @@ const developerCopyright = computed(() => {
     height: $v-footer-height;
     align-items: center;
     margin-top: $v-footer-margin-top;
-    margin-bottom: $v-footer-margin-bottom;
 
     &::after {
         position: absolute;
+        top: 0;
         right: calc(var(--gutter) * -1);
-        bottom: 0;
         left: 0;
         height: 1px;
         background-color: currentcolor;
@@ -54,10 +56,15 @@ const developerCopyright = computed(() => {
 }
 
 .app-copyright {
-    grid-column: span 4;
+    grid-column: span 5;
 }
 
 .developer-copyright {
-    grid-column: span 5;
+    grid-column: span 6;
+    text-align: right;
+
+    a {
+        color: inherit;
+    }
 }
 </style>

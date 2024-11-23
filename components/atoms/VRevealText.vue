@@ -16,7 +16,6 @@ const rootClasses = computed(() => {
 
 watch(reveal, () => {
     const elements = getHtmlElement(root.value)
-    console.log('elements', elements)
 })
 </script>
 
