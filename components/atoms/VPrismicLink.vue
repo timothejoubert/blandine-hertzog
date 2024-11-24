@@ -9,6 +9,7 @@ export const vPrismicLinkProps = {
     nuxtLinkProps: Object as PropType<NuxtLinkProps>,
     custom: Boolean, // use scoped slot
     label: [String, null],
+    fallbackTag: String,
 }
 
 export default defineComponent({
@@ -36,15 +37,17 @@ export default defineComponent({
         })
 
         return () => {
-            // A VPrismicLink without URL or reference will render slot
-            if (!url.value) {
-                return slots.default?.() || null
-            }
-            else if (props.custom) {
-            // Render scoped slot data
+            if (props.custom) {
+                // Render scoped slot data
                 const vNode = slots.default?.({ ...attributes.value })
 
                 if (vNode?.length) return vNode[0]
+            }
+            // A VPrismicLink without URL or reference will render slot
+            else if (!url.value) {
+                return props.fallbackTag
+                    ? h(props.fallbackTag, { class: attrs.class }, slots.default?.())
+                    : slots.default?.()
             }
 
             // By default return a NuxtLink component

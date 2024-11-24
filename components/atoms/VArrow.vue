@@ -9,7 +9,7 @@ export const vArrowProps = {
         default: 'md',
     },
     direction: {
-        type: String as PropType<'top' | 'bottom' | 'left' | 'right' >,
+        type: String as PropType<'up' | 'down' | 'left' | 'right' >,
         default: 'right',
     },
     href: String,
@@ -20,13 +20,6 @@ export default defineComponent({
     props: vArrowProps,
     setup(props) {
         const $style = useCssModule()
-        const rootClasses = computed(() => {
-            return [
-                $style.root,
-                $style[`root--direction-${props.direction}`],
-                $style[`root--size-${props.size}`],
-            ]
-        })
 
         const rootTag = computed(() => {
             if (props.tag) return props.tag
@@ -35,18 +28,18 @@ export default defineComponent({
             return 'span'
         })
 
-        const rootAttrs = computed(() => {
-            return {
-                'aria-hidden': rootTag.value === 'button' || rootTag.value === 'a' ? undefined : 'true',
-                'href': props.href,
-                'to': props.to,
-            }
-        })
-
         return () => h(
             rootTag.value,
-            { class: rootClasses.value, ...rootAttrs.value },
-            h(VIcon, { class: $style.icon, name: 'arrow-right-small' }),
+            {
+                class: [
+                    $style.root,
+                    $style[`root--size-${props.size}`],
+                ],
+                ariaHidden: rootTag.value === 'button' || rootTag.value === 'a' ? undefined : 'true',
+                href: props.href,
+                to: props.to,
+            },
+            h(VIcon, { class: $style.icon, name: `arrow-${props.direction}` }),
         )
     },
 })
@@ -59,7 +52,6 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
     background-color: var(--theme-color-secondary);
-    color: var(--theme-color-primary);
 
     &--size-sm {
         padding: rem(3);
@@ -68,7 +60,7 @@ export default defineComponent({
 
     &--size-md {
         padding: rem(6);
-        border-radius: rem(16);
+        border-radius: rem(14);
     }
 
     &--size-lg {
@@ -80,9 +72,14 @@ export default defineComponent({
 .icon {
     height: auto;
     transform-origin: center;
+    color: var(--theme-color-primary);
+
+    :global(.global--theme-dark) & {
+        color: var(--theme-color-background);
+    }
 
     .root--size-sm & {
-        @include property-fluid('width', (xs: 16, xl: 24), $breakpoint: null);
+        @include property-fluid('width', (xs: 18, xl: 26), $breakpoint: null);
     }
 
     .root--size-md & {
@@ -90,19 +87,7 @@ export default defineComponent({
     }
 
     .root--size-lg & {
-        @include property-fluid('width', (xs: 28, xl: 60), $breakpoint: null);
-    }
-
-    .root--direction-top & {
-        rotate: -90deg;
-    }
-
-    .root--direction-bottom & {
-        rotate: 90deg;
-    }
-
-    .root--direction-left & {
-        rotate: 180deg;
+        @include property-fluid('width', (xs: 32, xl: 48), $breakpoint: null);
     }
 }
 </style>

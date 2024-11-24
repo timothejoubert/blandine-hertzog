@@ -1,9 +1,8 @@
 ## In progress
-- VFilterBar
-- Create VArrowButton
-- redesign nav
+- Fetch prev and next project cta
 
 ## TODO
+- redesign nav
 - Nav on mobile
 - Embed video
 - Reveal on intersectionObserver 
@@ -16,6 +15,9 @@
 - VPrismicLink slot warning
 
 ## Done
+- Create VArrowButton
+- Fix SvgSprite
+- VFilterBar
 - Color theme logic
 - Style typo
 - Deploy preprod

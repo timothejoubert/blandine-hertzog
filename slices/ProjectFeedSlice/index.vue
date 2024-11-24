@@ -2,6 +2,8 @@
 import type { Content } from '@prismicio/client'
 import { usePrismic } from '@prismicio/vue'
 import type { ProjectPageDocument } from '~/prismicio-types'
+import { usePrismicFetchProjects } from '~/composables/use-prismic-fetch-projects'
+import { prismicDocumentRoute } from '~/utils/prismic/route-resolver'
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -15,6 +17,7 @@ const props = defineProps(
 )
 
 const data = computed(() => props.slice.primary)
+
 const manualProjectIds = computed(() => {
     return data.value.custom_projects.filter((group) => {
         const projectRelation = group.project
@@ -33,16 +36,7 @@ async function setProjects() {
         projects.value = fetchListingResponse.results
     }
     else {
-        const prismicFilter = usePrismic().filter
-        const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('project_page', {
-            orderings: {
-                field: 'my.project.date',
-                direction: 'desc',
-            },
-            pageSize: listLength.value,
-            filters: [prismicFilter.at('my.project_page.archived', false)],
-        })
-
+        const fetchListing = await usePrismicFetchProjects({ pageSize: listLength.value })
         projects.value = fetchListing.data.value.results
     }
 }
@@ -75,11 +69,22 @@ watch(data, async () => {
                 :project="item"
             />
         </VGridList>
+        <VArrowButton
+            :label="data.link_label || $t('see_all_projects')"
+            arrow-direction="right"
+            icon-position="start"
+            :to="data.internal_page?.url ? data.internal_page : prismicDocumentRoute.project_listing_page.path"
+            :class="$style['cta']"
+        />
     </VSlice>
 </template>
 
 <style lang="scss" module>
 .list {
-    margin-top: rem(77);
+    margin-top: rem(54);
+}
+
+.cta {
+    margin-top: rem(42);
 }
 </style>

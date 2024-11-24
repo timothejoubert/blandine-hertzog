@@ -55,7 +55,7 @@
     font-weight: 500;
     line-height: 1.3;
 
-    @include font-size-fluid((xs: 16, xl: 19));
+    @include font-size-fluid((xs: 15, xl: 17));
 }
 
 @mixin text-body-sm {

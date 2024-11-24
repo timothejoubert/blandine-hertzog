@@ -3,16 +3,23 @@ import type { BuildQueryURLArgs } from '@prismicio/client'
 import type { PrismicDocumentType } from '~/types/api'
 import { prismicDocumentRoutes } from '~/utils/prismic/route-resolver'
 import type { AllDocumentTypes } from '~/prismicio-types'
+import { generateHashFromObject } from '~/utils/string/generate-hash-from-object'
 
 type PrismicFetchDocumentsOptions = Partial<BuildQueryURLArgs>
 
 const DEFAULT_SIZE = 10
 
 export function usePrismicFetchDocuments<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType, options: PrismicFetchDocumentsOptions = {}) {
-    const filterHash = options.filters?.length && options.filters
+    const hash: string[] = [prismicDocument]
 
-    const key = `fetched-pages-${prismicDocument}` + (filterHash || '')
+    if (Object.keys(options)) {
+        const optionsHash = typeof options.orderings === 'object' ? generateHashFromObject(options) : options.orderings
 
+        if (optionsHash) hash.push(optionsHash)
+    }
+
+    const key = `fetched-pages-${hash.join('-')}`
+    console.log('key', key)
     const size = options.pageSize || DEFAULT_SIZE
 
     return useAsyncData(key, async () => {
@@ -23,6 +30,7 @@ export function usePrismicFetchDocuments<T extends AllDocumentTypes>(prismicDocu
             ...fetchLocaleOption.value,
             pageSize: size, // default 20
             routes: prismicDocumentRoutes,
+            brokenRoute: '/404',
             ...options,
         })
     }, {

@@ -53,6 +53,7 @@ export default defineNuxtConfig({
             site: {
                 name: '',
                 url: 'http://localhost:3000',
+                environment: 'development',
             },
         },
     },

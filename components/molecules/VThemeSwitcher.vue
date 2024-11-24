@@ -27,7 +27,7 @@ function switchTheme() {
     height: $v-footer-height;
     align-items: center;
     justify-content: center;
-    gap: rem(14);
+    gap: rem(8);
 }
 
 .button {

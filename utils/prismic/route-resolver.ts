@@ -36,11 +36,18 @@ export const prismicDocumentRoutes: prismicDocumentRoute[] = [
 ]
 
 export const prismicDocumentName = prismicDocumentRoutes.reduce((acc, route) => {
-    const value = route.type
-    Object.assign(acc, { [value]: value })
+    const type = route.type
+    Object.assign(acc, { [type]: type })
 
     return acc
 }, {} as Record<PrismicDocumentType, PrismicDocumentType>)
+
+export const prismicDocumentRoute = prismicDocumentRoutes.reduce((acc, route) => {
+    const type = route.type
+    Object.assign(acc, { [type]: route })
+
+    return acc
+}, {} as Record<PrismicDocumentType, prismicDocumentRoute>)
 
 // TODO: find item by alias too
 export function getDocumentTypeByUrl(path: string) {

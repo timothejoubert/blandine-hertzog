@@ -9,6 +9,9 @@
     "switch_theme_to": "Basculer vers le theme {theme}",
     "filters": "Filtres",
     "project_page.back": "Retour",
+    "previous_project":  "Projet précédant",
+    "next_project": "Projet suivant",
+    "see_all_projects": "Voir tous mes projets",
 
     "error_page.not_found.title": "Page introuvable",
     "error_page.unauthenticated_user_error": "Access non autorisé",

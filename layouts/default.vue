@@ -7,7 +7,9 @@ const theme = useThemeState()
 const $style = useCssModule()
 
 const rootClasses = computed(() => {
-    return [$style.root, $style[`root--theme-${theme.value}`]]
+    return [$style.root,
+        `global--theme-${theme.value}`,
+        $style[`root--theme-${theme.value}`]]
 })
 </script>
 

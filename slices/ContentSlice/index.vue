@@ -63,6 +63,7 @@ const imgSizes = computed(() => {
             <VText
                 v-if="item.text"
                 :content="item.text"
+                class="text-body-md"
                 :class="[$style.item, $style['item--text']]"
             />
             <VPrismicLink
