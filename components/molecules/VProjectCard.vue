@@ -41,8 +41,6 @@ const { image, title, date, tags } = useProjectUtils(props.project)
             <VTime
                 v-if="date"
                 :date="date"
-                :class="$style.date"
-                class="text-over-title-sm"
             />
             <template v-if="tags.length">
                 <VTag
@@ -72,10 +70,6 @@ const { image, title, date, tags } = useProjectUtils(props.project)
     font-weight: 800;
     margin-block: rem(14);
     text-decoration: none;
-}
-
-.date {
-
 }
 
 .footer {

@@ -51,7 +51,4 @@ const imageField = {
     </nuxtstory>
 </template>
 
-<style lang="scss" module>
-.root {
-}
-</style>
+<!-- <style lang="scss" module></style> -->

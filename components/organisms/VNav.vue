@@ -7,7 +7,6 @@ const links = menu.value?.data.links || []
 <template>
     <nav
         v-if="links.length"
-        :class="$style.root"
         aria-label="Main"
     >
         <ul :class="$style.list">
@@ -29,9 +28,6 @@ const links = menu.value?.data.links || []
 </template>
 
 <style lang="scss" module>
-.root {
-}
-
 .list {
     display: flex;
     flex-direction: column;

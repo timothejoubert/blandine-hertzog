@@ -96,8 +96,9 @@
 // Components
 @mixin text-tag-md {
     font-family: $font-noi;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1;
+    text-transform: uppercase;
 
-    @include font-size-fluid((xs: 14, xl: 15));
+    @include font-size-fluid((xs: 12, xl: 14));
 }

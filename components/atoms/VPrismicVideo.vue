@@ -185,8 +185,7 @@ const onVideoEnded = () => (hadInteraction.value = false)
     &--placeholder {
         position: relative;
         aspect-ratio: 16 / 9;
-
-        //background-color: color(grey-50);
+        // background-color: color(grey-50);
 
         &::after {
             position: absolute;

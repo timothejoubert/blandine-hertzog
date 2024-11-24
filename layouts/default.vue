@@ -3,8 +3,6 @@
 const settingDocument = await usePrismicSettingsDocument()
 const showreelVideo = settingDocument?.data.showreel
 
-console.log(showreelVideo)
-
 const theme = useThemeState()
 const $style = useCssModule()
 

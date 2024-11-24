@@ -1,5 +1,5 @@
 ## In progress
-- VProjectsFilterBar
+- VFilterBar
 - Create VArrowButton
 - redesign nav
 
