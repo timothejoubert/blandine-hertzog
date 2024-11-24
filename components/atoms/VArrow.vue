@@ -71,8 +71,8 @@ export default defineComponent({
 
 .icon {
     height: auto;
-    transform-origin: center;
     color: var(--theme-color-primary);
+    transform-origin: center;
 
     :global(.global--theme-dark) & {
         color: var(--theme-color-background);

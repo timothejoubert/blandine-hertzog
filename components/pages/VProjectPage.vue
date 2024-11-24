@@ -112,8 +112,8 @@ console.log('nextProject', nextProjectResponse.data.value)
 }
 
 .back {
-    margin-bottom: rem(32);
     width: flex-grid(2, 11);
+    margin-bottom: rem(32);
 }
 
 .attributes {
@@ -131,9 +131,9 @@ console.log('nextProject', nextProjectResponse.data.value)
 
 .cross-projects {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
     height: min-content;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
     margin-block: rem(192) rem(40);
 }
 

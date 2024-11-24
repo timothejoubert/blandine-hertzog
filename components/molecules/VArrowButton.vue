@@ -36,8 +36,8 @@ const rootClasses = computed(() => {
 <style lang="scss" module>
 .root {
     display: flex;
+    color: currentcolor;
     gap: rem(14);
-    color: currentColor;
     text-decoration: none;
 
     &--icon-position-end {
@@ -48,11 +48,11 @@ const rootClasses = computed(() => {
 
 .label {
     display: block;
-    text-transform: uppercase;
+    max-width: 11ch;
     font-family: $font-mango;
     font-weight: 500;
     line-height: 1;
-    max-width: 11ch;
+    text-transform: uppercase;
 
     @include font-size-fluid((xs: 32, xl: 42));
 }
