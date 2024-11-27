@@ -56,17 +56,17 @@ export default defineComponent({
 
     &--size-sm {
         padding: rem(3);
-        border-radius: rem(12);
+        border-radius: rem(5);
     }
 
     &--size-md {
         padding: rem(6);
-        border-radius: rem(14);
+        border-radius: rem(6);
     }
 
     &--size-lg {
         padding: rem(9);
-        border-radius: rem(30);
+        border-radius: rem(16);
     }
 }
 

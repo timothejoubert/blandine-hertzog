@@ -40,7 +40,7 @@ const links = menu.value?.data.links || []
 }
 
 .link {
-    --v-nav-item-gap: #{rem(14)};
+    --v-nav-item-gap: #{rem(10)};
     --v-nav-item-active-symbol-width: #{rem(14)};
 
     display: flex;
@@ -65,6 +65,7 @@ const links = menu.value?.data.links || []
         width: var(--v-nav-item-active-symbol-width);
         height: var(--v-nav-item-active-symbol-width);
         flex-shrink: 0;
+        border-radius: rem(2);
         background-color: currentcolor;
         content: '';
         opacity: 0;
@@ -80,15 +81,15 @@ const links = menu.value?.data.links || []
 
 .label {
     transition: translate 0.3s ease(out-quad);
-    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1);
+    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1) rem(01);
 
     .link:global(.router-link-active) & {
-        translate: 0;
+        translate: 0 rem(01);
     }
 
     @media (hover: hover) {
         .link:not(:global(.router-link-active)):hover & {
-            translate: calc(var(--v-nav-item-active-symbol-width) * -0.8);
+            translate: calc(var(--v-nav-item-active-symbol-width) * -0.8) rem(01);
         }
     }
 }

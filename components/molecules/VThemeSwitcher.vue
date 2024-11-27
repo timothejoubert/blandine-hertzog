@@ -10,13 +10,21 @@ function switchTheme() {
 
 <template>
     <div :class="[$style.root, $style[`root--theme-${theme}`]]">
-        <VIcon name="sun" />
+        <VIcon
+            name="sun"
+            :class="$style.icon"
+            @click="() => theme = 'light'"
+        />
         <button
             :class="$style.button"
             :aria-label="$t('switch_theme_to', { theme })"
             @click="switchTheme"
         />
-        <VIcon name="moon" />
+        <VIcon
+            name="moon"
+            :class="$style.icon"
+            @click="() => theme = 'dark'"
+        />
     </div>
 </template>
 
@@ -31,13 +39,14 @@ function switchTheme() {
 }
 
 .button {
-    --v-theme-switcher-width: #{rem(50)};
-    --v-theme-switcher-paddding: #{rem(5)};
+    --v-theme-switcher-width: #{rem(40)};
+    --v-theme-switcher-paddding-inline: #{rem(6)};
+    --v-theme-switcher-paddding-block: #{rem(5)};
 
     width: var(--v-theme-switcher-width);
-    padding: var(--v-theme-switcher-paddding);
+    padding: var(--v-theme-switcher-paddding-block) var(--v-theme-switcher-paddding-inline);
     border: none;
-    border-radius: rem(25);
+    border-radius: rem(6);
     margin: 0;
     background-color: var(--theme-color-primary);
     cursor: pointer;
@@ -50,16 +59,20 @@ function switchTheme() {
     &::before {
         position: relative;
         display: block;
-        width: rem(16);
-        height: rem(16);
-        border-radius: 100%;
+        width: rem(13);
+        height: rem(13);
+        border-radius: rem(4);
         background-color: var(--theme-color-secondary);
         content: '';
         transition: translate 0.4s ease(out-cubic);
     }
 
     .root--theme-dark &::before {
-        translate: calc(var(--v-theme-switcher-width) - (var(--v-theme-switcher-paddding) * 2) - 100%) 0;
+        translate: calc(var(--v-theme-switcher-width) - (var(--v-theme-switcher-paddding-inline) * 2) - 100%) 0;
     }
+}
+
+.icon {
+    cursor: pointer;
 }
 </style>
