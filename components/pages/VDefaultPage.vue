@@ -11,7 +11,7 @@ const data = props.document.data
         :content="data.content"
         class="grid-item-main"
     />
-    <pre> {{ data }}</pre>
+<!--    <pre> {{ data }}</pre> -->
 </template>
 
 <!-- <style lang="scss" module></style> -->

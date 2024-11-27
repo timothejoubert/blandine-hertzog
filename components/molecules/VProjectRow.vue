@@ -7,11 +7,7 @@ interface VProjectCardProps {
 
 const props = defineProps<VProjectCardProps>()
 
-const {
-    title,
-    date,
-    tags,
-} = useProjectUtils(props.project)
+const { title, tags } = useProjectUtils(props.project)
 </script>
 
 <template>
@@ -19,13 +15,12 @@ const {
         :to="props.project"
         :class="$style.root"
     >
-        <div :class="$style.title">
+        <div
+            :class="$style.title"
+            class="text-over-title-sm"
+        >
             {{ title }}
         </div>
-        <VTime
-            v-if="date"
-            :date="date"
-        />
         <VTag
             v-for="tag in tags"
             :key="tag"
@@ -40,11 +35,14 @@ const {
     position: relative;
     display: flex;
     width: 100%;
+    height: var(--v-project-row-height);
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid black;
     gap: rem(14);
-    padding-block: rem(13);
+    padding-block:  var(--v-project-row-padding-block, rem(14));
+    color: inherit;
+    text-decoration: none;
 }
 
 .title {

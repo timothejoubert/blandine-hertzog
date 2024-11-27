@@ -28,19 +28,20 @@ export default defineComponent({
             return 'span'
         })
 
-        return () => h(
-            rootTag.value,
-            {
-                class: [
+        return () => {
+            const attrs = {
+                'class': [
                     $style.root,
                     $style[`root--size-${props.size}`],
                 ],
-                ariaHidden: rootTag.value === 'button' || rootTag.value === 'a' ? undefined : 'true',
-                href: props.href,
-                to: props.to,
-            },
-            h(VIcon, { class: $style.icon, name: `arrow-${props.direction}` }),
-        )
+                'aria-hidden': rootTag.value === 'button' || rootTag.value === 'a' ? undefined : 'true',
+                'href': props.href,
+                'to': props.to,
+            }
+            return h(rootTag.value, attrs,
+                h(VIcon, { class: $style.icon, name: `arrow-${props.direction}` }),
+            )
+        }
     },
 })
 </script>
@@ -48,8 +49,8 @@ export default defineComponent({
 <style lang="scss" module>
 .root {
     position: relative;
-    display: inline-flex;
-    align-items: center;
+    display: var(--v-arrow-display, inline-flex);
+    align-items: var(--v-arrow-align-items, center);
     justify-content: center;
     background-color: var(--theme-color-secondary);
 

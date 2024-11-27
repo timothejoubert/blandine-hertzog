@@ -4,6 +4,8 @@ import type { VTextContent } from '~/components/atoms/VText.vue'
 
 const props = defineProps({
     title: [String, null],
+    anchorTitle: Boolean,
+    anchorHref: String,
     content: [String, null, Array] as PropType<VTextContent>,
 })
 
@@ -26,7 +28,14 @@ const rootClasses = computed(() => {
         :class="rootClasses"
     >
         <slot />
+        <LazyVTitleAnchor
+            v-if="title && anchorTitle"
+            :title="title"
+            :anchor-href="anchorHref"
+            :class="$style.title"
+        />
         <h1
+            v-else
             :class="$style.title"
             class="text-h1"
         >
@@ -65,10 +74,8 @@ const rootClasses = computed(() => {
 }
 
 .title {
-    display: flex;
-    flex-wrap: wrap;
-
-    //gap: rem(24);
+    //display: flex;
+    //flex-wrap: wrap;
     margin-block: initial;
 }
 

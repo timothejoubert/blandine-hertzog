@@ -4,6 +4,7 @@ import { usePrismic } from '@prismicio/vue'
 import type { ProjectPageDocument } from '~/prismicio-types'
 import { usePrismicFetchProjects } from '~/composables/use-prismic-fetch-projects'
 import { prismicDocumentRoute } from '~/utils/prismic/route-resolver'
+import { useLinkResolver } from '~/composables/use-link-resolver'
 
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
@@ -37,7 +38,7 @@ async function setProjects() {
     }
     else {
         const fetchListing = await usePrismicFetchProjects({ pageSize: listLength.value })
-        projects.value = fetchListing.data.value.results
+        projects.value = fetchListing.data.value?.results || []
     }
 }
 
@@ -46,6 +47,9 @@ await setProjects()
 watch(data, async () => {
     await setProjects()
 }, { deep: true })
+
+const { url } = useLinkResolver(prismicDocumentRoute.project_listing_page)
+const listingUrl = computed(() => data.value.internal_page?.url ? data.value.internal_page : url.value)
 </script>
 
 <template>
@@ -73,7 +77,7 @@ watch(data, async () => {
             :label="data.link_label || $t('see_all_projects')"
             arrow-direction="right"
             icon-position="start"
-            :to="data.internal_page?.url ? data.internal_page : prismicDocumentRoute.project_listing_page.path"
+            :to="listingUrl"
             :class="$style['cta']"
         />
     </VSlice>
@@ -85,6 +89,6 @@ watch(data, async () => {
 }
 
 .cta {
-    margin-top: rem(42);
+    margin-top: rem(54);
 }
 </style>

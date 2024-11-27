@@ -9,6 +9,7 @@ import { prismicDocumentRoutes } from '#root/utils/prismic/route-resolver'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
+    compatibilityDate: '2024-07-09',
     devtools: { enabled: true },
     experimental: {
         asyncContext: true,
@@ -137,6 +138,7 @@ export default defineNuxtConfig({
         isDev ? undefined : 'pages/_stories/**',
         'assets/backup/**',
     ],
+    // Setup app modules
     modules: [
         '@nuxtjs/svg-sprite',
         '@nuxt/image',
@@ -164,7 +166,6 @@ export default defineNuxtConfig({
             strictMessage: false, // Allow value to include HTML
         },
     },
-
     // https://github.com/rezozero/nuxt-stories
     stories: {
         pattern: [
@@ -208,13 +209,11 @@ export default defineNuxtConfig({
             },
         },
     },
-
     // https://www.nuxtseo.com/sitemap/getting-started/installation
     sitemap: {
         // enabled: !isGenerateMaintenance,
         exclude: ['/slice-simulator'],
     },
-
     // https://eslint.nuxt.com/packages/module
     eslint: {
         config: {
@@ -223,5 +222,4 @@ export default defineNuxtConfig({
             },
         },
     },
-    compatibilityDate: '2024-07-09',
 })

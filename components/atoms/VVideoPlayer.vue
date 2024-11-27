@@ -38,6 +38,7 @@ export default defineComponent({
                         showinfo: '0',
                         rel: '0',
                         enablejsapi: '1',
+                        autoplay: autoplay.value ? '1' : '',
                     }
                 }
                 else if (platform === 'vimeo') {

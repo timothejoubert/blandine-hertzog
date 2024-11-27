@@ -4,13 +4,13 @@ import { extractValueBetweenOccurrence } from '#root/utils/string/extract'
 import { I18N_LOCALES } from '#root/i18n/i18n.config'
 import type { PrismicDocumentType } from '~/types/api'
 
-interface prismicDocumentRoute {
+export interface PrismicDocumentRoute {
     type: PrismicDocumentType
     path: string
     alias?: string[]
 }
 
-export const prismicDocumentRoutes: prismicDocumentRoute[] = [
+export const prismicDocumentRoutes: PrismicDocumentRoute[] = [
     {
         type: 'home_page',
         path: '/:lang?',
@@ -35,6 +35,10 @@ export const prismicDocumentRoutes: prismicDocumentRoute[] = [
     },
 ]
 
+export function isPrismicDocumentRoute(route: object): route is PrismicDocumentRoute {
+    return ('type' in route) && prismicDocumentRoutes.map(r => r.type).includes(route.type as PrismicDocumentType) && ('path' in route)
+}
+
 export const prismicDocumentName = prismicDocumentRoutes.reduce((acc, route) => {
     const type = route.type
     Object.assign(acc, { [type]: type })
@@ -47,7 +51,7 @@ export const prismicDocumentRoute = prismicDocumentRoutes.reduce((acc, route) =>
     Object.assign(acc, { [type]: route })
 
     return acc
-}, {} as Record<PrismicDocumentType, prismicDocumentRoute>)
+}, {} as Record<PrismicDocumentType, PrismicDocumentRoute>)
 
 // TODO: find item by alias too
 export function getDocumentTypeByUrl(path: string) {

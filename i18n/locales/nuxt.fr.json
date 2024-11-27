@@ -12,6 +12,7 @@
     "previous_project":  "Projet précédant",
     "next_project": "Projet suivant",
     "see_all_projects": "Voir tous mes projets",
+    "scroll_to_main_section": "Défiler à la section principale",
 
     "error_page.not_found.title": "Page introuvable",
     "error_page.unauthenticated_user_error": "Access non autorisé",

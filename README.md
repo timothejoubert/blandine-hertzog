@@ -29,7 +29,9 @@ npm run slicemachine
 * Add your environment variables in "site settings"
 
 ### Webhook
-If your are creating a Static Website add a webhook for generate the app each time Prismic data is updated. [Prismic tuto](https://prismic.io/docs/webhooks) | [Netlify build hook page](https://app.netlify.com/sites/hugo-tomasi/settings/deploys#build-hooks)
+If you are creating a Static Website:  
+Use Prismic webhook for rebuild the app each time Prismic data is updated. [Prismic tuto](https://prismic.io/docs/webhooks) | [Netlify build hook page](https://app.netlify.com/sites/hugo-tomasi/settings/deploys#build-hooks)
+
 
 ### Preview
 Not

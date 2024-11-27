@@ -1,5 +1,6 @@
 <script  lang="ts" setup="">
 import type { DateField } from '@prismicio/types'
+import { parseDate } from '~/utils/prismic/prismic-date'
 
 const props = withDefaults(defineProps<{
     date: string | undefined | DateField
@@ -8,16 +9,11 @@ const props = withDefaults(defineProps<{
     output: 'year',
 })
 
-const parsedDate = computed(() => {
-    const [years, month, day] = props.date?.split('-') || [null, null, null]
-
-    return { years, month, day }
-})
-
 const output = computed(() => {
-    if (props.output === 'year') return parsedDate.value.years
-    else if (props.output === 'month') return parsedDate.value.month
-    else if (props.output === 'day') return parsedDate.value.day
+    const date = parseDate(props.date)
+    if (props.output === 'year') return date?.year
+    else if (props.output === 'month') return date?.month
+    else if (props.output === 'day') return date?.day
 
     return props.date
 })

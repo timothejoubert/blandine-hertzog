@@ -1,8 +1,8 @@
 {
-    "name": "@timothejoubert/timothejoubert.com",
     "version": "1.0.0",
+    "name": "timothejoubert/blandine-hertzog",
+    "description": "Blandine Hertzog personal website",
     "author": "Timothé Joubert",
-    "description": "Timothé joubert personal website",
     "engines": {
         "node": "^20"
     },

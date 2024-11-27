@@ -36,22 +36,23 @@ export default defineComponent({
             return result
         })
 
+        // warning_bug(Vue): Seem to have wrong vue warning "Slot invoked outside of the render function"
+        // https://github.com/vuejs/core/issues/12194
         return () => {
+            // Custom VRoadizLink will pass all attributes to the default slot
+            // and render it (i.e. render-less component behavior)
             if (props.custom) {
-                // Render scoped slot data
-                const vNode = slots.default?.({ ...attributes.value })
-
-                if (vNode?.length) return vNode[0]
+                return slots.default?.(attributes.value) || ''
             }
-            // A VPrismicLink without URL or reference will render slot
-            else if (!url.value) {
-                return props.fallbackTag
-                    ? h(props.fallbackTag, { class: attrs.class }, slots.default?.())
-                    : slots.default?.()
+            else if (url.value) {
+                return h(NuxtLink, attributes.value, slots.default || (() => (typeof props.label === 'string' && props.label) || ''))
             }
 
-            // By default return a NuxtLink component
-            return h(NuxtLink, attributes.value, slots.default || (() => props.label))
+            const child = (slots.default && slots.default()) || (typeof props.label === 'string' && h('span', attrs, props.label)) || ''
+
+            return props.fallbackTag
+                ? h(props.fallbackTag, { class: attrs.class }, child)
+                : child
         }
     },
 })

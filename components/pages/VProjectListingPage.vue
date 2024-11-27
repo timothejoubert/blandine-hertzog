@@ -1,23 +1,11 @@
 <script lang="ts" setup>
-import type { ProjectPageDocument } from '~/prismicio-types'
 import type { PageComponentProps } from '~/types/app'
-import { useRouteQuery } from '~/composables/use-route-query'
 
 const props = defineProps<PageComponentProps<'project_listing_page'>>()
 const data = computed(() => props.document.data)
 
-const prismicFilter = usePrismic().filter
-const fetchListing = await usePrismicFetchDocuments<ProjectPageDocument>('project_page', {
-    orderings: {
-        field: 'my.project.date',
-        direction: 'desc',
-    },
-    pageSize: 30,
-    filters: [prismicFilter.at('my.project_page.archived', false)],
-})
-
-const isPending = computed(() => fetchListing.status.value === 'pending')
-const projects = computed(() => fetchListing.data.value?.results || [])
+const projects = await usePrismicMainProjects()
+const isPending = computed(() => !!projects.value.length && projects.value.every(p => !p))
 
 // Filters
 const QUERY_KEY = 'tags'
@@ -52,6 +40,8 @@ const renderedProjects = computed(() => {
         return project?.tags.some(tag => currentQueries.value.includes(tag))
     })
 })
+
+// TODO: replace button tag filters by VSelectList (radio or input multiselect)
 </script>
 
 <template>
@@ -64,6 +54,7 @@ const renderedProjects = computed(() => {
         :filters="filters"
         :query-key="QUERY_KEY"
         :class="$style.filters"
+        class="grid-item-main"
     />
     <ul
         v-if="projects.length"
@@ -90,7 +81,6 @@ const renderedProjects = computed(() => {
 
 .filters {
     width: 100%;
-    grid-column: 1 / -1;
     margin-block: rem(32);
 }
 

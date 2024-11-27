@@ -20,7 +20,7 @@ const developerCopyright = computed(() => {
 <template>
     <footer
         :class="$style.root"
-        class="grid text-body-xs"
+        class="grid grid-item-main text-body-xs"
     >
         <div :class="$style['app-copyright']">
             {{ appCopyright }}
@@ -37,6 +37,7 @@ const developerCopyright = computed(() => {
 
 <style lang="scss" module>
 .root {
+    --grid-columns: 11;
     --grid-width: 100%;
 
     position: relative;
@@ -47,7 +48,7 @@ const developerCopyright = computed(() => {
     &::after {
         position: absolute;
         top: 0;
-        right: calc(var(--gutter) * -1);
+        right: calc((#{flex-grid-value(3, 11)} + var(--gutter) * 2) * -1);
         left: 0;
         height: 1px;
         background-color: currentcolor;

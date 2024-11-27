@@ -1,17 +1,16 @@
-import type { BuildQueryURLArgs } from '@prismicio/client'
 import { usePrismic } from '@prismicio/vue'
 import type { ProjectPageDocument } from '~/prismicio-types'
+import type { PrismicFetchDocumentsOptions } from '~/composables/use-prismic-fetch-documents'
 
-type PrismicFetchDocumentsOptions = Partial<BuildQueryURLArgs>
 export function usePrismicFetchProjects(options: PrismicFetchDocumentsOptions = {}, isArchived = false) {
     const prismicFilter = usePrismic().filter
 
     return usePrismicFetchDocuments<ProjectPageDocument>('project_page', {
         orderings: {
-            field: 'my.project.date',
+            field: 'my.project_page.creation_date',
             direction: 'desc',
         },
-        pageSize: options.pageSize || 30,
+        pageSize: options.pageSize || 20,
         filters: [prismicFilter.at('my.project_page.archived', isArchived)],
         ...options,
     })

@@ -50,7 +50,10 @@ const imgSizes = computed(() => {
             <VPrismicVideo
                 v-if="item.embed_video_url?.embed_url"
                 :embed-field="item.embed_video_url"
-                :thumbnail="item.image"
+                :thumbnail="{
+                    document: item.image,
+                    sizes: imgSizes,
+                }"
                 :class="[$style.item, $style['item--video']]"
             />
             <VPrismicImage
@@ -83,16 +86,23 @@ const imgSizes = computed(() => {
     row-gap: rem(32);
 
     @include media('>=md') {
-        column-gap: rem(82);
+        column-gap: var(--gutter);
         grid-template-columns: repeat(var(--content-slice-column-length, 1), 1fr);
-
-        &--layout-3 {
-            column-gap: rem(32);
-        }
     }
 }
 
 .item {
+    &--video {
+        iframe {
+            --v-player-video-height: 100%;
+            height: 100%;
+        }
+    }
+
+    &--text:only-child {
+        max-width: 64ch;
+    }
+
     &--link {
         place-self: center center;
     }

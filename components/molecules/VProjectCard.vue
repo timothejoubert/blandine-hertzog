@@ -3,6 +3,7 @@ import type { PossibleProjectPageDocument } from '~/types/app'
 
 interface VProjectCardProps {
     project: PossibleProjectPageDocument | null
+    skeleton?: boolean
 }
 
 const props = defineProps<VProjectCardProps>()
@@ -11,10 +12,12 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 </script>
 
 <template>
-    <div :class="$style.root">
+    <div :class="[$style.root, skeleton && $style['root--skeleton']]">
         <VPrismicLink
             :to="props.project"
             :class="$style['media-wrapper']"
+            rel="noopener nofollow"
+            tabindex="-1"
         >
             <VPrismicImage
                 v-if="image"
@@ -62,6 +65,11 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 
 .image {
     width: 100%;
+
+    &--placeholder {
+        aspect-ratio: 460 / 248;
+        background-color: lightgrey;
+    }
 }
 
 .title {
@@ -76,5 +84,10 @@ const { image, title, date, tags } = useProjectUtils(props.project)
     display: flex;
     align-items: center;
     gap: rem(12);
+
+    .root--skeleton & {
+        height: rem(24);
+        background-color: lightgrey;
+    }
 }
 </style>

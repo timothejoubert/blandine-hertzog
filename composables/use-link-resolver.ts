@@ -6,8 +6,11 @@ import type {
 import type { ContentRelationshipField } from '@prismicio/types'
 import { isContentRelationshipField, isPrismicDocument } from '~/utils/prismic/guard'
 import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/api'
+import type { PrismicDocumentRoute } from '~/utils/prismic/route-resolver'
+import { isPrismicDocumentRoute } from '~/utils/prismic/route-resolver'
 
-export type PossibleRouteReference = string | undefined | null | LocationAsRelativeRaw | _RouteRecordBase | ReachableDocument | ContentRelationshipField<PrismicReachableDocumentType>
+export type PossibleRouteReference =
+    string | undefined | null | LocationAsRelativeRaw | _RouteRecordBase | ReachableDocument | ContentRelationshipField<PrismicReachableDocumentType> | PrismicDocumentRoute
 
 export function useLinkResolver(reference: PossibleRouteReference) {
     const siteUrl = useRuntimeConfig().public?.site.url
@@ -16,6 +19,10 @@ export function useLinkResolver(reference: PossibleRouteReference) {
     const url = computed(() => {
         if (!reference) {
             return undefined
+        }
+        else if (typeof reference === 'object' && isPrismicDocumentRoute(reference)) {
+            const { getLocalizedUrl } = useLocale()
+            return getLocalizedUrl(reference.path.replace('/:lang?', ''))
         }
         else if (typeof reference === 'string') {
             const hasLang = reference.includes('/:lang?')

@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import type { PageComponentProps } from '~/types/app'
 import { components } from '~/slices'
-import { usePrismicFetchProjects } from '~/composables/use-prismic-fetch-projects'
 import type { ProjectPageDocumentData } from '~/prismicio-types'
+import { prismicDocumentRoute } from '~/utils/prismic/route-resolver'
+import { useLinkResolver } from '~/composables/use-link-resolver'
 
 const props = defineProps<PageComponentProps<'project_page'>>()
 const data = computed(() => props.document.data)
@@ -15,30 +16,25 @@ const slices = computed(() => {
 })
 
 // Cross Projects
-const prevProjectResponse = await usePrismicFetchProjects({
-    pageSize: 1,
-    after: props.document.id,
-    orderings: {
-        field: 'my.project.date',
-        direction: 'asc',
-    },
-})
-const prevProject = computed(() => prevProjectResponse.data.value.results[0])
+const mainProjectList = await usePrismicMainProjects()
 
-const nextProjectResponse = await usePrismicFetchProjects({
-    pageSize: 1,
-    after: props.document.id,
-    orderings: {
-        field: 'my.project.date',
-        direction: 'desc',
-    },
-})
-const nextProject = computed(() => nextProjectResponse.data.value.results[0])
+const currentProjectIndex = computed(() => mainProjectList.value.findIndex(p => p?.id === props.document.id))
 
-// TODO: fetch previous project
-// https://community.prismic.io/t/find-the-next-and-previous-posts-pagination/652/3
-console.log('prevProject', prevProjectResponse.data.value)
-console.log('nextProject', nextProjectResponse.data.value)
+const prevProject = computed(() => {
+    const index = currentProjectIndex.value - 1
+    const prevIndex = index < 0 ? mainProjectList.value.length - 1 : index
+
+    return mainProjectList.value[prevIndex]
+})
+
+const nextProject = computed(() => {
+    const index = currentProjectIndex.value + 1
+    const nextIndex = index > mainProjectList.value.length - 1 ? 0 : index
+
+    return mainProjectList.value[nextIndex]
+})
+
+const { url: listingUrl } = useLinkResolver(prismicDocumentRoute.project_listing_page)
 </script>
 
 <template>
@@ -48,7 +44,7 @@ console.log('nextProject', nextProjectResponse.data.value)
         class="grid-item-main"
     >
         <VArrow
-            to="/projects"
+            :to="listingUrl"
             :aria-label="$t('project_page.back')"
             :class="$style.back"
             direction="left"
@@ -116,6 +112,10 @@ console.log('nextProject', nextProjectResponse.data.value)
     margin-bottom: rem(32);
 }
 
+.main {
+    display: contents;
+}
+
 .attributes {
     display: flex;
     align-items: center;
@@ -126,7 +126,7 @@ console.log('nextProject', nextProjectResponse.data.value)
 .slices {
     display: flex;
     flex-direction: column;
-    gap: rem(75);
+    gap: rem(42);
 }
 
 .cross-projects {

@@ -8,17 +8,25 @@
 $themes: (
     light: (
         color-background: #FFE6DB,
+
         color-primary: #2E1F69,
         color-primary-variant: #826F97,
+
         color-secondary: #FFA974,
         color-secondary-variant: #FFC8A7,
+
+        color-line-primary: #2E1F69,
     ),
     dark: (
         color-background: #05000D,
+
         color-primary: #FFDCC3,
         color-primary-variant: #372C31,
+
         color-secondary: #FFDCC3,
         color-secondary-variant: #372C31,
+
+        color-line-primary: #FFDCC3,
     ),
 );
 $default-theme: light;

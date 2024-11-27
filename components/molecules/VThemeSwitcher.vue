@@ -1,7 +1,7 @@
 <script  lang="ts" setup>
-import { useThemeState } from '~/composables/use-theme-state'
+import { useUiThemeState } from '~/composables/use-ui-theme-state'
 
-const theme = useThemeState()
+const theme = useUiThemeState()
 
 function switchTheme() {
     theme.value = theme.value === 'light' ? 'dark' : 'light'

@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import type { EmbedField, ImageField, LinkToMediaField } from '@prismicio/types'
+import type { EmbedField, LinkToMediaField } from '@prismicio/types'
 import { commonVideoProps, videoAttributes } from '~/utils/video/video-props'
 import type { PrismicVideoField } from '~/utils/prismic/prismic-media'
+import type { vRoadizImageProps } from '~/components/atoms/VPrismicImage.vue'
 
 const props = defineProps({
     ...commonVideoProps,
@@ -10,28 +11,14 @@ const props = defineProps({
     linkToMediaField: { type: Object as PropType<LinkToMediaField> },
     embedField: { type: Object as PropType<EmbedField> },
     video: { type: Object as PropType<PrismicVideoField> },
-    thumbnail: { type: Object as PropType<ImageField> },
+    thumbnail: { type: Object as PropType<vRoadizImageProps> },
 })
+
+const hasThumbnail = computed(() => !!props.thumbnail?.document?.url)
 
 const slots = useSlots()
 const hasLazyVideoPlayer = computed(() => {
-    return !!props.thumbnail?.url || !!slots.default?.()
-})
-
-const displayThumbnail = computed(() => {
-    return props.thumbnail?.url
-})
-
-const thumbnailProps = computed(() => {
-    if (!displayThumbnail.value) return undefined
-
-    else if (props.thumbnail?.url) {
-        return {
-            document: props.thumbnail,
-        }
-    }
-
-    return undefined
+    return hasThumbnail.value || !!slots.default?.()
 })
 
 const videoData = computed(() => {
@@ -62,7 +49,7 @@ const videoAttrs = computed(() => {
     const height = props.embedField?.height || props.linkToMediaField?.height || props?.height || 1080
 
     const attrs = Object.entries(props).reduce((acc, [key, value]) => {
-        if (key in commonVideoProps || key in videoAttributes) acc[key] = value
+        if ((key in commonVideoProps || key in videoAttributes)) acc[key] = value
         return acc
     }, {})
 
@@ -113,8 +100,8 @@ const onVideoEnded = () => (hadInteraction.value = false)
         </button>
         <slot>
             <VPrismicImage
-                v-if="displayThumbnail"
-                v-bind="thumbnailProps"
+                v-if="hasThumbnail"
+                v-bind="thumbnail"
                 :class="$style.thumbnail"
                 @click="onClick"
             />
