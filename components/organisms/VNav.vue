@@ -28,6 +28,11 @@ const links = menu.value?.data.links || []
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/variables/fonts' as *;
+@use "assets/scss/mixins/include-media" as *;
+@use "assets/scss/functions/ease" as *;
+
 .list {
     display: flex;
     flex-direction: column;
@@ -81,7 +86,7 @@ const links = menu.value?.data.links || []
 
 .label {
     transition: translate 0.3s ease(out-quad);
-    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1) rem(01);
+    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1) rem(1);
 
     .link:global(.router-link-active) & {
         translate: 0 rem(01);
@@ -89,7 +94,7 @@ const links = menu.value?.data.links || []
 
     @media (hover: hover) {
         .link:not(:global(.router-link-active)):hover & {
-            translate: calc(var(--v-nav-item-active-symbol-width) * -0.8) rem(01);
+            translate: calc(var(--v-nav-item-active-symbol-width) * -0.8) rem(1);
         }
     }
 }

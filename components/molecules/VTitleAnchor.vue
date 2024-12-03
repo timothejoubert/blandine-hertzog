@@ -45,6 +45,8 @@ const nodes = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     line-height: 0.75 !important;
 }

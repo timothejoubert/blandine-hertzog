@@ -80,6 +80,9 @@ const imgSizes = computed(() => {
 </template>
 
 <style lang="scss" module="">
+@use "assets/scss/mixins/include-media" as *;
+@use "assets/scss/functions/rem" as *;
+
 .root {
     display: grid;
     grid-template-columns: 1fr;

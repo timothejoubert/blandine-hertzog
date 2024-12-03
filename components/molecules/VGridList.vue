@@ -23,6 +23,9 @@ defineSlots<{
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use "assets/scss/mixins/include-media" as *;
+
 .root {
     --v-grid-list-column: 1;
 

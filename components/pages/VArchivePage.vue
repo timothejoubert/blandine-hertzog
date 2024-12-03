@@ -66,6 +66,8 @@ const projectGroups = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .year-group {
     --v-project-row-height: #{rem(56)};
     --v-project-row-padding-block: #{rem(14)};

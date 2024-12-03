@@ -1,3 +1,6 @@
+@use 'assets/scss/mixins/theme' as *;
+@use 'assets/scss/variables/themes' as *;
+
 :root {
     @include theme($default-theme);
 }

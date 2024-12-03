@@ -127,6 +127,8 @@ const onVideoEnded = () => (hadInteraction.value = false)
 </template>
 
 <style lang="scss" module="">
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     --v-player-position: absolute;
     --v-player-height: 100%;

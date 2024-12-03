@@ -21,6 +21,7 @@ const rootClasses = computed(() => {
         <!--        <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
         <!--        <VSplashScreen /> -->
         <NuxtLoadingIndicator />
+        <VGridVisualizer />
         <VNav
             :class="$style.nav"
             class="grid-item-aside"
@@ -49,6 +50,8 @@ const rootClasses = computed(() => {
 </template>
 
 <style lang="scss">
+@use "assets/scss/mixins/include-media" as *;
+
 .grid-item-main {
     // min-height: calc(100vh - ($v-footer-height + $v-footer-margin-bottom + $v-footer-margin-top));
     grid-column: var(--left-grid-column);
@@ -64,6 +67,10 @@ const rootClasses = computed(() => {
 </style>
 
 <style lang="scss" module>
+@use "assets/scss/mixins/include-media" as *;
+@use "assets/scss/functions/flex-grid" as *;
+@use "assets/scss/mixins/theme" as *;
+
 .root {
     --left-grid-column: 1 / -1;
     --right-grid-column: 1 / -1;

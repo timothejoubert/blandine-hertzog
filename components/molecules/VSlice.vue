@@ -19,6 +19,8 @@ defineProps<{
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     border-top: 1px solid currentcolor;
     padding-block: rem(94);

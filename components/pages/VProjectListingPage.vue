@@ -75,6 +75,9 @@ const renderedProjects = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use "assets/scss/mixins/include-media" as *;
+
 .root {
     position: relative;
 }

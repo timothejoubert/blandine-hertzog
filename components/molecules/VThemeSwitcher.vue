@@ -29,6 +29,10 @@ function switchTheme() {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/v-footer' as *;
+@use 'assets/scss/functions/ease' as *;
+
 .root {
     z-index: 1;
     display: flex;

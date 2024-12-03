@@ -65,6 +65,9 @@ const attributes = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use "assets/scss/mixins/include-media" as *;
+
 .root {
     display: grid;
     grid-template-areas:

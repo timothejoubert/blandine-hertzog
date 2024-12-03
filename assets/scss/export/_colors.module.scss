@@ -1,4 +1,4 @@
-@import "../variables/colors";
+@use "assets/scss/variables/colors" as *;
 
 @each $color, $value in $colors {
     :export {

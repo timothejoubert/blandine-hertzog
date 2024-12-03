@@ -14,6 +14,8 @@ defineProps({
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     padding: rem(5) rem(11);
     border-radius: rem(2);

@@ -84,6 +84,8 @@ const listingUrl = computed(() => data.value.internal_page?.url ? data.value.int
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .list {
     margin-top: rem(54);
 }

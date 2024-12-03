@@ -65,6 +65,6 @@ const typographies = [
 
 <style lang="scss" module>
 .hr {
-    margin-block: rem(30);
+    margin-block: 30px;
 }
 </style>

@@ -103,6 +103,8 @@ const { url: listingUrl } = useLinkResolver(prismicDocumentRoute.project_listing
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     position: relative;
 }

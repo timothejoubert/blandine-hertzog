@@ -47,6 +47,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/mixins/property-fluid' as *;
+
 .root {
     position: relative;
     display: var(--v-arrow-display, inline-flex);

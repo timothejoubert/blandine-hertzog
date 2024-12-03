@@ -1,3 +1,5 @@
+@use 'assets/scss/mixins/typography' as *;
+
 .text-h1 {
     @include text-h1;
 }

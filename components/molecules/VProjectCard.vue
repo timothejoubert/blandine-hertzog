@@ -58,6 +58,8 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     position: relative;
     display: block;

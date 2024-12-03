@@ -36,6 +36,9 @@ const developerCopyright = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/v-footer' as *;
+@use 'assets/scss/functions/flex-grid' as *;
+
 .root {
     --grid-columns: 11;
     --grid-width: 100%;

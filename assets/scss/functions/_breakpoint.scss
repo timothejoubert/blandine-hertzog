@@ -1,10 +1,13 @@
 @use 'sass:map';
+@use "sass:meta";
+@use "assets/scss/functions/strip-units" as *;
+@use "assets/scss/variables/breakpoints" as *;
 
 /*
  * @param {string} $key - breakpoint e.g. xl
  */
 @function breakpoint($key, $strip-unit: false) {
-    @if type-of($breakpoints) != map {
+    @if meta.type-of($breakpoints) != map {
         @warn "$breakpoints is not defined";
         @return null;
     }

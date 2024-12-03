@@ -1,6 +1,9 @@
 @use 'sass:math';
 @use 'sass:list';
 @use 'sass:map';
+@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/functions/breakpoint' as *;
+@use 'assets/scss/functions/strip-units' as *;
 
 /*
  * @param {map} $values - (breakpoint: value) e.g. (xs: 30px, xl: 60px)

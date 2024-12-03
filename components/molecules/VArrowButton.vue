@@ -34,6 +34,10 @@ const rootClasses = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/variables/fonts' as *;
+@use 'assets/scss/mixins/font-size-fluid' as *;
+
 .root {
     display: flex;
     color: currentcolor;

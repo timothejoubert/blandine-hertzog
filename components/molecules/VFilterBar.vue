@@ -27,6 +27,8 @@ const { toggleQuery } = useRouteQuery(props.queryKey)
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     display: flex;
     flex-wrap: wrap;
