@@ -27,10 +27,13 @@ useEventListener('keydown', (e) => {
 <style lang="scss" module>
 .root {
     position: fixed;
-    height: 100vh;
-    margin: initial;
+    top: 0;
+    bottom: 0;
     grid-template-rows: 1fr;
     pointer-events: none;
+    z-index: 1001;
+    margin-block: initial;
+    left: var(--gutter);
 }
 
 .item {

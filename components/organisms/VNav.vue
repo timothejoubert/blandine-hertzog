@@ -35,7 +35,6 @@ const links = menu.value?.data.links || []
 
 .list {
     display: flex;
-    flex-direction: column;
     padding: initial;
     margin: initial;
 }
@@ -45,57 +44,23 @@ const links = menu.value?.data.links || []
 }
 
 .link {
-    --v-nav-item-gap: #{rem(10)};
-    --v-nav-item-active-symbol-width: #{rem(14)};
-
     display: flex;
     align-items: center;
     padding: rem(9) rem(24);
-    border: 1px solid currentcolor;
-    border-bottom-width: 0;
-    color: var(--theme-color-primary);
+    border-left: 1px solid var(--theme-color-line);
+    color: inherit;
     font-family: $font-noi;
     font-size: rem(18);
     font-variation-settings: "wght" 600;
-    gap: var(--v-nav-item-gap);
     text-decoration: none;
     text-transform: uppercase;
 
-    .item:last-of-type & {
-        border-width: 1px;
-    }
-
-    &::before {
-        position: relative;
-        width: var(--v-nav-item-active-symbol-width);
-        height: var(--v-nav-item-active-symbol-width);
-        flex-shrink: 0;
-        border-radius: rem(2);
-        background-color: currentcolor;
-        content: '';
-        opacity: 0;
-        transition: opacity 0.3s ease(out-quad);
-    }
-
-    &:global(.router-link-active) {
-        &::before {
-            opacity: 1;
-        }
+    .item:last-child & {
+        border-right: 1px solid var(--theme-color-line);
     }
 }
 
 .label {
-    transition: translate 0.3s ease(out-quad);
-    translate: calc((var(--v-nav-item-gap) + var(--v-nav-item-active-symbol-width)) * -1) rem(1);
 
-    .link:global(.router-link-active) & {
-        translate: 0 rem(01);
-    }
-
-    @media (hover: hover) {
-        .link:not(:global(.router-link-active)):hover & {
-            translate: calc(var(--v-nav-item-active-symbol-width) * -0.8) rem(1);
-        }
-    }
 }
 </style>

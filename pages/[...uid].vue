@@ -11,7 +11,6 @@ import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
 const route = useRoute()
 const pageType = getDocumentTypeByUrl(route.path)
 
-// TODO: error triggered on stories layout
 if (!pageType) {
     throw createError({
         statusCode: 404,

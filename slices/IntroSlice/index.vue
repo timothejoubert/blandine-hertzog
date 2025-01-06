@@ -14,13 +14,12 @@ defineProps(
 </script>
 
 <template>
-    <section
-        :data-slice-type="slice.slice_type"
-        :data-slice-variation="slice.variation"
+    <VSlice
+        :slice="slice"
     >
         <VText
             class="text-h4"
             :content="slice.primary.content"
         />
-    </section>
+    </VSlice>
 </template>

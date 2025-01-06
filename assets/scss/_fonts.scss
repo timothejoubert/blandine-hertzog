@@ -1,13 +1,15 @@
+@use 'assets/scss/variables/fonts' as *;
+
 @font-face {
     font-display: swap;
-    font-family: 'Mongo grotesk';
+    font-family: $font-mango;
     src: url('~/assets/fonts/mango-grotesk-variable.ttf') format('truetype');
 }
 
 // TODO: convert variable font to woff2
 @font-face {
     font-display: swap;
-    font-family: 'Noi grotesk';
+    font-family: $font-noi;
     src:
         //url('~/assets/fonts/noi-grotesk-variable.woff2') format('woff2'),
         //url('~/assets/fonts/noi-grotesk-variable.woff') format('woff'),

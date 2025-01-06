@@ -26,6 +26,7 @@ const rootClasses = computed(() => {
 <template>
     <header
         :class="rootClasses"
+        class="grid-width"
     >
         <slot />
         <LazyVTitleAnchor
@@ -64,9 +65,9 @@ const rootClasses = computed(() => {
         position: absolute;
         bottom: 0;
         left: 0;
-        width: calc(100% + var(--gutter));
+        width: 100%;
         height: 1px;
-        background-color: currentcolor;
+        background-color: var(--theme-color-line);
         content: '';
     }
 

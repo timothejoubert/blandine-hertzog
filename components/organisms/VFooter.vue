@@ -20,7 +20,7 @@ const developerCopyright = computed(() => {
 <template>
     <footer
         :class="$style.root"
-        class="grid grid-item-main text-body-xs"
+        class="text-body-xs grid-width"
     >
         <div :class="$style['app-copyright']">
             {{ appCopyright }}
@@ -40,21 +40,20 @@ const developerCopyright = computed(() => {
 @use 'assets/scss/functions/flex-grid' as *;
 
 .root {
-    --grid-columns: 11;
-    --grid-width: 100%;
-
     position: relative;
     height: $v-footer-height;
+    display: grid;
+    grid-template-columns: subgrid;
     align-items: center;
     margin-top: $v-footer-margin-top;
 
     &::after {
         position: absolute;
         top: 0;
-        right: calc((#{flex-grid-value(3, 11)} + var(--gutter) * 2) * -1);
-        left: 0;
+        right: calc(var(--gutter) * -1);
+        left: calc(var(--gutter) * -1);
         height: 1px;
-        background-color: currentcolor;
+        background-color: var(--theme-color-line);
         content: '';
     }
 }

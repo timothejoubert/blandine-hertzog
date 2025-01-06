@@ -14,6 +14,7 @@ export const vArrowProps = {
     },
     href: String,
     to: String,
+    border: String,
 }
 
 export default defineComponent({
@@ -55,27 +56,29 @@ export default defineComponent({
     display: var(--v-arrow-display, inline-flex);
     align-items: var(--v-arrow-align-items, center);
     justify-content: center;
-    background-color: var(--theme-color-secondary);
+    color: var(--theme-color-black-static);
+    background-color: var(--theme-color-primary);
+    border-radius: var(--v-arrow-border, var(--v-arrow-border-size));
+    padding: var(--v-arrow-padding, var(--v-arrow-padding-size));
 
     &--size-sm {
-        padding: rem(3);
-        border-radius: rem(5);
+        --v-arrow-border-size: #{rem(5)};
+        --v-arrow-padding-size: #{rem(3)};
     }
 
     &--size-md {
-        padding: rem(6);
-        border-radius: rem(6);
+        --v-arrow-border-size: #{rem(6)};
+        --v-arrow-padding-size: #{rem(6)};
     }
 
     &--size-lg {
-        padding: rem(9);
-        border-radius: rem(16);
+        --v-arrow-border-size: #{rem(16)};
+        --v-arrow-padding-size: #{rem(9)};
     }
 }
 
 .icon {
     height: auto;
-    color: var(--theme-color-primary);
     transform-origin: center;
 
     :global(.global--theme-dark) & {

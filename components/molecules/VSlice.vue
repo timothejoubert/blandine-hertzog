@@ -11,6 +11,7 @@ defineProps<{
     <component
         :is="tag || 'section'"
         :class="$style.root"
+        class="grid-width"
         :data-slice-type="slice.slice_type"
         :data-slice-variation="slice.variation"
     >
@@ -22,7 +23,7 @@ defineProps<{
 @use 'assets/scss/functions/rem' as *;
 
 .root {
-    border-top: 1px solid currentcolor;
+    border-top: 1px solid var(--theme-color-line);
     padding-block: rem(94);
 }
 </style>

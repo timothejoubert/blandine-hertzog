@@ -1,5 +1,5 @@
-$fallback-sans-serif: arial, sans-serif;
-$fallback-serif: georgia, times, serif;
+$font-noi: 'Noi grotesk';
+$font-mango: 'Mongo grotesk';
 
-$font-noi: 'Noi grotesk', $fallback-sans-serif;
-$font-mango: 'Mongo grotesk', $fallback-sans-serif;
+$font-noi-family: $font-noi, arial, sans-serif;
+$font-mango-family: $font-mango, georgia, times, serif;

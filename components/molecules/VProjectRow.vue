@@ -31,6 +31,8 @@ const { title, tags } = useProjectUtils(props.project)
 </template>
 
 <style lang="scss" module>
+@use 'assets/scss/functions/rem' as *;
+
 .root {
     position: relative;
     display: flex;
@@ -38,9 +40,9 @@ const { title, tags } = useProjectUtils(props.project)
     height: var(--v-project-row-height);
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--theme-color-line);
     gap: rem(14);
-    padding-block:  var(--v-project-row-padding-block, rem(14));
+    padding-block: var(--v-project-row-padding-block, rem(14));
     color: inherit;
     text-decoration: none;
 }

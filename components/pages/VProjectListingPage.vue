@@ -50,28 +50,29 @@ const renderedProjects = computed(() => {
         :content="data.content"
         class="grid-item-main"
     />
-    <VFilterBar
-        :filters="filters"
-        :query-key="QUERY_KEY"
-        :class="$style.filters"
-        class="grid-item-main"
-    />
-    <ul
-        v-if="projects.length"
-        :class="$style.list"
-        class="grid-item-main"
-    >
-        <li
-            v-for="(project, index) in renderedProjects"
-            :key="(project?.uid || index)"
-            :class="$style.item"
+    <main class="grid-width">
+        <VFilterBar
+            :filters="filters"
+            :query-key="QUERY_KEY"
+            :class="$style.filters"
+        />
+        <ul
+            v-if="projects.length"
+            :class="$style.list"
+            class="grid-item-main"
         >
-            <VProjectCard
-                :project="project"
-                :skeleton="isPending || !project"
-            />
-        </li>
-    </ul>
+            <li
+                v-for="(project, index) in renderedProjects"
+                :key="(project?.uid || index)"
+                :class="$style.item"
+            >
+                <VProjectCard
+                    :project="project"
+                    :skeleton="isPending || !project"
+                />
+            </li>
+        </ul>
+    </main>
 </template>
 
 <style lang="scss" module>
@@ -83,6 +84,7 @@ const renderedProjects = computed(() => {
 }
 
 .filters {
+    grid-column: 1 / -1;
     width: 100%;
     margin-block: rem(32);
 }
@@ -94,6 +96,7 @@ const renderedProjects = computed(() => {
 .list {
     --v-project-listing-page-columns: 1;
 
+    grid-column: 1 / -1;
     display: grid;
     gap: rem(24);
     grid-template-columns: repeat(var(--v-project-listing-page-columns), minmax(0 , 1fr));

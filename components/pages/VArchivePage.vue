@@ -36,12 +36,10 @@ const projectGroups = computed(() => {
     <VHeader
         :title="data.title"
         :content="data.content"
-        class="grid-item-main"
     />
     <div
         v-for="group in projectGroups"
         :key="group.year"
-        class="grid-item-main"
         :class="$style['year-group']"
     >
         <div
@@ -72,6 +70,7 @@ const projectGroups = computed(() => {
     --v-project-row-height: #{rem(56)};
     --v-project-row-padding-block: #{rem(14)};
 
+    grid-column: 1 / -1;
     position: relative;
     display: grid;
     grid-template-columns: subgrid;
@@ -88,7 +87,7 @@ const projectGroups = computed(() => {
         width: 100%;
         left: 0;
         top: -1px;
-        background-color: currentColor;
+        background-color: var(--theme-color-line);;
         height: 1px;
     }
 }

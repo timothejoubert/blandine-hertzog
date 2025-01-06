@@ -1,32 +1,51 @@
 // Exported from variable2css figma plugin
 // https://www.figma.com/community/plugin/1261234393153346915/variables2css
 
-// Generated output is sass, need to convert to scss
-// CMD f + CMD r could help
+//$themes: (
+//    light: (
+//        color-background: #FFE6DB,
+//        color-primary: #2E1F69,
+//        color-primary-variant: #826F97,
+//        color-secondary: #FFA974,
+//        color-secondary-variant: #FFC8A7,
+//        color-line-primary: #2E1F69,
+//    ),
+//    dark: (
+//        color-background: #05000D,
+//        color-primary: #FFDCC3,
+//        color-primary-variant: #372C31,
+//        color-secondary: #FFDCC3,
+//        color-secondary-variant: #372C31,
+//        color-line-primary: #FFDCC3,
+//    ),
+//);
 
-/* Tokens */
 $themes: (
     light: (
-        color-background: #FFE6DB,
+        color-primary: #FFA974,
 
-        color-primary: #2E1F69,
-        color-primary-variant: #826F97,
+        color-background: #FFFBF5,
+        color-on-background: #05000D,
 
-        color-secondary: #FFA974,
-        color-secondary-variant: #FFC8A7,
+        color-surface: #FFFBF5,
+        color-on-surface: #05000D,
 
-        color-line-primary: #2E1F69,
+        color-line: #C4C2D8,
+        color-black-static: #05000D,
     ),
     dark: (
-        color-background: #05000D,
+        color-primary: #F0D435,
 
-        color-primary: #FFDCC3,
-        color-primary-variant: #372C31,
+        color-background: #161515,
+        color-on-background: #F2F3F9,
 
-        color-secondary: #FFDCC3,
-        color-secondary-variant: #372C31,
+        color-surface: #070707,
+        color-on-surface: #F2F3F9,
 
-        color-line-primary: #FFDCC3,
+        color-line: #464647,
+        color-black-static: #05000D,
     ),
 );
-$default-theme: light;
+
+
+$default-theme: dark;

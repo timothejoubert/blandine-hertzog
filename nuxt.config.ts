@@ -2,7 +2,6 @@ import svgLoader from 'vite-svg-loader'
 import prismicData from './slicemachine.config.json'
 import { endpoint } from '#root/slicemachine.config.json'
 import { version } from '#root/package.json'
-import { hoistUseStatements } from '#root/utils/vite/hoist-use-statements'
 import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from '#root/i18n/i18n.config'
 import { prismicDocumentRoutes } from '#root/utils/prismic/route-resolver'
 
@@ -19,7 +18,9 @@ export default defineNuxtConfig({
         '#root': __dirname,
     },
     app: {
+        layoutTransition: false, // Prevent issue with layout without root element
         head: {
+            htmlAttrs: { class: 'app' },
             link: [
                 { rel: 'icon', href: '/favicon/favicon.svg' },
                 { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },

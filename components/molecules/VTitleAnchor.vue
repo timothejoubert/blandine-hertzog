@@ -16,6 +16,7 @@ const arrowNode = computed(() => {
             'href': props.anchorHref,
             'direction': 'down',
             'size': 'lg',
+            'border': '1 0 0 1',
             'aria-label': t('scroll_to_main_section'),
         })
 })
@@ -53,6 +54,7 @@ const nodes = computed(() => {
 
 .arrow {
     --v-arrow-align-items: none;
+
     margin-right: rem(6);
     height: 1lh;
     translate: 0 rem(-9);

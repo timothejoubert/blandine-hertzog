@@ -9,4 +9,9 @@ export default withNuxt(
         'vue/require-default-prop': 'off',
         'vue/multi-word-component-names': 'off',
     },
+}).append({
+    files: ['**/layouts/default.vue'],
+    rules: {
+        'vue/no-multiple-template-root': 'off',
+    },
 })

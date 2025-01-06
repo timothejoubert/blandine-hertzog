@@ -37,9 +37,8 @@ const imgSizes = computed(() => {
 </script>
 
 <template>
-    <section
-        :data-slice-type="slice.slice_type"
-        :data-slice-variation="slice.variation"
+    <VSlice
+        :slice="slice"
         :class="rootClasses"
         :style="{ '--content-slice-column-length': contents.length }"
     >
@@ -76,7 +75,7 @@ const imgSizes = computed(() => {
                 :class="[$style.item, $style['item--link']]"
             />
         </template>
-    </section>
+    </VSlice>
 </template>
 
 <style lang="scss" module="">
