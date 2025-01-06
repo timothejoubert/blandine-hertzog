@@ -41,11 +41,11 @@ const developerCopyright = computed(() => {
 
 .root {
     position: relative;
-    height: $v-footer-height;
     display: grid;
-    grid-template-columns: subgrid;
+    height: $v-footer-height;
     align-items: center;
     margin-top: $v-footer-margin-top;
+    grid-template-columns: subgrid;
 
     &::after {
         position: absolute;

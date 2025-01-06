@@ -70,25 +70,25 @@ const projectGroups = computed(() => {
     --v-project-row-height: #{rem(56)};
     --v-project-row-padding-block: #{rem(14)};
 
-    grid-column: 1 / -1;
     position: relative;
     display: grid;
-    grid-template-columns: subgrid;
     flex-direction: row-reverse;
     align-items: baseline;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
 
     &:nth-last-child(1 of &) {
         min-height: 30vh;
     }
 
     &::before {
-        content: '';
         position: absolute;
-        width: 100%;
-        left: 0;
         top: -1px;
-        background-color: var(--theme-color-line);;
+        left: 0;
+        width: 100%;;
         height: 1px;
+        background-color: var(--theme-color-line);
+        content: '';
     }
 }
 
@@ -96,15 +96,15 @@ const projectGroups = computed(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    grid-row: 1;
     grid-column: span 2;
+    grid-row: 1;
 }
 
 .projects {
-    margin-block: initial;
     //flex-grow: 1;
     grid-column: 1 / 10;
     grid-row: 1;
+    margin-block: initial;
 }
 
 .item {

@@ -27,17 +27,17 @@ useEventListener('keydown', (e) => {
 <style lang="scss" module>
 .root {
     position: fixed;
+    z-index: 1001;
     top: 0;
     bottom: 0;
-    grid-template-rows: 1fr;
-    pointer-events: none;
-    z-index: 1001;
-    margin-block: initial;
     left: var(--gutter);
+    grid-template-rows: 1fr;
+    margin-block: initial;
+    pointer-events: none;
 }
 
 .item {
-    background-color: rgba(255, 0, 0, 0.1);
+    background-color: rgba(255, 0, 0, 10%);
     list-style: none;
 }
 </style>

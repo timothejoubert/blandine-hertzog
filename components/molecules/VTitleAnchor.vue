@@ -55,8 +55,8 @@ const nodes = computed(() => {
 .arrow {
     --v-arrow-align-items: none;
 
-    margin-right: rem(6);
     height: 1lh;
+    margin-right: rem(6);
     translate: 0 rem(-9);
 }
 </style>

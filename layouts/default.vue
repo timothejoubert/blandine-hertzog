@@ -1,7 +1,7 @@
 <script  lang="ts" setup>
 // const splashScreenState = useSplashScreen()
-const settingDocument = await usePrismicSettingsDocument()
-const showreelVideo = settingDocument?.data.showreel
+// const settingDocument = await usePrismicSettingsDocument()
+// const showreelVideo = settingDocument?.data.showreel
 </script>
 
 <template>

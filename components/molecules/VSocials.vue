@@ -42,18 +42,18 @@ const socials = settings?.data.socials
 
 .list {
     display: flex;
+    height: 100%;
     align-items: center;
     margin: 0;
-    height: 100%;
     gap: var(--v-top-bar-padding-inline-item);
     padding-inline: var(--v-top-bar-padding-inline-item);
 }
 
 .item {
-    list-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    list-style: none;
 }
 
 .link {

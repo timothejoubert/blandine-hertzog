@@ -2,21 +2,21 @@
 @use 'assets/scss/variables/themes' as *;
 @use 'sass:meta';
 
-//:root {
+// :root {
 //    @include theme($default-theme);
-//}
+// }
 
-//@each $key, $value in $themes {
+// @each $key, $value in $themes {
 //    @media (prefers-color-scheme: $key) {
 //        :root {
 //            @include theme($key);
 //        }
 //    }
-//}
+// }
 
 .app {
-    // class theme take priority thant @media prefers-color-scheme
+    color: var(--theme-color-on-background);
+
     @include theme-variants;
 
-    color: var(--theme-color-on-background);
 }

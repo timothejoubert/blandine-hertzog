@@ -45,8 +45,8 @@
 }
 
 .themes {
-    margin-left: auto;
     border-left: 1px solid var(--theme-color-line) !important;
+    margin-left: auto;
     padding-inline: var(--v-top-bar-padding-inline-item);
 }
 </style>

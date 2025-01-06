@@ -56,10 +56,10 @@ export default defineComponent({
     display: var(--v-arrow-display, inline-flex);
     align-items: var(--v-arrow-align-items, center);
     justify-content: center;
-    color: var(--theme-color-black-static);
-    background-color: var(--theme-color-primary);
-    border-radius: var(--v-arrow-border, var(--v-arrow-border-size));
     padding: var(--v-arrow-padding, var(--v-arrow-padding-size));
+    border-radius: var(--v-arrow-border, var(--v-arrow-border-size));
+    background-color: var(--theme-color-primary);
+    color: var(--theme-color-black-static);
 
     &--size-sm {
         --v-arrow-border-size: #{rem(5)};

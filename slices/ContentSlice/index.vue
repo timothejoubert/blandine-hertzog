@@ -97,6 +97,7 @@ const imgSizes = computed(() => {
     &--video {
         iframe {
             --v-player-video-height: 100%;
+
             height: 100%;
         }
     }

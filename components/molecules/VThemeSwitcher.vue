@@ -32,9 +32,9 @@ const iconName = computed(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: initial;
     border: initial;
-    cursor: pointer;
+    background: initial;
     color: inherit;
+    cursor: pointer;
 }
 </style>

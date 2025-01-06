@@ -84,8 +84,8 @@ const renderedProjects = computed(() => {
 }
 
 .filters {
-    grid-column: 1 / -1;
     width: 100%;
+    grid-column: 1 / -1;
     margin-block: rem(32);
 }
 
@@ -96,9 +96,9 @@ const renderedProjects = computed(() => {
 .list {
     --v-project-listing-page-columns: 1;
 
-    grid-column: 1 / -1;
     display: grid;
     gap: rem(24);
+    grid-column: 1 / -1;
     grid-template-columns: repeat(var(--v-project-listing-page-columns), minmax(0 , 1fr));
 
     @include media('>=md') {

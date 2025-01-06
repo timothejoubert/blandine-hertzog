@@ -41,9 +41,9 @@ const { title, tags } = useProjectUtils(props.project)
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--theme-color-line);
+    color: inherit;
     gap: rem(14);
     padding-block: var(--v-project-row-padding-block, rem(14));
-    color: inherit;
     text-decoration: none;
 }
 
