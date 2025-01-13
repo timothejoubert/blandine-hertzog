@@ -1,22 +1,31 @@
-export function useRouteQuery(queryKey: string) {
+export function useRouteQuery(queryKey: string, allowMultipleValue: boolean = false) {
     const route = useRoute()
     const router = useRouter()
 
-    const currentQueries = computed(() => {
+    const queryValues = computed(() => {
         const query = route.query[queryKey]
         return (Array.isArray(query) ? query : [query]).filter(q => !!q)
     })
 
-    const hasQuery = computed(() => !!currentQueries.value.length)
+    const hasQuery = computed(() => !!queryValues.value.length)
 
-    function toggleQuery(query: string) {
-        const current = [...currentQueries.value.slice()]
+    function getUpdatedQuery(query: string) {
+        if (allowMultipleValue) {
+            const current = [...queryValues.value.slice()]
 
-        const hasQuery = current.includes(query)
-        const newQueries = hasQuery ? current.filter(q => q !== query) : [...current, query]
+            const hasQuery = current.includes(query)
+            const newQueries = hasQuery ? current.filter(q => q !== query) : [...current, query]
 
-        router.replace({ ...route, query: newQueries.length ? { [queryKey]: newQueries } : undefined })
+            return newQueries.length ? { ...route.query, [queryKey]: newQueries } : route.query
+        }
+        else {
+            return { ...route.query, [queryKey]: query }
+        }
     }
 
-    return { currentQueries, hasQuery, toggleQuery }
+    function toggleQuery(query: string) {
+        router.replace({ ...route, query: getUpdatedQuery(query) })
+    }
+
+    return { queryValues, hasQuery, getUpdatedQuery, toggleQuery }
 }

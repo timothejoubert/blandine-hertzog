@@ -14,13 +14,9 @@ const data = computed(() => props.slice.primary)
     <VSlice
         :slice="slice"
         :class="$style.root"
+        :title="data.title"
+        class="grid"
     >
-        <div
-            class="text-h3"
-            :class="$style.title"
-        >
-            {{ data.title }}
-        </div>
         <VPrismicImage
             v-if="data.image.url"
             :document="data.image"
@@ -43,44 +39,35 @@ const data = computed(() => props.slice.primary)
 @use "assets/scss/mixins/include-media" as *;
 
 .root {
-    display: grid;
-    grid-template-areas:
-            'title'
-            'image'
-            'content'
-            'link';
 
-    @include media('>=md') {
-        column-gap: var(--gutter);
-        grid-template-areas:
-            'title image'
-            'content image'
-            'link image';
-        grid-template-columns: repeat(2, minmax(0 , 1fr));
-    }
-
-}
-
-.title {
-    grid-area: title;
 }
 
 .image {
     margin-top: rem(24);
-    grid-area: image;
+    grid-column: 1 / -1;
 
-    @include media('>=md') {
-        margin-top: initial;
+    @include media('>=lg') {
+        grid-column: 8 / -1;
     }
 }
 
 .content {
+    grid-column: 1 / -1;
     max-width: 48ch;
     margin-top: rem(16);
     grid-area: content;
+
+    @include media('>=lg') {
+        grid-column: 1 / span 6;
+    }
+
 }
 
 .link {
-    grid-area: linl;
+    grid-column: 1 / -1;
+
+    @include media('>=lg') {
+        grid-column: 1 / span 6;
+    }
 }
 </style>

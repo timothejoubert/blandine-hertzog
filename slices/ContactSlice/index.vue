@@ -25,13 +25,9 @@ const attributes = computed(() => {
     <VSlice
         :slice="slice"
         :class="$style.root"
+        :title="data.title"
+        class="grid"
     >
-        <div
-            class="text-h3"
-            :class="$style.title"
-        >
-            {{ data.title }}
-        </div>
         <div
             v-if="attributes.length"
             :class="$style.attributes"
@@ -69,34 +65,16 @@ const attributes = computed(() => {
 @use "assets/scss/mixins/include-media" as *;
 
 .root {
-    display: grid;
-    grid-template-areas:
-            'title'
-            'content'
-            'attributes'
-            'link';
-
-    @include media('>=md') {
-        gap: rem(32) var(--gutter);
-        grid-template-areas:
-            'title .'
-            'content attributes'
-            'link attributes';
-        grid-template-columns: repeat(2, minmax(0 , 1fr));
-    }
-
-}
-
-.title {
-    grid-area: title;
 }
 
 .attributes {
     margin-top: rem(24);
     grid-area: attributes;
+    grid-column: 1 / -1;
 
     @include media('>=md') {
         margin-top: initial;
+        grid-column: 8 / -1;
     }
 }
 
@@ -109,11 +87,15 @@ const attributes = computed(() => {
 }
 
 .content {
+    grid-column: 1 / -1;
     max-width: 48ch;
-    grid-area: content;
+
+    @include media('>=lg') {
+        grid-column: 1 / 6;
+    }
+
 }
 
 .link {
-    grid-area: linl;
 }
 </style>

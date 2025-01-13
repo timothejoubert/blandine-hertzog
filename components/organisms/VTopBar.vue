@@ -8,12 +8,13 @@
     >
         <VNav />
         <VThemeSwitcher :class="$style.themes" />
-        <VSocials />
+        <VSocials :class="$style.socials" />
     </div>
 </template>
 
 <style lang="scss" module>
 @use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/functions/flex-grid' as *;
 
 .root {
     --v-top-bar-padding-inline-item: #{rem(18)};
@@ -47,6 +48,13 @@
 .themes {
     border-left: 1px solid var(--theme-color-line) !important;
     margin-left: auto;
-    padding-inline: var(--v-top-bar-padding-inline-item);
+    min-width: var(--gutter);
+    width: flex-grid(2, 14);
+}
+
+.socials {
+    width: flex-grid(2, 14);
+    border: solid var(--theme-color-line);
+    border-width: 0 1px;
 }
 </style>

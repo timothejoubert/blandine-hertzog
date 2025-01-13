@@ -1,9 +1,20 @@
 <script  lang="ts" setup>
 import { useRouteQuery } from '~/composables/use-route-query'
 
-export interface VFilterBarProps {
-    filters: { value: string, isActive: boolean | undefined }[]
+interface InputGroup {
+    value: string
+    type: 'checkbox' | 'radio' | 'select'
+    isActive: boolean | undefined
+}
+
+interface VFilterBarInputGroup {
+    title: string
+    inputs: InputGroup[]
     queryKey: string
+}
+
+export interface VFilterBarProps {
+    inputGroup: VFilterBarInputGroup[]
 }
 
 const props = defineProps<VFilterBarProps>()
@@ -13,9 +24,6 @@ const { toggleQuery } = useRouteQuery(props.queryKey)
 
 <template>
     <div :class="$style.root">
-        <div class="text-over-title-sm">
-            {{ $t('filters') }}
-        </div>
         <VChip
             v-for="filter in filters"
             :key="filter.value"

@@ -7,6 +7,11 @@ import type {
     ProjectPageDocument,
 } from '~/prismicio-types'
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
+import { defaultPageTransition } from '~/transitions/default-page-transition'
+
+definePageMeta({
+    pageTransition: defaultPageTransition,
+})
 
 const route = useRoute()
 const pageType = getDocumentTypeByUrl(route.path)
@@ -69,24 +74,26 @@ if (!documentFind.value) {
 </script>
 
 <template>
-    <LazyVHomePage
-        v-if="homeDocument"
-        :document="homeDocument"
-    />
-    <LazyVProjectListingPage
-        v-else-if="projectListingDocument"
-        :document="projectListingDocument"
-    />
-    <LazyVProjectPage
-        v-else-if="projectDocument"
-        :document="projectDocument"
-    />
-    <LazyVArchivePage
-        v-else-if="archiveDocument"
-        :document="archiveDocument"
-    />
-    <LazyVDefaultPage
-        v-else-if="defaultDocument"
-        :document="defaultDocument"
-    />
+    <div>
+        <LazyVHomePage
+            v-if="homeDocument"
+            :document="homeDocument"
+        />
+        <LazyVProjectListingPage
+            v-else-if="projectListingDocument"
+            :document="projectListingDocument"
+        />
+        <LazyVProjectPage
+            v-else-if="projectDocument"
+            :document="projectDocument"
+        />
+        <LazyVArchivePage
+            v-else-if="archiveDocument"
+            :document="archiveDocument"
+        />
+        <LazyVDefaultPage
+            v-else-if="defaultDocument"
+            :document="defaultDocument"
+        />
+    </div>
 </template>

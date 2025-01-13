@@ -4,15 +4,20 @@ import type { PossibleProjectPageDocument } from '~/types/app'
 interface VProjectCardProps {
     project: PossibleProjectPageDocument | null
     skeleton?: boolean
+    rootTag?: string
 }
 
+const DISPLAY_DATE = false
 const props = defineProps<VProjectCardProps>()
 
 const { image, title, date, tags } = useProjectUtils(props.project)
 </script>
 
 <template>
-    <div :class="[$style.root, skeleton && $style['root--skeleton']]">
+    <component
+        :is="rootTag || 'div'"
+        :class="[$style.root, skeleton && $style['root--skeleton']]"
+    >
         <VPrismicLink
             :to="props.project"
             :class="$style['media-wrapper']"
@@ -34,15 +39,15 @@ const { image, title, date, tags } = useProjectUtils(props.project)
                 :class="[$style.image, $style['image--placeholder']]"
             />
         </VPrismicLink>
-        <VPrismicLink
-            :to="props.project"
-            :class="$style.title"
-            :label="title"
-            class="text-over-title-md"
-        />
         <div :class="$style.footer">
+            <VPrismicLink
+                :to="props.project"
+                :class="$style.title"
+                :label="title"
+                class="text-over-title-md"
+            />
             <VTime
-                v-if="date"
+                v-if="DISPLAY_DATE && date"
                 :date="date"
             />
             <template v-if="tags.length">
@@ -54,7 +59,7 @@ const { image, title, date, tags } = useProjectUtils(props.project)
                 />
             </template>
         </div>
-    </div>
+    </component>
 </template>
 
 <style lang="scss" module>

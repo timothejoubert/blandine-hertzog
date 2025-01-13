@@ -48,21 +48,17 @@ watch(data, async () => {
     await setProjects()
 }, { deep: true })
 
-const { url } = useLinkResolver(prismicDocumentRoute.project_listing_page)
-const listingUrl = computed(() => data.value.internal_page?.url ? data.value.internal_page : url.value)
+const { url: projectListingUrl } = useLinkResolver(prismicDocumentRoute.project_listing_page)
+const listingUrl = computed(() => data.value.internal_page?.url ? data.value.internal_page : projectListingUrl.value)
 </script>
 
 <template>
     <VSlice
         :slice="slice"
-        :class="$style.root"
+        :title="data.title"
+        :link-reference="listingUrl"
+        :link-label="data.link_label || $t('see_all_projects')"
     >
-        <div
-            class="text-h3"
-            :class="$style.title"
-        >
-            {{ data.title }}
-        </div>
         <VGridList
             v-if="projects?.length"
             v-slot="{ item }"
@@ -73,13 +69,6 @@ const listingUrl = computed(() => data.value.internal_page?.url ? data.value.int
                 :project="item"
             />
         </VGridList>
-        <VArrowButton
-            :label="data.link_label || $t('see_all_projects')"
-            arrow-direction="right"
-            icon-position="start"
-            :to="listingUrl"
-            :class="$style['cta']"
-        />
     </VSlice>
 </template>
 

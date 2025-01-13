@@ -10,34 +10,17 @@ const slices = computed(() => {
     return data.value?.[slideKey] || []
 })
 
-const mainId = 'home-main'
+const mainId = computed(() => props.document.id)
 </script>
 
 <template>
-    <VHeader
-        :class="$style.header"
-        :title="data.title"
-        anchor-title
-        :anchor-href="`#${mainId}`"
-        class="grid-item-main"
-    />
-    <LazySliceZone
-        v-if="slices?.length"
-        :id="mainId"
-        :slices="slices"
-        wrapper="main"
-        :components="components"
-        :class="$style.slices"
-        class="grid-item-main"
-    />
+    <main :id="mainId">
+        <LazySliceZone
+            v-if="slices?.length"
+            :slices="slices"
+            :components="components"
+        />
+    </main>
 </template>
 
-<style lang="scss" module>
-.header {
-    grid-column: var(--left-grid-column);
-}
-
-.slices {
-    grid-column: var(--left-grid-column);
-}
-</style>
+<!-- <style lang="scss" module></style> -->

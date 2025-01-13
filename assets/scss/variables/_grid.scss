@@ -2,7 +2,7 @@
 
 $gutters: (
      0: rem(16),
-     md: rem(44),
+     md: rem(28),
 ) !default;
 $grid-widths: (
     0: calc(100% - 2 * var(--gutter)),

@@ -2,11 +2,24 @@
 // const splashScreenState = useSplashScreen()
 // const settingDocument = await usePrismicSettingsDocument()
 // const showreelVideo = settingDocument?.data.showreel
+
+import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
+
+const route = useRoute()
+// fill CurrentPage data
+if (route.name === 'uid' || route.name?.includes('uid___')) {
+    const pageType = getDocumentTypeByUrl(route.path)
+    if (pageType) {
+        const { webResponse } = await usePrismicFetchPage(pageType)
+        useCurrentPage({ webResponse })
+    }
+}
 </script>
 
 <template>
     <!--        <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
     <NuxtLoadingIndicator />
+    <VPageTitle />
     <VTopBar />
     <NuxtPage />
     <VFooter />
