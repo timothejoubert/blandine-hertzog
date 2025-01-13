@@ -52,10 +52,10 @@ const data = computed(() => props.slice.primary)
 }
 
 .content {
-    grid-column: 1 / -1;
     max-width: 48ch;
     margin-top: rem(16);
     grid-area: content;
+    grid-column: 1 / -1;
 
     @include media('>=lg') {
         grid-column: 1 / span 6;

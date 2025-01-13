@@ -40,11 +40,11 @@ defineProps<{
     &::before,
     &::after {
         position: absolute;
-        content: '';
-        width: calc(100% + var(--gutter) *2);
         left: calc(var(--gutter) * -1);
+        width: calc(100% + var(--gutter) *2);
         height: 1px;
         background-color: var(--theme-color-line);
+        content: '';
     }
 
     &::before {
@@ -64,12 +64,12 @@ defineProps<{
 }
 
 .link {
-    text-decoration: none;
     display: block;
     min-width: flex-grid(2, 14);
-    margin-left: auto;
-    border-left: 1px solid var(--theme-color-line);
     border-right: 1px solid var(--theme-color-line);
+    border-left: 1px solid var(--theme-color-line);
+    margin-left: auto;
+    text-decoration: none;
 
     @at-root span#{&} {
         opacity: 0.6;

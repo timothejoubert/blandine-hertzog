@@ -88,13 +88,13 @@
 }
 
 @mixin text-over-title-sm {
+    color: var(--theme-color-on-background);
     font-family: $font-noi-family;
-    text-transform: uppercase;
     font-weight: 400;
     line-height: 0.9;
-    color: var(--theme-color-on-background);
-    padding-inline: var(--over-title-padding-inline, calc(var(--gutter) * 0.5));
     padding-block: var(--over-title-padding-block, rem(12));
+    padding-inline: var(--over-title-padding-inline, calc(var(--gutter) * 0.5));
+    text-transform: uppercase;
 
 
     @include font-size-fluid((xs: 12, xl: 14));

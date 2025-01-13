@@ -63,21 +63,21 @@ const rootClasses = computed(() => {
 @use 'assets/scss/functions/rem' as *;
 
 .root {
-    cursor: pointer;
     display: flex;
     align-items: center;
+    cursor: pointer;
     font-family: $font-space-mono-family;
     font-size: rem(12);
     text-transform: uppercase;
 
     &--custom-input::before {
         position: relative;
-        content: '';
         width: rem(7);
         height: rem(7);
-        background-color: var(--theme-color-on-background);
         border-radius: 100%;
         margin-right: rem(5);
+        background-color: var(--theme-color-on-background);
+        content: '';
         opacity: 0;
     }
 

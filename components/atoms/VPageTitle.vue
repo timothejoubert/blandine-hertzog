@@ -52,18 +52,18 @@ $mongo-cap-ratio: math.div($mongo-cap-height, $mongo-font-height);
 }
 
 .anchor {
-    border: none;
     display: block;
-    background-color: var(--theme-color-primary);
-    cursor: pointer;
     align-self: stretch;
+    border: none;
+
     //border-radius: 34px 0 0 34px;
     margin-right: rem(3);
+    background-color: var(--theme-color-primary);
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    cursor: pointer;
 
     @include property-fluid(border-radius, (xs: 18, xl: 34));
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-
     @include property-fluid(width, (xs: 30, xl: 62));
 
     svg {
@@ -72,12 +72,12 @@ $mongo-cap-ratio: math.div($mongo-cap-height, $mongo-font-height);
 }
 
 .title {
-    margin-block: 0;
     font-family: $font-mango-family;
     font-weight: 600;
     line-height: $mongo-cap-ratio;
-    translate: 0 math.div($mongo-cap-top-offset, $mongo-font-height * $mongo-cap-ratio) * 100%;
+    margin-block: 0;
     text-transform: uppercase;
+    translate: 0 math.div($mongo-cap-top-offset, $mongo-font-height * $mongo-cap-ratio) * 100%;
 
     @include font-size-fluid((xs: 60, vl: 240, xl: 280, hd: 340));
 

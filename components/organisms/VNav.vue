@@ -41,13 +41,14 @@ const links = menu.value?.data.links || []
 
 .list {
     display: flex;
+    min-width: 100%;
     padding: initial;
     margin: initial;
-    min-width: 100%;
 }
 
 .item {
     width: calc(#{flex-grid-value(2, 10)} + var(--gutter));
+
     //width: flex-grid(2, 10);
     //margin-right: var(--gutter);
     list-style: none;
@@ -55,8 +56,8 @@ const links = menu.value?.data.links || []
 
 .link {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: rem(9) rem(24);
     border-left: 1px solid var(--theme-color-line);
     color: inherit;

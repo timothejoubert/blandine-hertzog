@@ -35,8 +35,8 @@ const socials = settings?.data.socials
 
 .list {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     margin: 0;
     gap: calc(var(--gutter) * 0.5);
 }

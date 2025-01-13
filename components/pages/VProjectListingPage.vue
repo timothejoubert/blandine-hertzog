@@ -3,7 +3,6 @@ import type { PageComponentProps } from '~/types/app'
 import type { VInputGroupProps } from '~/components/molecules/VInputGroup.vue'
 
 const props = defineProps<PageComponentProps<'project_listing_page'>>()
-const data = computed(() => props.document.data)
 
 // Common
 const { t } = useI18n()
@@ -150,9 +149,9 @@ const mainId = computed(() => props.document.id)
     grid-column: 1 / -1;
 
     @include media('>=lg') {
+        width: calc(100% + var(--gutter));
         grid-column: 12 / -1;
         grid-row: 1 / 3;
-        width: calc(100% + var(--gutter));
     }
 }
 
@@ -163,11 +162,11 @@ const mainId = computed(() => props.document.id)
     &::before,
     &::after {
         position: absolute;
-        content: '';
-        height: 1px;
-        background-color: var(--theme-color-line);
         left: 0;
         width: 100%;
+        height: 1px;
+        background-color: var(--theme-color-line);
+        content: '';
     }
 
     &::before {
@@ -182,10 +181,10 @@ const mainId = computed(() => props.document.id)
 .filters__type {
     display: flex;
     flex-direction: column;
-    gap: rem(6);
     border-left: 1px solid var(--theme-color-line);
-    padding-inline: calc(var(--gutter) * 0.5);
+    gap: rem(6);
     padding-block: rem(32);
+    padding-inline: calc(var(--gutter) * 0.5);
 }
 
 .filters__layout {
@@ -196,10 +195,10 @@ const mainId = computed(() => props.document.id)
 
 .layout-input {
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 50%;
     height: rem(44);
+    align-items: center;
+    justify-content: center;
 
     &:not(:first-child) {
         border-left: 1px solid var(--theme-color-line);
@@ -222,24 +221,24 @@ const mainId = computed(() => props.document.id)
 
 .list {
     display: grid;
-    margin-block: 0;
-    padding-block: rem(16);
     gap: rem(8) var(--gutter);
     grid-column: 1 / -1;
+    margin-block: 0;
+    padding-block: rem(16);
 
     @include media('>=lg') {
-        grid-template-columns: repeat(11, minmax(0, 1fr));
         grid-column: 1 / 12;
+        grid-template-columns: repeat(11, minmax(0, 1fr));
     }
 }
 
 .item {
-    list-style: none;
     grid-column: 1 / -1;
+    list-style: none;
 
     @include media('>=lg') {
-        grid-column: span 5;
         width: calc(100% + var(--gutter) + #{flex-grid-value(1, 5)} * 0.33);
+        grid-column: span 5;
 
         &:nth-child(even) {
             margin-left: calc(#{flex-grid-value(1, 5)} * 0.66);
