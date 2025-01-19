@@ -64,9 +64,6 @@ const attributes = computed(() => {
 @use 'assets/scss/functions/rem' as *;
 @use "assets/scss/mixins/include-media" as *;
 
-.root {
-}
-
 .attributes {
     margin-top: rem(24);
     grid-area: attributes;
@@ -93,9 +90,5 @@ const attributes = computed(() => {
     @include media('>=lg') {
         grid-column: 1 / 6;
     }
-
-}
-
-.link {
 }
 </style>

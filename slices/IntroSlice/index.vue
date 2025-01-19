@@ -70,16 +70,17 @@ const tagList = computed(() => {
 
 .root {
     --intro-slice-paddin-block-content: #{rem(42)};
+
     position: relative;
 
     &::after {
         position: absolute;
-        content: '';
-        left: calc(var(--gutter) * -1);
         right: calc(var(--gutter) * -1);
         bottom: 0;
+        left: calc(var(--gutter) * -1);
         height: 1px;
         background-color: var(--theme-color-line);
+        content: '';
     }
 }
 
@@ -92,9 +93,9 @@ const tagList = computed(() => {
 }
 
 .content {
-    margin-block: var(--intro-slice-paddin-block-content);
-    grid-column: 1 / -1;
     max-width: 38ch;
+    grid-column: 1 / -1;
+    margin-block: var(--intro-slice-paddin-block-content);
 
     & p {
         margin-block: 0;
@@ -112,25 +113,25 @@ const tagList = computed(() => {
 
     @include media('>=lg') {
         width: calc(100% + var(--gutter) * 2);
-        margin-left: calc(var(--gutter) * -1);
         border-left: 1px solid var(--theme-color-line);
+        margin-left: calc(var(--gutter) * -1);
         grid-column: 12 / -1;
     }
 }
 
 .title-right {
     position: relative;
-    padding-block: var(--spacing-over-title-padding-block);
     margin-block: 0;
+    padding-block: var(--spacing-over-title-padding-block);
 
     &::before,
     &::after {
         position: absolute;
-        content: '';
-        left: calc(var(--gutter) * -1);
         right: calc(var(--gutter) * -1);
+        left: calc(var(--gutter) * -1);
         height: 1px;
         background-color: var(--theme-color-line);
+        content: '';
     }
 
     &::before {
@@ -146,8 +147,8 @@ const tagList = computed(() => {
 
         &::before,
         &::after {
-            left: 0;
             right: 0;
+            left: 0;
         }
     }
 }

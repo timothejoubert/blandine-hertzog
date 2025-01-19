@@ -56,7 +56,7 @@ $mongo-cap-ratio: math.div($mongo-cap-height, $mongo-font-height);
     align-self: stretch;
     border: none;
 
-    //border-radius: 34px 0 0 34px;
+    // border-radius: 34px 0 0 34px;
     margin-right: rem(3);
     background-color: var(--theme-color-primary);
     border-bottom-right-radius: 0 !important;

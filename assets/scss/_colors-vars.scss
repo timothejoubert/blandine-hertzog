@@ -1,36 +1,36 @@
-// Use them instead
+ // Use them instead
 
-//@use 'assets/scss/functions/list' as *;
-//@use 'sass:string';
-//
-//$colors: (
-//    dark: #090909,
-//    light: #fff,
-//    main: #FAAD17,
-//    secondary: #2E1F69,
-//);
-//
-//
-//@mixin color-mix($name: '', $from-color, $to-color) {
-//    @for $i from 1 through 9 {
-//        $percent: $i * 10;
-//        $key: list-implode(('--', 'color', $name, $percent), '-');
-//
-//        #{$key}: color-mix(in srgb, #{$from-color}, #{$to-color} string.unquote("#{$percent}%"));
-//    }
-//}
-//
-//
-//@mixin color-mixes($name: '', $color-1) {
-//    @include color-mix(string.unquote("#{$name}-lighter"), $color-1, white);
-//    @include color-mix(string.unquote("#{$name}-darker"), $color-1, black);
-//}
-//
-//
-//html {
-//    @each $color-key, $value in $colors {
-//        --color-#{$color-key}: #{$value};
-//
-//        @include color-mixes($color-key, var(--color-#{$color-key}));
-//    }
-//}
+@use 'assets/scss/functions/list' as *;
+@use 'sass:string';
+
+$colors: (
+    dark: #090909,
+    light: #fff,
+    main: #FAAD17,
+    secondary: #2E1F69,
+);
+
+
+@mixin color-mix($name: '', $from-color, $to-color) {
+    @for $i from 1 through 9 {
+        $percent: $i * 10;
+        $key: list-implode(('--', 'color', $name, $percent), '-');
+
+        #{$key}: color-mix(in srgb, #{$from-color}, #{$to-color} string.unquote("#{$percent}%"));
+    }
+}
+
+
+@mixin color-mixes($name: '', $color-1) {
+    @include color-mix(string.unquote("#{$name}-lighter"), $color-1, white);
+    @include color-mix(string.unquote("#{$name}-darker"), $color-1, black);
+}
+
+
+html {
+    @each $color-key, $value in $colors {
+        --color-#{$color-key}: #{$value};
+
+        @include color-mixes($color-key, var(--color-#{$color-key}));
+    }
+}

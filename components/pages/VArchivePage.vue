@@ -101,7 +101,7 @@ const projectGroups = computed(() => {
 }
 
 .projects {
-    //flex-grow: 1;
+    // flex-grow: 1;
     grid-column: 1 / 10;
     grid-row: 1;
     margin-block: initial;

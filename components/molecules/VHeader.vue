@@ -79,8 +79,8 @@ const rootClasses = computed(() => {
 }
 
 .title {
-    //display: flex;
-    //flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
     margin-block: initial;
 }
 

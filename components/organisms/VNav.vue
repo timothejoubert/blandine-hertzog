@@ -48,9 +48,6 @@ const links = menu.value?.data.links || []
 
 .item {
     width: calc(#{flex-grid-value(2, 10)} + var(--gutter));
-
-    //width: flex-grid(2, 10);
-    //margin-right: var(--gutter);
     list-style: none;
 }
 
@@ -75,9 +72,5 @@ const links = menu.value?.data.links || []
     .item:last-child & {
         border-right: 1px solid var(--theme-color-line);
     }
-}
-
-.label {
-
 }
 </style>

@@ -38,10 +38,6 @@ const data = computed(() => props.slice.primary)
 @use 'assets/scss/functions/rem' as *;
 @use "assets/scss/mixins/include-media" as *;
 
-.root {
-
-}
-
 .image {
     margin-top: rem(24);
     grid-column: 1 / -1;

@@ -45,7 +45,7 @@ const { url } = useLinkResolver(props.linkReference)
     &::after {
         position: absolute;
         left: calc(var(--gutter) * -1);
-        width: calc(100% + var(--gutter) *2);
+        width: calc(100% + var(--gutter) * 2);
         height: 1px;
         background-color: var(--theme-color-line);
         content: '';
@@ -70,11 +70,11 @@ const { url } = useLinkResolver(props.linkReference)
 
 .link {
     display: block;
-    padding-block: var(--spacing-over-title-padding-block);
-    padding-inline: var(--gutter);
     border-right: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
     margin-left: auto;
+    padding-block: var(--spacing-over-title-padding-block);
+    padding-inline: var(--gutter);
     text-decoration: none;
 
     @at-root span#{&} {

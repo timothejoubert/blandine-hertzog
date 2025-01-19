@@ -1,7 +1,6 @@
 import type {
     LocationAsRelativeRaw,
     _RouteRecordBase,
-    RouteLocationAsRelativeTyped,
 } from 'vue-router'
 import type { ContentRelationshipField } from '@prismicio/types'
 import { isContentRelationshipField, isPrismicDocument } from '~/utils/prismic/guard'

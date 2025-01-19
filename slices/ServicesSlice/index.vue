@@ -82,12 +82,12 @@ const activeService = ref(0)
 
     &::after {
         position: absolute;
-        content: '';
-        left: calc(var(--gutter) * -1);
         right: calc(var(--gutter) * -1);
         bottom: 0;
+        left: calc(var(--gutter) * -1);
         height: 1px;
         background-color: var(--theme-color-line);
+        content: '';
     }
 }
 
@@ -97,20 +97,20 @@ const activeService = ref(0)
     @include media('>=lg') {
         &::before {
             position: absolute;
-            content: '';
             top: 0;
             left: 50%;
             width: calc(50% + var(--gutter));
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 5%);
+            content: '';
         }
     }
 }
 
 .service {
     display: flex;
-    flex-direction: column;
     width: 100%;
+    flex-direction: column;
 
     @include media('>=lg') {
         width: 50%;
@@ -118,21 +118,21 @@ const activeService = ref(0)
 }
 
 .left-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: calc(var(--gutter) * 0.5);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: calc(var(--gutter) * 0.5);
     padding-block: rem(14);
 
     &::after {
         position: absolute;
-        content: '';
-        left: 0;
         right: 0;
         bottom: 0;
+        left: 0;
         height: 1px;
         background-color: var(--theme-color-line);
+        content: '';
     }
 
     @include media('>=lg') {
@@ -163,9 +163,9 @@ const activeService = ref(0)
 
     @include media('>=lg') {
         opacity: 0;
-        translate: rem(10) 0;
         transform-origin: right center;
         transition: opacity 0.45s, translate 0.45s;
+        translate: rem(10) 0;
 
         .service[data-active="true"] & {
             opacity: 1;
@@ -178,25 +178,25 @@ const activeService = ref(0)
     padding-block: rem(32) rem(48);
 
     @include media('>=lg') {
-        margin-block: 0;
-        display: flex;
         position: absolute;
-        align-items: center;
-        justify-content: center;
         top: 0;
         left: 50%;
+        display: flex;
         width: calc(50% + var(--gutter));
         height: 100%;
+        align-items: center;
+        justify-content: center;
+        margin-block: 0;
+        opacity: 0;
         padding-block: rem(40);
         padding-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 0.5);
-        opacity: 0;
-        translate: 0 rem(8);
         transition: opacity 0s, translate 0.4s;
+        translate: 0 rem(8);
 
         .service[data-active="true"] & {
             opacity: 1;
-            translate: 0;
             transition: opacity 0.5s ease(out-quad);
+            translate: 0;
         }
     }
 }
