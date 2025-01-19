@@ -37,10 +37,10 @@ export function useLinkResolver(reference: PossibleRouteReference) {
         else if (typeof reference === 'object' && 'name' in reference) {
             return router.hasRoute(reference.name as string) ? router.resolve(reference)?.fullPath : undefined
         }
-        else if (typeof reference === 'object') {
-            return router.resolve(reference as RouteLocationAsRelativeTyped)?.fullPath
-        }
-        else return reference
+        // else if (typeof reference === 'object') {
+        //     return router.resolve(reference as RouteLocationAsRelativeTyped)?.fullPath
+        // }
+        // else if return reference
     })
 
     const isRelative = computed(() => {

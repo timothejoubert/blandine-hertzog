@@ -1,11 +1,14 @@
 <script  lang="ts" setup>
-import type { PossibleRouteReference } from '~/composables/use-link-resolver'
+import type { KeyTextField } from '@prismicio/types'
+import { type PossibleRouteReference, useLinkResolver } from '~/composables/use-link-resolver'
 
-defineProps<{
+const props = defineProps<{
     title?: string | null
-    linkLabel?: string
+    linkLabel?: string | KeyTextField
     linkReference?: PossibleRouteReference
 }>()
+
+const { url } = useLinkResolver(props.linkReference)
 </script>
 
 <template>
@@ -14,13 +17,13 @@ defineProps<{
             :class="$style.title"
             class="text-over-title-sm"
         >
-            {{ title }}
+            {{ title }} || {{ url }}
         </h2>
         <slot />
         <VPrismicLink
-            v-if="linkReference || linkLabel"
+            v-if="url || linkLabel"
             class="text-over-title-sm"
-            :to="linkReference"
+            :to="url"
             :label="linkLabel"
             :class="$style.link"
         />
@@ -29,6 +32,7 @@ defineProps<{
 
 <style lang="scss" module>
 @use 'assets/scss/variables/fonts' as *;
+@use 'assets/scss/mixins/include-media' as *;
 @use 'assets/scss/functions/rem' as *;
 @use 'assets/scss/functions/flex-grid' as *;
 
@@ -61,11 +65,13 @@ defineProps<{
 
     font-weight: 600;
     margin-block: 0;
+    padding-block: var(--spacing-over-title-padding-block);
 }
 
 .link {
     display: block;
-    min-width: flex-grid(2, 14);
+    padding-block: var(--spacing-over-title-padding-block);
+    padding-inline: var(--gutter);
     border-right: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
     margin-left: auto;
@@ -73,6 +79,10 @@ defineProps<{
 
     @at-root span#{&} {
         opacity: 0.6;
+    }
+
+    @include media('>=lg') {
+        min-width: calc(#{flex-grid-value(3, 14)} + var(--gutter));
     }
 }
 </style>

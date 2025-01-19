@@ -17,10 +17,10 @@ const props = defineProps(
     ]),
 )
 
-const data = computed(() => props.slice.primary)
+const primary = computed(() => props.slice.primary)
 
 const manualProjectIds = computed(() => {
-    return data.value.custom_projects.filter((group) => {
+    return primary.value.custom_projects.filter((group) => {
         const projectRelation = group.project
         return 'id' in projectRelation && !!projectRelation.id
     }).map(group => group.project.id)
@@ -44,39 +44,56 @@ async function setProjects() {
 
 await setProjects()
 
-watch(data, async () => {
+watch(primary, async () => {
     await setProjects()
 }, { deep: true })
 
 const { url: projectListingUrl } = useLinkResolver(prismicDocumentRoute.project_listing_page)
-const listingUrl = computed(() => data.value.internal_page?.url ? data.value.internal_page : projectListingUrl.value)
+const listingUrl = computed(() => primary.value.internal_page?.url ? primary.value.internal_page : projectListingUrl.value)
 </script>
 
 <template>
     <VSlice
         :slice="slice"
-        :title="data.title"
-        :link-reference="listingUrl"
-        :link-label="data.link_label || $t('see_all_projects')"
     >
-        <VGridList
+        <VHeadSection
+            :title="primary.title"
+            :link-label="primary.link_label || $t('see_all_projects')"
+            :link-reference="listingUrl"
+        />
+        <ul
             v-if="projects?.length"
-            v-slot="{ item }"
             :class="$style.list"
-            :items="projects"
         >
             <VProjectCard
-                :project="item"
+                v-for="(project, index) in projects"
+                :key="project?.id || index"
+                tag="li"
+                :project="project"
+                :class="$style.item"
             />
-        </VGridList>
+        </ul>
     </VSlice>
 </template>
 
 <style lang="scss" module>
 @use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/mixins/include-media' as *;
 
 .list {
-    margin-top: rem(54);
+    --v-grid-list-column: 1;
+
+    display: grid;
+    gap: rem(24) var(--gutter);
+    grid-template-columns: repeat(var(--v-grid-list-column), minmax(0 , 1fr));
+
+    @include media('>=md') {
+        --v-grid-list-column: 2;
+    }
+}
+
+.item {
+    list-style: none;
 }
 
 .cta {

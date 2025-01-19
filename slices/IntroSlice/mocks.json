@@ -13,6 +13,34 @@
 						}
 					}
 				]
+			},
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "distant",
+				"type": "Text"
+			},
+			"secondary_title": {
+				"__TYPE__": "FieldContent",
+				"value": "chicken",
+				"type": "Text"
+			},
+			"attributes": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"attribut",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "airplane",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []
