@@ -9,8 +9,35 @@ export default defineComponent({
         const tag = props.tag || 'div'
         const $style = useCssModule()
 
-        const isMounted = ref(false)
-        onMounted(() => isMounted.value = true)
+        const root = ref<HTMLElement | null>(null)
+        const renderClientChildren = ref(false)
+        let intersectionObs: null | IntersectionObserver = null
+
+        const unwatch = watch(root, (element) => {
+            if (!element) return
+            intersectionObs = new IntersectionObserver(([entries]) => {
+                if (entries.isIntersecting) {
+                    renderClientChildren.value = true
+                    clearIntersectionObs()
+                }
+            })
+            intersectionObs.observe(element)
+            unwatch()
+        })
+
+        function clearIntersectionObs() {
+            intersectionObs?.disconnect()
+            intersectionObs = null
+        }
+
+        onBeforeUnmount(clearIntersectionObs)
+
+        const title = computed(() => props.title || '')
+        const mountedNode = h('span', { class: $style.item }, title.value)
+
+        const childrenNode = computed(() => {
+            return renderClientChildren.value ? h('div', { class: $style.wrapper }, [mountedNode, mountedNode, mountedNode]) : title.value
+        })
 
         const enterDirection = ref('top')
 
@@ -22,23 +49,17 @@ export default defineComponent({
             enterDirection.value = event.clientY > elCenter ? 'bottom' : 'top'
         }
 
-        return () => {
-            if (!props.title) return () => {}
-
-            const mountedNode = h('span', { class: $style.item }, props.title)
-            const children = isMounted.value ? h('div', { class: $style.wrapper }, [mountedNode, mountedNode, mountedNode]) : props.title
-
-            return h(tag, {
-                onMouseenter: onMouseEnter,
-                onMouseleave: onMouseEnter,
-                class: [
-                    $style.root,
-                    $style[`root--translate-direction-${enterDirection.value}`],
-                    props.active && $style['root--active'],
-                    $style['root--mounted'],
-                ],
-            }, children)
-        }
+        return () => h(tag, {
+            ref: root,
+            onMouseenter: onMouseEnter,
+            onMouseleave: onMouseEnter,
+            class: [
+                $style.root,
+                renderClientChildren.value && $style['root--render-client-children'],
+                renderClientChildren.value && $style[`root--translate-direction-${enterDirection.value}`],
+                renderClientChildren.value && props.active && $style['root--active'],
+            ],
+        }, childrenNode.value)
     },
 })
 </script>
@@ -58,7 +79,7 @@ export default defineComponent({
 .root {
     position: relative;
 
-    &--mounted {
+    &--render-client-children {
         overflow: hidden;
     }
 }
