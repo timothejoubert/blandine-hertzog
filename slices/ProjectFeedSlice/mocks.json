@@ -9,6 +9,7 @@
 				"type": "Text"
 			},
 			"internal_page": {
+				"key": "97f2cf60-03a1-4843-bb16-5e6be53d6cf2",
 				"__TYPE__": "LinkContent",
 				"value": {
 					"__TYPE__": "DocumentLink",
@@ -29,6 +30,7 @@
 							[
 								"project",
 								{
+									"key": "57b4fce8-10d6-4974-a43f-e24bfc80fe13",
 									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "DocumentLink",
@@ -39,6 +41,11 @@
 						]
 					}
 				]
+			},
+			"externa_url": {
+				"__TYPE__": "FieldContent",
+				"value": "body",
+				"type": "Text"
 			}
 		},
 		"items": []

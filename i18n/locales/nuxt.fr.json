@@ -18,6 +18,7 @@
     "go_to_main_content": "Défiler jusqu'au contenu principal",
     "grid": "Grille",
     "list": "Liste",
+    "close": "Fermer",
 
     "error_page.not_found.title": "Page introuvable",
     "error_page.unauthenticated_user_error": "Access non autorisé",

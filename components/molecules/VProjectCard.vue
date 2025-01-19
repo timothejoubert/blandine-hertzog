@@ -79,22 +79,22 @@ const { image, title, date, tags } = useProjectUtils(props.project)
     }
 }
 
-.title {
-    display: block;
-    color: inherit;
-    font-weight: 800;
-    margin-block: rem(14);
-    text-decoration: none;
-}
-
 .footer {
     display: flex;
     align-items: center;
     gap: rem(12);
+    padding-top: rem(10);
 
     .root--skeleton & {
         height: rem(24);
         background-color: lightgrey;
     }
+}
+
+.title {
+    display: block;
+    color: inherit;
+    font-weight: 800;
+    text-decoration: none;
 }
 </style>

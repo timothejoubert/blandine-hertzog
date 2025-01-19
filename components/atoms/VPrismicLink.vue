@@ -42,7 +42,7 @@ export default defineComponent({
             // Custom VRoadizLink will pass all attributes to the default slot
             // and render it (i.e. render-less component behavior)
             if (props.custom) {
-                return slots.default?.(attributes.value) || ''
+                return slots.default?.({...attributes.value, url: attributes.value.href || attributes.value.to }) || ''
             }
             else if (url.value) {
                 return h(NuxtLink, attributes.value, slots.default || (() => (typeof props.label === 'string' && props.label) || ''))

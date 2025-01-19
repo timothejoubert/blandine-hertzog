@@ -26,6 +26,7 @@ if (route.name === 'uid' || route.name?.includes('uid___')) {
     <DevOnly>
         <VGridVisualizer />
     </DevOnly>
+    <VToast />
 </template>
 
 <style lang="scss" module>

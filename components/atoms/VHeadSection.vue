@@ -8,7 +8,7 @@ const props = defineProps<{
     linkReference?: PossibleRouteReference
 }>()
 
-const { url } = useLinkResolver(props.linkReference)
+const { url: linkUrl } = useLinkResolver(props.linkReference)
 </script>
 
 <template>
@@ -17,16 +17,29 @@ const { url } = useLinkResolver(props.linkReference)
             :class="$style.title"
             class="text-over-title-sm"
         >
-            {{ title }} || {{ url }}
+            {{ title }}
         </h2>
         <slot />
         <VPrismicLink
-            v-if="url || linkLabel"
-            class="text-over-title-sm"
-            :to="url"
-            :label="linkLabel"
-            :class="$style.link"
-        />
+            v-if="linkUrl || linkLabel"
+            v-slot="{ url }"
+            :to="linkUrl"
+            custom
+        >
+            <NuxtLink
+                :to="url"
+                :class="$style.link"
+                class="text-over-title-sm"
+            >
+                {{ linkLabel }}
+                <SvgIcon
+                    aria-hidden="true"
+                    name="link-arrow"
+                    width="21"
+                    height="12"
+                />
+            </NuxtLink>
+        </VPrismicLink>
     </header>
 </template>
 
@@ -69,7 +82,10 @@ const { url } = useLinkResolver(props.linkReference)
 }
 
 .link {
-    display: block;
+    display: flex;
+    justify-content: center;
+    gap: rem(10);
+    align-items: center;
     border-right: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
     margin-left: auto;

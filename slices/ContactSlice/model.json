@@ -28,38 +28,46 @@
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
-        "attributs": {
-          "type": "Group",
+        "link_label": {
+          "type": "Text",
           "config": {
-            "label": "Attributs",
-            "repeat": true,
-            "fields": {
-              "label": {
-                "type": "Text",
-                "config": {
-                  "label": "Label",
-                  "placeholder": ""
-                }
-              },
-              "external_url": {
-                "type": "Text",
-                "config": {
-                  "label": "External url",
-                  "placeholder": ""
-                }
-              },
-              "icon": {
-                "type": "Select",
-                "config": {
-                  "label": "Icon",
-                  "placeholder": "",
-                  "options": [
-                    "Email",
-                    "Phone"
-                  ]
-                }
-              }
-            }
+            "label": "Link label",
+            "placeholder": ""
+          }
+        },
+        "internal_page": {
+          "type": "Link",
+          "config": {
+            "label": "Internal page",
+            "select": "document",
+            "customtypes": [
+              "archive_page",
+              "home_page",
+              "project_listing_page",
+              "project_page",
+              "default_page"
+            ]
+          }
+        },
+        "external_url": {
+          "type": "Text",
+          "config": {
+            "label": "External url",
+            "placeholder": ""
+          }
+        },
+        "phone": {
+          "type": "Text",
+          "config": {
+            "label": "Phone",
+            "placeholder": ""
+          }
+        },
+        "mail": {
+          "type": "Text",
+          "config": {
+            "label": "Mail",
+            "placeholder": ""
           }
         }
       },

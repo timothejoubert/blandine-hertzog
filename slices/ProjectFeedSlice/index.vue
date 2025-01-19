@@ -68,9 +68,9 @@ const listingUrl = computed(() => primary.value.internal_page?.url ? primary.val
             <VProjectCard
                 v-for="(project, index) in projects"
                 :key="project?.id || index"
-                tag="li"
+                root-tag="li"
                 :project="project"
-                :class="$style.item"
+                :class="$style.project"
             />
         </ul>
     </VSlice>
@@ -83,17 +83,41 @@ const listingUrl = computed(() => primary.value.internal_page?.url ? primary.val
 .list {
     --v-grid-list-column: 1;
 
+    position: relative;
     display: grid;
+    margin-block: 0;
     gap: rem(24) var(--gutter);
     grid-template-columns: repeat(var(--v-grid-list-column), minmax(0 , 1fr));
 
-    @include media('>=md') {
+    @include media('>=lg') {
         --v-grid-list-column: 2;
+
+        &::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 1px;
+            background-color: var(--theme-color-line);
+        }
     }
 }
 
-.item {
+.project {
+    position: relative;
     list-style: none;
+    padding-block: calc(var(--gutter) * 0.5);
+
+    &::before {
+        position: absolute;
+        content: '';
+        bottom: 0;
+        left: calc(var(--gutter) * -1);
+        right: calc(var(--gutter) * -1);
+        height: 1px;
+        background-color: var(--theme-color-line);
+    }
 }
 
 .cta {

@@ -59,8 +59,9 @@ const activeService = ref(0)
                     <a
                         :inert="activeService !== index"
                         href=""
+                        class="text-over-title-sm"
                         :class="$style.cta"
-                    >En savoir plus</a>
+                    >En savoir +</a>
                 </div>
                 <VText
                     :class="$style.content"
@@ -159,7 +160,11 @@ const activeService = ref(0)
 
 .cta {
     display: block;
-    color: inherit;
+    color: var(--theme-color-background);
+    background-color: var(--theme-color-primary);
+    text-decoration: none;
+    padding: rem(4) rem(8);
+    border-radius: rem(2);
 
     @include media('>=lg') {
         opacity: 0;

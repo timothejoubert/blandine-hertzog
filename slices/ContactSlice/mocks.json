@@ -19,39 +19,33 @@
 					}
 				]
 			},
-			"attributs": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"label",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "eye",
-									"type": "Text"
-								}
-							],
-							[
-								"external_url",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "describe",
-									"type": "Text"
-								}
-							],
-							[
-								"icon",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "Email",
-									"type": "Select"
-								}
-							]
-						]
-					}
-				]
+			"link_label": {
+				"__TYPE__": "FieldContent",
+				"value": "buffalo",
+				"type": "Text"
+			},
+			"internal_page": {
+				"key": "c25efd9e-ecd3-41eb-8d84-0751d6eac64a",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "DocumentLink",
+					"id": "mock_document_id"
+				}
+			},
+			"external_url": {
+				"__TYPE__": "FieldContent",
+				"value": "image",
+				"type": "Text"
+			},
+			"phone": {
+				"__TYPE__": "FieldContent",
+				"value": "loss",
+				"type": "Text"
+			},
+			"mail": {
+				"__TYPE__": "FieldContent",
+				"value": "people",
+				"type": "Text"
 			}
 		},
 		"items": []

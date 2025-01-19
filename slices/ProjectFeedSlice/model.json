@@ -36,6 +36,13 @@
             "placeholder": ""
           }
         },
+        "externa_url": {
+          "type": "Text",
+          "config": {
+            "label": "Externa url",
+            "placeholder": ""
+          }
+        },
         "custom_projects": {
           "type": "Group",
           "config": {
