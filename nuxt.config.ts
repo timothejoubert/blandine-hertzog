@@ -146,11 +146,11 @@ export default defineNuxtConfig({
         '@nuxtjs/prismic',
         '@nuxt/image',
         '@nuxtjs/i18n',
-        '@nuxtjs/sitemap',
         '@vueuse/nuxt',
         '@nuxt/eslint',
         '@rezo-zero/nuxt-stories',
     ],
+        // '@nuxtjs/sitemap',
     i18n: {
         strategy: 'prefix_except_default',
         // I18n issue, disabled detectBrowserLanguage work only with empty obj
