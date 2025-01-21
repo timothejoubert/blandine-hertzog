@@ -46,10 +46,12 @@
 }
 
 .themes {
-    width: flex-grid(2, 14);
+    width: flex-grid(1, 14);
     min-width: var(--gutter);
     border-left: 1px solid var(--theme-color-line) !important;
+    border-right: 1px solid var(--theme-color-line) !important;
     margin-left: auto;
+    margin-right: var(--gutter);
 }
 
 .socials {

@@ -149,7 +149,7 @@ const activeService = ref(0)
     margin-block: 0;
 
     @include media('>=lg') {
-        opacity: 0.5;
+        opacity: 0.6;
         transition: opacity 0.3s;
 
         .service[data-active="true"] & {

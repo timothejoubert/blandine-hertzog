@@ -33,38 +33,43 @@ const projectGroups = computed(() => {
 </script>
 
 <template>
-    <VHeader
-        :title="data.title"
-        :content="data.content"
-    />
-    <div
-        v-for="group in projectGroups"
-        :key="group.year"
-        :class="$style['year-group']"
+    <main
+        class="grid"
+        :class="$style.root"
     >
         <div
-            :class="$style.year"
-            class="text-over-title-md"
+            v-for="group in projectGroups"
+            :key="group.year"
+            :class="$style['year-group']"
         >
-            {{ group.year }}
-        </div>
-        <ul
-            v-if="group.projects.length"
-            :class="$style.projects"
-        >
-            <li
-                v-for="(project, index) in group.projects"
-                :key="project?.uid || index"
-                :class="$style.item"
+            <div
+                :class="$style.year"
+                class="text-over-title-md"
             >
-                <VProjectRow :project="project" />
-            </li>
-        </ul>
-    </div>
+                {{ group.year }}
+            </div>
+            <ul
+                v-if="group.projects.length"
+                :class="$style.projects"
+            >
+                <li
+                    v-for="(project, index) in group.projects"
+                    :key="project?.uid || index"
+                    :class="$style.item"
+                >
+                    <VProjectRow :project="project" />
+                </li>
+            </ul>
+        </div>
+    </main>
 </template>
 
 <style lang="scss" module>
 @use 'assets/scss/functions/rem' as *;
+
+.root {
+    margin-top: rem(120);
+}
 
 .year-group {
     --v-project-row-height: #{rem(56)};
@@ -102,7 +107,7 @@ const projectGroups = computed(() => {
 
 .projects {
     // flex-grow: 1;
-    grid-column: 1 / 10;
+    grid-column: 1 / 13;
     grid-row: 1;
     margin-block: initial;
 }

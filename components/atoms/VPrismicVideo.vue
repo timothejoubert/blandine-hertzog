@@ -3,15 +3,17 @@ import type { PropType } from 'vue'
 import type { EmbedField, LinkToMediaField } from '@prismicio/types'
 import { commonVideoProps, videoAttributes } from '~/utils/video/video-props'
 import type { PrismicVideoField } from '~/utils/prismic/prismic-media'
-import type { vRoadizImageProps } from '~/components/atoms/VPrismicImage.vue'
+import type { vPrismicImageProps } from '~/components/atoms/VPrismicImage'
+import type { PossibleMedia } from '~/composables/use-prismic-media'
 
 const props = defineProps({
     ...commonVideoProps,
     ...videoAttributes,
+    document: { type: Object as PropType<PossibleMedia> },
     linkToMediaField: { type: Object as PropType<LinkToMediaField> },
     embedField: { type: Object as PropType<EmbedField> },
     video: { type: Object as PropType<PrismicVideoField> },
-    thumbnail: { type: Object as PropType<vRoadizImageProps> },
+    thumbnail: { type: Object as PropType<vPrismicImageProps> },
 })
 
 const hasThumbnail = computed(() => !!props.thumbnail?.document?.url)
@@ -40,13 +42,16 @@ const videoData = computed(() => {
             src: props.linkToMediaField?.url,
         }
     }
+    else if (props.document?.src) {
+        return props.document
+    }
 
     return {}
 })
 
 const videoAttrs = computed(() => {
-    const width = props.embedField?.width || props.linkToMediaField?.width || props?.width || 1920
-    const height = props.embedField?.height || props.linkToMediaField?.height || props?.height || 1080
+    const width = props.embedField?.width || props.linkToMediaField?.width || props.document?.width || props?.width || 1920
+    const height = props.embedField?.height || props.linkToMediaField?.height || props.document?.height || props?.height || 1080
 
     const attrs = Object.entries(props).reduce((acc, [key, value]) => {
         if ((key in commonVideoProps || key in videoAttributes)) acc[key] = value

@@ -20,7 +20,7 @@ const developerCopyright = computed(() => {
 <template>
     <footer
         :class="$style.root"
-        class="text-body-xs grid-width"
+        class="grid text-body-xs"
     >
         <div :class="$style['app-copyright']">
             {{ appCopyright }}
@@ -45,7 +45,6 @@ const developerCopyright = computed(() => {
     height: $v-footer-height;
     align-items: center;
     margin-top: $v-footer-margin-top;
-    grid-template-columns: subgrid;
 
     &::after {
         position: absolute;
@@ -63,7 +62,7 @@ const developerCopyright = computed(() => {
 }
 
 .developer-copyright {
-    grid-column: span 6;
+    grid-column: 6 / -1;
     text-align: right;
 
     a {

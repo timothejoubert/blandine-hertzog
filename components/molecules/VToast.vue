@@ -14,7 +14,7 @@ function shakeToast(toast: ToastData) {
             duration: 100,
             easing: 'ease-in-out',
             iterations: 3,
-        },
+        }, f,
     )
 }
 

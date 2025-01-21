@@ -27,7 +27,7 @@ defineProps<{
 @use 'assets/scss/functions/rem' as *;
 
 .root {
-    margin-block: rem(192);
+    margin-block: var(--v-slice-margin-top, rem(242)) var(--v-slice-margin-bottom, rem(242));
 }
 
 .head {

@@ -19,6 +19,8 @@
     "grid": "Grille",
     "list": "Liste",
     "close": "Fermer",
+    "media_viewer.open": "Ourvrir le lecteur de média",
+    "media_viewer.close": "Fermer le lecteur de média",
 
     "error_page.not_found.title": "Page introuvable",
     "error_page.unauthenticated_user_error": "Access non autorisé",

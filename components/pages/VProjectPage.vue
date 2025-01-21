@@ -38,18 +38,6 @@ const { url: listingUrl } = useLinkResolver(prismicDocumentRoute.project_listing
 </script>
 
 <template>
-    <VHeader
-        :title="data.title"
-        :content="data.content"
-        class="grid-item-main"
-    >
-        <VArrow
-            :to="listingUrl"
-            :aria-label="$t('project_page.back')"
-            :class="$style.back"
-            direction="left"
-        />
-    </VHeader>
     <div
         :class="$style.attributes"
         class="grid-item-main"
