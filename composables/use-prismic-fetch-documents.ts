@@ -35,7 +35,7 @@ export function usePrismicFetchDocuments<T extends AllDocumentTypes>(prismicDocu
         getCachedData: key => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key], // no re-fetch data if the key is already in the payload
         dedupe: 'defer', // wait for the first request to finish before making another request
         deep: false,
-        lazy: true,
+        // lazy: true,
         // default: () => {
         //     return {
         //         page: options.page || 0,

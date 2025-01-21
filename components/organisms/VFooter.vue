@@ -15,29 +15,40 @@ const developerCopyright = computed(() => {
         url: 'https://timothejoubert.com',
     }
 })
+
+// TODO: add footer menu
 </script>
 
 <template>
     <footer
         :class="$style.root"
-        class="grid text-body-xs"
+        class="grid"
     >
-        <div :class="$style['app-copyright']">
-            {{ appCopyright }}
-        </div>
-        <div :class="$style['developer-copyright']">
-            {{ $t('development') }} :
-            <VPrismicLink
-                :to="developerCopyright.url"
-                :label="developerCopyright.label"
-            />
+        <div :class="$style.copyright">
+            <div
+                class="text-body-xs"
+            >
+                {{ appCopyright }}
+            </div>
+            <div
+                :class="$style['copyright__developer']"
+                class="text-body-xs"
+            >
+                {{ $t('development') }} :
+                <VPrismicLink
+                    :to="developerCopyright.url"
+                    :label="developerCopyright.label"
+                />
+            </div>
         </div>
     </footer>
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/v-footer' as *;
 @use 'assets/scss/functions/flex-grid' as *;
+@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/mixins/include-media' as *;
+@use 'assets/scss/v-footer' as *;
 
 .root {
     position: relative;
@@ -57,14 +68,18 @@ const developerCopyright = computed(() => {
     }
 }
 
-.app-copyright {
-    grid-column: span 5;
+.copyright {
+    display: flex;
+    align-items: center;
+    gap: var(--gutter);
+    grid-column: 1 / -1;
+
+    @include media('>=lg') {
+        grid-column: 1 / span 8;
+    }
 }
 
-.developer-copyright {
-    grid-column: 6 / -1;
-    text-align: right;
-
+.copyright__developer {
     a {
         color: inherit;
     }

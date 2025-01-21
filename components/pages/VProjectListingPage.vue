@@ -87,27 +87,6 @@ const mainId = computed(() => props.document.id)
                 :class="$style.head"
                 title="mes projets"
             />
-            <aside :class="$style.filters">
-                <div
-                    :class="$style['filters__title']"
-                    class="text-over-title-sm"
-                >
-                    {{ $t('filter_by') }}
-                </div>
-                <div :class="$style.filters__type">
-                    <VInputGroup
-                        v-bind="tagFilter"
-                        custom-input
-                        :class="$style['tag-input']"
-                    />
-                </div>
-                <div :class="$style.filters__layout">
-                    <VInputGroup
-                        v-bind="layoutFilter"
-                        :class="$style['layout-input']"
-                    />
-                </div>
-            </aside>
             <ul
                 v-if="renderedProjects.length"
                 :class="$style.list"
@@ -126,6 +105,30 @@ const mainId = computed(() => props.document.id)
             >
                 {{ $t('no_result') }}
             </div>
+            <aside :class="$style.filters">
+                <div
+                    :class="$style['filters__title']"
+                    class="text-over-title-sm"
+                >
+                    {{ $t('filter_by') }}
+                </div>
+                <div :class="$style.filters__type">
+                    <VInputGroup
+                        v-bind="tagFilter"
+                        custom-input
+                        :class="$style['tag-input']"
+                    />
+                </div>
+                <div
+                    v-if="false"
+                    :class="$style.filters__layout"
+                >
+                    <VInputGroup
+                        v-bind="layoutFilter"
+                        :class="$style['layout-input']"
+                    />
+                </div>
+            </aside>
         </section>
     </main>
 </template>
@@ -141,23 +144,20 @@ const mainId = computed(() => props.document.id)
 }
 
 .head {
-    grid-column: 1 / -4;
-}
-
-.filters {
-    width: 100%;
     grid-column: 1 / -1;
 
     @include media('>=lg') {
-        width: calc(100% + var(--gutter));
-        grid-column: 12 / -1;
-        grid-row: 1 / 3;
+        grid-column: 1 / -4;
     }
 }
 
-.filters__title {
+.filters {
     position: relative;
+    align-self: flex-start;
+    width: 100%;
+    grid-column: 1 / -1;
     border-left: 1px solid var(--theme-color-line);
+    border-right: 1px solid var(--theme-color-line);
 
     &::before,
     &::after {
@@ -176,15 +176,49 @@ const mainId = computed(() => props.document.id)
     &::after {
         bottom: 0;
     }
+
+    @include media('<lg') {
+        grid-row: 2;
+
+        &::before {
+            display: none;
+        }
+    }
+
+    @include media('>=lg') {
+        width: calc(100% + var(--gutter));
+        grid-column: 12 / -1;
+        grid-row: 1 / 3;
+    }
+}
+
+.filters__title {
+    position: relative;
+    padding-block: var(--spacing-over-title-padding-block);
+    padding-inline: calc(var(--gutter) * 0.5);
 }
 
 .filters__type {
+    position: relative;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid var(--theme-color-line);
     gap: rem(6);
     padding-block: rem(32);
     padding-inline: calc(var(--gutter) * 0.5);
+
+    &::before {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        top: -1px;
+        height: 1px;
+        background-color: var(--theme-color-line);
+        content: '';
+    }
+
+    &:last-child {
+        border-bottom: 1px solid var(--theme-color-line);
+    }
 }
 
 .filters__layout {
@@ -221,7 +255,7 @@ const mainId = computed(() => props.document.id)
 
 .list {
     display: grid;
-    gap: rem(8) var(--gutter);
+    gap: rem(16) var(--gutter);
     grid-column: 1 / -1;
     margin-block: 0;
     padding-block: rem(16);
