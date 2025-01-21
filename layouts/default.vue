@@ -17,19 +17,17 @@ if (route.name === 'uid' || route.name?.includes('uid___')) {
 </script>
 
 <template>
+    <ClientOnly>
+        <VGridVisualizer />
+        <VMediaViewer />
+    </ClientOnly>
     <!--        <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
     <NuxtLoadingIndicator />
     <VPageTitle />
     <VTopBar />
     <NuxtPage />
-    <VFooter />
-    <DevOnly>
-        <VGridVisualizer />
-    </DevOnly>
     <VToast />
-    <ClientOnly>
-        <VMediaViewer />
-    </ClientOnly>
+    <VFooter />
 </template>
 
 <style lang="scss" module>

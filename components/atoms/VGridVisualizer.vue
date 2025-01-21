@@ -3,9 +3,14 @@ import ScssGrid from 'assets/scss/export/_grid.module.scss'
 
 const maxColumnLength = Math.max(...Object.values(ScssGrid).map(v => Number(v)))
 
-const isVisible = ref(true)
+const isVisible = ref(false)
+
+const isValidKeyDown = (e: KeyboardEvent) => {
+    return e.shiftKey && (e.key === 'g' || e.key === 'G')
+}
+
 useEventListener('keydown', (e) => {
-    if (e.shiftKey && (e.key === 'g' || e.key === 'G')) isVisible.value = !isVisible.value
+    if (isValidKeyDown(e)) isVisible.value = !isVisible.value
 })
 </script>
 
