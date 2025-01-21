@@ -83,12 +83,12 @@ const { url: linkUrl } = useLinkResolver(props.linkReference)
 
 .link {
     display: flex;
-    justify-content: center;
-    gap: rem(10);
     align-items: center;
+    justify-content: center;
     border-right: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
     margin-left: auto;
+    gap: rem(10);
     padding-block: var(--spacing-over-title-padding-block);
     padding-inline: var(--gutter);
     text-decoration: none;

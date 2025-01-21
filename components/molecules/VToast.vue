@@ -59,30 +59,30 @@ watch(toasts, (list) => {
 
 .root {
     position: fixed;
+    right: var(--gutter);
+    bottom: var(--gutter);
     display: flex;
     flex-direction: column;
     gap: rem(8);
-    right: var(--gutter);
-    bottom: var(--gutter);
 }
 
 .toast {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: rem(20);
+    justify-content: space-between;
     padding: rem(16) rem(16) rem(16) rem(24);
+    border-radius: rem(4);
     background-color: var(--theme-color-primary);
     color: var(--theme-color-background);
-    border-radius: rem(4);
+    gap: rem(20);
     transform-origin: center;
 }
 
 .close {
-    cursor: pointer;
-    background-color: initial;
     border: initial;
+    background-color: initial;
     color: inherit;
+    cursor: pointer;
 
     svg {
         width: rem(12);
@@ -101,19 +101,20 @@ watch(toasts, (list) => {
     }
 
     &:global(#{'-leave-to'}) {
-        translate: 0 rem(-10);
         opacity: 0;
+        translate: 0 rem(-10);
     }
 
-    //&:global(#{'-leave-active'}) {
+    // &:global(#{'-leave-active'}) {
     //    position: absolute;
-    //}
+    // }
 }
 
 @keyframes shake {
     30% {
         rotate: 10%;
     }
+
     70% {
         rotate: -10%;
     }

@@ -30,13 +30,17 @@ const projectGroups = computed(() => {
         return Number(bKey) - Number(aKey)
     }).map(([key, value]) => ({ year: key, projects: value }))
 })
+
+const mainId = computed(() => props.document.id)
 </script>
 
 <template>
     <main
+        :id="mainId"
         class="grid"
         :class="$style.root"
     >
+        <pre>{{ data }}</pre>
         <div
             v-for="group in projectGroups"
             :key="group.year"

@@ -48,10 +48,10 @@
 .themes {
     width: flex-grid(1, 14);
     min-width: var(--gutter);
-    border-left: 1px solid var(--theme-color-line) !important;
     border-right: 1px solid var(--theme-color-line) !important;
-    margin-left: auto;
+    border-left: 1px solid var(--theme-color-line) !important;
     margin-right: var(--gutter);
+    margin-left: auto;
 }
 
 .socials {

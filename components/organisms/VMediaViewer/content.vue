@@ -5,8 +5,6 @@ const id = useId()
 
 const { documents, index: slideIndex, close, nextSlide, previousSlide } = useMediaViewer()
 
-const snapLength = ref(documents.value?.length || 1)
-
 useEventListener('keyup', onKeyPressed)
 
 function onKeyPressed(event: KeyboardEvent) {
@@ -16,18 +14,6 @@ function onKeyPressed(event: KeyboardEvent) {
 }
 
 const plyrInstances = ref<{ index: number, plyr: Plyr }[]>([])
-
-function onPlyrReady(plyr: Plyr, index: number) {
-    const isAlreadyInit = plyrInstances.value.find(item => item.index === index)
-
-    if (!isAlreadyInit) {
-        plyrInstances.value.push({
-            index,
-            plyr,
-        })
-    }
-}
-
 watch(
     slideIndex,
     (currentSlideIndex) => {
@@ -94,15 +80,15 @@ const rootClasses = computed(() => {
     position: fixed;
     z-index: 101;
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     max-width: initial;
     height: 100%;
     max-height: initial;
+    align-items: center;
+    justify-content: center;
     padding: initial;
-    margin: initial;
     border: initial;
+    margin: initial;
     background-color: var(--theme-color-background);
     color: var(--theme-color-on-background);
     inset: 0;
@@ -118,8 +104,8 @@ const rootClasses = computed(() => {
     justify-content: center;
     border: initial;
     background-color: initial;
-    cursor: pointer;
     color: var(--theme-color-on-background);
+    cursor: pointer;
 
     @include media('>=lg') {
         top: rem(24);

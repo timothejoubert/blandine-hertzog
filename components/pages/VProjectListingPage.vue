@@ -153,11 +153,11 @@ const mainId = computed(() => props.document.id)
 
 .filters {
     position: relative;
-    align-self: flex-start;
     width: 100%;
-    grid-column: 1 / -1;
-    border-left: 1px solid var(--theme-color-line);
+    align-self: flex-start;
     border-right: 1px solid var(--theme-color-line);
+    border-left: 1px solid var(--theme-color-line);
+    grid-column: 1 / -1;
 
     &::before,
     &::after {
@@ -208,9 +208,9 @@ const mainId = computed(() => props.document.id)
 
     &::before {
         position: absolute;
+        top: -1px;
         left: 0;
         width: 100%;
-        top: -1px;
         height: 1px;
         background-color: var(--theme-color-line);
         content: '';

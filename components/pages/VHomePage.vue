@@ -64,6 +64,7 @@ function OpenMediaViewer() {
 
  .root {
      --v-home-page-video-margin-block: #{rem(130)};
+
      .video-wrapper + * {
          --v-slice-margin-top: var(--v-home-page-video-margin-block);
 
@@ -72,13 +73,13 @@ function OpenMediaViewer() {
 
  .video-wrapper {
      position: relative;
-     aspect-ratio: 1920 / 500;
-     border-radius: rem(8);
-     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
-     width: 100%;
-     margin-top: var(--v-home-page-video-margin-block);
      overflow: hidden;
+     width: 100%;
+     border-radius: rem(8);
+     margin-top: var(--v-home-page-video-margin-block);
      margin-left: var(--gutter);
+     aspect-ratio: 1920 / 500;
+     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
 
      @include media('>=lg') {
         width: flex-grid(12, 14, '%', true);
@@ -88,27 +89,27 @@ function OpenMediaViewer() {
  .fullscreen {
      --fullsreen-position: #{rem(8)};
 
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     z-index: 1;
-     width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
-     aspect-ratio: 1;
      position: absolute;
+     z-index: 1;
      right: var(--fullsreen-position);
      bottom: var(--fullsreen-position);
+     display: flex;
+     width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
+     align-items: center;
+     justify-content: center;
      border: initial;
+     aspect-ratio: 1;
     background-color: initial;
      cursor: pointer;
 
      &::before {
          position: absolute;
-         content: "";
-         background-color: var(--theme-color-primary);
+         z-index: -1;
          width: rem(32);
          height: rem(32);
          border-radius: 100%;
-         z-index: -1;
+         background-color: var(--theme-color-primary);
+         content: "";
      }
  }
 

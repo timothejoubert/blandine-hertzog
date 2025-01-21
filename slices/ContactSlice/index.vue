@@ -74,8 +74,8 @@ function copyToClipBoard(_event: MouseEvent) {
 @use "assets/scss/mixins/include-media" as *;
 
 .content {
-    margin-top: rem(44);
     max-width: 48ch;
+    margin-top: rem(44);
     grid-column: 1 / -1;
 
     @include media('>=lg') {
@@ -84,13 +84,13 @@ function copyToClipBoard(_event: MouseEvent) {
 }
 
 .mail {
+    display: block;
+    border: none;
+    margin-top: rem(130);
     background-color: initial;
     color: inherit;
-    border: none;
-    margin-inline: auto;
     cursor: pointer;
-    display: block;
-    margin-top: rem(130);
+    margin-inline: auto;
     text-align: center;
 }
 

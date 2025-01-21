@@ -49,8 +49,8 @@ defineProps<{
 }
 
 .head {
-    grid-column: 1 /-1;
     margin-bottom: rem(124);
+    grid-column: 1 /-1;
 }
 
 .project {

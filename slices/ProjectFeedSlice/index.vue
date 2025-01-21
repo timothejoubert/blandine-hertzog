@@ -85,21 +85,21 @@ const listingUrl = computed(() => primary.value.internal_page?.url ? primary.val
 
     position: relative;
     display: grid;
-    margin-block: 0;
     gap: rem(24) var(--gutter);
     grid-template-columns: repeat(var(--v-grid-list-column), minmax(0 , 1fr));
+    margin-block: 0;
 
     @include media('>=lg') {
         --v-grid-list-column: 2;
 
         &::before {
             position: absolute;
-            content: '';
             top: 0;
             left: 50%;
-            height: 100%;
             width: 1px;
+            height: 100%;
             background-color: var(--theme-color-line);
+            content: '';
         }
     }
 }
@@ -111,12 +111,12 @@ const listingUrl = computed(() => primary.value.internal_page?.url ? primary.val
 
     &::before {
         position: absolute;
-        content: '';
+        right: calc(var(--gutter) * -1);
         bottom: 0;
         left: calc(var(--gutter) * -1);
-        right: calc(var(--gutter) * -1);
         height: 1px;
         background-color: var(--theme-color-line);
+        content: '';
     }
 }
 

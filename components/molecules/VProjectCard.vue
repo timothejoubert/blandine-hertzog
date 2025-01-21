@@ -82,8 +82,8 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 .footer {
     display: flex;
     align-items: center;
-    gap: rem(12);
     padding-top: rem(10);
+    gap: rem(12);
 
     .root--skeleton & {
         height: rem(24);

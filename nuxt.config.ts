@@ -8,15 +8,25 @@ import { prismicDocumentRoutes } from '#root/utils/prismic/route-resolver'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
-    compatibilityDate: '2024-07-09',
+    // Setup app modules
+    modules: [
+        '@nuxtjs/svg-sprite',
+        '@nuxt/image',
+        '@nuxtjs/prismic',
+        '@nuxt/image',
+        '@nuxtjs/i18n',
+        '@vueuse/nuxt',
+        '@nuxt/eslint',
+        '@rezo-zero/nuxt-stories',
+    ],
+    plugins: [],
+    components: [
+        '~/components/atoms',
+        '~/components/molecules',
+        '~/components/organisms',
+        '~/components/pages',
+    ],
     devtools: { enabled: true },
-    experimental: {
-        asyncContext: true,
-        appManifest: false, // We don't need client route rules for now, and Nuxt makes an extra request to get them.
-    },
-    alias: {
-        '#root': __dirname,
-    },
     app: {
         layoutTransition: false, // Prevent issue with layout without root element
         head: {
@@ -37,18 +47,12 @@ export default defineNuxtConfig({
             ],
         },
     },
+    css: ['~/assets/scss/main.scss'],
     router: {
         options: {
             scrollBehaviorType: 'smooth',
         },
     },
-    plugins: [],
-    components: [
-        '~/components/atoms',
-        '~/components/molecules',
-        '~/components/organisms',
-        '~/components/pages',
-    ],
     runtimeConfig: {
         public: {
             version,
@@ -59,7 +63,55 @@ export default defineNuxtConfig({
             },
         },
     },
-    css: ['~/assets/scss/main.scss'],
+    alias: {
+        '#root': __dirname,
+    },
+    ignore: [
+        isDev ? undefined : 'pages/_stories/**',
+        'assets/backup/**',
+    ],
+    experimental: {
+        asyncContext: true,
+        appManifest: false, // We don't need client route rules for now, and Nuxt makes an extra request to get them.
+    },
+    compatibilityDate: '2024-07-09',
+    nitro: {
+        routeRules: {
+            '/**': {
+                headers: {
+                    // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
+                    'Access-Control-Allow-Origin': '*',
+                    // https://web.dev/articles/floc?hl=fr#can_websites_opt_out_of_being_included_in_the_floc_computation
+                    'Permissions-Policy': 'interest-cohort=()',
+                    // Hardening client security policies
+                    // https://developer.mozilla.org/fr/docs/Web/HTTP/CSP
+                    'Content-Security-Policy': [
+                        // Only allows these iframe origins
+                        'frame-src \'self\' https://blandine-hertzog.prismic.io *.youtube-nocookie.com *.youtube.com *.vimeo.com *.instagram.com *.soundcloud.com *.google.com *.deezer.com *.spotify.com',
+                        // Only allows these script origins
+                        'script-src \'self\' \'unsafe-inline\' https://html2canvas.hertzen.com https://prismic.io https://static.cdn.prismic.io *.googletagmanager.com *.youtube.com *.google.com *.googleapis.com *.gstatic.com',
+                        // Only allows these images origins
+                        // "img-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
+                    ].join('; '),
+                },
+            },
+            '/_icons': {
+                headers: {
+                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
+                },
+            },
+            '/preview': {
+                headers: {
+                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
+                },
+            },
+            '/_stories/**': {
+                headers: {
+                    'X-Robots-Tag': 'noindex',
+                },
+            },
+        },
+    },
     vite: {
         css: {
             preprocessorOptions: {
@@ -98,59 +150,15 @@ export default defineNuxtConfig({
             }),
         ],
     },
-    nitro: {
-        routeRules: {
-            '/**': {
-                headers: {
-                    // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
-                    'Access-Control-Allow-Origin': '*',
-                    // https://web.dev/articles/floc?hl=fr#can_websites_opt_out_of_being_included_in_the_floc_computation
-                    'Permissions-Policy': 'interest-cohort=()',
-                    // Hardening client security policies
-                    // https://developer.mozilla.org/fr/docs/Web/HTTP/CSP
-                    'Content-Security-Policy': [
-                        // Only allows these iframe origins
-                        'frame-src \'self\' https://blandine-hertzog.prismic.io *.youtube-nocookie.com *.youtube.com *.vimeo.com *.instagram.com *.soundcloud.com *.google.com *.deezer.com *.spotify.com',
-                        // Only allows these script origins
-                        'script-src \'self\' \'unsafe-inline\' https://html2canvas.hertzen.com https://prismic.io https://static.cdn.prismic.io *.googletagmanager.com *.youtube.com *.google.com *.googleapis.com *.gstatic.com',
-                        // Only allows these images origins
-                        // "img-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
-                    ].join('; '),
-                },
-            },
-            '/_icons': {
-                headers: {
-                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
-                },
-            },
-            '/preview': {
-                headers: {
-                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
-                },
-            },
-            '/_stories/**': {
-                headers: {
-                    'X-Robots-Tag': 'noindex',
-                },
+    // https://eslint.nuxt.com/packages/module
+    eslint: {
+        config: {
+            stylistic: {
+                indent: 4,
             },
         },
     },
-    ignore: [
-        isDev ? undefined : 'pages/_stories/**',
-        'assets/backup/**',
-    ],
-    // Setup app modules
-    modules: [
-        '@nuxtjs/svg-sprite',
-        '@nuxt/image',
-        '@nuxtjs/prismic',
-        '@nuxt/image',
-        '@nuxtjs/i18n',
-        '@vueuse/nuxt',
-        '@nuxt/eslint',
-        '@rezo-zero/nuxt-stories',
-    ],
-        // '@nuxtjs/sitemap',
+    // '@nuxtjs/sitemap',
     i18n: {
         strategy: 'prefix_except_default',
         // I18n issue, disabled detectBrowserLanguage work only with empty obj
@@ -166,25 +174,6 @@ export default defineNuxtConfig({
         compilation: {
             strictMessage: false, // Allow value to include HTML
         },
-    },
-    // https://github.com/rezozero/nuxt-stories
-    stories: {
-        pattern: [
-            '**/*.stories.vue',
-        ],
-    },
-    prismic: {
-        endpoint,
-        preview: '/preview',
-        toolbar: true,
-        clientConfig: {
-            routes: prismicDocumentRoutes,
-        },
-    },
-    // https://github.com/nuxt-modules/svg-sprite#options
-    svgSprite: {
-        input: '~/assets/images/icons',
-        output: '~/assets/images/sprites',
     },
     // https://image.nuxt.com/get-started/configuration
     image: {
@@ -210,17 +199,28 @@ export default defineNuxtConfig({
             },
         },
     },
+    prismic: {
+        endpoint,
+        preview: '/preview',
+        toolbar: true,
+        clientConfig: {
+            routes: prismicDocumentRoutes,
+        },
+    },
     // https://www.nuxtseo.com/sitemap/getting-started/installation
     sitemap: {
         // enabled: !isGenerateMaintenance,
         exclude: ['/slice-simulator'],
     },
-    // https://eslint.nuxt.com/packages/module
-    eslint: {
-        config: {
-            stylistic: {
-                indent: 4,
-            },
-        },
+    // https://github.com/rezozero/nuxt-stories
+    stories: {
+        pattern: [
+            '**/*.stories.vue',
+        ],
+    },
+    // https://github.com/nuxt-modules/svg-sprite#options
+    svgSprite: {
+        input: '~/assets/images/icons',
+        output: '~/assets/images/sprites',
     },
 })

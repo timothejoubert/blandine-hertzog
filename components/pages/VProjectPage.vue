@@ -2,8 +2,6 @@
 import type { PageComponentProps } from '~/types/app'
 import { components } from '~/slices'
 import type { ProjectPageDocumentData } from '~/prismicio-types'
-import { prismicDocumentRoute } from '~/utils/prismic/route-resolver'
-import { useLinkResolver } from '~/composables/use-link-resolver'
 import VCrossProjects from '~/components/molecules/VCrossProjects.vue'
 
 const props = defineProps<PageComponentProps<'project_page'>>()

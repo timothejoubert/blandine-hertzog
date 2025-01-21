@@ -160,11 +160,11 @@ const activeService = ref(0)
 
 .cta {
     display: block;
-    color: var(--theme-color-background);
-    background-color: var(--theme-color-primary);
-    text-decoration: none;
     padding: rem(4) rem(8);
     border-radius: rem(2);
+    background-color: var(--theme-color-primary);
+    color: var(--theme-color-background);
+    text-decoration: none;
 
     @include media('>=lg') {
         opacity: 0;
