@@ -21,6 +21,7 @@ const iconName = computed(() => {
         <VIcon
             :name="iconName"
             aria-hidden="true"
+            :class="$style.icon"
         />
     </button>
 </template>
@@ -36,5 +37,9 @@ const iconName = computed(() => {
     background: initial;
     color: inherit;
     cursor: pointer;
+}
+
+.icon {
+    flex-shrink: 0;
 }
 </style>

@@ -70,6 +70,7 @@ const developerCopyright = computed(() => {
 
 .copyright {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--gutter);
     grid-column: 1 / -1;

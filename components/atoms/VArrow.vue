@@ -59,7 +59,7 @@ export default defineComponent({
     padding: var(--v-arrow-padding, var(--v-arrow-padding-size));
     border-radius: var(--v-arrow-border, var(--v-arrow-border-size));
     background-color: var(--theme-color-primary);
-    color: var(--theme-color-black-static);
+    color: var(--theme-color-on-primary);
 
     &--size-sm {
         --v-arrow-border-size: #{rem(5)};

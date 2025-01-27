@@ -2,15 +2,38 @@
 const menu = await usePrismicMenuDocument()
 
 const links = menu.value?.data.links || []
+
+const isOpen = ref(false)
+const id = 'main-nav'
+
+const toggleNav = () => isOpen.value = !isOpen.value
+
+const page = useCurrentPage()
+watch(page, () => {
+    isOpen.value = false
+})
 </script>
 
 <template>
     <nav
         v-if="links.length"
         aria-label="Main"
-        :class="$style.nav"
+        :class="$style.root"
     >
-        <ul :class="$style.list">
+        <button
+            :class="$style.toggle"
+            :aria-expanded="isOpen"
+            :aria-controls="id"
+            :aria-label="$t('toggle_main_nav.aria')"
+            class="text-over-title-md"
+            @click="toggleNav"
+        >
+            {{ $t('toggle_main_nav') }}
+        </button>
+        <ul
+            :id="id"
+            :class="$style.list"
+        >
             <li
                 v-for="(link, i) in links"
                 :key="i"
@@ -35,27 +58,64 @@ const links = menu.value?.data.links || []
 @use "assets/scss/mixins/include-media" as *;
 @use "assets/scss/functions/ease" as *;
 
-.nav {
-    width: flex-grid(10, 14);
+.root {
+    @include media('>=lg') {
+        width: flex-grid(11, 14);
+    }
+}
+
+.toggle {
+    background-color: initial;
+    color: inherit;
+    border: none;
+    padding-block: var(--spacing-over-title-padding-block);
+    padding-inline: rem(24);
+    border-left: 1px solid var(--theme-color-line);
+    border-right: 1px solid var(--theme-color-line);
+
+    @include media('>=lg') {
+        display: none;
+    }
+
 }
 
 .list {
+    position: absolute;
     display: flex;
-    min-width: 100%;
+    flex-direction: column;
     padding: initial;
-    margin: initial;
+    margin-block: initial;
+    width: 100%;
+
+    @include media('<lg') {
+        .toggle[aria-expanded="false"] + & {
+            display: none;
+        }
+    }
+
+    @include media('>=lg') {
+        position: relative;
+        margin-inline: initial;
+        flex-direction: row;
+
+    }
+
 }
 
 .item {
-    width: calc(#{flex-grid-value(2, 10)} + var(--gutter));
     list-style: none;
+
+    @include media('>=lg') {
+        width: calc(#{flex-grid-value(2, 11)} + var(--gutter));
+    }
 }
 
 .link {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: rem(9) rem(24);
+    padding-block: var(--spacing-over-title-padding-block);
+    padding-inline: rem(18);
     border-left: 1px solid var(--theme-color-line);
     color: inherit;
     font-family: $font-noi;
@@ -63,14 +123,22 @@ const links = menu.value?.data.links || []
     font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
+    background-color: var(--theme-color-background);
+    border-bottom: 1px solid var(--theme-color-line);
+    border-right: 1px solid var(--theme-color-line);
 
     &[aria-current="page"] {
         background-color: var(--theme-color-on-background);
         color: var(--theme-color-background);
     }
 
-    .item:last-child & {
-        border-right: 1px solid var(--theme-color-line);
+    @include media('>=lg') {
+        border-bottom: none;
+
+        .item:not(:last-child) & {
+            border-right: none;
+        }
     }
+
 }
 </style>

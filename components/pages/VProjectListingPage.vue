@@ -152,12 +152,15 @@ const mainId = computed(() => props.document.id)
 }
 
 .filters {
-    position: relative;
+    position: sticky;
+    top: 0;
     width: 100%;
     align-self: flex-start;
     border-right: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
     grid-column: 1 / -1;
+    background-color: var(--theme-color-background);
+    grid-row: 2;
 
     &::before,
     &::after {
@@ -171,24 +174,22 @@ const mainId = computed(() => props.document.id)
 
     &::before {
         top: 0;
+        display: none;
     }
 
     &::after {
         bottom: 0;
     }
 
-    @include media('<lg') {
-        grid-row: 2;
-
-        &::before {
-            display: none;
-        }
-    }
-
     @include media('>=lg') {
         width: calc(100% + var(--gutter));
         grid-column: 12 / -1;
         grid-row: 1 / 3;
+        border-right: none;
+
+        &::before {
+            display: initial;
+        }
     }
 }
 
@@ -201,8 +202,8 @@ const mainId = computed(() => props.document.id)
 .filters__type {
     position: relative;
     display: flex;
-    flex-direction: column;
-    gap: rem(6);
+    gap: rem(6) rem(18);
+    flex-wrap: wrap;
     padding-block: rem(32);
     padding-inline: calc(var(--gutter) * 0.5);
 
@@ -219,6 +220,11 @@ const mainId = computed(() => props.document.id)
     &:last-child {
         border-bottom: 1px solid var(--theme-color-line);
     }
+
+    @include media('>=lg') {
+        flex-direction: column;
+    }
+
 }
 
 .filters__layout {

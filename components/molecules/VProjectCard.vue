@@ -81,6 +81,7 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 
 .footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     padding-top: rem(10);
     gap: rem(12);

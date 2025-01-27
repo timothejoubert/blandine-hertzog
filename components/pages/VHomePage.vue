@@ -106,14 +106,19 @@ function OpenMediaViewer() {
      align-items: center;
      justify-content: center;
      overflow: hidden;
-     width: 100%;
+     width: calc(100% - var(--gutter) * 2);
      border-radius: rem(8);
      margin-top: var(--v-home-page-video-margin-block);
      margin-left: var(--gutter);
-     aspect-ratio: 1920 / 500;
+     aspect-ratio: 375 / 300;
      background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
 
+     @include media('>=md') {
+         aspect-ratio: 768 / 300;
+     }
+
      @include media('>=lg') {
+         aspect-ratio: 1920 / 500;
         width: flex-grid(12, 14, '%', true);
      }
  }
@@ -129,6 +134,10 @@ function OpenMediaViewer() {
      background-color: initial;
      cursor: pointer;
      width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
+
+     > svg {
+         flex-shrink: 0;
+     }
  }
 
  .play-state {

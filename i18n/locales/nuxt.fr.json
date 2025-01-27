@@ -21,6 +21,8 @@
     "close": "Fermer",
     "media_viewer.open": "Ourvrir le lecteur de média",
     "media_viewer.close": "Fermer le lecteur de média",
+    "toggle_main_nav": "Menu",
+    "toggle_main_nav.aria": "Basculer le menu",
 
     "error_page.not_found.title": "Page introuvable",
     "error_page.unauthenticated_user_error": "Access non autorisé",

@@ -23,6 +23,7 @@
 $themes: (
     light: (
         color-primary: #FFA974,
+        color-on-primary: #05000D,
 
         color-background: #FAFAFA,
         color-on-background: #05000D,
@@ -31,10 +32,10 @@ $themes: (
         color-on-surface: #05000D,
 
         color-line: #C4C2D8,
-        color-black-static: #05000D,
     ),
     dark: (
         color-primary: #F0D435,
+        color-on-primary: #05000D,
 
         color-background: #161515,
         color-on-background: #F2F3F9,
@@ -43,7 +44,6 @@ $themes: (
         color-on-surface: #F2F3F9,
 
         color-line: #464647,
-        color-black-static: #05000D,
     ),
 );
 $default-theme: dark;

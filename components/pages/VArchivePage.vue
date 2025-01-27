@@ -40,7 +40,6 @@ const mainId = computed(() => props.document.id)
         class="grid"
         :class="$style.root"
     >
-        <pre>{{ data }}</pre>
         <div
             v-for="group in projectGroups"
             :key="group.year"
