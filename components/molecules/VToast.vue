@@ -14,7 +14,7 @@ function shakeToast(toast: ToastData) {
             duration: 100,
             easing: 'ease-in-out',
             iterations: 3,
-        }, f,
+        },
     )
 }
 
@@ -64,6 +64,7 @@ watch(toasts, (list) => {
     display: flex;
     flex-direction: column;
     gap: rem(8);
+    z-index: 999;
 }
 
 .toast {
