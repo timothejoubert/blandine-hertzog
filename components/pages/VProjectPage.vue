@@ -89,7 +89,7 @@ const mainId = computed(() => props.document.id)
     position: relative;
 
     @include media('>=lg') {
-        width: flex-grid(12, 14, '%', true);
+        width: flex-grid(11, 14, '%', true);
         margin-left: var(--gutter);
     }
 

@@ -143,7 +143,7 @@ function OpenMediaViewer() {
  .play-state {
      position: absolute;
      z-index: 1;
-     color: var(--theme-color-background);
+     color: var(--theme-color-on-primary);
      backdrop-filter: blur(7px);
      border-radius: 3px;
  }

@@ -1,10 +1,14 @@
 <script  lang="ts" setup="">
 import type { ProjectPageDocument } from '~/prismicio-types'
+import { useLinkResolver } from '~/composables/use-link-resolver'
+import { prismicDocumentRoute } from '~/utils/prismic/route-resolver'
 
 defineProps<{
     prevProject?: ProjectPageDocument | null
     nextProject?: ProjectPageDocument | null
 }>()
+
+const { url: projectListingUrl } = useLinkResolver(prismicDocumentRoute.project_listing_page)
 </script>
 
 <template>
@@ -16,6 +20,8 @@ defineProps<{
         <VHeadSection
             :class="$style.head"
             title="En voir davantage"
+            :link-label="$t('see_all_projects')"
+            :link-reference="projectListingUrl"
         />
         <VArrowButton
             v-if="prevProject"

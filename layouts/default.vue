@@ -1,9 +1,7 @@
 <script  lang="ts" setup>
 // const splashScreenState = useSplashScreen()
-// const settingDocument = await usePrismicSettingsDocument()
-// const showreelVideo = settingDocument?.data.showreel
-
 import { getDocumentTypeByUrl } from '~/utils/prismic/route-resolver'
+import themeProperties from '~/assets/scss/export/_themes.module.scss'
 
 const route = useRoute()
 // fill CurrentPage data
@@ -14,15 +12,20 @@ if (route.name === 'uid' || route.name?.includes('uid___')) {
         useCurrentPage({ webResponse })
     }
 }
+
+const theme = useUiThemeState()
+const primaryColor = computed(() => themeProperties[`${theme.value}-color-primary`])
+
+console.log('ThemeProperties', primaryColor.value)
 </script>
 
 <template>
+    <!--        <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
     <ClientOnly>
         <VGridVisualizer />
         <VMediaViewer />
     </ClientOnly>
-    <!--        <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator :color="primaryColor" />
     <VPageTitle />
     <VTopBar />
     <NuxtPage />
