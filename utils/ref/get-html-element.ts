@@ -12,9 +12,9 @@ export function isDomElement(el: TemplateElement) {
     return (el as HTMLElement).ownerDocument?.documentElement.tagName.toLowerCase() === 'html'
 }
 
-export function getHtmlElement(element: TemplateElementRef) {
+export function getHtmlElement<T extends HTMLElement>(element: TemplateElementRef) {
     const el = toValue(element)
     if (!el) return
 
-    return ((el as ComponentPublicInstance)?.$el || el) as HTMLElement | undefined
+    return ((el as ComponentPublicInstance)?.$el || el) as T | undefined
 }

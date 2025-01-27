@@ -1,6 +1,7 @@
 <script  lang="ts" setup>
 import type { PageComponentProps } from '~/types/app'
 import { components } from '~/slices'
+import { getHtmlElement, type TemplateElement } from '~/utils/ref/get-html-element'
 
 const props = defineProps<PageComponentProps<'home_page'>>()
 const data = computed(() => props.document.data)
@@ -14,6 +15,23 @@ const mainId = computed(() => props.document.id)
 
 const { open } = useMediaViewer()
 
+const isPaused = ref(false)
+const videoInstance = ref<TemplateElement>(null)
+const videoEl = computed(() => getHtmlElement<HTMLVideoElement>(videoInstance))
+
+function onVideoClicked(_event: MouseEvent) {
+    if (!videoEl.value) return
+
+    if (videoEl.value.paused) {
+        videoEl.value.play()
+    }
+    else {
+        videoEl.value.pause()
+    }
+
+    isPaused.value = videoEl.value.paused
+}
+
 function OpenMediaViewer() {
     open([{ src: '/assets/showreel.mp4', type: 'public_video' }])
 }
@@ -26,19 +44,19 @@ function OpenMediaViewer() {
     >
         <div
             :class="$style['video-wrapper']"
-            @click="OpenMediaViewer"
         >
             <button
-                :class="$style.fullscreen"
-                :aria-label="$t('media_viewer.open')"
+                :class="[$style['play-state'], $style.button]"
+                @click="onVideoClicked"
             >
                 <VIcon
-                    name="fullscreen"
+                    :name="isPaused ? 'pause' : 'play'"
                     width="20"
                     height="20"
                 />
             </button>
             <VVideoPlayer
+                ref="videoInstance"
                 src="/assets/showreel.mp4"
                 :class="$style.video"
                 width="1920"
@@ -48,6 +66,17 @@ function OpenMediaViewer() {
                 autoplay
                 loop
             />
+            <button
+                :class="[$style.fullscreen, $style.button]"
+                :aria-label="$t('media_viewer.open')"
+                @click="OpenMediaViewer"
+            >
+                <VIcon
+                    name="fullscreen"
+                    width="20"
+                    height="20"
+                />
+            </button>
         </div>
         <LazySliceZone
             v-if="slices?.length"
@@ -73,6 +102,9 @@ function OpenMediaViewer() {
 
  .video-wrapper {
      position: relative;
+     display: flex;
+     align-items: center;
+     justify-content: center;
      overflow: hidden;
      width: 100%;
      border-radius: rem(8);
@@ -86,21 +118,32 @@ function OpenMediaViewer() {
      }
  }
 
- .fullscreen {
-     --fullsreen-position: #{rem(8)};
-
+ .button {
      position: absolute;
      z-index: 1;
-     right: var(--fullsreen-position);
-     bottom: var(--fullsreen-position);
      display: flex;
-     width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
      align-items: center;
      justify-content: center;
      border: initial;
      aspect-ratio: 1;
-    background-color: initial;
+     background-color: initial;
      cursor: pointer;
+     width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
+ }
+
+ .play-state {
+     position: absolute;
+     z-index: 1;
+     color: var(--theme-color-background);
+     backdrop-filter: blur(7px);
+     border-radius: 3px;
+ }
+
+ .fullscreen {
+     --fullsreen-position: #{rem(8)};
+
+     right: var(--fullsreen-position);
+     bottom: var(--fullsreen-position);
 
      &::before {
          position: absolute;
