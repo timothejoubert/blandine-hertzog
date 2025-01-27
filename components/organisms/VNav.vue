@@ -65,13 +65,13 @@ watch(page, () => {
 }
 
 .toggle {
+    border: none;
+    border-right: 1px solid var(--theme-color-line);
+    border-left: 1px solid var(--theme-color-line);
     background-color: initial;
     color: inherit;
-    border: none;
     padding-block: var(--spacing-over-title-padding-block);
     padding-inline: rem(24);
-    border-left: 1px solid var(--theme-color-line);
-    border-right: 1px solid var(--theme-color-line);
 
     @include media('>=lg') {
         display: none;
@@ -82,10 +82,10 @@ watch(page, () => {
 .list {
     position: absolute;
     display: flex;
+    width: 100%;
     flex-direction: column;
     padding: initial;
     margin-block: initial;
-    width: 100%;
 
     @include media('<lg') {
         .toggle[aria-expanded="false"] + & {
@@ -95,8 +95,8 @@ watch(page, () => {
 
     @include media('>=lg') {
         position: relative;
-        margin-inline: initial;
         flex-direction: row;
+        margin-inline: initial;
 
     }
 
@@ -114,18 +114,18 @@ watch(page, () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-block: var(--spacing-over-title-padding-block);
-    padding-inline: rem(18);
+    border-right: 1px solid var(--theme-color-line);
+    border-bottom: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
+    background-color: var(--theme-color-background);
     color: inherit;
     font-family: $font-noi;
     font-size: rem(15);
     font-weight: 600;
+    padding-block: var(--spacing-over-title-padding-block);
+    padding-inline: rem(18);
     text-decoration: none;
     text-transform: uppercase;
-    background-color: var(--theme-color-background);
-    border-bottom: 1px solid var(--theme-color-line);
-    border-right: 1px solid var(--theme-color-line);
 
     &[aria-current="page"] {
         background-color: var(--theme-color-on-background);

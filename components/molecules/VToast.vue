@@ -59,12 +59,12 @@ watch(toasts, (list) => {
 
 .root {
     position: fixed;
+    z-index: 999;
     right: var(--gutter);
     bottom: var(--gutter);
     display: flex;
     flex-direction: column;
     gap: rem(8);
-    z-index: 999;
 }
 
 .toast {

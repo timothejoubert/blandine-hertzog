@@ -24,6 +24,7 @@
     z-index: 101;
     top: 0;
     display: flex;
+
     // background-color: var(--theme-color-background);
     background-color: color-mix(in srgb, var(--theme-color-background) 80%, transparent);
     grid-column: 1 / -1;
@@ -31,12 +32,12 @@
     &::before,
     &::after {
         position: absolute;
+        z-index: 1;
         right: calc(var(--gutter) * -1);
         left: calc(var(--gutter) * -1);
         height: 1px;
         background-color: var(--theme-color-line);
         content: '';
-        z-index: 1;
     }
 
     &::before {
@@ -51,10 +52,10 @@
 .nav {
     &::before {
         position: absolute;
-        content: '';
-        inset: 0 calc(var(--gutter) * -1);
         z-index: -10;
         backdrop-filter: blur(6px);
+        content: '';
+        inset: 0 calc(var(--gutter) * -1);
     }
 }
 

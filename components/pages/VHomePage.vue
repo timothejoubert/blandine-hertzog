@@ -103,10 +103,10 @@ function OpenMediaViewer() {
  .video-wrapper {
      position: relative;
      display: flex;
-     align-items: center;
-     justify-content: center;
      overflow: hidden;
      width: calc(100% - var(--gutter) * 2);
+     align-items: center;
+     justify-content: center;
      border-radius: rem(8);
      margin-top: var(--v-home-page-video-margin-block);
      margin-left: var(--gutter);
@@ -118,8 +118,8 @@ function OpenMediaViewer() {
      }
 
      @include media('>=lg') {
-         aspect-ratio: 1920 / 500;
         width: flex-grid(12, 14, '%', true);
+         aspect-ratio: 1920 / 500;
      }
  }
 
@@ -127,13 +127,13 @@ function OpenMediaViewer() {
      position: absolute;
      z-index: 1;
      display: flex;
+     width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
      align-items: center;
      justify-content: center;
      border: initial;
      aspect-ratio: 1;
      background-color: initial;
      cursor: pointer;
-     width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
 
      > svg {
          flex-shrink: 0;
@@ -143,9 +143,9 @@ function OpenMediaViewer() {
  .play-state {
      position: absolute;
      z-index: 1;
-     color: var(--theme-color-on-primary);
-     backdrop-filter: blur(7px);
      border-radius: 3px;
+     backdrop-filter: blur(7px);
+     color: var(--theme-color-on-primary);
  }
 
  .fullscreen {

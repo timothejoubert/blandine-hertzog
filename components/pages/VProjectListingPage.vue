@@ -158,8 +158,8 @@ const mainId = computed(() => props.document.id)
     align-self: flex-start;
     border-right: 1px solid var(--theme-color-line);
     border-left: 1px solid var(--theme-color-line);
-    grid-column: 1 / -1;
     background-color: var(--theme-color-background);
+    grid-column: 1 / -1;
     grid-row: 2;
 
     &::before,
@@ -183,9 +183,9 @@ const mainId = computed(() => props.document.id)
 
     @include media('>=lg') {
         width: calc(100% + var(--gutter));
+        border-right: none;
         grid-column: 12 / -1;
         grid-row: 1 / 3;
-        border-right: none;
 
         &::before {
             display: initial;
@@ -202,8 +202,8 @@ const mainId = computed(() => props.document.id)
 .filters__type {
     position: relative;
     display: flex;
-    gap: rem(6) rem(18);
     flex-wrap: wrap;
+    gap: rem(6) rem(18);
     padding-block: rem(32);
     padding-inline: calc(var(--gutter) * 0.5);
 
