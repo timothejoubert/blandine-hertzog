@@ -4,7 +4,7 @@ import { parseDate } from '~/utils/prismic/prismic-date'
 import type { ProjectPageDocument } from '~/prismicio-types'
 
 const props = defineProps<PageComponentProps<'archive_page'>>()
-const data = computed(() => props.document.data)
+// const data = computed(() => props.document.data)
 
 const projects = await usePrismicArchivedProjects()
 
