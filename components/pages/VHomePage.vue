@@ -113,6 +113,13 @@ function OpenMediaViewer() {
      aspect-ratio: 375 / 300;
      background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
 
+     &::after {
+         position: absolute;
+         content: '';
+         inset: 0;
+         background: linear-gradient(4deg, var(--theme-color-background) 0%, transparent 40%, transparent 60%, var(--theme-color-background) 100%);
+     }
+
      @include media('>=md') {
          aspect-ratio: 768 / 300;
      }
@@ -125,7 +132,7 @@ function OpenMediaViewer() {
 
  .button {
      position: absolute;
-     z-index: 1;
+     z-index: 2;
      display: flex;
      width: calc(#{flex-grid-value(1, 12)} - var(--fullsreen-position) * 2);
      align-items: center;
@@ -142,10 +149,9 @@ function OpenMediaViewer() {
 
  .play-state {
      position: absolute;
-     z-index: 1;
      border-radius: 3px;
      backdrop-filter: blur(7px);
-     color: var(--theme-color-on-primary);
+     color: var(--theme-color-on-background);
  }
 
  .fullscreen {
@@ -153,6 +159,7 @@ function OpenMediaViewer() {
 
      right: var(--fullsreen-position);
      bottom: var(--fullsreen-position);
+     color: var(--theme-color-on-primary);
 
      &::before {
          position: absolute;
