@@ -1,4 +1,6 @@
 <script  lang="ts" setup>
+import { usePrismicFooterMenuDocument } from '~/composables/use-prismic-footer-menu-document'
+
 const settingsDocument = await usePrismicSettingsDocument()
 const runtimeConfig = useRuntimeConfig()
 
@@ -11,12 +13,14 @@ const appCopyright = computed(() => {
 
 const developerCopyright = computed(() => {
     return {
-        label: 'Timothé Joubert',
+        label: 'T. Joubert',
         url: 'https://timothejoubert.com',
     }
 })
 
-// TODO: add footer menu
+const menu = await usePrismicFooterMenuDocument()
+const links = menu.value?.data.links || []
+console.log('menu', menu)
 </script>
 
 <template>
@@ -34,13 +38,37 @@ const developerCopyright = computed(() => {
                 :class="$style['copyright__developer']"
                 class="text-body-xs"
             >
-                {{ $t('development') }} :
+                {{ $t('code_by') }}
                 <VPrismicLink
                     :to="developerCopyright.url"
                     :label="developerCopyright.label"
                 />
             </div>
         </div>
+        <nav
+            v-if="links.length"
+            :class="$style.nav"
+            aria-label="Secondaire"
+        >
+            <ul
+                :class="$style.list"
+            >
+                <li
+                    v-for="(link, i) in links"
+                    :key="i"
+                    :class="$style.item"
+                >
+                    <VPrismicLink
+                        :to="link.internal_page"
+                        :url="link.external_url"
+                        :class="$style.link"
+                        class="text-body-xs"
+                    >
+                        {{ link.label }}
+                    </VPrismicLink>
+                </li>
+            </ul>
+        </nav>
     </footer>
 </template>
 
@@ -74,6 +102,7 @@ const developerCopyright = computed(() => {
     align-items: center;
     gap: var(--gutter);
     grid-column: 1 / -1;
+    opacity: 0.7;
 
     @include media('>=lg') {
         grid-column: 1 / span 8;
@@ -83,6 +112,41 @@ const developerCopyright = computed(() => {
 .copyright__developer {
     a {
         color: inherit;
+        text-decoration: initial;
+
+        @media (hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
+
+}
+
+.nav {
+    grid-column: 1 / -1;
+    grid-row: 1;
+
+    @include media('>=lg') {
+        grid-row: initial;
+        grid-column: 9 / -1;
+    }
+}
+
+.list {
+    display: flex;
+    gap: rem(12);
+
+    @include media('>=lg') {
+        justify-content: flex-end;
+    }
+}
+.item {
+    display: contents;
+}
+
+.link {
+    color: inherit;
+    text-decoration: none;
 }
 </style>

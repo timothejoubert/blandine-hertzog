@@ -54,6 +54,10 @@ function copyToClipBoard(_event: MouseEvent) {
             {{ primary.mail }}
         </button>
         <div
+            :class="$style.wave"
+            data-text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        />
+        <div
             v-if="primary.phone"
             :class="$style.phone"
             class="text-h5"
@@ -94,8 +98,41 @@ function copyToClipBoard(_event: MouseEvent) {
     text-align: center;
 }
 
+.wave {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    overflow: hidden;
+    margin-inline: auto;
+    height: rem(40);
+    font-size: rem(40);
+
+     &:before {
+         content: attr(data-text);
+         position: absolute;
+         color: transparent;
+         translate: 0 -0.5lh;
+         width: 100%;
+         text-decoration-style: wavy;
+         text-decoration-color: var(--theme-color-primary);
+         text-decoration-line: underline;
+         animation: animate 1.5s linear infinite;
+         -webkit-animation: animate 1.5s linear infinite;
+     }
+}
+
+@keyframes animate {
+    0% {
+        translate: 0 -0.5lh;
+    }
+    100% {
+        translate: -25% -0.5lh;
+    }
+}
+
 .phone {
-    margin-top: rem(20);
     text-align: center;
 }
 </style>
