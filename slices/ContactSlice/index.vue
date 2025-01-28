@@ -101,25 +101,25 @@ function copyToClipBoard(_event: MouseEvent) {
 .wave {
     position: relative;
     display: flex;
+    overflow: hidden;
+    width: 150px;
+    height: rem(40);
     align-items: center;
     justify-content: center;
-    width: 150px;
-    overflow: hidden;
-    margin-inline: auto;
-    height: rem(40);
     font-size: rem(40);
+    margin-inline: auto;
 
-     &:before {
-         content: attr(data-text);
+     &::before {
          position: absolute;
-         color: transparent;
-         translate: 0 -0.5lh;
          width: 100%;
-         text-decoration-style: wavy;
+         animation: animate 1.5s linear infinite;
+         animation: animate 1.5s linear infinite;
+         color: transparent;
+         content: attr(data-text);
          text-decoration-color: var(--theme-color-primary);
          text-decoration-line: underline;
-         animation: animate 1.5s linear infinite;
-         -webkit-animation: animate 1.5s linear infinite;
+         text-decoration-style: wavy;
+         translate: 0 -0.5lh;
      }
 }
 
@@ -127,6 +127,7 @@ function copyToClipBoard(_event: MouseEvent) {
     0% {
         translate: 0 -0.5lh;
     }
+
     100% {
         translate: -25% -0.5lh;
     }

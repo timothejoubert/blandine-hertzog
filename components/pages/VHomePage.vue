@@ -115,9 +115,10 @@ function OpenMediaViewer() {
 
      &::after {
          position: absolute;
+         background: linear-gradient(4deg, var(--theme-color-background) -6%, transparent 40%, transparent 60%, var(--theme-color-background) 110%);
          content: '';
          inset: 0;
-         background: linear-gradient(4deg, var(--theme-color-background) 0%, transparent 40%, transparent 60%, var(--theme-color-background) 100%);
+         opacity: 0.5;
      }
 
      @include media('>=md') {

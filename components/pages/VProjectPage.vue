@@ -88,8 +88,8 @@ const mainId = computed(() => props.document.id)
 }
 
 .short-content {
-    margin-top: rem(80);
     max-width: 56ch;
+    margin-top: rem(80);
     margin-left: var(--gutter);
 
 }

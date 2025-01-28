@@ -128,8 +128,8 @@ console.log('menu', menu)
     grid-row: 1;
 
     @include media('>=lg') {
-        grid-row: initial;
         grid-column: 9 / -1;
+        grid-row: initial;
     }
 }
 
@@ -141,6 +141,7 @@ console.log('menu', menu)
         justify-content: flex-end;
     }
 }
+
 .item {
     display: contents;
 }

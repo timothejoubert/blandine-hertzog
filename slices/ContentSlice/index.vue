@@ -104,8 +104,8 @@ const imgSizes = computed(() => {
     }
 
     &--text {
-        margin-block: fluid((xs: 50, xl: 110));
         max-width: 44ch;
+        margin-block: fluid((xs: 50, xl: 110));
     }
 
     &--link {

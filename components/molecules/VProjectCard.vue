@@ -95,10 +95,9 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 
 .title {
     display: block;
+    margin-right: rem(12);
     color: inherit;
     font-weight: 800;
     text-decoration: none;
-    //font-family: $font-space-mono-family;
-    margin-right: rem(12);
 }
 </style>

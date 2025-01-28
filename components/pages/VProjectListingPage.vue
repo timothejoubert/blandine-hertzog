@@ -150,9 +150,9 @@ const rootClasses = computed(() => {
 }
 
 .content {
-    margin-inline: var(--gutter);
     margin-top: fluid((xs: 40, xl: 130));
     margin-bottom: fluid((xs: 40, xl: 80));
+    margin-inline: var(--gutter);
 
     @include media('>=lg') {
         width: flex-grid(10, 14);
