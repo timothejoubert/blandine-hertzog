@@ -64,6 +64,7 @@ const { image, title, date, tags } = useProjectUtils(props.project)
 
 <style lang="scss" module>
 @use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/variables/fonts' as *;
 
 .root {
     position: relative;
@@ -97,5 +98,7 @@ const { image, title, date, tags } = useProjectUtils(props.project)
     color: inherit;
     font-weight: 800;
     text-decoration: none;
+    //font-family: $font-space-mono-family;
+    margin-right: rem(12);
 }
 </style>

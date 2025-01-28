@@ -1,0 +1,49 @@
+{
+  "format": "custom",
+  "id": "footer_menu",
+  "label": "Footer menu",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "links": {
+        "type": "Group",
+        "config": {
+          "label": "Links",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Label",
+                "placeholder": ""
+              }
+            },
+            "internal_page": {
+              "type": "Link",
+              "config": {
+                "label": "Internal page",
+                "select": "document",
+                "repeat": false,
+                "customtypes": [
+                  "default_page",
+                  "home_page",
+                  "project_page",
+                  "project_listing_page",
+                  "archive_page"
+                ]
+              }
+            },
+            "external_url": {
+              "type": "Text",
+              "config": {
+                "label": "external url",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

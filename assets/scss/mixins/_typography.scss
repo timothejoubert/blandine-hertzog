@@ -84,7 +84,7 @@
     line-height: 1;
     text-transform: uppercase;
 
-    @include font-size-fluid((xs: 18, xl: 20));
+    @include font-size-fluid((xs: 18, xl: 18));
 }
 
 @mixin text-over-title-sm {
@@ -105,5 +105,5 @@
     line-height: 1;
     text-transform: uppercase;
 
-    @include font-size-fluid((xs: 12, xl: 14));
+    @include font-size-fluid((xs: 12, xl: 13));
 }

@@ -3,7 +3,7 @@ import type { PageComponentProps } from '~/types/app'
 import type { VInputGroupProps } from '~/components/molecules/VInputGroup.vue'
 
 const props = defineProps<PageComponentProps<'project_listing_page'>>()
-
+const data = computed(() => props.document.data)
 // Common
 const { t } = useI18n()
 
@@ -37,7 +37,7 @@ const tagFilter = computed(() => {
                 }
             }),
         ],
-    }
+    } as const
 })
 
 // FILTERS: layout
@@ -66,6 +66,8 @@ const renderedProjects = computed(() => {
     })
 })
 
+const mainId = computed(() => props.document.id)
+
 const $style = useCssModule()
 const rootClasses = computed(() => {
     return [
@@ -73,8 +75,6 @@ const rootClasses = computed(() => {
         selectedLayouts.value[0] === 'list' && $style['root--project-list'],
     ]
 })
-
-const mainId = computed(() => props.document.id)
 </script>
 
 <template>
@@ -82,6 +82,12 @@ const mainId = computed(() => props.document.id)
         :id="mainId"
         :class="rootClasses"
     >
+        <VText
+            v-if="data.content"
+            :content="data.content"
+            :class="$style.content"
+            class="text-h5"
+        />
         <section class="grid">
             <VHeadSection
                 :class="$style.head"
@@ -136,11 +142,21 @@ const mainId = computed(() => props.document.id)
 <style lang="scss" module>
 @use 'assets/scss/functions/rem' as *;
 @use 'assets/scss/functions/flex-grid' as *;
+@use 'assets/scss/functions/fluid' as *;
 @use "assets/scss/mixins/include-media" as *;
 
 .root {
     position: relative;
-    margin-top: rem(100);
+}
+
+.content {
+    margin-inline: var(--gutter);
+    margin-top: fluid((xs: 40, xl: 130));
+    margin-bottom: fluid((xs: 40, xl: 80));
+
+    @include media('>=lg') {
+        width: flex-grid(10, 14);
+    }
 }
 
 .head {

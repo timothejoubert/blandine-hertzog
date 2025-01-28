@@ -81,6 +81,7 @@ const imgSizes = computed(() => {
 <style lang="scss" module="">
 @use "assets/scss/mixins/include-media" as *;
 @use "assets/scss/functions/rem" as *;
+@use "assets/scss/functions/fluid" as *;
 
 .root {
     display: grid;
@@ -102,8 +103,9 @@ const imgSizes = computed(() => {
         }
     }
 
-    &--text:only-child {
-        max-width: 64ch;
+    &--text {
+        margin-block: fluid((xs: 50, xl: 110));
+        max-width: 44ch;
     }
 
     &--link {

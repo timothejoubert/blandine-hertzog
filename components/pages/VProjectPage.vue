@@ -44,7 +44,7 @@ const mainId = computed(() => props.document.id)
         <VText
             v-if="data.short_content"
             :content="data.short_content"
-            class="text-h4"
+            class="text-h5"
             :class="$style['short-content']"
         />
         <div
@@ -83,27 +83,22 @@ const mainId = computed(() => props.document.id)
 @use 'assets/scss/mixins/include-media' as *;
 
 .root {
-    --v-slice-margin-top: #{rem(100)};
-    --v-slice-margin-bottom: #{rem(100)};
-
-    position: relative;
-
-    @include media('>=lg') {
-        width: flex-grid(11, 14, '%', true);
-        margin-left: var(--gutter);
-    }
-
+    --v-slice-margin-top: var(--gutter);
+    --v-slice-margin-bottom: var(--gutter);
 }
 
 .short-content {
-    margin-top: rem(100);
+    margin-top: rem(80);
+    max-width: 56ch;
+    margin-left: var(--gutter);
+
 }
 
 .attributes {
     display: flex;
     align-items: center;
     gap: rem(20);
-    margin-block: rem(24) rem(48);
+    margin-block: rem(24) rem(80);
 }
 
 .slices {

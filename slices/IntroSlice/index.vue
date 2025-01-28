@@ -64,6 +64,7 @@ const tagList = computed(() => {
 </template>
 
 <style lang="scss" module="">
+@use 'assets/scss/variables/fonts' as *;
 @use 'assets/scss/functions/rem' as *;
 @use 'assets/scss/functions/flex-grid' as *;
 @use "assets/scss/mixins/include-media" as *;
@@ -167,6 +168,7 @@ const tagList = computed(() => {
 }
 
 .item {
+    font-family: $font-space-mono-family;
     list-style: none;
 }
 </style>

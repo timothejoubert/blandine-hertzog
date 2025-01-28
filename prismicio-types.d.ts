@@ -200,6 +200,79 @@ export type DefaultPageDocument<Lang extends string = string> =
       Lang
   >
 
+/**
+ * Item in *Footer menu → Links*
+ */
+export interface FooterMenuDocumentDataLinksItem {
+    /**
+   * Label field in *Footer menu → Links*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_menu.links[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    label: prismic.KeyTextField
+
+    /**
+   * Internal page field in *Footer menu → Links*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_menu.links[].internal_page
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+    internal_page: prismic.ContentRelationshipField<
+        | 'default_page'
+        | 'home_page'
+        | 'project_page'
+        | 'project_listing_page'
+        | 'archive_page'
+    >
+
+    /**
+   * external url field in *Footer menu → Links*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_menu.links[].external_url
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    external_url: prismic.KeyTextField
+}
+
+/**
+ * Content for Footer menu documents
+ */
+interface FooterMenuDocumentData {
+    /**
+   * Links field in *Footer menu*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: footer_menu.links[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+    links: prismic.GroupField<Simplify<FooterMenuDocumentDataLinksItem>>
+}
+
+/**
+ * Footer menu document from Prismic
+ *
+ * - **API ID**: `footer_menu`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type FooterMenuDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+      Simplify<FooterMenuDocumentData>,
+      'footer_menu',
+      Lang
+  >
+
 type HomePageDocumentDataSlicesSlice = never
 
 type HomePageDocumentDataSlices2Slice =
@@ -808,6 +881,7 @@ export type SettingsDocument<Lang extends string = string> =
 export type AllDocumentTypes =
     | ArchivePageDocument
     | DefaultPageDocument
+    | FooterMenuDocument
     | HomePageDocument
     | MenuDocument
     | ProjectListingPageDocument
@@ -1461,6 +1535,9 @@ declare module '@prismicio/client' {
             DefaultPageDocument,
             DefaultPageDocumentData,
             DefaultPageDocumentDataSlicesSlice,
+            FooterMenuDocument,
+            FooterMenuDocumentData,
+            FooterMenuDocumentDataLinksItem,
             HomePageDocument,
             HomePageDocumentData,
             HomePageDocumentDataSlicesSlice,

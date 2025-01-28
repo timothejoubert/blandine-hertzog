@@ -24,13 +24,9 @@ defineProps<{
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
+@use 'assets/scss/functions/fluid' as *;
 
 .root {
-    margin-block: var(--v-slice-margin-top, rem(242)) var(--v-slice-margin-bottom, rem(242));
-}
-
-.head {
-    grid-column: 1 /-1;
+    margin-block: var(--v-slice-margin-top, fluid((xs: 160, hd: 380))) var(--v-slice-margin-bottom, fluid((xs: 160, hd: 380)));
 }
 </style>
