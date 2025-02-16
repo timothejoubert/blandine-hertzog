@@ -1,0 +1,29 @@
+@use "sass:map";
+@use "sass:math";
+@use '../../../assets/scss/mixins/css-vars-map';
+@use '../../../assets/scss/functions/list' as *;
+@use '../../../assets/scss/functions/rem' as *;
+
+$vars: (
+    (
+        vars: (
+            sm: (
+                font-size: rem(12),
+                border-radius: rem(2),
+                padding-block: rem(5) rem(2),
+                padding-inline: rem(11),
+            ),
+            md: (
+                font-size: rem(14),
+                border-radius: rem(2),
+                padding-block: rem(5) rem(2),
+                padding-inline: rem(11),
+            ),
+        ),
+        prefix: '',
+    ),
+);
+
+@mixin size($size) {
+    @include css-vars-map.deep-get($vars, $size, 'v-tag');
+}

@@ -182,6 +182,10 @@ const activeService = ref(0)
 .content {
     padding-block: rem(32) rem(48);
 
+    > * {
+        max-width: 42ch;
+    }
+
     @include media('>=lg') {
         position: absolute;
         top: 0;

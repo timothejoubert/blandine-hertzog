@@ -46,7 +46,7 @@ function OpenMediaViewer() {
             :class="$style['video-wrapper']"
         >
             <button
-                :class="[$style['play-state'], $style.button]"
+                :class="[$style.button, $style['button--play-state']]"
                 @click="onVideoClicked"
             >
                 <VIcon
@@ -60,14 +60,14 @@ function OpenMediaViewer() {
                 src="/assets/showreel.mp4"
                 :class="$style.video"
                 width="1920"
-                height="500"
+                height="900"
                 :controls="false"
                 muted
                 autoplay
                 loop
             />
             <button
-                :class="[$style.fullscreen, $style.button]"
+                :class="[$style.button, $style['button--fullscreen']]"
                 :aria-label="$t('media_viewer.open')"
                 @click="OpenMediaViewer"
             >
@@ -92,7 +92,7 @@ function OpenMediaViewer() {
  @use 'assets/scss/mixins/include-media' as *;
 
  .root {
-     --v-home-page-video-margin-block: #{rem(130)};
+     --v-home-page-video-margin-block: #{rem(80)};
 
      .video-wrapper + * {
          --v-slice-margin-top: var(--v-home-page-video-margin-block);
@@ -101,25 +101,25 @@ function OpenMediaViewer() {
  }
 
  .video-wrapper {
-     position: relative;
-     display: flex;
-     overflow: hidden;
-     width: calc(100% - var(--gutter) * 2);
-     align-items: center;
-     justify-content: center;
-     border-radius: rem(8);
-     margin-top: var(--v-home-page-video-margin-block);
-     margin-left: var(--gutter);
-     aspect-ratio: 375 / 300;
-     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: calc(100% - var(--gutter) * 2);
+    align-items: center;
+    justify-content: center;
+    border-radius: rem(8);
+    margin-top: var(--v-home-page-video-margin-block);
+    margin-left: var(--gutter);
+    aspect-ratio: 375 / 300;
+    background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
 
-     &::after {
-         position: absolute;
-         background: linear-gradient(4deg, var(--theme-color-background) -6%, transparent 40%, transparent 60%, var(--theme-color-background) 110%);
-         content: '';
-         inset: 0;
-         opacity: 0.5;
-     }
+    &::after {
+        position: absolute;
+        background: linear-gradient(4deg, var(--theme-color-background) -6%, transparent 40%, transparent 60%, var(--theme-color-background) 110%);
+        content: '';
+        inset: 0;
+        opacity: 0.5;
+    }
 
      @include media('>=md') {
          aspect-ratio: 768 / 300;
@@ -127,7 +127,7 @@ function OpenMediaViewer() {
 
      @include media('>=lg') {
         width: flex-grid(12, 14, '%', true);
-         aspect-ratio: 1920 / 500;
+         aspect-ratio: 1920 / 900;
      }
  }
 
@@ -146,30 +146,30 @@ function OpenMediaViewer() {
      > svg {
          flex-shrink: 0;
      }
- }
 
- .play-state {
-     position: absolute;
-     border-radius: 3px;
-     backdrop-filter: blur(7px);
-     color: var(--theme-color-on-background);
- }
-
- .fullscreen {
-     --fullsreen-position: #{rem(8)};
-
-     right: var(--fullsreen-position);
-     bottom: var(--fullsreen-position);
-     color: var(--theme-color-on-primary);
-
-     &::before {
+     &--play-state {
          position: absolute;
-         z-index: -1;
-         width: rem(32);
-         height: rem(32);
-         border-radius: 100%;
-         background-color: var(--theme-color-primary);
-         content: "";
+         border-radius: 3px;
+         backdrop-filter: blur(7px);
+         color: var(--theme-color-on-background);
+     }
+
+     &--fullscreen {
+         --fullsreen-position: #{rem(8)};
+
+         right: var(--fullsreen-position);
+         bottom: var(--fullsreen-position);
+         color: var(--theme-color-on-primary);
+
+         &::before {
+             position: absolute;
+             z-index: -1;
+             width: rem(32);
+             height: rem(32);
+             border-radius: 100%;
+             background-color: var(--theme-color-primary);
+             content: "";
+         }
      }
  }
 

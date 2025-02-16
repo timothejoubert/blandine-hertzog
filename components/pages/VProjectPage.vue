@@ -34,23 +34,25 @@ const nextProject = computed(() => {
 })
 
 const mainId = computed(() => props.document.id)
+
+const content = computed(() => data.value.short_content || data.value.content)
 </script>
 
 <template>
-    <main
+    <div
         :id="mainId"
         :class="$style.root"
     >
-        <VText
-            v-if="data.short_content"
-            :content="data.short_content"
-            class="text-h5"
-            :class="$style['short-content']"
-        />
-        <div
-            :class="$style.attributes"
-            class="grid"
+        <header
+            class="grid-width"
+            :class="$style.header"
         >
+            <VText
+                v-if="content"
+                :content="content"
+                class="text-h5"
+                :class="$style['intro-text']"
+            />
             <VTime
                 :date="date"
                 :class="$style.date"
@@ -63,14 +65,15 @@ const mainId = computed(() => props.document.id)
                     :label="tag"
                 />
             </template>
-        </div>
+        </header>
 
         <LazySliceZone
             v-if="slices?.length"
             :slices="slices"
             :components="components"
+            wrapper="main"
         />
-    </main>
+    </div>
     <VCrossProjects
         :next-project="nextProject"
         :prev-project="prevProject"
@@ -87,23 +90,30 @@ const mainId = computed(() => props.document.id)
     --v-slice-margin-bottom: var(--gutter);
 }
 
-.short-content {
-    max-width: 56ch;
-    margin-top: rem(80);
-    margin-left: var(--gutter);
-
+.header {
+    margin-block: rem(72);
 }
 
-.attributes {
-    display: flex;
-    align-items: center;
-    gap: rem(20);
-    margin-block: rem(24) rem(80);
+.intro-text {
+    //width: 100%;
+    max-width: 58ch;
+    width: flex-grid(8, 12);
+    margin-block: 0 rem(24);
+
+    @include media('>=lg') {
+        width: flex-grid(8, 12);
+    }
 }
 
-.slices {
-    display: flex;
-    flex-direction: column;
-    gap: rem(42);
+.date {
+    margin-right: rem(18);
+}
+
+.tag {
+    margin-right: rem(18);
+
+    &:last-child {
+        margin-right: 0;
+    }
 }
 </style>

@@ -12,7 +12,7 @@ const { url: linkUrl } = useLinkResolver(props.linkReference)
 </script>
 
 <template>
-    <header :class="$style.root">
+    <div :class="$style.root">
         <h2
             :class="$style.title"
             class="text-over-title-sm"
@@ -40,7 +40,7 @@ const { url: linkUrl } = useLinkResolver(props.linkReference)
                 />
             </NuxtLink>
         </VPrismicLink>
-    </header>
+    </div>
 </template>
 
 <style lang="scss" module>

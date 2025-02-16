@@ -20,7 +20,6 @@ const developerCopyright = computed(() => {
 
 const menu = await usePrismicFooterMenuDocument()
 const links = menu.value?.data.links || []
-console.log('menu', menu)
 </script>
 
 <template>

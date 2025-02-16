@@ -1,6 +1,6 @@
-@use 'sass:meta';
-@use "sass:string";
 @use "sass:list";
+@use "sass:meta";
+@use "sass:string";
 
 // @see https://gist.github.com/danielpchen/1bef5000cfda98dbf6be
 // @function implode() -- join list elements to form a single string
@@ -10,7 +10,7 @@
 @function list-implode($pieces, $glue: "") {
     $result: null;
 
-    @for $i from 1 through length($pieces) {
+    @for $i from 1 through list.length($pieces) {
         $piece: list.nth($pieces, $i);
 
         @if meta.type-of($piece) == list {
@@ -20,9 +20,9 @@
         }
     }
 
-    @if $result {
-        $result: string.slice($result, string.length($glue) + 1, -1);
-    }
+    // @if $result {
+    //     $result: string.slice($result, string.length($glue) + 1, -1);
+    // }
 
     @return $result;
 }
