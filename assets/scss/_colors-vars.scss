@@ -1,6 +1,6 @@
  // Use them instead
 
-@use 'assets/scss/functions/list' as *;
+@use 'assets/scss/functions/list';
 @use 'sass:string';
 
 $colors: (
@@ -14,7 +14,7 @@ $colors: (
 @mixin color-mix($name: '', $from-color, $to-color) {
     @for $i from 1 through 9 {
         $percent: $i * 10;
-        $key: list-implode(('--', 'color', $name, $percent), '-');
+        $key: list.list-implode(('--', 'color', $name, $percent), '-');
 
         #{$key}: color-mix(in srgb, #{$from-color}, #{$to-color} string.unquote("#{$percent}%"));
     }

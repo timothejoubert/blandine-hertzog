@@ -113,7 +113,6 @@ function copyToClipBoard(_event: MouseEvent) {
          position: absolute;
          width: 100%;
          animation: animate 1.5s linear infinite;
-         animation: animate 1.5s linear infinite;
          color: transparent;
          content: attr(data-text);
          text-decoration-color: var(--theme-color-primary);

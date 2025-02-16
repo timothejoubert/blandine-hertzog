@@ -28,15 +28,15 @@ export default defineComponent({
 @use 'assets/scss/variables/fonts' as *;
 
 .root {
+    border-radius: var(--v-tag-border-radius);
     background-color: color-mix(in srgb, var(--theme-color-primary) 10%, var(--theme-color-background));
     color: var(--theme-color-on-background);
-    border-radius: var(--v-tag-border-radius);
-    padding-block: var(--v-tag-padding-block);
-    padding-inline: var(--v-tag-padding-inline);
-    font-size: var(--v-tag-font-size);
     font-family: $font-noi-family;
+    font-size: var(--v-tag-font-size);
     font-weight: 500;
     line-height: 1;
+    padding-block: var(--v-tag-padding-block);
+    padding-inline: var(--v-tag-padding-inline);
     text-transform: uppercase;
 
     @include sizes(v-tag.$vars, 'v-tag');

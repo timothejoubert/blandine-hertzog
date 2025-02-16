@@ -1,4 +1,5 @@
 @use 'assets/scss/variables/breakpoints' as *;
+
 @forward "include-media/dist/include-media" with (
     $breakpoints: $breakpoints
 );

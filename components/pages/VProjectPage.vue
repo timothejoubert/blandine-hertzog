@@ -95,9 +95,8 @@ const content = computed(() => data.value.short_content || data.value.content)
 }
 
 .intro-text {
-    //width: 100%;
-    max-width: 58ch;
     width: flex-grid(8, 12);
+    max-width: 58ch;
     margin-block: 0 rem(24);
 
     @include media('>=lg') {
