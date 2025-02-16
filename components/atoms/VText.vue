@@ -43,6 +43,7 @@ const flatRichTextContent = computed(() => {
         v-else-if="!!richText[0]"
         :class="$style.root"
         :field="richText"
+        wrapper="div"
     />
 </template>
 
