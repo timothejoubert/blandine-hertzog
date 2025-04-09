@@ -1,5 +1,5 @@
-@use 'assets/scss/mixins/theme' as *;
-@use 'assets/scss/variables/themes' as *;
+@use './mixins/theme' as *;
+@use './variables/themes' as *;
 @use 'sass:meta';
 
 // :root {
@@ -14,9 +14,8 @@
 //    }
 // }
 
-.app {
+:root  {
+    @include theme($default-theme);
+
     color: var(--theme-color-on-background);
-
-    @include theme-variants;
-
 }

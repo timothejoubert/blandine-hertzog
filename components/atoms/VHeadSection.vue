@@ -32,7 +32,7 @@ const { url: linkUrl } = useLinkResolver(props.linkReference)
                 class="text-over-title-sm"
             >
                 {{ linkLabel }}
-                <SvgIcon
+                <VIcon
                     aria-hidden="true"
                     name="link-arrow"
                     width="21"

@@ -1,14 +1,14 @@
 <script  lang="ts" setup="">
 import type { ProjectPageDocument } from '~/prismicio-types'
 import { useLinkResolver } from '~/composables/use-link-resolver'
-import { prismicDocumentRoute } from '~/utils/prismic/route-resolver'
+import { prismicDocumentName } from '~/constants/prismic-page'
 
 defineProps<{
     prevProject?: ProjectPageDocument | null
     nextProject?: ProjectPageDocument | null
 }>()
 
-const { url: projectListingUrl } = useLinkResolver(prismicDocumentRoute.project_listing_page)
+const { url: projectListingUrl } = useLinkResolver(prismicDocumentName.project_listing_page)
 </script>
 
 <template>

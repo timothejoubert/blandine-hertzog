@@ -1,6 +1,6 @@
 import { joinURL } from 'ufo'
 import type { Link, Script } from '@unhead/schema'
-import type { PrismicWebResponse } from '~/composables/use-prismic-fetch-page'
+import type { PrismicWebResponse } from '~/composables/use-prismic-fetch-document'
 import { getFormattedLocale } from '~/composables/use-locale'
 import { I18N_DEFAULT_LOCALE } from '~/i18n/i18n.config'
 

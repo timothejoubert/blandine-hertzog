@@ -19,4 +19,4 @@ type ExtractDocumentType<T extends PrismicDocument> = Pick<T, 'type'>['type']
 type IntersectDocument<T extends PrismicDocument, FilterType extends PrismicDocument> = T extends FilterType ? T : never
 type ExcludeDocument<T extends PrismicDocument, FilterType extends PrismicDocument> = T extends FilterType ? never : T
 
-type T = prismic.PrismicDocumentWithoutUID
+// type T = prismic.PrismicDocumentWithoutUID

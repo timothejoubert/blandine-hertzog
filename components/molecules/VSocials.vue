@@ -21,6 +21,7 @@ const socials = settings?.data.socials
                 <VIcon
                     v-if="social.icon"
                     :name="`social-${social.icon}`"
+                    :class="$style.icon"
                 />
                 <template v-else-if="social.label">
                     {{ social.label }}
@@ -49,7 +50,16 @@ const socials = settings?.data.socials
 }
 
 .link {
-    display: contents;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: inherit;
+    width: rem(20);
+    height: rem(20);
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
 }
 </style>

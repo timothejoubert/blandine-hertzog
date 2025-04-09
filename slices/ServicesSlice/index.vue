@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import type { Content } from '@prismicio/client'
+import { isFilled } from '@prismicio/client'
+import VSectionTitle from '~/components/atoms/VSectionTitle.vue'
 import VTitleTranslate from '~/components/molecules/VTitleTranslate.vue'
 
 const props = defineProps(
-    getSliceComponentProps<Content.ServicesSliceSlice>([
-        'slice',
-        'index',
-        'slices',
-        'context',
-    ]),
+    getSliceComponentProps<Content.ServicesSliceSlice>(),
 )
 
 const primary = computed(() => props.slice.primary)
-const linkReference = computed(() => primary.value.external_url || primary.value.internal_page)
+// const linkReference = computed(() => primary.value.external_url || primary.value.internal_page)
 
 const services = computed(() => {
     const fields = primary.value.services
@@ -21,7 +18,7 @@ const services = computed(() => {
     return fields.map((field, index) => {
         return {
             index,
-            title: field.title,
+            title: isFilled.keyText(field.title) ? field.title : '',
             content: field.content,
         }
     })
@@ -34,37 +31,34 @@ const activeService = ref(0)
     <VSlice
         :slice="slice"
         :class="$style.root"
+        class="grid"
     >
-        <VHeadSection
-            :title="primary.title"
-            :link-label="primary.link_label"
-            :link-reference="linkReference"
+        <VSectionTitle
+            v-if="primary.title"
+            :label="primary.title"
+            :class="$style.title"
         />
-        <div :class="$style.list">
+        <div
+            :class="$style.body"
+        >
             <div
                 v-for="(service, index) in services"
                 :key="service.title"
-                :class="$style.service"
+                :class="$style.item"
                 :data-active="activeService === index"
                 @mouseenter="() => activeService = index"
             >
-                <div :class="$style['left-head']">
+                <VLabel v-slot="{ componentClass }">
                     <VTitleTranslate
                         :active="activeService === index"
-                        :class="$style.title"
-                        class="text-h4"
+                        :class="[$style.item__title, componentClass]"
+                        class="text-h5"
                         tag="h3"
                         :title="service.title"
                     />
-                    <a
-                        :inert="activeService !== index"
-                        href=""
-                        class="text-over-title-sm"
-                        :class="$style.cta"
-                    >En savoir +</a>
-                </div>
+                </VLabel>
                 <VText
-                    :class="$style.content"
+                    :class="$style.item__content"
                     class="text-body-md"
                     :content="service.content"
                 />
@@ -74,135 +68,76 @@ const activeService = ref(0)
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
 @use 'assets/scss/functions/flex-grid' as *;
-@use 'assets/scss/mixins/include-media' as *;
 
 .root {
     position: relative;
-
-    &::after {
-        position: absolute;
-        right: calc(var(--gutter) * -1);
-        bottom: 0;
-        left: calc(var(--gutter) * -1);
-        height: 1px;
-        background-color: var(--theme-color-line);
-        content: '';
-    }
-}
-
-.list {
-    position: relative;
-
-    @include media('>=lg') {
-        &::before {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: calc(50% + var(--gutter));
-            height: 100%;
-            background-color: rgba(255, 255, 255, 5%);
-            content: '';
-        }
-    }
-}
-
-.service {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-
-    @include media('>=lg') {
-        width: 50%;
-    }
-}
-
-.left-head {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: calc(var(--gutter) * 0.5);
-    padding-block: rem(14);
-
-    &::after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 1px;
-        background-color: var(--theme-color-line);
-        content: '';
-    }
-
-    @include media('>=lg') {
-        border-right: 1px solid var(--theme-color-line);
-
-        &::after {
-            left: calc(var(--gutter) * -1);
-        }
-    }
 }
 
 .title {
+    grid-column: 1 / -1;
+}
+
+.body {
+    position: relative;
+    width: 100%;
+    margin-block: 240px 180px;
+    grid-column: 1 / -1;
+
+    @include media('>=vl') {
+        grid-column: 3 / -3;
+    }
+}
+
+.item {
+    width: fit-content;
+}
+
+.item__title {
+    --v-title-translate-wrapper-padding-block: 4px;
+
     margin-block: 0;
+    padding-left: 20px;
 
     @include media('>=lg') {
-        opacity: 0.6;
+        opacity: 0.4;
         transition: opacity 0.3s;
 
-        .service[data-active="true"] & {
+        .item[data-active="true"] & {
             opacity: 1;
         }
     }
 }
 
-.cta {
-    display: block;
-    padding: rem(4) rem(8);
-    border-radius: rem(2);
-    background-color: var(--theme-color-primary);
-    color: var(--theme-color-background);
-    text-decoration: none;
-
-    @include media('>=lg') {
-        opacity: 0;
-        transform-origin: right center;
-        transition: opacity 0.45s, translate 0.45s;
-        translate: rem(10) 0;
-
-        .service[data-active="true"] & {
-            opacity: 1;
-            translate: 0;
-        }
-    }
-}
-
-.content {
+.item__content {
     padding-block: rem(32) rem(48);
+    z-index: -1;
 
     > * {
-        max-width: 42ch;
+        max-width: 62ch;
     }
 
     @include media('>=lg') {
         position: absolute;
         top: 0;
-        left: 50%;
+        right: 0;
         display: flex;
-        width: calc(50% + var(--gutter));
+        width: calc(50% - var(--gutter) * 0.5);
         height: 100%;
         align-items: center;
         justify-content: center;
         margin-block: 0;
         opacity: 0;
         padding-block: rem(40);
-        padding-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 0.5);
+        // padding-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 0.5);
         transition: opacity 0s, translate 0.4s;
         translate: 0 rem(8);
 
-        .service[data-active="true"] & {
+        > * {
+            max-width: 46ch;
+        }
+
+        .item[data-active="true"] & {
             opacity: 1;
             transition: opacity 0.5s ease(out-quad);
             translate: 0;

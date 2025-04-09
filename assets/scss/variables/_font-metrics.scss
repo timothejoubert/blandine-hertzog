@@ -1,0 +1,11 @@
+// https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align
+// https://css-tricks.com/how-to-tame-line-height-in-css/
+
+$mango-metrics: (
+    unitsPerEm: 1000,
+    capHeight: 700,
+    xHeight: 540,
+    typoAscender: 750,
+    typoDescender: -210,
+    typoLineGap: 100,
+);

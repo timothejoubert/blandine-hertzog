@@ -13,26 +13,68 @@
           "placeholder": ""
         }
       },
-      "content": {
+      "tagline": {
         "type": "Text",
         "config": {
-          "label": "Content",
+          "label": "tagline",
           "placeholder": ""
         }
       },
-      "image": {
-        "type": "Image",
+      "location": {
+        "type": "Text",
         "config": {
-          "label": "Image",
-          "constraint": {},
-          "thumbnails": []
+          "label": "location",
+          "placeholder": ""
+        }
+      },
+      "media": {
+        "type": "Group",
+        "config": {
+          "label": "media",
+          "repeat": false,
+          "fields": {
+            "image": {
+              "type": "Image",
+              "config": {
+                "label": "image",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "video_embed": {
+              "type": "Embed",
+              "config": {
+                "label": "video embed",
+                "placeholder": ""
+              }
+            }
+          }
         }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "about_slice": {
+              "type": "SharedSlice"
+            },
+            "services_slice": {
+              "type": "SharedSlice"
+            },
+            "project_feed_slice": {
+              "type": "SharedSlice"
+            },
+            "content_slice": {
+              "type": "SharedSlice"
+            },
+            "intro_slice": {
+              "type": "SharedSlice"
+            },
+            "contact_slice": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },
@@ -61,34 +103,6 @@
           "thumbnails": []
         },
         "type": "Image"
-      }
-    },
-    "Slices": {
-      "slices2": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "services_slice": {
-              "type": "SharedSlice"
-            },
-            "intro_slice": {
-              "type": "SharedSlice"
-            },
-            "project_feed_slice": {
-              "type": "SharedSlice"
-            },
-            "about_slice": {
-              "type": "SharedSlice"
-            },
-            "contact_slice": {
-              "type": "SharedSlice"
-            },
-            "content_slice": {
-              "type": "SharedSlice"
-            }
-          }
-        }
       }
     }
   }

@@ -1,28 +1,9 @@
 // Exported from variable2css figma plugin
 // https://www.figma.com/community/plugin/1261234393153346915/variables2css
 
-// $themes: (
-//    light: (
-//        color-background: #FFE6DB,
-//        color-primary: #2E1F69,
-//        color-primary-variant: #826F97,
-//        color-secondary: #FFA974,
-//        color-secondary-variant: #FFC8A7,
-//        color-line-primary: #2E1F69,
-//    ),
-//    dark: (
-//        color-background: #05000D,
-//        color-primary: #FFDCC3,
-//        color-primary-variant: #372C31,
-//        color-secondary: #FFDCC3,
-//        color-secondary-variant: #372C31,
-//        color-line-primary: #FFDCC3,
-//    ),
-// );
-
 $themes: (
     light: (
-        color-primary: #FFA974,
+        color-primary: #FF7C60,
         color-on-primary: #05000D,
 
         color-background: #FAFAFA,
@@ -31,19 +12,19 @@ $themes: (
         color-surface: #FAFAFA,
         color-on-surface: #05000D,
 
-        color-line: #C4C2D8,
+        color-line: #454652,
     ),
     dark: (
         color-primary: #F0D435,
         color-on-primary: #05000D,
 
-        color-background: #161515,
-        color-on-background: #F2F3F9,
+        color-background: #161A2B,
+        color-on-background: #FFF4EF,
 
-        color-surface: #070707,
-        color-on-surface: #F2F3F9,
+        // color-surface: #070707,
+        // color-on-surface: #F2F3F9,
 
-        color-line: #464647,
+        color-line: #fff4ef1a,
     ),
 );
 $default-theme: dark;

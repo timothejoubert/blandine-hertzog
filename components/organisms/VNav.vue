@@ -59,30 +59,17 @@ watch(page, () => {
 @use "assets/scss/functions/ease" as *;
 
 .root {
-    @include media('>=lg') {
-        width: flex-grid(11, 14);
-    }
 }
 
 .toggle {
-    border: none;
-    border-right: 1px solid var(--theme-color-line);
-    border-left: 1px solid var(--theme-color-line);
-    background-color: initial;
-    color: inherit;
-    padding-block: var(--spacing-over-title-padding-block);
-    padding-inline: rem(24);
-
     @include media('>=lg') {
         display: none;
     }
-
 }
 
 .list {
-    position: absolute;
     display: flex;
-    width: 100%;
+    flex-grow: 1;
     flex-direction: column;
     padding: initial;
     margin-block: initial;
@@ -96,6 +83,7 @@ watch(page, () => {
     @include media('>=lg') {
         position: relative;
         flex-direction: row;
+        gap: rem(32);
         margin-inline: initial;
 
     }
@@ -104,41 +92,23 @@ watch(page, () => {
 
 .item {
     list-style: none;
-
-    @include media('>=lg') {
-        width: calc(#{flex-grid-value(2, 11)} + var(--gutter));
-    }
 }
 
 .link {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid var(--theme-color-line);
-    border-bottom: 1px solid var(--theme-color-line);
-    border-left: 1px solid var(--theme-color-line);
-    background-color: var(--theme-color-background);
     color: inherit;
     font-family: $font-noi;
     font-size: rem(15);
     font-weight: 600;
-    padding-block: var(--spacing-over-title-padding-block);
-    padding-inline: rem(18);
     text-decoration: none;
     text-transform: uppercase;
 
     &[aria-current="page"] {
-        background-color: var(--theme-color-on-background);
-        color: var(--theme-color-background);
     }
 
     @include media('>=lg') {
-        border-bottom: none;
-
-        .item:not(:last-child) & {
-            border-right: none;
-        }
     }
-
 }
 </style>

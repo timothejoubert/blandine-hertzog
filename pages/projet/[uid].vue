@@ -1,23 +1,20 @@
 <script lang="ts" setup>
-import type { PageComponentProps } from '~/types/app'
 import { components } from '~/slices'
-import type { ProjectPageDocumentData } from '~/prismicio-types'
+import type { ProjectPageDocument } from '~/prismicio-types'
 import VCrossProjects from '~/components/molecules/VCrossProjects.vue'
 
-const props = defineProps<PageComponentProps<'project_page'>>()
-const data = computed(() => props.document.data)
-
-const { tags, date } = useProjectUtils(props.document)
+const { document, documentData } = await useFetchPage<ProjectPageDocument>('project_page')
+const { tags, date } = useProjectUtils(document.value)
 
 const slices = computed(() => {
-    const sliceKey = (Object.keys(data.value).findLast(dataKey => dataKey.includes('slice')) || 'slices') as keyof ProjectPageDocumentData
-    return data.value?.[sliceKey] || []
+    const sliceKey = (Object.keys(documentData.value).findLast(dataKey => dataKey.includes('slice')) || 'slices')
+    return documentData.value?.[sliceKey] || []
 })
 
 // Cross Projects
 const mainProjectList = await usePrismicMainProjects()
 
-const currentProjectIndex = computed(() => mainProjectList.value.findIndex(p => p?.id === props.document.id))
+const currentProjectIndex = computed(() => mainProjectList.value.findIndex(p => p?.id === document.value?.id))
 
 const prevProject = computed(() => {
     const index = currentProjectIndex.value - 1
@@ -33,9 +30,9 @@ const nextProject = computed(() => {
     return mainProjectList.value[nextIndex]
 })
 
-const mainId = computed(() => props.document.id)
+const mainId = computed(() => document.value.id)
 
-const content = computed(() => data.value.short_content || data.value.content)
+const content = computed(() => documentData.value?.short_content || documentData.value?.content)
 </script>
 
 <template>

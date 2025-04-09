@@ -78,9 +78,11 @@ export default defineComponent({
 
 .root {
     position: relative;
+    padding-block: var(--v-title-translate-wrapper-padding-block);
 
     &--render-client-children {
         overflow: hidden;
+        padding-block: initial;
     }
 }
 
@@ -89,6 +91,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     transition: translate 0.3s ease(out-quad);
+    padding-block: var(--v-title-translate-wrapper-padding-block);
 
     .root--translate-direction-top:not(.root--active) & {
         translate: 0 -100%;
@@ -104,6 +107,8 @@ export default defineComponent({
 }
 
 .item {
+    height: 100%;
+
     &:first-child,
     &:last-child {
         position: absolute;

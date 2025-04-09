@@ -1,7 +1,7 @@
 import { usePrismic } from '@prismicio/vue'
 import type { BuildQueryURLArgs } from '@prismicio/client'
 import type { PrismicDocumentType } from '~/types/api'
-import { prismicDocumentRoutes } from '~/utils/prismic/route-resolver'
+import { prismicDocumentRoutes } from '~/constants/prismic-page'
 import type { AllDocumentTypes } from '~/prismicio-types'
 import { generateHashFromObject } from '~/utils/string/generate-hash-from-object'
 

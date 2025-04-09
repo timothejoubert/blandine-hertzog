@@ -1,5 +1,5 @@
 import { joinURL } from 'ufo'
-import type { PrismicWebResponse } from '~/composables/use-prismic-fetch-page'
+import type { PrismicWebResponse } from '~/composables/use-prismic-fetch-document'
 import { getText } from '~/utils/prismic/prismic-rich-field'
 
 export async function usePrismicSeoMeta(webResponse?: PrismicWebResponse) {

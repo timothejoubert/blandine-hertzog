@@ -5,7 +5,7 @@ import type {
 import type { ContentRelationshipField } from '@prismicio/types'
 import { isContentRelationshipField, isPrismicDocument } from '~/utils/prismic/guard'
 import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/api'
-import type { PrismicDocumentRoute } from '~/utils/prismic/route-resolver'
+import { prismicDocumentRoute } from '~/constants/prismic-page'
 import { isPrismicDocumentRoute } from '~/utils/prismic/route-resolver'
 
 export type PossibleRouteReference =

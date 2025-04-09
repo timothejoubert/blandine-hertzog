@@ -31,8 +31,8 @@ onMounted(() => {
     })
 })
 
-const runtimeConfig = useRuntimeConfig()
-const homeUrl = runtimeConfig.public.site.url
+const config = useRuntimeConfig()
+const homeUrl = config.public.site.url
 
 // Log the error for debugging purposes
 console.error('Error page:', props.error)

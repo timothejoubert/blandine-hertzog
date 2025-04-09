@@ -1,17 +1,14 @@
 <script  lang="ts" setup>
-import type { PageComponentProps } from '~/types/app'
+import type { HomePageDocument } from '~/prismicio-types'
 import { components } from '~/slices'
 import { getHtmlElement, type TemplateElement } from '~/utils/ref/get-html-element'
 
-const props = defineProps<PageComponentProps<'home_page'>>()
-const data = computed(() => props.document.data)
+const { documentData } = await useFetchPage<HomePageDocument>('home_page')
 
 const slices = computed(() => {
-    const slideKey = Object.keys(data.value).findLast(dataKey => dataKey.includes('slice')) || 'slices'
-    return data.value?.[slideKey] || []
+    const slideKey = Object.keys(documentData.value).findLast(dataKey => dataKey.includes('slice')) || 'slices'
+    return documentData.value?.[slideKey] || []
 })
-
-const mainId = computed(() => props.document.id)
 
 const { open } = useMediaViewer()
 
@@ -38,78 +35,83 @@ function OpenMediaViewer() {
 </script>
 
 <template>
-    <main
-        :id="mainId"
+    <div
         :class="$style.root"
     >
-        <div
-            :class="$style['video-wrapper']"
-        >
-            <button
-                :class="[$style.button, $style['button--play-state']]"
-                @click="onVideoClicked"
-            >
-                <VIcon
-                    :name="isPaused ? 'pause' : 'play'"
-                    width="20"
-                    height="20"
-                />
-            </button>
-            <VVideoPlayer
-                ref="videoInstance"
-                src="/assets/showreel.mp4"
-                :class="$style.video"
-                width="1920"
-                height="900"
-                :controls="false"
-                muted
-                autoplay
-                loop
+        <header class="grid">
+            <VPageTitle
+                v-if="documentData.title"
+                :title="documentData.title"
+                :class="$style.title"
             />
-            <button
-                :class="[$style.button, $style['button--fullscreen']]"
-                :aria-label="$t('media_viewer.open')"
-                @click="OpenMediaViewer"
+            <VText
+                v-if="documentData.tagline"
+                tag="h2"
+                :content="documentData.tagline"
+                :class="$style.tagline"
+            />
+            <VText
+                v-if="documentData.location"
+                tag="h2"
+                :content="documentData.location"
+                :class="$style.location"
+            />
+            <div
+                :class="$style['video-wrapper']"
             >
-                <VIcon
-                    name="fullscreen"
-                    width="20"
-                    height="20"
+                <button
+                    :class="[$style.button, $style['button--play-state']]"
+                    @click="onVideoClicked"
+                >
+                    <VIcon
+                        :name="isPaused ? 'pause' : 'play'"
+                        width="20"
+                        height="20"
+                    />
+                </button>
+                <VVideoPlayer
+                    ref="videoInstance"
+                    src="/assets/showreel.mp4"
+                    :class="$style.video"
+                    width="1376"
+                    height="627"
+                    :controls="false"
+                    muted
+                    autoplay
+                    loop
                 />
-            </button>
-        </div>
+                <button
+                    :class="[$style.button, $style['button--fullscreen']]"
+                    :aria-label="$t('media_viewer.open')"
+                    @click="OpenMediaViewer"
+                >
+                    <VIcon
+                        name="fullscreen"
+                        width="20"
+                        height="20"
+                    />
+                </button>
+            </div>
+        </header>
         <LazySliceZone
             v-if="slices?.length"
             :slices="slices"
             :components="components"
+            wrapper="main"
         />
-    </main>
+    </div>
 </template>
 
  <style lang="scss" module>
- @use 'assets/scss/functions/rem' as *;
- @use 'assets/scss/functions/flex-grid' as *;
- @use 'assets/scss/mixins/include-media' as *;
-
- .root {
-     --v-home-page-video-margin-block: #{rem(80)};
-
-     .video-wrapper + * {
-         --v-slice-margin-top: var(--v-home-page-video-margin-block);
-
-     }
- }
-
  .video-wrapper {
+    grid-column: 1 / -1;
     position: relative;
     display: flex;
     overflow: hidden;
-    width: calc(100% - var(--gutter) * 2);
+    margin-top: rem(24);
     align-items: center;
     justify-content: center;
-    border-radius: rem(8);
-    margin-top: var(--v-home-page-video-margin-block);
-    margin-left: var(--gutter);
+    width: 100%;
     aspect-ratio: 375 / 300;
     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
 
@@ -126,8 +128,7 @@ function OpenMediaViewer() {
      }
 
      @include media('>=lg') {
-        width: flex-grid(12, 14, '%', true);
-         aspect-ratio: 1920 / 900;
+         aspect-ratio: 1376 / 627;
      }
  }
 
@@ -178,5 +179,35 @@ function OpenMediaViewer() {
      --v-player-video-width: 100%;
      --v-player-video-height: 100%;
      --v-player-video-object-fit: cover;
+ }
+
+.title {
+    grid-column: 1 / -1;
+}
+
+.tagline,
+.location {
+    font-family: $font-hanken-grostesk-family;
+    margin-block: initial;
+    text-transform: uppercase;
+    font-variation-settings: "wght" 400;
+    font-size: rem(22);
+ }
+
+ .tagline {
+     grid-column: 1 / -1;
+
+    @include media('>=lg') {
+        grid-column: 1 / span 6;
+    }
+ }
+
+ .location {
+    grid-column: 1 / -1;
+
+    @include media('>=lg') {
+        grid-column: 7 / -1;
+        text-align: right;
+    }
  }
  </style>

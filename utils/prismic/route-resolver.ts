@@ -1,42 +1,15 @@
 // https://prismic.io/docs/route-resolver#resolvers
 // https://prismic.io/docs/nuxt-3-define-routes
-import { extractValueBetweenOccurrence } from '#root/utils/string/extract'
-import { I18N_LOCALES } from '#root/i18n/i18n.config'
+import { extractValueBetweenOccurrence } from '~/utils/string/extract'
+import { I18N_LOCALES } from '~/constants/i18n'
 import type { PrismicDocumentType } from '~/types/api'
-
-export interface PrismicDocumentRoute {
-    type: PrismicDocumentType
-    path: string
-    alias?: string[]
-}
-
-export const prismicDocumentRoutes: PrismicDocumentRoute[] = [
-    {
-        type: 'home_page',
-        path: '/:lang?',
-    },
-    {
-        type: 'archive_page',
-        path: '/:lang?/archive',
-    },
-    {
-        type: 'project_listing_page',
-        path: '/:lang?/projects',
-        alias: ['/:lang?', '/:lang?/projects', '/:lang?/projets'],
-    },
-    {
-        type: 'project_page',
-        path: '/:lang?/projets/:uid',
-        alias: ['/:lang?/projects/:uid'],
-    },
-    {
-        type: 'default_page',
-        path: '/:lang?/:uid',
-    },
-]
+import { prismicDocumentRoutes, type PrismicDocumentRoute } from '~/constants/prismic-page'
 
 export function isPrismicDocumentRoute(route: object): route is PrismicDocumentRoute {
-    return ('type' in route) && prismicDocumentRoutes.map(r => r.type).includes(route.type as PrismicDocumentType) && ('path' in route)
+    if (!('type' in route) || !('path' in route)) return false
+
+    const routeTypeList = prismicDocumentRoutes.map(r => r.type) as string []
+    return routeTypeList.includes(route.type as string)
 }
 
 export const prismicDocumentName = prismicDocumentRoutes.reduce((acc, route) => {

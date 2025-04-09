@@ -1,11 +1,9 @@
-import type { AlternateLanguage } from '@prismicio/types'
 import EventType from '~/constants/event-type'
 import type { AllDocumentTypes } from '~/prismicio-types'
 
 export interface Page {
     title?: string
-    webResponse?: AllDocumentTypes
-    alternateLinks?: AlternateLanguage[]
+    document?: AllDocumentTypes | null | undefined
 }
 
 type UsePageOptions = Page
@@ -16,8 +14,7 @@ export function usePage(options?: UsePageOptions) {
 
     nextPage.value = {
         title: options?.title,
-        webResponse: options?.webResponse,
-        alternateLinks: options?.alternateLinks,
+        document: options?.document,
     }
 
     function updatePage() {

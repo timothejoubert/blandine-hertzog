@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { PageComponentProps } from '~/types/app'
 import type { VInputGroupProps } from '~/components/molecules/VInputGroup.vue'
 
-const props = defineProps<PageComponentProps<'project_listing_page'>>()
-const data = computed(() => props.document.data)
+const { document, documentData } = await useFetchPage('project_listing_page')
+const mainId = computed(() => document.value?.id)
+
 // Common
 const { t } = useI18n()
 
@@ -66,8 +66,6 @@ const renderedProjects = computed(() => {
     })
 })
 
-const mainId = computed(() => props.document.id)
-
 const $style = useCssModule()
 const rootClasses = computed(() => {
     return [
@@ -83,8 +81,8 @@ const rootClasses = computed(() => {
         :class="rootClasses"
     >
         <VText
-            v-if="data.content"
-            :content="data.content"
+            v-if="documentData.content"
+            :content="documentData.content"
             :class="$style.content"
             class="text-h5"
         />

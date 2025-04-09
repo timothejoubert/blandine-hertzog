@@ -1,79 +1,21 @@
-import type { I18nOptions } from 'vue-i18n'
+import type { DateTimeFormat } from '@intlify/core-base'
+import { I18N_DEFAULT_TIMEZONE, I18N_LOCALES } from '~/constants/i18n'
 
-export const I18N_LOCALES = ['fr'] as const
-export const I18N_DEFAULT_LOCALE = 'fr'
-export const I18N_DEFAULT_TIMEZONE = 'Europe/Paris'
-
-type I18nLocale = typeof I18N_LOCALES[number]
-
-// defineI18nConfig() does not work
-// therefore we need to type the config object
-export default {
+export default defineI18nConfig(() => ({
     datetimeFormats: I18N_LOCALES.reduce(
-        (acc, cur: I18nLocale) => ({
+        (acc, cur) => ({
             ...acc,
             [cur]: {
-                // 28 jan. 2021
-                'short': {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // 20:15
-                'hour': {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false,
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // 28 jan. 2021 20:15
-                'short-hour': {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: false,
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // 28 jan.
-                'short-date-only': {
-                    day: 'numeric',
-                    month: 'short',
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // monday
-                'weekday': {
-                    weekday: 'long',
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // 28
-                'date': {
-                    day: 'numeric',
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // mon. 28 jan. 2021
-                'long-date': {
-                    day: 'numeric',
+                // mon. 28/01
+                date: {
                     weekday: 'short',
-                    month: 'short',
-                    year: 'numeric',
-                    timeZone: I18N_DEFAULT_TIMEZONE,
-                },
-                // mon. 28 jan. 2021 20:15
-                'long-date-hour': {
-                    day: 'numeric',
-                    weekday: 'short',
-                    month: 'short',
-                    year: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
+                    day: '2-digit',
+                    month: '2-digit',
                     hour12: false,
                     timeZone: I18N_DEFAULT_TIMEZONE,
                 },
             },
         }),
-        {} as Record<I18nLocale, unknown>,
+        {} as Record<typeof I18N_LOCALES[number], DateTimeFormat>,
     ),
-} as I18nOptions
+}))

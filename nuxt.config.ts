@@ -1,36 +1,28 @@
 import svgLoader from 'vite-svg-loader'
-import prismicData from './slicemachine.config.json'
-import { endpoint } from '#root/slicemachine.config.json'
-import { version } from '#root/package.json'
-import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from '#root/i18n/i18n.config'
-import { prismicDocumentRoutes } from '#root/utils/prismic/route-resolver'
+import slicemachine from './slicemachine.config.json'
+import { version } from './package.json'
+import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './constants/i18n'
+import { prismicDocumentRoutes } from './constants/prismic-page'
+import { PREVIEW_PATH } from './constants/prismic-preview'
 
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
-    // Setup app modules
-    modules: [
-        '@nuxtjs/svg-sprite',
-        '@nuxt/image',
-        '@nuxtjs/prismic',
-        '@nuxt/image',
-        '@nuxtjs/i18n',
-        '@vueuse/nuxt',
-        '@nuxt/eslint',
-        '@rezo-zero/nuxt-stories',
-    ],
+    modules: ['@nuxt/image', '@nuxtjs/prismic', '@nuxt/image', '@nuxtjs/i18n', '@vueuse/nuxt', '@nuxt/eslint', '@rezo-zero/nuxt-stories', '@nuxtjs/sitemap', '@nuxtjs/robots', '@nuxt/icon'],
     plugins: [],
     components: [
         '~/components/atoms',
         '~/components/molecules',
         '~/components/organisms',
-        '~/components/pages',
     ],
     devtools: { enabled: true },
     app: {
         layoutTransition: false, // Prevent issue with layout without root element
         head: {
-            htmlAttrs: { class: 'app' },
+            htmlAttrs: {
+                lang: I18N_DEFAULT_LOCALE,
+                class: 'app',
+            },
             link: [
                 { rel: 'icon', href: '/favicon/favicon.svg' },
                 { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },
@@ -40,7 +32,7 @@ export default defineNuxtConfig({
             ],
             script: [
                 {
-                    src: `https://static.cdn.prismic.io/prismic.js?new=true&repo=${prismicData.repositoryName}`,
+                    src: `https://static.cdn.prismic.io/prismic.js?new=true&repo=${slicemachine.repositoryName}`,
                     async: true,
                     defer: true,
                 },
@@ -48,16 +40,11 @@ export default defineNuxtConfig({
         },
     },
     css: ['~/assets/scss/main.scss'],
-    router: {
-        options: {
-            scrollBehaviorType: 'smooth',
-        },
-    },
     runtimeConfig: {
         public: {
             version,
             site: {
-                name: '',
+                name: 'Blandine hertzog dev',
                 url: 'http://localhost:3000',
                 environment: 'development',
             },
@@ -93,21 +80,6 @@ export default defineNuxtConfig({
                         // Only allows these images origins
                         // "img-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
                     ].join('; '),
-                },
-            },
-            '/_icons': {
-                headers: {
-                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
-                },
-            },
-            '/preview': {
-                headers: {
-                    'X-Robots-Tag': 'noindex', // Do not index the page and remove it from sitemap
-                },
-            },
-            '/_stories/**': {
-                headers: {
-                    'X-Robots-Tag': 'noindex',
                 },
             },
         },
@@ -152,11 +124,9 @@ export default defineNuxtConfig({
             },
         },
     },
-    // '@nuxtjs/sitemap',
+    // https://i18n.nuxtjs.org/docs/getting-started
     i18n: {
-        strategy: 'prefix_except_default',
-        // I18n issue, disabled detectBrowserLanguage work only with empty obj
-        // https://github.com/nuxt-modules/i18n/issues/3039
+        strategy: I18N_LOCALES.length > 1 ? 'prefix_except_default' : 'no_prefix',
         detectBrowserLanguage: false,
         defaultLocale: I18N_DEFAULT_LOCALE,
         locales: I18N_LOCALES.map(locale => ({
@@ -168,6 +138,23 @@ export default defineNuxtConfig({
         compilation: {
             strictMessage: false, // Allow value to include HTML
         },
+        bundle: {
+            optimizeTranslationDirective: false,
+        },
+    },
+    // https://nuxt.com/modules/icon#usage
+    icon: {
+        componentName: 'NuxtIcon',
+        class: '',
+        fallbackToApi: false,
+        localApiEndpoint: '/_nuxt_icon',
+        customCollections: [
+            {
+                normalizeIconName: false,
+                prefix: 'icon',
+                dir: './assets/images/icons',
+            },
+        ],
     },
     // https://image.nuxt.com/get-started/configuration
     image: {
@@ -189,22 +176,26 @@ export default defineNuxtConfig({
         densities: '1',
         presets: {
             default: {
-                sizes: 'xs:100vw sm:100vw md:100vw lg:100vw vl:100vw xl:100vw xxl:100vw hd:100vw qhd:100vw',
+                sizes: 'xs:100vw md:100vw lg:100vw xl:100vw hd:100vw qhd:100vw',
             },
         },
     },
     prismic: {
-        endpoint,
-        preview: '/preview',
+        endpoint: slicemachine.endpoint,
+        preview: PREVIEW_PATH,
         toolbar: true,
         clientConfig: {
             routes: prismicDocumentRoutes,
         },
     },
+    robots: {
+        // provide simple disallow rules for all robots `user-agent: *`
+        disallow: ['/slice-simulator', '/slice-smulator', '/prismic-preview'],
+    },
     // https://www.nuxtseo.com/sitemap/getting-started/installation
     sitemap: {
         // enabled: !isGenerateMaintenance,
-        exclude: ['/slice-simulator'],
+        exclude: ['/slice-simulator', '/slice-smulator', '/prismic-preview'],
     },
     // https://github.com/rezozero/nuxt-stories
     stories: {

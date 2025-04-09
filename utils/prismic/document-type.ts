@@ -1,5 +1,5 @@
 import type { PrismicDocumentType } from '~/types/api'
-import { prismicDocumentRoutes, prismicDocumentName } from '~/utils/prismic/route-resolver'
+import { prismicDocumentRoutes, prismicDocumentName } from '~/constants/prismic-page'
 
 export function isPrismicDocument() {}
 

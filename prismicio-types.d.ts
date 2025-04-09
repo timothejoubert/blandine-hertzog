@@ -273,15 +273,38 @@ export type FooterMenuDocument<Lang extends string = string> =
       Lang
   >
 
-type HomePageDocumentDataSlicesSlice = never
+/**
+ * Item in *Home page → media*
+ */
+export interface HomePageDocumentDataMediaItem {
+    /**
+   * image field in *Home page → media*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home_page.media[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+    image: prismic.ImageField<never>
 
-type HomePageDocumentDataSlices2Slice =
-    | ServicesSliceSlice
-    | IntroSliceSlice
-    | ProjectFeedSliceSlice
+    /**
+   * video embed field in *Home page → media*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home_page.media[].video_embed
+   * - **Documentation**: https://prismic.io/docs/field#embed
+   */
+    video_embed: prismic.EmbedField
+}
+
+type HomePageDocumentDataSlicesSlice =
     | AboutSliceSlice
-    | ContactSliceSlice
+    | ServicesSliceSlice
+    | ProjectFeedSliceSlice
     | ContentSliceSlice
+    | IntroSliceSlice
+    | ContactSliceSlice
 
 /**
  * Content for Home page documents
@@ -299,26 +322,37 @@ interface HomePageDocumentData {
     title: prismic.KeyTextField
 
     /**
-   * Content field in *Home page*
+   * tagline field in *Home page*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home_page.content
+   * - **API ID Path**: home_page.tagline
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-    content: prismic.KeyTextField
+    tagline: prismic.KeyTextField
 
     /**
-   * Image field in *Home page*
+   * location field in *Home page*
    *
-   * - **Field Type**: Image
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home_page.image
+   * - **API ID Path**: home_page.location
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-    image: prismic.ImageField<never>
+    location: prismic.KeyTextField
+
+    /**
+   * media field in *Home page*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home_page.media[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+    media: prismic.GroupField<Simplify<HomePageDocumentDataMediaItem>>
 
     /**
    * Slice Zone field in *Home page*
@@ -360,16 +394,7 @@ interface HomePageDocumentData {
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
-    meta_image: prismic.ImageField<never> /**
-   * Slice Zone field in *Home page*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home_page.slices2[]
-   * - **Tab**: Slices
-   * - **Documentation**: https://prismic.io/docs/field#slices
-   */
-    slices2: prismic.SliceZone<HomePageDocumentDataSlices2Slice>
+    meta_image: prismic.ImageField<never>
 }
 
 /**
@@ -859,7 +884,7 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-    showreel: prismic.LinkToMediaField
+    showreel: prismic.LinkToMediaField<prismic.FieldState, never>
 }
 
 /**
@@ -1540,8 +1565,8 @@ declare module '@prismicio/client' {
             FooterMenuDocumentDataLinksItem,
             HomePageDocument,
             HomePageDocumentData,
+            HomePageDocumentDataMediaItem,
             HomePageDocumentDataSlicesSlice,
-            HomePageDocumentDataSlices2Slice,
             MenuDocument,
             MenuDocumentData,
             MenuDocumentDataLinksItem,

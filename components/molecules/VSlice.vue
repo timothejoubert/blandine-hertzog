@@ -1,13 +1,9 @@
 <script  lang="ts" setup>
 import type { SharedSlice } from '@prismicio/types'
-import type { PossibleRouteReference } from '~/composables/use-link-resolver'
 
 defineProps<{
     slice: SharedSlice
     tag?: string
-    title?: string | null
-    linkLabel?: string
-    linkReference?: PossibleRouteReference
 }>()
 </script>
 

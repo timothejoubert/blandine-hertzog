@@ -1,6 +1,6 @@
-@use 'assets/scss/mixins/grid' as *;
-@use 'assets/scss/variables/grid' as *;
-@use 'assets/scss/functions/breakpoint' as *;
+@use './mixins/grid' as *;
+@use './variables/grid' as *;
+@use './functions/breakpoint' as *;
 
 .grid-width {
     @include grid-width;

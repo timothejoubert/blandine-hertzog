@@ -1,4 +1,5 @@
-@use 'assets/scss/functions/rem' as *;
+@use './functions/rem' as *;
+@use './variables/fonts' as *;
 
 html {
     background-color: var(--theme-color-background);
@@ -12,6 +13,8 @@ body {
     margin: initial;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    font-family: $font-hanken-grostesk-family;
 }
 
 *:focus-visible {
