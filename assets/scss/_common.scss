@@ -11,10 +11,9 @@ html {
 
 body {
     margin: initial;
+    font-family: $font-hanken-grostesk-family;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    font-family: $font-hanken-grostesk-family;
 }
 
 *:focus-visible {

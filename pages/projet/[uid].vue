@@ -70,17 +70,15 @@ const content = computed(() => documentData.value?.short_content || documentData
             :components="components"
             wrapper="main"
         />
+        <VCrossProjects
+            :next-project="nextProject"
+            :prev-project="prevProject"
+        />
     </div>
-    <VCrossProjects
-        :next-project="nextProject"
-        :prev-project="prevProject"
-    />
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
 @use 'assets/scss/functions/flex-grid' as *;
-@use 'assets/scss/mixins/include-media' as *;
 
 .root {
     --v-slice-margin-top: var(--gutter);

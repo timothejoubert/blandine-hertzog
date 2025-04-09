@@ -15,9 +15,9 @@ import VLogo from '~/assets/images/logo.svg?component'
 
 <style lang="scss" module>
 $color: var(--theme-color-background);
-
 $transparent-background: color-mix(in srgb, $color, transparent 100%);
 $flatter-background: color-mix(in srgb, $color, transparent 20%);
+
 .root {
     position: sticky;
     z-index: 101;
@@ -25,10 +25,10 @@ $flatter-background: color-mix(in srgb, $color, transparent 20%);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    grid-column: 1 / -1;
-    background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
-    padding-block: rem(18);
     backdrop-filter: blur(1px);
+    background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
+    grid-column: 1 / -1;
+    padding-block: rem(18);
     padding-inline: var(--gutter);
 }
 

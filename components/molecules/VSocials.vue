@@ -51,11 +51,11 @@ const socials = settings?.data.socials
 
 .link {
     display: flex;
+    width: rem(20);
+    height: rem(20);
     align-items: center;
     justify-content: center;
     color: inherit;
-    width: rem(20);
-    height: rem(20);
 }
 
 .icon {

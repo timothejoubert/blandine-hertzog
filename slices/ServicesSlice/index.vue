@@ -81,8 +81,8 @@ const activeService = ref(0)
 .body {
     position: relative;
     width: 100%;
-    margin-block: 240px 180px;
     grid-column: 1 / -1;
+    margin-block: 240px 180px;
 
     @include media('>=vl') {
         grid-column: 3 / -3;
@@ -96,8 +96,8 @@ const activeService = ref(0)
 .item__title {
     --v-title-translate-wrapper-padding-block: 4px;
 
-    margin-block: 0;
     padding-left: 20px;
+    margin-block: 0;
 
     @include media('>=lg') {
         opacity: 0.4;
@@ -110,8 +110,8 @@ const activeService = ref(0)
 }
 
 .item__content {
-    padding-block: rem(32) rem(48);
     z-index: -1;
+    padding-block: rem(32) rem(48);
 
     > * {
         max-width: 62ch;
@@ -129,6 +129,7 @@ const activeService = ref(0)
         margin-block: 0;
         opacity: 0;
         padding-block: rem(40);
+
         // padding-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 0.5);
         transition: opacity 0s, translate 0.4s;
         translate: 0 rem(8);

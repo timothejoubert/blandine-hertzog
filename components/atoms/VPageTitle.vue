@@ -37,24 +37,23 @@ const titleSplitted = computed(() => {
 @use 'sass:map';
 
 .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1%;
+    margin-bottom: -1.5%;
     font-family: $font-mango-family;
     font-weight: 800;
     margin-block: 0;
     text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: -1.5%;
-    margin-top: 1%;
 
     @include font-size-fluid((xs: 60, xl: 280));
 }
 
 .asterix {
-    margin-inline: rem(20);
     width: rem(70);
     height: auto;
     margin-top: -40px;
+    margin-inline: rem(20);
 }
 </style>

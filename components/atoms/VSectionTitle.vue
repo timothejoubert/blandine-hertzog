@@ -20,8 +20,8 @@ defineProps<{
     display: flex;
     align-items: center;
     font-family: $font-hanken-grostesk-family;
-    text-transform: uppercase;
     font-size: 18px;
+    text-transform: uppercase;
 }
 
 .icon {

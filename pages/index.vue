@@ -104,16 +104,16 @@ function OpenMediaViewer() {
 
  <style lang="scss" module>
  .video-wrapper {
-    grid-column: 1 / -1;
     position: relative;
     display: flex;
     overflow: hidden;
-    margin-top: rem(24);
+    width: 100%;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    margin-top: rem(24);
     aspect-ratio: 375 / 300;
     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
+    grid-column: 1 / -1;
 
     &::after {
         position: absolute;
@@ -188,10 +188,10 @@ function OpenMediaViewer() {
 .tagline,
 .location {
     font-family: $font-hanken-grostesk-family;
+    font-size: rem(22);
+    font-variation-settings: "wght" 400;
     margin-block: initial;
     text-transform: uppercase;
-    font-variation-settings: "wght" 400;
-    font-size: rem(22);
  }
 
  .tagline {

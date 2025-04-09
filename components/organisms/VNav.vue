@@ -69,8 +69,8 @@ watch(page, () => {
 
 .list {
     display: flex;
-    flex-grow: 1;
     flex-direction: column;
+    flex-grow: 1;
     padding: initial;
     margin-block: initial;
 

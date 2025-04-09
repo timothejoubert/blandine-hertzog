@@ -21,19 +21,19 @@ defineProps<{
     position: relative;
 
     &--styled {
+        padding-left: 24px;
         font-family: $font-mango-family;
         font-size: 54px;
-        padding-left: 24px;
     }
 
     &::before {
         position: absolute;
         top: 0;
-        height: 100%;
-        left: 0px;
-        content: '';
+        left: 0;
         width: 2px;
+        height: 100%;
         background-color: var(--theme-color-line);
+        content: '';
     }
 }
 </style>

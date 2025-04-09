@@ -90,8 +90,8 @@ export default defineComponent({
     position: relative;
     display: flex;
     flex-direction: column;
-    transition: translate 0.3s ease(out-quad);
     padding-block: var(--v-title-translate-wrapper-padding-block);
+    transition: translate 0.3s ease(out-quad);
 
     .root--translate-direction-top:not(.root--active) & {
         translate: 0 -100%;
