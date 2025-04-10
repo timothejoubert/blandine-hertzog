@@ -11,39 +11,23 @@ const slices = computed(() => {
     return documentData.value?.[sliceKey] || []
 })
 
-// Cross Projects
-const mainProjectList = await usePrismicMainProjects()
-
-const currentProjectIndex = computed(() => mainProjectList.value.findIndex(p => p?.id === document.value?.id))
-
-const prevProject = computed(() => {
-    const index = currentProjectIndex.value - 1
-    const prevIndex = index < 0 ? mainProjectList.value.length - 1 : index
-
-    return mainProjectList.value[prevIndex]
-})
-
-const nextProject = computed(() => {
-    const index = currentProjectIndex.value + 1
-    const nextIndex = index > mainProjectList.value.length - 1 ? 0 : index
-
-    return mainProjectList.value[nextIndex]
-})
-
-const mainId = computed(() => document.value.id)
-
 const content = computed(() => documentData.value?.short_content || documentData.value?.content)
 </script>
 
 <template>
     <div
-        :id="mainId"
+        :id="document?.id"
         :class="$style.root"
     >
         <header
             class="grid-width"
             :class="$style.header"
         >
+            <VPageTitle
+                v-if="documentData?.title"
+                :title="documentData.title"
+                :class="$style.title"
+            />
             <VText
                 v-if="content"
                 :content="content"
@@ -70,10 +54,7 @@ const content = computed(() => documentData.value?.short_content || documentData
             :components="components"
             wrapper="main"
         />
-        <VCrossProjects
-            :next-project="nextProject"
-            :prev-project="prevProject"
-        />
+        <VCrossProjects :active-project-document="document" />
     </div>
 </template>
 
@@ -86,7 +67,7 @@ const content = computed(() => documentData.value?.short_content || documentData
 }
 
 .header {
-    margin-block: rem(72);
+    margin-bottom: rem(72);
 }
 
 .intro-text {

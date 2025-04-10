@@ -31,5 +31,6 @@
     "error_page.title": "Oups, Une erreur c'est produite",
     "error_page.unknown_error": "",
     "error_page.not_found.body": "Oups, la page que vous recherché n'existe pas.",
-    "error_page.body":  "Une erreur c'est produite, il semblerait que le développeur à fait du mauvais boulot..."
+    "error_page.body":  "Une erreur c'est produite, il semblerait que le développeur à fait du mauvais boulot...",
+    "all_projects": "Tous les projets"
 }

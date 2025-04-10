@@ -5,7 +5,7 @@ const VIcon = defineAsyncComponent({
     errorComponent: defineAsyncComponent(() => import(`~/assets/images/logo.svg?component`)),
 })
 
-console.log(index.value)
+// console.log(index.value)
 </script>
 
 <template>

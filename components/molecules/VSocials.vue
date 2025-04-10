@@ -1,6 +1,14 @@
-<script  lang="ts" setup="">
+<script  lang="ts" setup>
+const props = defineProps<{
+    displayLabel?: boolean
+    filter?: boolean
+}>()
+
 const settings = await usePrismicSettingsDocument()
-const socials = settings?.data.socials
+const socials = computed(() => {
+    const socials = settings?.data.socials
+    return props.filter ? socials?.filter(social => social.show_in_contact_slice) : socials
+})
 </script>
 
 <template>
@@ -19,9 +27,10 @@ const socials = settings?.data.socials
                 :class="$style.link"
             >
                 <VIcon
-                    v-if="social.icon"
+                    v-if="social.icon && !displayLabel"
                     :name="`social-${social.icon}`"
                     :class="$style.icon"
+                    size="1.1rem"
                 />
                 <template v-else-if="social.label">
                     {{ social.label }}
@@ -32,14 +41,9 @@ const socials = settings?.data.socials
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-
 .list {
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 0;
-    gap: calc(var(--gutter) );
 }
 
 .item {
@@ -51,15 +55,10 @@ const socials = settings?.data.socials
 
 .link {
     display: flex;
-    width: rem(20);
-    height: rem(20);
     align-items: center;
     justify-content: center;
     color: inherit;
-}
-
-.icon {
-    width: 100%;
-    height: 100%;
+    text-decoration: none;
+    padding: var(--v-socials-link-padding);
 }
 </style>

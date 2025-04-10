@@ -3,12 +3,30 @@ import type { ProjectPageDocument } from '~/prismicio-types'
 import { useLinkResolver } from '~/composables/use-link-resolver'
 import { prismicDocumentName } from '~/constants/prismic-page'
 
-defineProps<{
-    prevProject?: ProjectPageDocument | null
-    nextProject?: ProjectPageDocument | null
+const props = defineProps<{
+    activeProjectDocument?: ProjectPageDocument
 }>()
 
-const { url: projectListingUrl } = useLinkResolver(prismicDocumentName.project_listing_page)
+// Cross Projects
+const projectList = await usePrismicMainProjects()
+
+const currentProjectIndex = computed(() => projectList.value.findIndex(p => p?.id === props.activeProjectDocument?.id))
+
+const prevProject = computed(() => {
+    const index = currentProjectIndex.value - 1
+    const prevIndex = index < 0 ? projectList.value.length - 1 : index
+
+    return projectList.value[prevIndex]
+})
+
+const nextProject = computed(() => {
+    const index = currentProjectIndex.value + 1
+    const nextIndex = index > projectList.value.length - 1 ? 0 : index
+
+    return projectList.value[nextIndex]
+})
+
+// const { url: projectListingUrl } = useLinkResolver(prismicDocumentName.project_listing_page)
 </script>
 
 <template>
@@ -17,12 +35,6 @@ const { url: projectListingUrl } = useLinkResolver(prismicDocumentName.project_l
         class="grid"
         :class="$style.root"
     >
-        <VHeadSection
-            :class="$style.head"
-            title="En voir davantage"
-            :link-label="$t('see_all_projects')"
-            :link-reference="projectListingUrl"
-        />
         <VArrowButton
             v-if="prevProject"
             :to="prevProject"

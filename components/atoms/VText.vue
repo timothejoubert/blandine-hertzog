@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { KeyTextField, RichTextField, RTTextNodeBase } from '@prismicio/types'
-import { isRichTextFilled } from '~/utils/prismic/guard'
+import type { KeyTextField, RichTextField } from '@prismicio/types'
+import { isFilled } from '@prismicio/client'
 
 export type VTextContent = string | RichTextField | KeyTextField | null
 
@@ -12,51 +12,31 @@ interface VTextProps {
 
 const props = defineProps<VTextProps>()
 
-const slots = useSlots()
-const hasSlot = slots.default?.()
+const richTextFilled = computed(() => {
+    if (props.content && typeof props.content !== 'string' && isFilled.richText(props.content)) return props.content
 
-const isString = computed(() => typeof props.content === 'string')
-
-const richText = computed(() => {
-    return (isRichTextFilled(props.content) && props.content) || []
+    return undefined
 })
 
-const flatRichTextContent = computed(() => {
-    if (!props.tag) return
+const contentString = computed(() => {
+    if (typeof props.content === 'string') return props.content
+    if (richTextFilled.value && richTextFilled.value.length === 1) return richTextFilled.value[0].text
 
-    const spans = (richText.value?.[0] as RTTextNodeBase)?.spans || []
-    if (richText.value?.length > 1 || spans.length > 0) return
-
-    return (richText.value?.[0] as { text: string })?.text
+    return undefined
 })
 </script>
 
 <template>
     <component
         :is="tag || 'div'"
-        v-if="isString || hasSlot || flatRichTextContent"
-        :class="$style.root"
+        v-if="contentString"
     >
-        <slot>{{ flatRichTextContent ? flatRichTextContent : content }}</slot>
+        {{ contentString }}
     </component>
     <PrismicRichText
-        v-else-if="!!richText[0]"
-        :class="$style.root"
-        :field="richText"
+        v-else-if="!!richTextFilled?.[0]"
+
+        :field="richTextFilled"
         wrapper="div"
     />
 </template>
-
-<style lang="scss" module>
-.root {
-  strong {
-    font-weight: bold;
-  }
-
-  a {
-    text-decoration: underline;
-    text-decoration-thickness: 0.5px;
-    text-underline-offset: 2px;
-  }
-}
-</style>

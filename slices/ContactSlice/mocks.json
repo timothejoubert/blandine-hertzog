@@ -8,44 +8,67 @@
 				"value": "satellites",
 				"type": "Text"
 			},
-			"content": {
-				"__TYPE__": "StructuredTextContent",
+			"link_group": {
+				"__TYPE__": "GroupContentType",
 				"value": [
 					{
-						"type": "paragraph",
-						"content": {
-							"text": "Est et proident consequat laborum magna nostrud ut occaecat. Incididunt eu do ea ullamco ut veniam dolore Lorem ad ex mollit aute eu."
-						}
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "toward",
+									"type": "Text"
+								}
+							],
+							[
+								"link",
+								{
+									"key": "756edc7b-9a23-460f-b096-1d01bd747c8e",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com",
+										"text": "topic"
+									}
+								}
+							]
+						]
 					}
 				]
 			},
-			"link_label": {
-				"__TYPE__": "FieldContent",
-				"value": "buffalo",
-				"type": "Text"
-			},
-			"internal_page": {
-				"key": "c25efd9e-ecd3-41eb-8d84-0751d6eac64a",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
-			},
-			"external_url": {
-				"__TYPE__": "FieldContent",
-				"value": "image",
-				"type": "Text"
-			},
-			"phone": {
-				"__TYPE__": "FieldContent",
-				"value": "loss",
-				"type": "Text"
-			},
-			"mail": {
-				"__TYPE__": "FieldContent",
-				"value": "people",
-				"type": "Text"
+			"body": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "easily",
+									"type": "Text"
+								}
+							],
+							[
+								"content",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Deserunt do id Lorem veniam ullamco non proident. Exercitation enim sunt tempor exercitation labore ullamco veniam ullamco. Deserunt reprehenderit sunt proident labore."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []

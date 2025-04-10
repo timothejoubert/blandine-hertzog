@@ -11,7 +11,6 @@ defineProps<{
     <component
         :is="tag || 'section'"
         :class="$style.root"
-        class="grid-width"
         :data-slice-type="slice.slice_type"
         :data-slice-variation="slice.variation"
     >

@@ -52,11 +52,7 @@ watch(page, () => {
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-@use 'assets/scss/functions/flex-grid' as *;
 @use 'assets/scss/variables/fonts' as *;
-@use "assets/scss/mixins/include-media" as *;
-@use "assets/scss/functions/ease" as *;
 
 .root {
 }
@@ -83,6 +79,7 @@ watch(page, () => {
     @include media('>=lg') {
         position: relative;
         flex-direction: row;
+        justify-content: center;
         gap: rem(32);
         margin-inline: initial;
 
@@ -99,16 +96,15 @@ watch(page, () => {
     align-items: center;
     justify-content: center;
     color: inherit;
-    font-family: $font-noi;
+    font-family: $font-hanken-grostesk-family;
     font-size: rem(15);
     font-weight: 600;
-    text-decoration: none;
     text-transform: uppercase;
+    text-underline-offset: 6px;
+    text-decoration-color: transparent;
 
     &[aria-current="page"] {
-    }
-
-    @include media('>=lg') {
+        text-decoration-color: color-mix(in srgb, var(--theme-color-on-background), transparent 60%);
     }
 }
 </style>

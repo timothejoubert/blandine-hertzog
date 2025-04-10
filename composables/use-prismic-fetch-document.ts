@@ -19,8 +19,8 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
     const { data, error } = await useAsyncData(dataKey, async () => {
         const { fetchLocaleOption } = useLocale()
 
-        if (isPreview && documentId) {
-            return await prismicClient.getByID(documentId, { ...fetchLocaleOption.value })
+        if (isPreview.value && documentId.value) {
+            return await prismicClient.getByID(documentId.value, { ...fetchLocaleOption.value })
         }
         else if (uid && isDynamicDocument(prismicDocument)) {
             return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })

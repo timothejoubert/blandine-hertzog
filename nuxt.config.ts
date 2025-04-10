@@ -82,6 +82,14 @@ export default defineNuxtConfig({
                     ].join('; '),
                 },
             },
+            [PREVIEW_PATH]: {
+                prerender: false,
+                ssr: false,
+            },
+            '/slice-simulator': {
+                prerender: false,
+                ssr: false,
+            },
         },
     },
     vite: {

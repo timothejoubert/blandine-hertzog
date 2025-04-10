@@ -19,55 +19,56 @@
             "placeholder": ""
           }
         },
-        "content": {
-          "type": "StructuredText",
+        "body": {
+          "type": "Group",
           "config": {
-            "label": "Content",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+            "label": "Body",
+            "repeat": false,
+            "fields": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "Title",
+                  "placeholder": ""
+                }
+              },
+              "content": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Content",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em,hyperlink"
+                }
+              }
+            }
           }
         },
-        "link_label": {
-          "type": "Text",
+        "link_group": {
+          "type": "Group",
           "config": {
-            "label": "Link label",
-            "placeholder": ""
-          }
-        },
-        "internal_page": {
-          "type": "Link",
-          "config": {
-            "label": "Internal page",
-            "select": "document",
-            "customtypes": [
-              "archive_page",
-              "home_page",
-              "project_listing_page",
-              "project_page",
-              "default_page"
-            ]
-          }
-        },
-        "external_url": {
-          "type": "Text",
-          "config": {
-            "label": "External url",
-            "placeholder": ""
-          }
-        },
-        "phone": {
-          "type": "Text",
-          "config": {
-            "label": "Phone",
-            "placeholder": ""
-          }
-        },
-        "mail": {
-          "type": "Text",
-          "config": {
-            "label": "Mail",
-            "placeholder": ""
+            "label": "Link group",
+            "repeat": false,
+            "fields": {
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "label",
+                  "placeholder": ""
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              }
+            }
           }
         }
       },

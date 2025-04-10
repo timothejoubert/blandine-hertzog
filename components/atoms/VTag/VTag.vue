@@ -31,7 +31,6 @@ export default defineComponent({
     border-radius: var(--v-tag-border-radius);
     background-color: color-mix(in srgb, var(--theme-color-primary) 10%, var(--theme-color-background));
     color: var(--theme-color-on-background);
-    font-family: $font-noi-family;
     font-size: var(--v-tag-font-size);
     font-weight: 500;
     line-height: 1;

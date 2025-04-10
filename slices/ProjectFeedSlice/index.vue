@@ -32,6 +32,7 @@ const projects = computed(() => {
 <template>
     <VSlice
         :slice="slice"
+        class="grid-width"
     >
         <VSectionTitle
             v-if="primary.title"

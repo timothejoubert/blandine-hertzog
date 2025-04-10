@@ -21,7 +21,7 @@ const titleSplitted = computed(() => {
 
 <template>
     <h1 :class="$style.title">
-        {{ titleSplitted[0].join('') }}
+        {{ titleSplitted[0].join(' ') }}
         <VAsterixIcon
             :class="$style.asterix"
             aria-hidden="true"

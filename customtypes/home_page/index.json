@@ -56,9 +56,6 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "about_slice": {
-              "type": "SharedSlice"
-            },
             "services_slice": {
               "type": "SharedSlice"
             },
@@ -66,9 +63,6 @@
               "type": "SharedSlice"
             },
             "content_slice": {
-              "type": "SharedSlice"
-            },
-            "intro_slice": {
               "type": "SharedSlice"
             },
             "contact_slice": {

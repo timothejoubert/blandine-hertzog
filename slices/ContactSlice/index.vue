@@ -1,138 +1,85 @@
 <script setup lang="ts">
 import type { Content } from '@prismicio/client'
+import { isFilled } from '@prismicio/client'
 
 const props = defineProps(
     getSliceComponentProps<Content.ContactSliceSlice>(),
 )
-
 const primary = computed(() => props.slice.primary)
 
-const linkReference = computed(() => primary.value.external_url || primary.value.internal_page)
+console.log(primary.value)
+const bodyContent = computed(() => {
+    if (!isFilled.group(primary.value.body)) return
 
-const toastMessage = ref<string | null>(null)
-const { addToast } = useToast()
-
-const { t } = useI18n()
-function copyToClipBoard(_event: MouseEvent) {
-    const mail = primary.value.mail?.replace('[at]', '@')
-    if (!mail) return
-
-    navigator.clipboard.writeText(mail).then(() => {
-        addToast({
-            id: 'email_clipboard',
-            type: 'success',
-            message: t('email.copied__success'),
-            duration: 2000,
-        })
-    }).catch((error) => {
-        console.log('error', error)
-    })
-}
+    return primary.value.body[0]
+})
 </script>
 
 <template>
     <VSlice
         :slice="slice"
+        :class="$style.root"
+        class="grid"
     >
-        <VHeadSection
-            :title="primary.title"
-            :link-label="primary.link_label"
-            :link-reference="linkReference"
-        />
-        <VText
-            v-if="primary.content"
-            :class="$style.content"
-            :content="primary.content"
-            class="text-body-md"
-        />
-        <button
-            v-if="primary.mail"
-            :class="$style.mail"
-            class="text-h4"
-            @click="copyToClipBoard"
-        >
-            {{ primary.mail }}
-        </button>
-        <div
-            :class="$style.wave"
-            data-text="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        <VSectionTitle
+            v-if="primary.title"
+            :label="primary.title"
+            :class="$style.title"
         />
         <div
-            v-if="primary.phone"
-            :class="$style.phone"
-            class="text-h5"
+            v-if="bodyContent"
+            :class="$style.body"
         >
-            {{ primary.phone }}
-        </div>
-        <Teleport to="#teleports">
-            <VToast
-                v-if="toastMessage"
-                :message="toastMessage"
+            <div :class="$style.title">
+                {{ bodyContent.title }}
+            </div>
+            <VText
+                v-if="bodyContent.content"
+                :content="bodyContent.content"
             />
-        </Teleport>
+        </div>
+        <VSocials
+            :class="$style.socials"
+            display-label
+            filter
+        />
     </VSlice>
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-@use "assets/scss/mixins/include-media" as *;
+.root {
+    align-items: flex-start;
+}
 
-.content {
-    max-width: 48ch;
-    margin-top: rem(44);
+.title {
     grid-column: 1 / -1;
 
     @include media('>=lg') {
-        grid-column: 1 / 6;
+        grid-column: 1 / span 4;
     }
 }
 
-.mail {
-    display: block;
-    border: none;
-    margin-top: rem(130);
-    background-color: initial;
-    color: inherit;
-    cursor: pointer;
-    margin-inline: auto;
-    text-align: center;
-}
+.body {
+    grid-column: 1 / -1;
 
-.wave {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    width: 150px;
-    height: rem(40);
-    align-items: center;
-    justify-content: center;
-    font-size: rem(40);
-    margin-inline: auto;
-
-     &::before {
-         position: absolute;
-         width: 100%;
-         animation: animate 1.5s linear infinite;
-         color: transparent;
-         content: attr(data-text);
-         text-decoration-color: var(--theme-color-primary);
-         text-decoration-line: underline;
-         text-decoration-style: wavy;
-         translate: 0 -0.5lh;
-     }
-}
-
-@keyframes animate {
-    0% {
-        translate: 0 -0.5lh;
-    }
-
-    100% {
-        translate: -25% -0.5lh;
+    @include media('>=lg') {
+        grid-column: 6 / span 4;
     }
 }
 
-.phone {
-    text-align: center;
+.title {
+    text-transform: uppercase;
+}
+
+.socials {
+    grid-column: 1 / -1;
+    flex-direction: column;
+    width: fit-content;
+    gap: rem(8);
+    text-transform: uppercase;
+
+    @include media('>=lg') {
+        grid-column: 11 / -1;
+    }
 }
 </style>

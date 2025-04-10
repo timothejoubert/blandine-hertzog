@@ -6,12 +6,7 @@ import { getText } from '~/utils/prismic/prismic-rich-field'
 // The array passed to `getSliceComponentProps` is purely optional.
 // Consider it as a visual hint for you when templating your slice.
 const props = defineProps(
-    getSliceComponentProps<Content.ContentSliceSlice>([
-        'slice',
-        'index',
-        'slices',
-        'context',
-    ]),
+    getSliceComponentProps<Content.ContentSliceSlice>(),
 )
 
 const contents = computed(() => {
@@ -40,6 +35,7 @@ const imgSizes = computed(() => {
     <VSlice
         :slice="slice"
         :class="rootClasses"
+        class="grid-width"
         :style="{ '--content-slice-column-length': contents.length }"
     >
         <template

@@ -5,11 +5,6 @@ import { getHtmlElement, type TemplateElement } from '~/utils/ref/get-html-eleme
 
 const { documentData } = await useFetchPage<HomePageDocument>('home_page')
 
-const slices = computed(() => {
-    const slideKey = Object.keys(documentData.value).findLast(dataKey => dataKey.includes('slice')) || 'slices'
-    return documentData.value?.[slideKey] || []
-})
-
 const { open } = useMediaViewer()
 
 const isPaused = ref(false)
@@ -87,15 +82,14 @@ function OpenMediaViewer() {
                 >
                     <VIcon
                         name="fullscreen"
-                        width="20"
-                        height="20"
+                        size="1.2rem"
                     />
                 </button>
             </div>
         </header>
         <LazySliceZone
-            v-if="slices?.length"
-            :slices="slices"
+            v-if="documentData.slices?.length"
+            :slices="documentData.slices"
             :components="components"
             wrapper="main"
         />

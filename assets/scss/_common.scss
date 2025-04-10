@@ -5,15 +5,16 @@ html {
     background-color: var(--theme-color-background);
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
-
-    --spacing-over-title-padding-block: #{rem(16)};
 }
 
 body {
     margin: initial;
-    font-family: $font-hanken-grostesk-family;
+    padding: initial;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
+    font-family: $font-hanken-grostesk-family
 }
 
 *:focus-visible {

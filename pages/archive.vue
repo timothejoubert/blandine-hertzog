@@ -1,10 +1,8 @@
 <script  lang="ts" setup>
-import type { PageComponentProps } from '~/types/app'
 import { parseDate } from '~/utils/prismic/prismic-date'
-import type { ProjectPageDocument } from '~/prismicio-types'
+import type { ArchivePageDocument, ProjectPageDocument } from '~/prismicio-types'
 
-const props = defineProps<PageComponentProps<'archive_page'>>()
-// const data = computed(() => props.document.data)
+const { document } = await useFetchPage<ArchivePageDocument>('home_page')
 
 const projects = await usePrismicArchivedProjects()
 
@@ -30,13 +28,11 @@ const projectGroups = computed(() => {
         return Number(bKey) - Number(aKey)
     }).map(([key, value]) => ({ year: key, projects: value }))
 })
-
-const mainId = computed(() => props.document.id)
 </script>
 
 <template>
     <main
-        :id="mainId"
+        :id="document?.id"
         class="grid"
         :class="$style.root"
     >
@@ -68,8 +64,6 @@ const mainId = computed(() => props.document.id)
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-
 .root {
     margin-top: rem(120);
 }
