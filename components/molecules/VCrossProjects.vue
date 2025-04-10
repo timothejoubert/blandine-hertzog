@@ -1,7 +1,7 @@
 <script  lang="ts" setup="">
 import type { ProjectPageDocument } from '~/prismicio-types'
-import { useLinkResolver } from '~/composables/use-link-resolver'
-import { prismicDocumentName } from '~/constants/prismic-page'
+// import { useLinkResolver } from '~/composables/use-link-resolver'
+// import { prismicDocumentName } from '~/constants/prismic-page'
 
 const props = defineProps<{
     activeProjectDocument?: ProjectPageDocument

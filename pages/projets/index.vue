@@ -123,20 +123,20 @@ const renderedProjects = computed(() => {
 }
 
 .reset {
-    cursor: pointer;
-    background-color: initial;
-    color: inherit;
-    border: none;
     display: flex;
     align-items: center;
+    border: none;
+    background-color: initial;
+    color: inherit;
+    cursor: pointer;
+    font-size:  rem(14);
     gap: rem(4);
     text-transform: uppercase;
-    font-size:  rem(14);
     transition: opacity 0.3s;
 
     &[disabled] {
-        opacity: 0.6;
         cursor: initial;
+        opacity: 0.6;
     }
 }
 

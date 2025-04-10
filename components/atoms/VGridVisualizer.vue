@@ -42,8 +42,8 @@ useEventListener('keydown', (e) => {
 }
 
 .item {
+    min-height: 100%;
     background-color: rgba(255, 0, 0, 10%);
     list-style: none;
-    min-height: 100%;
 }
 </style>

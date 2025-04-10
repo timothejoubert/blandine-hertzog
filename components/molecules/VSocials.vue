@@ -57,8 +57,8 @@ const socials = computed(() => {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: var(--v-socials-link-padding);
     color: inherit;
     text-decoration: none;
-    padding: var(--v-socials-link-padding);
 }
 </style>

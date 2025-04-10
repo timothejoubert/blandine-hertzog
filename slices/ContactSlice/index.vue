@@ -72,10 +72,10 @@ const bodyContent = computed(() => {
 }
 
 .socials {
-    grid-column: 1 / -1;
-    flex-direction: column;
     width: fit-content;
+    flex-direction: column;
     gap: rem(8);
+    grid-column: 1 / -1;
     text-transform: uppercase;
 
     @include media('>=lg') {

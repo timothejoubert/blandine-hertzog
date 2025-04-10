@@ -47,10 +47,10 @@ const inputs = computed(() => {
 
 <style lang="scss" module>
 .root {
-    padding: inherit;
-    border: none;
     display: flex; // display: flex; not working with fieldset
     align-items: center;
+    padding: inherit;
+    border: none;
     column-gap: rem(12);
 }
 

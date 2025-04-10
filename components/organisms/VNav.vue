@@ -99,9 +99,9 @@ watch(page, () => {
     font-family: $font-hanken-grostesk-family;
     font-size: rem(15);
     font-weight: 600;
+    text-decoration-color: transparent;
     text-transform: uppercase;
     text-underline-offset: 6px;
-    text-decoration-color: transparent;
 
     &[aria-current="page"] {
         text-decoration-color: color-mix(in srgb, var(--theme-color-on-background), transparent 60%);

@@ -33,10 +33,10 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
 
     &::before {
         position: absolute;
-        inset: 0;
-        content: '';
         backdrop-filter: blur(1px);
         background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
+        content: '';
+        inset: 0;
     }
 }
 

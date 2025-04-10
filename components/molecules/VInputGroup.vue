@@ -65,8 +65,8 @@ function isChecked(value: string) {
 .root {
     display: inline-flex;
     align-items: center;
-    gap: rem(2);
     cursor: pointer;
+    gap: rem(2);
 }
 
 .input {
@@ -78,8 +78,8 @@ function isChecked(value: string) {
 // }
 
 .label {
-    opacity: 0.6;
     cursor: inherit;
+    opacity: 0.6;
 
     .root:has(input:checked) & {
         opacity: 1;
