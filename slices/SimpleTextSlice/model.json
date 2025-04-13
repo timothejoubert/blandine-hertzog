@@ -1,0 +1,49 @@
+{
+  "id": "simple_text_slice",
+  "type": "SharedSlice",
+  "name": "SimpleTextSlice",
+  "description": "SimpleTextSlice",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "content",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "spacing": {
+          "type": "Select",
+          "config": {
+            "label": "Spacing",
+            "placeholder": "",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ],
+            "default_value": "xs"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

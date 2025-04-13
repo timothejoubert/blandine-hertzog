@@ -20,7 +20,10 @@ const titleSplitted = computed(() => {
 </script>
 
 <template>
-    <h1 :class="$style.title">
+    <h1
+        :class="$style.title"
+        class="text-h1"
+    >
         {{ titleSplitted[0].join(' ') }}
         <VAsterixIcon
             :class="$style.asterix"
@@ -42,12 +45,8 @@ const titleSplitted = computed(() => {
     justify-content: space-between;
     margin-top: 1%;
     margin-bottom: -1.5%;
-    font-family: $font-mango-family;
-    font-weight: 800;
     margin-block: 0;
     text-transform: uppercase;
-
-    @include font-size-fluid((xs: 60, xl: 280));
 }
 
 .asterix {

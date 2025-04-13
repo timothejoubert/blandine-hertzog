@@ -1,8 +1,7 @@
-import type { AllDocumentTypes } from '~/prismicio-types'
 import { prismicDocumentRoutes } from '~/constants/prismic-page'
-import type { PrismicDocumentType } from '~/types/api'
+import type { PrismicDocumentType, ReachableDocument } from '~/types/api'
 
-export async function useFetchPage<T extends AllDocumentTypes>(type?: PrismicDocumentType) {
+export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDocumentType) {
     const route = useRoute()
     const internalRouteType = type || prismicDocumentRoutes.find(registerPrismicRoute => registerPrismicRoute.name === route.name)?.type
 

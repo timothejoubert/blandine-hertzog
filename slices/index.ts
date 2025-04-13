@@ -12,4 +12,7 @@ export const components = defineSliceZoneComponents({
     services_slice: defineAsyncComponent(
         () => import('./ServicesSlice/index.vue'),
     ),
+    simple_text_slice: defineAsyncComponent(
+        () => import('./SimpleTextSlice/index.vue'),
+    ),
 })

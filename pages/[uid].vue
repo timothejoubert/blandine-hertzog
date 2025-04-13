@@ -1,11 +1,21 @@
 <script lang="ts" setup>
-const { documentData } = await useFetchPage()
+import { components } from '~/slices'
+
+const { documentData } = await useFetchPage('default_page')
 </script>
 
 <template>
     <div>
-        <div>default [uid] page</div>
-        <pre>{{ documentData }}</pre>
+        <VPageTitle
+            v-if="documentData.title"
+            :title="documentData.title"
+        />
+        <LazySliceZone
+            v-if="documentData.slices?.length"
+            :slices="documentData.slices"
+            wrapper="main"
+            :components="components"
+        />
     </div>
 </template>
 

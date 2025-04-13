@@ -4,7 +4,10 @@ import type * as prismic from '@prismicio/client'
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] }
 
-type ArchivePageDocumentDataSlicesSlice = ContentSliceSlice
+type ArchivePageDocumentDataSlicesSlice =
+    | ContactSliceSlice
+    | SimpleTextSliceSlice
+    | ContentSliceSlice
 
 /**
  * Content for Archive Page documents
@@ -102,7 +105,10 @@ export type ArchivePageDocument<Lang extends string = string> =
       Lang
   >
 
-type DefaultPageDocumentDataSlicesSlice = never
+type DefaultPageDocumentDataSlicesSlice =
+    | ContactSliceSlice
+    | ContentSliceSlice
+    | SimpleTextSliceSlice
 
 /**
  * Content for Default page documents
@@ -1359,6 +1365,72 @@ export type ServicesSliceSlice = prismic.SharedSlice<
     ServicesSliceSliceVariation
 >
 
+/**
+ * Primary content in *SimpleTextSlice → Default → Primary*
+ */
+export interface SimpleTextSliceSliceDefaultPrimary {
+    /**
+   * Title field in *SimpleTextSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: simple_text_slice.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+    title: prismic.KeyTextField
+
+    /**
+   * content field in *SimpleTextSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: simple_text_slice.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+    content: prismic.RichTextField
+
+    /**
+   * Spacing field in *SimpleTextSlice → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: xs
+   * - **API ID Path**: simple_text_slice.default.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+    spacing: prismic.SelectField<'xs' | 'sm' | 'md' | 'lg', 'filled'>
+}
+
+/**
+ * Default variation for SimpleTextSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SimpleTextSliceSliceDefault = prismic.SharedSliceVariation<
+    'default',
+    Simplify<SimpleTextSliceSliceDefaultPrimary>,
+    never
+>
+
+/**
+ * Slice variation for *SimpleTextSlice*
+ */
+type SimpleTextSliceSliceVariation = SimpleTextSliceSliceDefault
+
+/**
+ * SimpleTextSlice Shared Slice
+ *
+ * - **API ID**: `simple_text_slice`
+ * - **Description**: SimpleTextSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SimpleTextSliceSlice = prismic.SharedSlice<
+    'simple_text_slice',
+    SimpleTextSliceSliceVariation
+>
+
 declare module '@prismicio/client' {
     interface CreateClient {
         (
@@ -1429,6 +1501,10 @@ declare module '@prismicio/client' {
             ServicesSliceSliceDefaultPrimary,
             ServicesSliceSliceVariation,
             ServicesSliceSliceDefault,
+            SimpleTextSliceSlice,
+            SimpleTextSliceSliceDefaultPrimary,
+            SimpleTextSliceSliceVariation,
+            SimpleTextSliceSliceDefault,
         }
     }
 }
