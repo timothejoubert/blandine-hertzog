@@ -1,6 +1,6 @@
 {
   "name": "Blandine Hertzog",
-  "short_name": "B.H",
+  "short_name": "BH",
   "icons": [
     {
       "src": "./web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#161A2B",
+  "background_color": "#161A2B",
   "display": "standalone"
 }

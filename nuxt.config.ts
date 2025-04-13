@@ -24,11 +24,11 @@ export default defineNuxtConfig({
                 class: 'app',
             },
             link: [
-                { rel: 'icon', href: '/favicon/favicon.svg' },
-                { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon/favicon-96x96.png' },
-                { rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png' },
-                { rel: 'manifest', href: '/favicon/site.webmanifest' },
-                { rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#fff' },
+                { rel: 'icon', href: '/favicon.svg' },
+                { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
+                { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+                { rel: 'manifest', href: '/site.webmanifest' },
+                { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#fff' },
             ],
             script: [
                 {
