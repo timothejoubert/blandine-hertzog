@@ -12,10 +12,11 @@ const titleSplitted = computed(() => {
             acc[0].push(curr)
         }
         else {
-            acc.push([curr])
+            acc[1].push(curr)
         }
+
         return acc
-    }, [[]] as string[][])
+    }, [[], []] as string[][])
 })
 </script>
 
@@ -29,7 +30,7 @@ const titleSplitted = computed(() => {
             :class="$style.asterix"
             aria-hidden="true"
         />
-        {{ titleSplitted[1].join('') }}
+        {{ titleSplitted[1].join(' ') }}
     </h1>
 </template>
 
@@ -43,9 +44,8 @@ const titleSplitted = computed(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1%;
-    margin-bottom: -1.5%;
-    margin-block: 0;
+    margin-top: 2%;
+    margin-bottom: -2%;
     text-transform: uppercase;
 }
 

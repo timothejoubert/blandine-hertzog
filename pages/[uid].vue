@@ -9,6 +9,7 @@ const { documentData } = await useFetchPage('default_page')
         <VPageTitle
             v-if="documentData.title"
             :title="documentData.title"
+            class="grid-width"
         />
         <LazySliceZone
             v-if="documentData.slices?.length"
