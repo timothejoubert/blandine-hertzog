@@ -34,16 +34,16 @@ const primary = computed(() => props.slice.primary)
 .root {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+            justify-content: center;
 }
 
 .link {
+    z-index: 1;
 	display: block;
 	color: inherit;
-	text-align: center;
 	margin-inline: auto;
+	text-align: center;
 	text-decoration: none;
-    z-index: 1;
 }
 
 .pill {

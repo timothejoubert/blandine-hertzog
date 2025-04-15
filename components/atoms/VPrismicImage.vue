@@ -35,7 +35,11 @@ export default defineComponent({
 
         const isPicture = computed(() => !!slots.default || props.tag === 'picture')
         const src = computed(() => {
-            const src = document.value?.thumbnail?.relativePath || document.value?.url || document.value?.src || props.src
+            const src = document.value?.thumbnail?.relativePath 
+                || document.value?.url 
+                || document.value?.src 
+                || props.src
+                
             if (!src) return
 
             const queryIndex = src.indexOf('?')

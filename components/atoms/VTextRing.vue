@@ -46,12 +46,12 @@ const rootStyle = computed(() => {
 
 <style lang="scss" module>
 .root {
-	color: var(--theme-color-primary);
-	font-family: monospace;
-	text-transform: uppercase;
-	font-size: calc(var(--font-size, 1) * 1rem);
 	position: var(--v-text-ring-position, relative);
 	animation: spin 15s infinite linear var(--v-text-ring-animation-play-state, paused);
+	color: var(--theme-color-primary);
+	font-family: monospace;
+	font-size: calc(var(--font-size, 1) * 1rem);
+	text-transform: uppercase;
 
 	@media (prefers-reduced-motion: reduce) {
 		animation: none;
@@ -65,10 +65,10 @@ const rootStyle = computed(() => {
 }
 
 .char {
-	display: inline-block;
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	display: inline-block;
 	transform:
 		translate(-50%, -50%)
 		rotate(calc(var(--inner-angle) * var(--char-index)))

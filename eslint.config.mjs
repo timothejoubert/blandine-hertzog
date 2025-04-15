@@ -17,12 +17,12 @@ export default withNuxt(
         'vue/multi-word-component-names': 'off',
     },
 }).override('nuxt/stylistic', {
+    files: ['slices/**.vue'],
     rules: {
-        '@stylistic/indent': ['error', 4],
         '@stylistic/function-paren-newline': ['error', 'consistent'],
-        'no-tabs': 0,
-        // '@stylistic/allowIndentationTabs': ['off'],
         // '@stylistic/indent': ['error', 4],
+        // 'no-tabs': 0,
+        // '@stylistic/allowIndentationTabs': ['off'],
         // '@stylistic/quotes': ['error', 'single', { allowTemplateLiterals: true }],
         // '@stylistic/semi': ['error', 'never'],
     },
@@ -44,14 +44,21 @@ export default withNuxt(
         }],
     },
 }).append({
-    files: ['**/*.ts', '**/*.js', '**/*.mjs', '**/*.jsx', '**/*.tsx'],
+    files: ['**/layouts/default.vue'],
     rules: {
-        '@stylistic/max-len': ['warn', {
-            code: 120,
-            ignoreUrls: true,
-            ignoreStrings: true,
-            ignoreTemplateLiterals: true,
-            ignoreTrailingComments: true,
-        }],
+        'vue/no-multiple-template-root': 'off',
     },
 })
+
+// .append({
+//     files: ['**/*.ts', '**/*.js', '**/*.mjs', '**/*.jsx', '**/*.tsx'],
+//     rules: {
+//         '@stylistic/max-len': ['warn', {
+//             code: 120,
+//             ignoreUrls: true,
+//             ignoreStrings: true,
+//             ignoreTemplateLiterals: true,
+//             ignoreTrailingComments: true,
+//         }],
+//     },
+// })

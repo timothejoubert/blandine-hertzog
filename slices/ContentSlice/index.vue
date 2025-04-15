@@ -99,6 +99,7 @@ const rootClasses = computed(() => {
 
     &--text {
         max-width: 44ch;
+
         // margin-block: fluid((xs: 50, xl: 110));
     }
 

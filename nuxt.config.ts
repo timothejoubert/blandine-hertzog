@@ -198,12 +198,12 @@ export default defineNuxtConfig({
         },
     },
     robots: {
-    // provide simple disallow rules for all robots `user-agent: *`
+        // provide simple disallow rules for all robots `user-agent: *`
         disallow: ['/slice-simulator', '/slice-smulator', '/prismic-preview'],
     },
     // https://www.nuxtseo.com/sitemap/getting-started/installation
     sitemap: {
-    // enabled: !isGenerateMaintenance,
+        // enabled: !isGenerateMaintenance,
         exclude: ['/slice-simulator', '/slice-smulator', '/prismic-preview'],
     },
     // https://github.com/rezozero/nuxt-stories

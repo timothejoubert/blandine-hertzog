@@ -19,9 +19,9 @@ defineProps<{
     --v-text-ring-position: absolute;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: rem(125);
     height: rem(125);
+    align-items: center;
+    justify-content: center;
 }
 </style>

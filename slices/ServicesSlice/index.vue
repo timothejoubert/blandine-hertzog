@@ -83,7 +83,7 @@ const activeService = ref(0)
     position: relative;
     width: 100%;
     grid-column: 1 / -1;
-    margin-block: 180px 180px;
+    margin-block: 180px;
 
     @include media('>=vl') {
         grid-column: 3 / -3;

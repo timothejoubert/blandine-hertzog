@@ -119,8 +119,8 @@ const renderedProjects = computed(() => {
 
 .content {
     max-width: 50ch;
-    margin-block: initial;
     margin-top: rem(60);
+    margin-block: initial;
 }
 
 .filters {
