@@ -6,9 +6,10 @@ import elementId from '~/constants/element-id'
 // const splashScreenState = useSplashScreen()
 
 const route = useRoute()
+const isSliceSimulatorRoute = computed(() => route.name === 'slice-simulator')
 
 callOnce(async () => {
-    if(route.name !== 'slice-simulator')  await useFetchPage()
+    if(!isSliceSimulatorRoute.value) await useFetchPage()
 })
 
 const theme = useUiThemeState()
@@ -29,7 +30,7 @@ const commonSlices = computed(() => settings?.data.slices)
 
     <!-- <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
 
-    <VTopBar />
+    <VTopBar v-if="!isSliceSimulatorRoute" />
     <slot>
         <NuxtPage :id="elementId?.PAGE_CONTENT" />
     </slot>
