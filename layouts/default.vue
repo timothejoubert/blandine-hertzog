@@ -5,7 +5,11 @@ import elementId from '~/constants/element-id'
 
 // const splashScreenState = useSplashScreen()
 
-await useFetchPage()
+const route = useRoute()
+
+callOnce(async () => {
+    if(route.name !== 'slice-simulator')  await useFetchPage()
+})
 
 const theme = useUiThemeState()
 const primaryColor = computed(() => themeProperties[`${theme.value}-color-primary`])
