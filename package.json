@@ -30,6 +30,7 @@
         "@prismicio/types": "^0.2.9",
         "@rezo-zero/nuxt-stories": "^0.1.18",
         "@slicemachine/adapter-nuxt": "^0.3.73",
+        "@stylistic/eslint-plugin": "^4.2.0",
         "@types/lodash": "^4.17.16",
         "@vueuse/core": "^13.0.0",
         "@vueuse/nuxt": "^13.0.0",

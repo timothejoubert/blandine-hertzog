@@ -14,7 +14,8 @@ const sliceData = computed(() => props.slice.primary)
     <VSlice
         :slice="slice"
         class="grid"
-        :class="[$style.root, $style[`root--spacing-block-${sliceData.spacing}`]]"
+        :spacing="sliceData.spacing"
+        :class="$style.root"
     >
         <div
             v-if="sliceData.title"
@@ -27,33 +28,15 @@ const sliceData = computed(() => props.slice.primary)
             v-if="sliceData.content"
             :content="sliceData.content"
             :class="$style.content"
-            class="text-body-lg"
+            class="text-body-md"
             tag="p"
         />
     </VSlice>
 </template>
 
 <style lang="scss" module>
-@use "assets/scss/mixins/property-fluid" as *;
-
 .root {
     row-gap: rem(18);
-
-    &--spacing-block-xs {
-      @include property-fluid('margin-block', (xs: 10, xl: 24));
-    }
-
-    &--spacing-block-sm {
-      @include property-fluid('margin-block', (xs: 24, xl: 48));
-    }
-
-    &--spacing-block-md {
-      @include property-fluid('margin-block', (xs: 48, xl: 96));
-    }
-
-    &--spacing-block-lg {
-      @include property-fluid('margin-block', (xs: 96, xl: 144));
-    }
 }
 
 .title {

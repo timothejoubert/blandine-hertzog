@@ -8,19 +8,6 @@
 				"value": "bus",
 				"type": "Text"
 			},
-			"internal_page": {
-				"key": "97f2cf60-03a1-4843-bb16-5e6be53d6cf2",
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "DocumentLink",
-					"id": "mock_document_id"
-				}
-			},
-			"link_label": {
-				"__TYPE__": "FieldContent",
-				"value": "negative",
-				"type": "Text"
-			},
 			"custom_projects": {
 				"__TYPE__": "GroupContentType",
 				"value": [
@@ -42,10 +29,10 @@
 					}
 				]
 			},
-			"externa_url": {
+			"automatic_projects_length": {
 				"__TYPE__": "FieldContent",
-				"value": "body",
-				"type": "Text"
+				"value": "69",
+				"type": "Number"
 			}
 		},
 		"items": []

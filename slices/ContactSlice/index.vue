@@ -7,7 +7,6 @@ const props = defineProps(
 )
 const primary = computed(() => props.slice.primary)
 
-console.log(primary.value)
 const bodyContent = computed(() => {
     if (!isFilled.group(primary.value.body)) return
 
@@ -20,6 +19,7 @@ const bodyContent = computed(() => {
         :slice="slice"
         :class="$style.root"
         class="grid"
+        spacing="xl"
     >
         <VSectionTitle
             v-if="primary.title"

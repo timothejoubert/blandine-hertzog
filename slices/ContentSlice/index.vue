@@ -3,70 +3,70 @@ import type { Content } from '@prismicio/client'
 import VPrismicVideo from '~/components/atoms/VPrismicVideo.vue'
 import { getText } from '~/utils/prismic/prismic-rich-field'
 
-// The array passed to `getSliceComponentProps` is purely optional.
-// Consider it as a visual hint for you when templating your slice.
 const props = defineProps(
     getSliceComponentProps<Content.ContentSliceSlice>(),
 )
 
-const contents = computed(() => {
-    return props.slice.primary.contents.filter((item) => {
-        return item.embed_video_url?.embed_url || item.image?.url || getText(item.text) || item.external_url
+const primary = computed(() => props.slice.primary)
+
+const columns = computed(() => {
+    return primary.value.columns?.filter((item) => {
+        return item.embed?.embed_url || item.image?.url || getText(item.text) || item.external_url
     }) || []
 })
 
-const itemLength = computed(() => contents.value.length)
-
-const $style = useCssModule()
-
-const rootClasses = computed(() => {
-    return [$style.root, $style[`root--layout-${itemLength.value}`]]
-})
+const columnLength = computed(() => columns.value.length)
 
 const imgSizes = computed(() => {
-    if (itemLength.value === 2) return 'xs:90vw sm:90vw md:90vw lg:35vw vl:35vw xl:35vw xxl:35vw hd:35vw qhd:35vw'
-    if (itemLength.value === 3) return 'xs:90vw sm:90vw md:90vw lg:22vw vl:22vw xl:22vw xxl:22vw hd:22vw qhd:22vw'
+    if (columnLength.value === 2) return 'xs:90vw md:90vw lg:35vw xl:35vw xxl:35vw qhd:35vw'
+    else if (columnLength.value === 3) return 'xs:90vw md:90vw lg:22vw xl:22vw xxl:22vw qhd:22vw'
+    else return 'xs:90vw md:90vw lg:75vw vl:75vw xl:75vw xxl:75vw qhd:75vw'
+})
 
-    return 'xs:90vw sm:90vw md:90vw lg:75vw vl:75vw xl:75vw xxl:75vw hd:75vw qhd:75vw'
+const $style = useCssModule()
+const rootClasses = computed(() => {
+    return [$style.root, $style[`root--layout-${columnLength.value}`]]
 })
 </script>
 
 <template>
     <VSlice
         :slice="slice"
+        tag="div"
         :class="rootClasses"
+        :spacing="primary.spacing"
         class="grid-width"
-        :style="{ '--content-slice-column-length': contents.length }"
+        :style="{ '--content-slice-column-length': columnLength }"
     >
         <template
-            v-for="(item, columnIndex) in contents"
+            v-for="(column, columnIndex) in columns"
             :key="columnIndex"
         >
             <VPrismicVideo
-                v-if="item.embed_video_url?.embed_url"
-                :embed-field="item.embed_video_url"
+                v-if="column.embed?.embed_url"
+                :embed-field="column.embed"
                 :thumbnail="{
-                    document: item.image,
+                    document: column.image,
                     sizes: imgSizes,
                 }"
                 :class="[$style.item, $style['item--video']]"
             />
             <VPrismicImage
-                v-else-if="item.image?.url"
-                :document="item.image"
+                v-else-if="column.image?.url"
+                :document="column.image"
                 :class="[$style.item, $style['item--image']]"
                 :copyright="true"
                 :sizes="imgSizes"
             />
             <VText
-                v-if="item.text"
-                :content="item.text"
+                v-if="column.text"
+                :content="column.text"
                 class="text-body-md"
                 :class="[$style.item, $style['item--text']]"
             />
             <VPrismicLink
-                v-if="item.external_url"
-                :to="item.external_url"
+                v-if="column.external_url"
+                :to="column.external_url"
                 label="Static link label"
                 :class="[$style.item, $style['item--link']]"
             />
@@ -74,9 +74,7 @@ const imgSizes = computed(() => {
     </VSlice>
 </template>
 
-<style lang="scss" module="">
-@use "assets/scss/mixins/include-media" as *;
-@use "assets/scss/functions/rem" as *;
+<style lang="scss" module>
 @use "assets/scss/functions/fluid" as *;
 
 .root {
@@ -101,7 +99,7 @@ const imgSizes = computed(() => {
 
     &--text {
         max-width: 44ch;
-        margin-block: fluid((xs: 50, xl: 110));
+        // margin-block: fluid((xs: 50, xl: 110));
     }
 
     &--link {

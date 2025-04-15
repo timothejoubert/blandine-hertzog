@@ -36,6 +36,13 @@
           "thumbnails": []
         }
       },
+      "client": {
+        "type": "Text",
+        "config": {
+          "label": "Client",
+          "placeholder": ""
+        }
+      },
       "archived": {
         "type": "Boolean",
         "config": {
@@ -57,6 +64,15 @@
         "config": {
           "label": "Creation date",
           "placeholder": ""
+        }
+      },
+      "credits": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Credits",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,strong,em,hyperlink"
         }
       },
       "link": {
@@ -86,20 +102,21 @@
           }
         }
       },
-      "credits": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Credits",
-          "placeholder": "",
-          "allowTargetBlank": true,
-          "multi": "paragraph,strong,em,hyperlink"
-        }
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "simple_text_slice": {
+              "type": "SharedSlice"
+            },
+            "content_slice": {
+              "type": "SharedSlice"
+            },
+            "cta_slice": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },
@@ -128,19 +145,6 @@
           "thumbnails": []
         },
         "type": "Image"
-      }
-    },
-    "Slices": {
-      "slices2": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "content_slice": {
-              "type": "SharedSlice"
-            }
-          }
-        }
       }
     }
   }

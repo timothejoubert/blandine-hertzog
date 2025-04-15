@@ -69,21 +69,15 @@
           }
         }
       },
-      "logo": {
-        "type": "Image",
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
         "config": {
-          "label": "logo",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "showreel": {
-        "type": "Link",
-        "config": {
-          "label": "showreel",
-          "placeholder": "",
-          "select": "media",
-          "allowText": true
+          "choices": {
+            "contact_slice": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     }

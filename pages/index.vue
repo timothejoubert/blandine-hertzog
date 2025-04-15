@@ -33,7 +33,10 @@ function OpenMediaViewer() {
     <div
         :class="$style.root"
     >
-        <header class="grid">
+        <header
+            class="grid"
+            :class="$style.header"
+        >
             <VPageTitle
                 v-if="documentData.title"
                 :title="documentData.title"
@@ -97,6 +100,10 @@ function OpenMediaViewer() {
 </template>
 
  <style lang="scss" module>
+.header {
+    row-gap: rem(24);
+ }
+
  .video-wrapper {
     position: relative;
     display: flex;
@@ -104,7 +111,6 @@ function OpenMediaViewer() {
     width: 100%;
     align-items: center;
     justify-content: center;
-    margin-top: rem(24);
     aspect-ratio: 375 / 300;
     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
     grid-column: 1 / -1;

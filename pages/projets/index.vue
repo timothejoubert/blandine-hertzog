@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { ProjectListingPageDocument } from '~/prismicio-types'
+import { components } from '~/slices'
 
 const { document, documentData } = await useFetchPage<ProjectListingPageDocument>('project_listing_page')
 
@@ -42,7 +43,7 @@ const renderedProjects = computed(() => {
 </script>
 
 <template>
-    <main
+    <div
         :id="document?.id"
         :class="$style.root"
     >
@@ -101,7 +102,12 @@ const renderedProjects = computed(() => {
                 {{ $t('no_result') }}
             </div>
         </main>
-    </main>
+        <LazySliceZone
+            v-if="documentData.slices?.length"
+            :slices="documentData.slices"
+            :components="components"
+        />
+    </div>
 </template>
 
 <style lang="scss" module>
@@ -114,6 +120,7 @@ const renderedProjects = computed(() => {
 .content {
     max-width: 50ch;
     margin-block: initial;
+    margin-top: rem(60);
 }
 
 .filters {

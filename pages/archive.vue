@@ -2,7 +2,7 @@
 import { parseDate } from '~/utils/prismic/prismic-date'
 import type { ArchivePageDocument, ProjectPageDocument } from '~/prismicio-types'
 
-const { document } = await useFetchPage<ArchivePageDocument>('home_page')
+const { document, documentData } = await useFetchPage<ArchivePageDocument>('archive_page')
 
 const projects = await usePrismicArchivedProjects()
 
@@ -31,36 +31,44 @@ const projectGroups = computed(() => {
 </script>
 
 <template>
-    <main
-        :id="document?.id"
-        class="grid"
-        :class="$style.root"
-    >
-        <div
-            v-for="group in projectGroups"
-            :key="group.year"
-            :class="$style['year-group']"
+    <div>
+        <VPageTitle
+            v-if="documentData?.title"
+            :title="documentData.title"
+            :class="$style.title"
+            class="grid-width"
+        />
+        <main
+            :id="document?.id"
+            class="grid"
+            :class="$style.root"
         >
             <div
-                :class="$style.year"
-                class="text-over-title-md"
+                v-for="group in projectGroups"
+                :key="group.year"
+                :class="$style['year-group']"
             >
-                {{ group.year }}
-            </div>
-            <ul
-                v-if="group.projects.length"
-                :class="$style.projects"
-            >
-                <li
-                    v-for="(project, index) in group.projects"
-                    :key="project?.uid || index"
-                    :class="$style.item"
+                <div
+                    :class="$style.year"
+                    class="text-over-title-md"
                 >
-                    <VProjectRow :project="project" />
-                </li>
-            </ul>
-        </div>
-    </main>
+                    {{ group.year }}
+                </div>
+                <ul
+                    v-if="group.projects.length"
+                    :class="$style.projects"
+                >
+                    <li
+                        v-for="(project, index) in group.projects"
+                        :key="project?.uid || index"
+                        :class="$style.item"
+                    >
+                        <VProjectRow :project="project" />
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
 </template>
 
 <style lang="scss" module>

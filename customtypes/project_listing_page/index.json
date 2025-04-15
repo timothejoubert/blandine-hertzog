@@ -34,7 +34,17 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {}
+          "choices": {
+            "simple_text_slice": {
+              "type": "SharedSlice"
+            },
+            "cta_slice": {
+              "type": "SharedSlice"
+            },
+            "contact_slice": {
+              "type": "SharedSlice"
+            }
+          }
         }
       }
     },

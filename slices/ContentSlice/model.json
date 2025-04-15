@@ -12,16 +12,33 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "contents": {
+        "spacing": {
+          "type": "Select",
+          "config": {
+            "label": "Spacing",
+            "placeholder": "",
+            "options": [
+              "none",
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "xxl"
+            ],
+            "default_value": "none"
+          }
+        },
+        "columns": {
           "type": "Group",
           "config": {
-            "label": "Contents",
+            "label": "columns",
             "repeat": true,
             "fields": {
-              "embed_video_url": {
+              "embed": {
                 "type": "Embed",
                 "config": {
-                  "label": "Embed video url",
+                  "label": "Embed video",
                   "placeholder": ""
                 }
               },

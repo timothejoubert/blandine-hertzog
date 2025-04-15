@@ -7,7 +7,10 @@ const props = defineProps(
     getSliceComponentProps<Content.ProjectFeedSliceSlice>(),
 )
 const primary = computed(() => props.slice.primary)
-const projectDocumentList = computed(() => {
+
+const allProjects = await usePrismicMainProjects()
+
+const manualProjectRelations = computed(() => {
     if (!isFilled.group(primary.value.custom_projects)) return []
 
     return primary.value.custom_projects?.filter((group) => {
@@ -15,13 +18,13 @@ const projectDocumentList = computed(() => {
     }).map(group => group.project)
 })
 
-const allProjects = await usePrismicMainProjects()
-
 const projects = computed(() => {
-    if (!projectDocumentList.value.length) return allProjects.value
+    if (!manualProjectRelations.value.length) {
+        return allProjects.value.slice(0, primary.value.automatic_projects_length || 3)
+    }
 
     // Keep same order as contentRelationField
-    return projectDocumentList.value.reduce((acc: ProjectPageDocument[], project) => {
+    return manualProjectRelations.value.reduce((acc: ProjectPageDocument[], project) => {
         const sameFilledProject = allProjects.value.find(p => p?.id === project?.id)
         if (sameFilledProject) acc.push(sameFilledProject)
         return acc

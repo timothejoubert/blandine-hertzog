@@ -19,7 +19,7 @@ const developerCopyright = computed(() => {
 })
 
 const menu = await usePrismicFooterMenuDocument()
-const links = menu.value?.data.links || []
+const links = computed(() => menu.value?.data.links || [])
 </script>
 
 <template>
@@ -72,9 +72,6 @@ const links = menu.value?.data.links || []
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/flex-grid' as *;
-@use 'assets/scss/functions/rem' as *;
-@use 'assets/scss/mixins/include-media' as *;
 @use 'assets/scss/v-footer' as *;
 
 .root {
@@ -134,7 +131,7 @@ const links = menu.value?.data.links || []
 
 .list {
     display: flex;
-    gap: rem(12);
+    gap: rem(42);
 
     @include media('>=lg') {
         justify-content: flex-end;
@@ -147,6 +144,11 @@ const links = menu.value?.data.links || []
 
 .link {
     color: inherit;
-    text-decoration: none;
+    text-decoration-color: transparent;
+    text-underline-offset: 6px;
+
+    &[aria-current="page"] {
+        text-decoration-color: color-mix(in srgb, var(--theme-color-on-background), transparent 60%);
+    }
 }
 </style>

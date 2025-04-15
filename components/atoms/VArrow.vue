@@ -40,8 +40,7 @@ export default defineComponent({
                 'to': props.to,
             }
             return h(rootTag.value, attrs,
-                h(VIcon, { class: $style.icon, name: `arrow-${props.direction}` }),
-            )
+                h(VIcon, { class: $style.icon, name: `arrow-${props.direction}` }))
         }
     },
 })

@@ -26,7 +26,7 @@ const titleSplitted = computed(() => {
         class="text-h1"
     >
         {{ titleSplitted[0].join(' ') }}
-        <VAsterixIcon
+        <VAsterisk
             :class="$style.asterix"
             aria-hidden="true"
         />
@@ -45,7 +45,7 @@ const titleSplitted = computed(() => {
     align-items: center;
     justify-content: space-between;
     margin-top: 2%;
-    margin-bottom: -2%;
+    margin-bottom: -3%;
     text-transform: uppercase;
 }
 

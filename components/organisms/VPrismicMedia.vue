@@ -1,5 +1,5 @@
 <script lang="ts">
-import { type Component, h, type PropType } from 'vue'
+import { h, type PropType } from 'vue'
 import { type VPrismicVideo, type VPrismicImage, LazyVPrismicVideo, LazyVPrismicImage } from '#components'
 import type { PossibleMedia } from '~/composables/use-prismic-media'
 
@@ -34,7 +34,11 @@ export default defineComponent({
             const result = { document: props.document }
 
             if (mediaType.value === 'video') {
-                Object.assign(result, { ...props.video, thumbnailProps: props.image })
+                Object.assign(result, {
+                    ...props.video,
+                    thumbnailProps: props.image,
+                    thumbnail: props.video?.thumbnail || props.image?.document,
+                })
             }
             else if (mediaType.value === 'image') {
                 Object.assign(result, props.image)
@@ -43,7 +47,7 @@ export default defineComponent({
             return result
         })
 
-        return () => h(tag.value as Component | string, nodeProps.value, slots)
+        return () => h(tag.value, nodeProps.value, slots)
     },
 })
 </script>

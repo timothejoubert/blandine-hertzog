@@ -4,7 +4,8 @@ import type { AllDocumentTypes, SettingsDocument, MenuDocument, FooterMenuDocume
 // Document data
 export type DocumentWithUid = IntersectDocument<AllDocumentTypes, PrismicDocumentWithUID>
 export type DocumentWithoutUid = IntersectDocument<AllDocumentTypes, PrismicDocumentWithoutUID>
-export type ReachableDocument = ExcludeDocument<AllDocumentTypes, (SettingsDocument | MenuDocument | FooterMenuDocument)>
+export type ReachableDocument =
+    ExcludeDocument<AllDocumentTypes, (SettingsDocument | MenuDocument | FooterMenuDocument)>
 
 // Document type
 export type PrismicDocumentType = ExtractDocumentType<AllDocumentTypes>

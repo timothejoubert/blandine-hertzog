@@ -35,6 +35,7 @@ const imageProps = computed(() => {
             :to="props.project"
             :class="$style.title"
             :label="title"
+            class="text-h5"
         />
         <VPrismicLink
             :to="props.project"
@@ -68,13 +69,8 @@ const imageProps = computed(() => {
 .title {
     display: block;
     color: inherit;
-    font-family: $font-mango-family;
-    font-weight: 300;
-    line-height: 0.9;
     text-decoration: none;
     text-transform: uppercase;
-
-    @include font-size-fluid((xs: 20, xl: 104));
 }
 
 .image {

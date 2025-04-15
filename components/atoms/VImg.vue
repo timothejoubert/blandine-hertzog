@@ -76,8 +76,7 @@ export default defineComponent({
                 {
                     ...options.value,
                 },
-            ),
-        )
+            ))
         const responsiveImageData = computed(() => {
             return (
                 (props.sizes || props.densities)
@@ -108,10 +107,10 @@ export default defineComponent({
                         ...(!isResponsive
                             ? { href: src.value }
                             : {
-                                    href: responsiveImageData.value.src,
-                                    imagesizes: responsiveImageData.value.sizes,
-                                    imagesrcset: responsiveImageData.value.srcset,
-                                }),
+                                href: responsiveImageData.value.src,
+                                imagesizes: responsiveImageData.value.sizes,
+                                imagesrcset: responsiveImageData.value.srcset,
+                            }),
                         ...(typeof props.preload !== 'boolean' && props.preload.fetchPriority
                             ? { fetchpriority: props.preload.fetchPriority }
                             : {}),
@@ -144,6 +143,7 @@ export default defineComponent({
 
 <style lang="scss" module>
 .root {
+    display: var(--v-img-display, block);
     max-width: var(--v-img-max-width, 100%); // responsive image
     height: var(--v-img-height, auto); // responsive image
     background: var(--v-img-background, var(--v-img-placeholder));

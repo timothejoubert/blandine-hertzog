@@ -3,12 +3,19 @@ import type {
     _RouteRecordBase,
 } from 'vue-router'
 import type { ContentRelationshipField } from '@prismicio/types'
-import { isContentRelationshipField, isPrismicDocument } from '~/utils/prismic/guard'
 import type { PrismicReachableDocumentType, ReachableDocument } from '~/types/api'
+import type { PrismicDocumentRoute } from '~/constants/prismic-page'
 import { isPrismicDocumentRoute } from '~/utils/prismic/route-resolver'
 
 export type PossibleRouteReference =
-    string | undefined | null | LocationAsRelativeRaw | _RouteRecordBase | ReachableDocument | ContentRelationshipField<PrismicReachableDocumentType> | PrismicDocumentRoute
+    string
+    | undefined
+    | null
+    | LocationAsRelativeRaw
+    | _RouteRecordBase
+    | ReachableDocument
+    | ContentRelationshipField<PrismicReachableDocumentType>
+    | PrismicDocumentRoute
 
 export function useLinkResolver(reference: PossibleRouteReference) {
     const siteUrl = useRuntimeConfig().public?.site.url
@@ -29,7 +36,7 @@ export function useLinkResolver(reference: PossibleRouteReference) {
             const { getLocalizedUrl } = useLocale()
             return getLocalizedUrl(reference.replace('/:lang?', ''))
         }
-        else if ((isContentRelationshipField(reference) || isPrismicDocument(reference)) && 'url' in reference) {
+        else if (typeof reference === 'object' && 'url' in reference) {
             return reference.url
         }
         else if (typeof reference === 'object' && 'name' in reference) {
@@ -38,7 +45,6 @@ export function useLinkResolver(reference: PossibleRouteReference) {
         // else if (typeof reference === 'object') {
         //     return router.resolve(reference as RouteLocationAsRelativeTyped)?.fullPath
         // }
-        // else if return reference
     })
 
     const isRelative = computed(() => {

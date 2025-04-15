@@ -19,28 +19,11 @@
             "placeholder": ""
           }
         },
-        "internal_page": {
-          "type": "Link",
+        "automatic_projects_length": {
+          "type": "Number",
           "config": {
-            "label": "Internal page",
-            "select": "document",
-            "customtypes": [
-              "project_listing_page"
-            ]
-          }
-        },
-        "link_label": {
-          "type": "Text",
-          "config": {
-            "label": "Link label",
-            "placeholder": ""
-          }
-        },
-        "externa_url": {
-          "type": "Text",
-          "config": {
-            "label": "Externa url",
-            "placeholder": ""
+            "label": "Automatic projects length",
+            "placeholder": "Default is 3"
           }
         },
         "custom_projects": {

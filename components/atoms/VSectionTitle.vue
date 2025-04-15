@@ -10,7 +10,7 @@ defineProps<{
         :is="rootTag || 'div'"
         :class="$style.root"
     >
-        <VAsterixIcon :class="$style.icon" />
+        <VAsterisk :class="$style.icon" />
         {{ label }}
     </component>
 </template>

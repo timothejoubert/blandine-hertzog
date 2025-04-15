@@ -56,6 +56,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "cta_slice": {
+              "type": "SharedSlice"
+            },
             "services_slice": {
               "type": "SharedSlice"
             },

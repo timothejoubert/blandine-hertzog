@@ -9,7 +9,9 @@ export type PrismicFetchDocumentsOptions = Partial<BuildQueryURLArgs>
 
 const DEFAULT_SIZE = 10
 
-export function usePrismicFetchDocuments<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType, options: PrismicFetchDocumentsOptions = {}) {
+export function usePrismicFetchDocuments<T extends AllDocumentTypes>(
+    prismicDocument: PrismicDocumentType, options: PrismicFetchDocumentsOptions = {},
+) {
     // Stored dataKey forEach different fetch endpoint and fetch options
     const hash: string[] = [prismicDocument]
     if (Object.keys(options).length) hash.push(generateHashFromObject(options))

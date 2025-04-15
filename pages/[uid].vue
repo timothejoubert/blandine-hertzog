@@ -20,6 +20,4 @@ const { documentData } = await useFetchPage('default_page')
     </div>
 </template>
 
-<style lang="scss" module>
-
-</style>
+<style lang="scss" module></style>

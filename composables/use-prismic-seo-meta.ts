@@ -15,15 +15,15 @@ export async function usePrismicSeoMeta(webResponse?: PrismicWebResponse) {
     const generateImg = useImage()
     const image = apiImgUrl
         ? generateImg(
-                apiImgUrl,
-                {
-                    fit: 'crop',
-                    width: 800,
-                },
-                {
-                    provider: 'imgix',
-                },
-            )
+            apiImgUrl,
+            {
+                fit: 'crop',
+                width: 800,
+            },
+            {
+                provider: 'imgix',
+            },
+        )
         : joinURL(runtimeConfig.public.site.url, '/assets/share.jpg')
 
     const { fullPath } = useRoute()

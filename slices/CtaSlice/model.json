@@ -1,8 +1,8 @@
 {
-  "id": "simple_text_slice",
+  "id": "cta_slice",
   "type": "SharedSlice",
-  "name": "SimpleTextSlice",
-  "description": "SimpleTextSlice",
+  "name": "CtaSlice",
+  "description": "CtaSlice",
   "variations": [
     {
       "id": "default",
@@ -19,13 +19,15 @@
             "placeholder": ""
           }
         },
-        "content": {
-          "type": "StructuredText",
+        "link": {
+          "type": "Link",
           "config": {
-            "label": "content",
+            "label": "Link",
             "placeholder": "",
+            "select": null,
             "allowTargetBlank": true,
-            "multi": "paragraph,strong,em,hyperlink"
+            "allowText": true,
+            "repeat": false
           }
         },
         "spacing": {

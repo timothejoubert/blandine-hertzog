@@ -29,7 +29,7 @@ export default defineComponent({
             )
         })
 
-        const cropDimensions = computed(() => modifiers.value?.crop?.split('x') || [])
+        const cropDimensions = computed(() => modifiers.value?.crop?.split('x') || props.ar?.split(':') || [])
         const width = computed(() => cropDimensions.value[0] || props?.width || document.value?.dimensions?.width)
         const height = computed(() => cropDimensions.value[1] || props?.height || document.value?.dimensions?.height)
 
@@ -64,15 +64,15 @@ export default defineComponent({
                 src: src.value,
                 width: width.value,
                 height: height.value,
-                alt: document.value?.alt || document.value?.name,
+                alt: props.alt || document.value?.alt || document.value?.name,
                 placeholder: document.value?.imageAverageColor || '#ddd',
                 sizes: sizes.value,
                 provider: provider.value,
                 modifiers: provider.value
                     ? {
-                            ...modifiers.value,
-                            auto: props.auto || 'format,compress',
-                        }
+                        ...modifiers.value,
+                        auto: props.auto || 'format,compress',
+                    }
                     : undefined,
             }
         })
@@ -88,10 +88,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" module>
-img.root {
-    display: block;
-}
-
 .root {
     &--copyright {
         position: relative;

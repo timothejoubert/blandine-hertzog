@@ -5,19 +5,17 @@
 		"primary": {
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "protection",
+				"value": "top",
 				"type": "Text"
 			},
-			"content": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Velit anim magna cillum irure aute elit eiusmod consectetur excepteur Lorem."
-						}
-					}
-				]
+			"link": {
+				"key": "fec0e874-63f4-40e1-a0e4-7ff027c6eeb4",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "given"
+				}
 			},
 			"spacing": {
 				"__TYPE__": "FieldContent",
