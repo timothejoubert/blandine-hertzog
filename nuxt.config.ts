@@ -85,10 +85,11 @@ export default defineNuxtConfig({
             [PREVIEW_PATH]: {
                 prerender: false,
                 ssr: false,
+                robots: false,
             },
             '/slice-simulator': {
                 prerender: false,
-                ssr: false,
+                robots: false,
             },
         },
     },
