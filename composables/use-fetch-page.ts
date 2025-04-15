@@ -3,6 +3,7 @@ import type { PrismicDocumentType, ReachableDocument } from '~/types/api'
 
 export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDocumentType) {
     const route = useRoute()
+    
     const internalRouteType = type
         || prismicDocumentRoutes.find((registerPrismicRoute) => {
             return registerPrismicRoute.name === route.name

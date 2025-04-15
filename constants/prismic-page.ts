@@ -16,7 +16,7 @@ export const prismicDocumentRoutes = [
         alias: ['/:lang?', '/:lang?/projets', '/:lang?/projects'],
     },
     {
-        name: 'projet-uid',
+        name: 'projets-uid',
         type: 'project_page',
         path: '/:lang?/projets/:uid',
         alias: ['/:lang?/projects/:uid'],

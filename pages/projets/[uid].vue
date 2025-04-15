@@ -6,11 +6,7 @@ import VCrossProjects from '~/components/molecules/VCrossProjects.vue'
 const { document, documentData } = await useFetchPage<ProjectPageDocument>('project_page')
 const { tags, date } = useProjectUtils(document.value)
 
-const slices = computed(() => {
-    const sliceKey = (Object.keys(documentData.value).findLast(dataKey => dataKey.includes('slice')) || 'slices')
-    return documentData.value?.[sliceKey] || []
-})
-
+const slices = computed(() => documentData.value?.slices || [])
 const content = computed(() => documentData.value?.short_content || documentData.value?.content)
 </script>
 
