@@ -16,8 +16,9 @@ export function useLocale() {
     })
 
     const fetchLocaleOption = computed(() => {
-        if (!extractLocaleFromUrl.value)
+        if (!extractLocaleFromUrl.value) {
             return undefined // { lang: $i18n.defaultLocale }
+        }
         else return { lang: extractLocaleFromUrl.value }
     })
 

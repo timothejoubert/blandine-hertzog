@@ -39,15 +39,17 @@ console.error('Error page:', props.error)
 </script>
 
 <template>
-    <VHeader
-        :title="title"
-        :content="message"
-    />
-    <VPrismicLink
-        :to="homeUrl"
-        :label="$t('back_home')"
-    />
-    <pre>{{ error }}</pre>
+    <NuxtLayout name="default">
+        <VHeader
+            :title="title"
+            :content="message"
+        />
+        <VPrismicLink
+            :to="homeUrl"
+            :label="$t('back_home')"
+        />
+        <pre>{{ error }}</pre>
+    </NuxtLayout>
 </template>
 
 <!-- <style lang="scss" module></style> -->

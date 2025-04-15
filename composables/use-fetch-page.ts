@@ -9,14 +9,21 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
             return registerPrismicRoute.name === route.name
         })?.type
 
+
     if (!internalRouteType) {
-        throw createError({ message: 'can\'t find internalRoute type in useFetchPage', status: 500 })
+        throw createError({ message: 'can\'t interpret route name during page fetch', status: 500 })
     }
 
     const { document, documentData, error } = await usePrismicFetchDocument<T>(internalRouteType)
 
-    if (error.value) {
-        showError(error.value)
+    if (!documentData.value) {
+        throw createError({
+            statusCode: 404,
+            message: 'Can\'t find page document',
+        })
+    }
+    else if (error.value) {
+        throw showError(error.value)
     }
 
     const currentPage = useCurrentPage()

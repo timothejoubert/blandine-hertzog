@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { components } from '~/slices'
 
-const { documentData } = await useFetchPage('default_page')
+const { document, documentData } = await useFetchPage('default_page')
 </script>
 
 <template>
-    <div>
+    <div :id="document?.id">
         <VPageTitle
             v-if="documentData.title"
             :title="documentData.title"
@@ -19,5 +19,3 @@ const { documentData } = await useFetchPage('default_page')
         />
     </div>
 </template>
-
-<style lang="scss" module></style>

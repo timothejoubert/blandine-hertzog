@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-await useFetchPage()
+const { documentData } = await useFetchPage()
 </script>
 
 <template>
-    <div>Prismic preview</div>
+    <div>
+        <div>Prismic preview</div>
+        <pre>documentData: {{ documentData }}</pre>
+    </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

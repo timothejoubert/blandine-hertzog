@@ -19,14 +19,24 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
     const { data, error } = await useAsyncData(dataKey, async () => {
         const { fetchLocaleOption } = useLocale()
 
-        if (isPreview.value && documentId.value) {
-            return await prismicClient.getByID(documentId.value, { ...fetchLocaleOption.value })
+        const options = {
+            ...fetchLocaleOption.value,
+            brokenRoute: '/404',
         }
-        else if (uid && isDynamicDocument(prismicDocument)) {
-            return await prismicClient.getByUID(prismicDocument, uid, { ...fetchLocaleOption.value })
-        }
-        else if (isExistingDocumentType(prismicDocument)) {
-            return await prismicClient.getSingle(prismicDocument, { ...fetchLocaleOption.value })
+        try {
+            if (isPreview.value && documentId.value) {
+                return await prismicClient.getByID(documentId.value, options)
+            }
+            else if (uid && isDynamicDocument(prismicDocument)) {
+                return await prismicClient.getByUID(prismicDocument, uid, options)
+            }
+            else if (isExistingDocumentType(prismicDocument)) {
+                return await prismicClient.getSingle(prismicDocument, options)
+            }
+        } catch (error) {
+            console.error('Error during Prismic document fetch', error);
+            return { data: '' }
+            
         }
     }, {
         getCachedData: (key, nuxtApp) => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key], // no re-fetch data if the key is already in the payload

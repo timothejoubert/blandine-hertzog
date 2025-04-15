@@ -1,22 +1,21 @@
 <script  lang="ts" setup>
 import { components } from '~/slices'
-
-// const splashScreenState = useSplashScreen()
 import themeProperties from '~/assets/scss/export/_themes.module.scss'
 import elementId from '~/constants/element-id'
+
+// const splashScreenState = useSplashScreen()
 
 await useFetchPage()
 
 const theme = useUiThemeState()
 const primaryColor = computed(() => themeProperties[`${theme.value}-color-primary`])
 
-// COMMON SLICE
+// COMMON SLICES
 const settings = await usePrismicSettingsDocument()
 const commonSlices = computed(() => settings?.data.slices)
 </script>
 
 <template>
-    <!-- <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
     <ClientOnly>
         <VGridVisualizer />
         <VMediaViewer />
@@ -24,8 +23,12 @@ const commonSlices = computed(() => settings?.data.slices)
         <VToast />
     </ClientOnly>
 
+    <!-- <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
+
     <VTopBar />
-    <NuxtPage :id="elementId.PAGE_CONTENT" />
+    <slot>
+        <NuxtPage :id="elementId?.PAGE_CONTENT" />
+    </slot>
     <LazySliceZone
         v-if="commonSlices?.length"
         :slices="commonSlices"
