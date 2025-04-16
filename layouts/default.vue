@@ -39,5 +39,5 @@ const commonSlices = computed(() => settings?.data.slices)
         :slices="commonSlices"
         :components="components"
     />
-    <VFooter />
+    <VFooter id="footer" />
 </template>

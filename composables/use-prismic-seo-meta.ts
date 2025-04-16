@@ -1,16 +1,17 @@
 import { joinURL } from 'ufo'
-import type { PrismicWebResponse } from '~/composables/use-prismic-fetch-document'
 import { getText } from '~/utils/prismic/prismic-rich-field'
+import type { ReachableDocument } from '~/types/api'
 
-export async function usePrismicSeoMeta(webResponse?: PrismicWebResponse) {
-    const nuxtApp = useNuxtApp()
-    const settingDocument = await usePrismicSettingsDocument()
-    const runtimeConfig = useRuntimeConfig()
+export async function usePrismicSeoMeta(document: ReachableDocument) {
+    // const settingDocument = await usePrismicSettingsDocument()
+    const configSite = useRuntimeConfig().public.site
 
-    const siteName = settingDocument?.data?.site_name || (nuxtApp.$config.siteName as string) || ''
-    const title = webResponse?.data?.meta_title || webResponse?.data?.title || siteName
-    const description = webResponse?.data?.meta_description || getText(webResponse?.data?.content)
-    const apiImgUrl = webResponse?.data?.meta_image?.url || webResponse?.data?.image?.url
+    // const siteName = settingDocument?.data?.site_name || configSite.name || ''
+    const siteName = configSite.name || ''
+    const title = document.data?.meta_title || document.data?.title || siteName
+
+    const description = document.data?.meta_description || getText(document.data?.content)
+    const apiImgUrl = document.data?.meta_image?.url || document.data?.image?.url
 
     const generateImg = useImage()
     const image = apiImgUrl
@@ -24,10 +25,10 @@ export async function usePrismicSeoMeta(webResponse?: PrismicWebResponse) {
                 provider: 'imgix',
             },
         )
-        : joinURL(runtimeConfig.public.site.url, '/assets/share.jpg')
+        : joinURL(configSite.url, '/share.jpg')
 
     const { fullPath } = useRoute()
-    const canonicalUrl = joinURL(runtimeConfig.public.site.url, fullPath)
+    const canonicalUrl = joinURL(configSite.url, fullPath)
 
     useSeoMeta({
         ogSiteName: siteName,

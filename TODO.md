@@ -1,4 +1,6 @@
 ## In progress
+- layout header page project
+- Cross project nav
 
 ## TODO
 - Nav on mobile
@@ -10,6 +12,7 @@
 
 
 ## Done
+- Use padding instead margin in VSlice (better slice-simulator view)
 - Resolve prismic document url from type
 - Embed video
 - Preview (Preview page should be build on fly and others prerender)

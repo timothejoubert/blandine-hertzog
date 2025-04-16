@@ -24,27 +24,27 @@ defineProps<{
 
 .root {
     &--spacing-block-xs {
-      @include property-fluid('margin-block', (xs: 10, xl: 24));
+      @include property-fluid('padding-block', (xs: 10, xl: 24));
     }
 
     &--spacing-block-sm {
-      @include property-fluid('margin-block', (xs: 24, xl: 48));
+      @include property-fluid('padding-block', (xs: 24, xl: 48));
     }
 
     &--spacing-block-md {
-      @include property-fluid('margin-block', (xs: 48, xl: 96));
+      @include property-fluid('padding-block', (xs: 48, xl: 96));
     }
 
     &--spacing-block-lg {
-      @include property-fluid('margin-block', (xs: 96, xl: 144));
+      @include property-fluid('padding-block', (xs: 96, xl: 144));
     }
 
     &--spacing-block-xl {
-      @include property-fluid('margin-block', (xs: 144, xl: 222));
+      @include property-fluid('padding-block', (xs: 144, xl: 222));
     }
 
     &--spacing-block-xxl {
-      @include property-fluid('margin-block', (xs: 194, xl: 322));
+      @include property-fluid('padding-block', (xs: 194, xl: 322));
     }
 }
 </style>

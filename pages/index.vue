@@ -25,7 +25,7 @@ function onVideoClicked(_event: MouseEvent) {
 }
 
 function OpenMediaViewer() {
-    open([{ src: '/assets/showreel.mp4', type: 'public_video' }])
+    open([{ src: '/showreel.mp4', type: 'public_video' }])
 }
 </script>
 
@@ -69,7 +69,7 @@ function OpenMediaViewer() {
                 </button>
                 <VVideoPlayer
                     ref="videoInstance"
-                    src="/assets/showreel.mp4"
+                    src="/showreel.mp4"
                     :class="$style.video"
                     width="1376"
                     height="627"

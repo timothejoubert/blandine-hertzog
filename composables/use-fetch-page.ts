@@ -31,5 +31,11 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
         document: document.value,
     }
 
+    usePrismicSeoMeta(document.value)
+
+    useHead({
+        title: `${documentData.value.meta_title || documentData.value.title} | ${useRuntimeConfig().public.site.name}`,
+    })
+
     return { document, documentData, error }
 }

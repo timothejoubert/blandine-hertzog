@@ -1,9 +1,9 @@
 import EventType from '~/constants/event-type'
-import type { AllDocumentTypes } from '~/prismicio-types'
+import type { ReachableDocument } from '~/types/api'
 
 export interface Page {
     title?: string
-    document?: AllDocumentTypes | null | undefined
+    document?: ReachableDocument | null | undefined
 }
 
 type UsePageOptions = Page

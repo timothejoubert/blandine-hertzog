@@ -53,6 +53,13 @@ const renderedProjects = computed(() => {
                 :title="documentData.title"
                 :class="$style.title"
             />
+            <VPrismicImage
+                v-if="documentData.image?.url"
+                :document="documentData.image"
+                :class="$style.media"
+                class="grid-width"
+                sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
+            />
             <VText
                 v-if="documentData.content"
                 :content="documentData.content"
@@ -117,10 +124,13 @@ const renderedProjects = computed(() => {
     position: relative;
 }
 
+.media {
+    margin-top: rem(60);
+}
+
 .content {
     max-width: 50ch;
-    margin-top: rem(60);
-    margin-block: initial;
+    margin-block: rem(60) 0;
 }
 
 .filters {

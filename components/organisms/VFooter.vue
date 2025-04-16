@@ -54,7 +54,7 @@ const links = computed(() => menu.value?.data.links || [])
             >
                 <li
                     v-for="(link, i) in links"
-                    :key="i"
+                    :key="`${link.label}-${i}`"
                     :class="$style.item"
                 >
                     <VPrismicLink
@@ -62,9 +62,8 @@ const links = computed(() => menu.value?.data.links || [])
                         :url="link.external_url"
                         :class="$style.link"
                         class="text-body-xs"
-                    >
-                        {{ link.label }}
-                    </VPrismicLink>
+                        :label="link.label"
+                    />
                 </li>
             </ul>
         </nav>

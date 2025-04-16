@@ -1,11 +1,12 @@
-type Theme = 'light' | 'dark'
-const DEFAULT_THEME = 'light'
-
 export function useUiThemeState() {
-    const theme = useCookie<Theme>('app_ui_theme', {
+    const config = useAppConfig()
+    const defaultTheme = config.defaultTheme
+    // type Theme = typeof config.themes[number]
+
+    const theme = useCookie<'dark' | 'light'>('app_ui_theme', {
         watch: true,
         maxAge: 24 * 60 * 60,
-        default: () => DEFAULT_THEME,
+        default: () => defaultTheme,
     })
 
     const userPrefersLight = () => window?.matchMedia?.('(prefers-color-scheme: light)').matches
@@ -18,7 +19,7 @@ export function useUiThemeState() {
             return userPrefersLight() ? 'light' : 'dark'
         }
 
-        return DEFAULT_THEME
+        return defaultTheme
     }
 
     onMounted(() => {

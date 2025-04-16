@@ -15,31 +15,30 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
     const dataKey = `page-${prismicDocument}-${uid || documentId || 'single-document'}`
 
     const prismicClient = usePrismic().client
+    const { fetchLocaleOption } = useLocale()
+    const prismicFetchOptions = {
+        ...fetchLocaleOption.value,
+        brokenRoute: '/404',
+    }
 
     const { data, error } = await useAsyncData(dataKey, async () => {
-        const { fetchLocaleOption } = useLocale()
-
-        const options = {
-            ...fetchLocaleOption.value,
-            brokenRoute: '/404',
-        }
         try {
             if (isPreview.value && documentId.value) {
-                return await prismicClient.getByID(documentId.value, options)
+                return await prismicClient.getByID(documentId.value, prismicFetchOptions)
             }
             else if (uid && isDynamicDocument(prismicDocument)) {
-                return await prismicClient.getByUID(prismicDocument, uid, options)
+                return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
             }
             else if (isExistingDocumentType(prismicDocument)) {
-                return await prismicClient.getSingle(prismicDocument, options)
-            }
+                return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
+            } 
         } catch (error) {
             console.error('Error during Prismic document fetch', error);
-            return { data: '' }
-            
+            return { data: '' }   
         }
     }, {
-        getCachedData: (key, nuxtApp) => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key], // no re-fetch data if the key is already in the payload
+        getCachedData: (key, nuxtApp) => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key],
+        dedupe: 'defer',
         deep: false,
     })
 
