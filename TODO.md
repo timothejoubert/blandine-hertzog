@@ -1,17 +1,20 @@
 ## In progress
 - layout header page project
 - Cross project nav
+- archive page
+- Responsive
+- sitemap 
 
 ## TODO
+- Schema.org (creative work)
 - Nav on mobile
 - Reveal on intersectionObserver 
-- Create VPageFactory ? 
-- Setup Github webhook on netlify
 
 ## Need review
 
 
 ## Done
+- Setup Github webhook on netlify
 - Use padding instead margin in VSlice (better slice-simulator view)
 - Resolve prismic document url from type
 - Embed video

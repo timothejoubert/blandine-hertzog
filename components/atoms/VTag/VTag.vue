@@ -2,6 +2,7 @@
 export const sizes = ['sm', 'md'] as const
 
 export const props = {
+    tag: String,
     label: String,
     size: {
         type: String as PropType<typeof sizes[number]>,
@@ -14,10 +15,11 @@ export default defineComponent({
     setup(props) {
         const $style = useCssModule()
 
-        return () => h('span', { class: [
-            $style.root,
-            props.size && $style[`root--size-${props.size}`],
-        ] }, props.label)
+        return () => h(
+            props.tag || 'span', 
+            { class: [$style.root, props.size && $style[`root--size-${props.size}`]] }, 
+            props.label
+        )
     },
 })
 </script>

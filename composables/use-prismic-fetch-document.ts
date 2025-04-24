@@ -5,7 +5,7 @@ import { usePrismicPreviewRoute } from '~/composables/use-prismic-preview-route'
 
 export type PrismicWebResponse = Awaited<ReturnType<typeof usePrismicFetchDocument>>['document']
 
-export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType) {
+export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismicDocument: PrismicDocumentType | undefined) {
     const route = useRoute()
     const routeUid = route.params?.uid || ''
     const uid = Array.isArray(routeUid) ? routeUid.at(-1) : routeUid // get the last uid when route has subPage,
@@ -26,10 +26,10 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
             if (isPreview.value && documentId.value) {
                 return await prismicClient.getByID(documentId.value, prismicFetchOptions)
             }
-            else if (uid && isDynamicDocument(prismicDocument)) {
+            else if (prismicDocument && uid && isDynamicDocument(prismicDocument)) {
                 return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
             }
-            else if (isExistingDocumentType(prismicDocument)) {
+            else if (prismicDocument && isExistingDocumentType(prismicDocument)) {
                 return await prismicClient.getSingle(prismicDocument, prismicFetchOptions)
             } 
         } catch (error) {

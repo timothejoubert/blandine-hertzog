@@ -19,31 +19,38 @@ const content = computed(() => documentData.value?.short_content || documentData
             class="grid-width"
             :class="$style.header"
         >
-            <VPageTitle
-                v-if="documentData?.title"
-                :title="documentData.title"
+            <h1
                 :class="$style.title"
-            />
-            <VText
-                v-if="content"
-                :content="content"
-                class="text-h5"
-                :class="$style['intro-text']"
-            />
-            <VTime
-                :date="date"
-                :class="$style.date"
-            />
-            <template v-if="tags.length">
+                class="text-h2"
+            >
+                {{ documentData?.title }}
+            </h1>
+            <div :class="$style.tags">
                 <VTag
                     v-for="tag in tags"
                     :key="tag"
                     :class="$style.tag"
                     :label="tag"
                 />
-            </template>
+            </div>
+            <VTime
+                :date="date"
+                :class="$style.date"
+            />
         </header>
-
+        <VPrismicImage
+            v-if="documentData.image?.url"
+            :document="documentData.image"
+            :class="$style.media"
+            class="grid-width"
+            sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
+        />
+        <VText
+            v-if="content"
+            :content="content"
+            class="text-h5 grid-width"
+            :class="$style['intro-text']"
+        />
         <LazySliceZone
             v-if="slices?.length"
             :slices="slices"

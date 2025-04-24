@@ -1,18 +1,27 @@
 <script lang="ts" setup>
-const { documentData } = await useFetchPage()
+const { document } = await usePrismicFetchDocument(undefined)
 // preview url exemple 
-// prismic-preview?token=https://blandine-hertzog.prismic.io/previews/Z_6y6BEAAC0AqEQa?websitePreviewId=ZzUxtBIAACwAI9Jj&documentId=Z0NoYBEAACoAFEKz
+// /prismic-preview?token=https://blandine-hertzog.prismic.io/previews/aApAZBEAACMAygXb?websitePreviewId=ZzUxtBIAACwAI9Jj&documentId=ZzTWWxIAACgAI0P5
 
-// prismic-preview
-// ?token=https://blandine-hertzog.prismic.io/previews/Z_6y6BEAAC0AqEQa
-// ?websitePreviewId=ZzUxtBIAACwAI9Jj
-// &documentId=Z0NoYBEAACoAFEKz
+const route = useRoute()
+if(document.value.url) {
+    await navigateTo({ 
+        path: document.value.url, 
+        query: { 
+            ...route.query, 
+        } 
+    })
+} else {
+    await navigateTo('/')
+}
 </script>
 
 <template>
     <div>
-        <div>Prismic preview</div>
-        <pre>documentData: {{ documentData }}</pre>
+        <h1 class="text-h2">
+            Preview Page...
+        </h1>
+        <pre>document: {{ document }}</pre>
     </div>
 </template>
 

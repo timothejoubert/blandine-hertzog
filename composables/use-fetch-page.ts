@@ -10,7 +10,9 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
         })?.type
 
 
-    if (!internalRouteType) {
+    const { isPreview } = usePrismicPreviewRoute()
+    
+    if (!internalRouteType && !isPreview.value) {
         throw createError({ message: 'can\'t interpret route name during page fetch', status: 500 })
     }
 
