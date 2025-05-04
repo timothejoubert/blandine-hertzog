@@ -46,7 +46,7 @@ export function usePrismicMedia(document: UsePrismicMediaDocument) {
         else if (isVideoEmbedField(doc)) return doc.embed_url
         else if (isFilledImageField(doc)) return doc.url
 
-        return 'unknown'
+        return undefined
     })
 
     return { mediaType, url }

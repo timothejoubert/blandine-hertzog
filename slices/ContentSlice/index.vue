@@ -44,9 +44,9 @@ const rootClasses = computed(() => {
         >
             <VPrismicVideo
                 v-if="column.embed?.embed_url"
-                :embed-field="column.embed"
-                :thumbnail="{
-                    document: column.image,
+                :document="column.embed"
+                :thumbnail="column.image"
+                :thumbnail-props="{
                     sizes: imgSizes,
                 }"
                 :class="[$style.item, $style['item--video']]"

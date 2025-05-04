@@ -26,9 +26,12 @@ const videoData = computed(() => {
     const embedData = {}
 
     if (isVideoEmbedField(props.document)) {
+        const embedUrl = new URL(props.document.embed_url)
+        const id = embedUrl?.pathname?.substring(1)
+
         Object.assign(embedData, {
             embedPlatform: props.document.provider_name,
-            embedId: new URL(props.document.embed_url)?.pathname?.substring(1),
+            embedId: id === 'watch' ? embedUrl.searchParams.get('v') : id,
             autoplay: hasLazyVideoPlayer.value || props.autoplay,
         })
     }
@@ -128,7 +131,7 @@ const onVideoEnded = () => (hadInteraction.value = false)
             v-if="hadInteraction"
             v-bind="videoProps"
             :autoplay="true"
-            :plyr="{ listener: { ended: onVideoEnded } }"
+            :plyr="{ listeners: { ended: onVideoEnded } }"
             :class="[$style.video, $style['video--with-thumbnail']]"
         />
     </div>
@@ -140,8 +143,6 @@ const onVideoEnded = () => (hadInteraction.value = false)
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-
 .root {
     --v-player-position: absolute;
     --v-player-height: 100%;
