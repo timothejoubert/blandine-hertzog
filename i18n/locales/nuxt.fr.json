@@ -33,5 +33,6 @@
     "error_page.not_found.body": "Oups, la page que vous recherché n'existe pas.",
     "error_page.body":  "Une erreur c'est produite, il semblerait que le développeur à fait du mauvais boulot...",
     "all_projects": "Tous les projets",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "scroll_to_top": "Défiler vers le haut"
 }

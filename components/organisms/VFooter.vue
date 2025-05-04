@@ -8,7 +8,7 @@ const appCopyright = computed(() => {
     const name = settingsDocument?.data.site_name || runtimeConfig.public.site.name
 
     const currentYear = new Date().getFullYear()
-    return `${name} © ${currentYear}`
+    return `©${currentYear} ${name}`
 })
 
 const developerCopyright = computed(() => {
@@ -66,6 +66,16 @@ const links = computed(() => menu.value?.data.links || [])
                     />
                 </li>
             </ul>
+            <a
+                href="#body"
+                :class="$style['arrow-link']"
+            >
+                <VIcon
+                    name="arrow-up"
+                    :class="$style['icon-arrow']"
+                    :aria-label="$t('scroll_to_top')"
+                />
+            </a>
         </nav>
     </footer>
 </template>
@@ -119,8 +129,12 @@ const links = computed(() => menu.value?.data.links || [])
 }
 
 .nav {
+    display: flex;
+    gap: rem(42);
     grid-column: 1 / -1;
     grid-row: 1;
+    justify-content: flex-end;
+    align-items: center;
 
     @include media('>=lg') {
         grid-column: 9 / -1;
@@ -149,5 +163,10 @@ const links = computed(() => menu.value?.data.links || [])
     &[aria-current="page"] {
         text-decoration-color: color-mix(in srgb, var(--theme-color-on-background), transparent 60%);
     }
+}
+
+.arrow-link {
+    display: contents;
+    color: var(--theme-color-on-background);
 }
 </style>
