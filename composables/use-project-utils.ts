@@ -13,15 +13,17 @@ export function useProjectUtils(project: PossibleProjectPageDocument | undefined
 
     const data = computed(() => projectFilled.value?.data)
     const tags = computed(() => projectFilled.value?.tags || [])
-
+    
     const title = computed(() => data.value?.title)
     const image = computed(() => data.value?.image?.url && data.value.image)
     const date = computed(() => data.value?.creation_date)
+    const client = computed(() => data.value?.client)
 
     return {
         image,
         title,
         date,
         tags,
+        client
     }
 }

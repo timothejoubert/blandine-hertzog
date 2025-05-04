@@ -33,6 +33,15 @@
 				"__TYPE__": "FieldContent",
 				"value": "69",
 				"type": "Number"
+			},
+			"link": {
+				"__TYPE__": "LinkContent",
+				"key": "d3608426-45c0-4cfc-a3c8-f9af2aeaf109",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://twitter.com",
+					"text": "wrapped"
+				}
 			}
 		},
 		"items": []

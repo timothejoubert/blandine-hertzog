@@ -28,7 +28,6 @@
                 "customtypes": [
                   "default_page",
                   "home_page",
-                  "project_page",
                   "project_listing_page",
                   "archive_page"
                 ]

@@ -35,6 +35,7 @@ const bodyContent = computed(() => {
             </div>
             <VText
                 v-if="bodyContent.content"
+                :class="$style.content"
                 :content="bodyContent.content"
             />
         </div>
@@ -71,12 +72,17 @@ const bodyContent = computed(() => {
     text-transform: uppercase;
 }
 
+.content {
+    margin-top: rem(16);
+}
+
 .socials {
     width: fit-content;
     flex-direction: column;
     gap: rem(8);
     grid-column: 1 / -1;
     text-transform: uppercase;
+    align-items: flex-start;
 
     @include media('>=lg') {
         grid-column: 11 / -1;

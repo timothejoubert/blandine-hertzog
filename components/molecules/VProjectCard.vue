@@ -9,7 +9,7 @@ interface VProjectCardProps {
 }
 
 const props = defineProps<VProjectCardProps>()
-const { image, title } = useProjectUtils(props.project)
+const { image, title, client } = useProjectUtils(props.project)
 
 const imageProps = computed(() => {
     const isFullwidth = props.size === 'fullwidth'
@@ -32,13 +32,20 @@ const imageProps = computed(() => {
         :class="[$style.root, skeleton && $style['root--skeleton']]"
     >
         <VPrismicLink
-            :to="props.project"
+            :to="project"
             :class="$style.title"
             :label="title"
             class="text-h5"
         />
+        <span
+            v-if="client && size === 'fullwidth'"
+            class="text-body-md"
+            :class="$style.client"
+        >
+            {{ client }}
+        </span>
         <VPrismicLink
-            :to="props.project"
+            :to="project"
             :class="$style['media-wrapper']"
             rel="noopener nofollow"
             tabindex="-1"
@@ -58,23 +65,34 @@ const imageProps = computed(() => {
 </template>
 
 <style lang="scss" module>
-// @use '~~/assets/scss/mixins/font-size-fluid.scss';
-@use 'assets/scss/mixins/font-size-fluid' as *;
-
 .root {
     position: relative;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .title {
-    display: block;
+    display: inline-block;
     color: inherit;
     text-decoration: none;
     text-transform: uppercase;
+    line-height: 0.75;
+    margin-top: 2%;
+}
+
+.client {
+    align-self: flex-end;
+    text-transform: uppercase;
+}
+
+.media-wrapper {
+    display: contents;
 }
 
 .image {
     width: 100%;
+    margin-top: rem(12);
 
     &--placeholder {
         aspect-ratio: 460 / 248;

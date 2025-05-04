@@ -2,7 +2,7 @@
 import type { KeyTextField, RichTextField, RTTextNodeBase } from '@prismicio/types'
 import type { VueRichTextSerializer } from '@prismicio/vue'
 import { isFilled } from '@prismicio/client'
-import { RichTextNodeType } from '@prismicio/types'
+// import { RichTextNodeType } from '@prismicio/types'
 
 export type VTextContent = string | RichTextField | KeyTextField | null
 
@@ -19,8 +19,6 @@ const props = withDefaults(defineProps<VTextProps>(), {
         hyperlink: undefined
     },
 })
-
-console.log('VText', RichTextNodeType.hyperlink)
 
 const slots = useSlots()
 const hasSlot = slots.default?.()

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Content } from '@prismicio/client'
+import type { transform } from 'lodash'
 import VSlice from '~/components/molecules/VSlice.vue'
 
 const props = defineProps(
@@ -15,17 +16,20 @@ const primary = computed(() => props.slice.primary)
         :slice="slice"
         :class="$style.root"
     >
+        <!-- <VMouseFollow v-slot="{ x, y }"> -->
+        <!-- :style="{ transform: `translate(${x}px, ${y}px)` }" -->
+        <VAsteriskPill
+            v-if="primary.title"
+            :class="$style.pill"
+            :label="primary.title"
+        />
+        <!-- </VMouseFollow> -->
         <VPrismicLink
             :to="primary.link"
             :label="primary.link?.text || 'aucun label rempli'"
             :class="$style.link"
             :target="primary.link?.target"
             class="text-h2"
-        />
-        <VAsteriskPill
-            v-if="primary.title"
-            :class="$style.pill"
-            :label="primary.title"
         />
     </VSlice>
 </template>
@@ -34,7 +38,10 @@ const primary = computed(() => props.slice.primary)
 .root {
 	display: flex;
 	align-items: center;
-            justify-content: center;
+    justify-content: center;
+    pointer-events: all;
+    overflow: hidden;
+    max-width: 100%;
 }
 
 .link {
@@ -44,11 +51,13 @@ const primary = computed(() => props.slice.primary)
 	margin-inline: auto;
 	text-align: center;
 	text-decoration: none;
+
 }
 
 .pill {
 	position: absolute;
     translate: -50% 50%;
+    pointer-events: none;
 
     @media (hover: hover) {
         .link:hover + & {

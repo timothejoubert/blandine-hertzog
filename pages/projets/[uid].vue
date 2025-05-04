@@ -25,7 +25,10 @@ const content = computed(() => documentData.value?.short_content || documentData
             >
                 {{ documentData?.title }}
             </h1>
-            <div :class="$style.tags">
+            <div
+                v-if="tags?.length"
+                :class="$style.tags"
+            >
                 <VTag
                     v-for="tag in tags"
                     :key="tag"
@@ -35,6 +38,7 @@ const content = computed(() => documentData.value?.short_content || documentData
             </div>
             <VTime
                 :date="date"
+                class="text-h5"
                 :class="$style.date"
             />
         </header>
@@ -70,7 +74,31 @@ const content = computed(() => documentData.value?.short_content || documentData
 }
 
 .header {
-    margin-bottom: rem(72);
+    display: flex;
+    align-items: flex-end;
+    margin-block: rem(72);
+    gap: rem(24) var(--gutter);
+}
+
+.title {
+    margin-block: 0;
+    text-transform: uppercase;
+    margin-top: 2%;
+    line-height: 0.56;
+}
+
+.tag {
+    margin-right: rem(18);
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.date {
+    margin-left: auto;
+    margin-top: 2%;
+    line-height: 0.56;
 }
 
 .intro-text {
@@ -80,18 +108,6 @@ const content = computed(() => documentData.value?.short_content || documentData
 
     @include media('>=lg') {
         width: flex-grid(8, 12);
-    }
-}
-
-.date {
-    margin-right: rem(18);
-}
-
-.tag {
-    margin-right: rem(18);
-
-    &:last-child {
-        margin-right: 0;
     }
 }
 </style>
