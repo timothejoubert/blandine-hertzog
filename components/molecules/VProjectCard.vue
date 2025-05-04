@@ -74,11 +74,11 @@ const imageProps = computed(() => {
 
 .title {
     display: inline-block;
+    margin-top: 2%;
     color: inherit;
+    line-height: 0.75;
     text-decoration: none;
     text-transform: uppercase;
-    line-height: 0.75;
-    margin-top: 2%;
 }
 
 .client {

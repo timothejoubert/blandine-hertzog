@@ -76,15 +76,15 @@ const content = computed(() => documentData.value?.short_content || documentData
 .header {
     display: flex;
     align-items: flex-end;
-    margin-block: rem(72);
     gap: rem(24) var(--gutter);
+    margin-block: rem(72);
 }
 
 .title {
-    margin-block: 0;
-    text-transform: uppercase;
     margin-top: 2%;
     line-height: 0.56;
+    margin-block: 0;
+    text-transform: uppercase;
 }
 
 .tag {
@@ -96,8 +96,8 @@ const content = computed(() => documentData.value?.short_content || documentData
 }
 
 .date {
-    margin-left: auto;
     margin-top: 2%;
+    margin-left: auto;
     line-height: 0.56;
 }
 

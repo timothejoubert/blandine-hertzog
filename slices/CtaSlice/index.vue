@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Content } from '@prismicio/client'
-import type { transform } from 'lodash'
 import VSlice from '~/components/molecules/VSlice.vue'
 
 const props = defineProps(
@@ -37,11 +36,11 @@ const primary = computed(() => props.slice.primary)
 <style lang="scss" module>
 .root {
 	display: flex;
+    overflow: hidden;
+    max-width: 100%;
 	align-items: center;
     justify-content: center;
     pointer-events: all;
-    overflow: hidden;
-    max-width: 100%;
 }
 
 .link {
@@ -56,8 +55,8 @@ const primary = computed(() => props.slice.primary)
 
 .pill {
 	position: absolute;
-    translate: -50% 50%;
     pointer-events: none;
+    translate: -50% 50%;
 
     @media (hover: hover) {
         .link:hover + & {

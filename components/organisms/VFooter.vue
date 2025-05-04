@@ -130,11 +130,11 @@ const links = computed(() => menu.value?.data.links || [])
 
 .nav {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
     gap: rem(42);
     grid-column: 1 / -1;
     grid-row: 1;
-    justify-content: flex-end;
-    align-items: center;
 
     @include media('>=lg') {
         grid-column: 9 / -1;
