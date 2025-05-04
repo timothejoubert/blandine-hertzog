@@ -1,42 +1,81 @@
 <script lang="ts" setup>
-import type { KeyTextField, RichTextField } from '@prismicio/types'
+import type { KeyTextField, RichTextField, RTTextNodeBase } from '@prismicio/types'
+import type { VueRichTextSerializer } from '@prismicio/vue'
 import { isFilled } from '@prismicio/client'
+import { RichTextNodeType } from '@prismicio/types'
 
 export type VTextContent = string | RichTextField | KeyTextField | null
 
 interface VTextProps {
     tag?: string
-    textClass?: string
     content?: VTextContent
+    richTextSerializer?: VueRichTextSerializer | null
 }
 
-const props = defineProps<VTextProps>()
+// Use custom rendered component
+// https://prismic.io/docs/fields/rich-text
+const props = withDefaults(defineProps<VTextProps>(), {
+    richTextSerializer: {
+        hyperlink: undefined
+    },
+})
+
+console.log('VText', RichTextNodeType.hyperlink)
+
+const slots = useSlots()
+const hasSlot = slots.default?.()
+
+const isString = computed(() => typeof props.content === 'string')
 
 const richTextFilled = computed(() => {
-    if (props.content && typeof props.content !== 'string' && isFilled.richText(props.content)) return props.content
+    const isRichText = props.content && typeof props.content !== 'string'
+    if (isRichText && isFilled.richText(props.content)) return props.content
 
     return undefined
 })
 
-const contentString = computed(() => {
-    if (typeof props.content === 'string') return props.content
-    if (richTextFilled.value && richTextFilled.value.length === 1) return richTextFilled.value[0].text
+const flatRichTextContent = computed(() => {
+    if (!props.tag || !richTextFilled.value?.length) return
 
-    return undefined
+    const spans = (richTextFilled.value?.[0] as RTTextNodeBase)?.spans || []
+    if (richTextFilled.value?.length > 1 || spans.length > 0) return
+
+    return (richTextFilled.value?.[0] as { text: string })?.text
 })
 </script>
 
 <template>
     <component
         :is="tag || 'div'"
-        v-if="contentString"
+        v-if="isString || hasSlot || flatRichTextContent"
+        :class="$style.root"
     >
-        {{ contentString }}
+        <slot>{{ flatRichTextContent ? flatRichTextContent : content }}</slot>
     </component>
     <PrismicRichText
-        v-else-if="!!richTextFilled?.[0]"
-
+        v-else-if="!!richTextFilled?.length"
+        :class="[$style.root, $attrs.class]"
         :field="richTextFilled"
         wrapper="div"
+        :components="richTextSerializer || undefined"
     />
 </template>
+
+<style lang="scss" module>
+.root {
+    *:first-child {
+        margin-top: initial;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-thickness: 0.5px;
+        text-underline-offset: 2px;
+    }
+}
+</style>
