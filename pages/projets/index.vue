@@ -136,7 +136,7 @@ const renderedProjects = computed(() => {
 .filters {
     display: flex;
     justify-content: space-between;
-    margin-top: rem(120);
+    margin-top: rem(60);
 }
 
 .reset {
@@ -159,7 +159,7 @@ const renderedProjects = computed(() => {
 
 .list {
     margin-top: rem(60);
-    row-gap: rem(100);
+    row-gap: rem(24);
 }
 
 .item {
