@@ -24,7 +24,7 @@ const services = computed(() => {
     })
 })
 
-const activeService = ref(0)
+const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosition()
 </script>
 
 <template>
@@ -40,24 +40,26 @@ const activeService = ref(0)
             :class="$style.title"
         />
         <div
+            :style="{
+                '--offset-top': `${Math.floor(offsetTop)}px`,
+                '--target-height': targetRect?.height ? `${Math.floor(targetRect.height)}px` : undefined,
+            }"
             :class="$style.body"
         >
             <div
                 v-for="(service, index) in services"
-                :key="service.title"
+                :key="service.title + index"
+                :ref="setRefList"
                 :class="$style.item"
-                :data-active="activeService === index"
-                @mouseenter="() => activeService = index"
+                :data-active="activeIndex === index"
             >
-                <VLabel v-slot="{ componentClass }">
-                    <VTitleTranslate
-                        :active="activeService === index"
-                        :class="[$style.item__title, componentClass]"
-                        class="text-h5"
-                        tag="h3"
-                        :title="service.title"
-                    />
-                </VLabel>
+                <VTitleTranslate
+                    :active="activeIndex === index"
+                    :class="[$style.item__title]"
+                    class="text-h6"
+                    tag="h3"
+                    :title="service.title"
+                />
                 <VText
                     :class="$style.item__content"
                     class="text-body-md"
@@ -84,20 +86,48 @@ const activeService = ref(0)
     width: 100%;
     grid-column: 1 / -1;
     margin-block: 180px;
+    padding-left: 20px;
 
-    @include media('>=vl') {
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1px;
+        z-index: -1;
+    }
+
+    &::before {
+        height: 100%;
+        background-color: var(--theme-color-line);
+
+    }
+
+    &::after {
+        height: var(--target-height, calc(100% / var(--list-length, 5)));
+        translate: 0 var(--offset-top);
+        background-color: var(--theme-color-primary);
+        transition: translate 0.3s ease(out-quad);
+    }
+
+    @include media('>=lg') {
         grid-column: 3 / -3;
     }
 }
 
 .item {
-    width: fit-content;
+    margin-bottom: rem(48);
+    
+    @include media('>=lg') {
+        width: fit-content;
+        margin-bottom: initial;
+    }
 }
 
 .item__title {
     --v-title-translate-wrapper-padding-block: 4px;
 
-    padding-left: 20px;
     margin-block: 0;
 
     @include media('>=lg') {
@@ -111,8 +141,7 @@ const activeService = ref(0)
 }
 
 .item__content {
-    z-index: -1;
-    padding-block: rem(32) rem(48);
+    padding-block: rem(12) 0;
 
     > * {
         max-width: 62ch;

@@ -6,8 +6,6 @@ import { useMouse, useParentElement } from '@vueuse/core'
 
 const parentEl = useParentElement()
 
-
-
 // TODO: custom x and y extractor depending on parent position
 // https://github.com/vueuse/vueuse/blob/main/packages/core/useMouse/index.ts
 const extractor: UseMouseEventExtractor = event => (

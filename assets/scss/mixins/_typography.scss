@@ -49,6 +49,15 @@
     @include font-size-fluid((xs: 32, xl: 62));
 }
 
+// Service slice title
+@mixin text-h6 {
+    font-family: $font-mango-family;
+    font-weight: 400;
+    line-height: 1;
+
+    @include font-size-fluid((xs: 32, xl: 54));
+}
+
 // Body
 @mixin text-body-lg {
     font-family: $font-hanken-grostesk-family;

@@ -1,4 +1,5 @@
 ## In progress
+- MouseMove component (https://developer.mozilla.org/en-US/docs/Web/API/Animation/remove_event)
 - layout header page project
 - Cross project nav
 - archive page

@@ -20,6 +20,10 @@
     @include text-h5;
 }
 
+.text-h6 {
+    @include text-h6;
+}
+
 // Body
 .text-body-lg {
     @include text-body-lg;
