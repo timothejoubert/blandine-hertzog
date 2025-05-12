@@ -11,6 +11,12 @@ const { document, documentData } = await useFetchPage('default_page')
             :title="documentData.title"
             class="grid-width"
         />
+        <VText
+            v-if="documentData.content"
+            :content="documentData.content"
+            class="text-h5"
+            :class="$style['content']"
+        />
         <VPrismicImage
             v-if="documentData.image?.url"
             :document="documentData.image"
@@ -28,7 +34,17 @@ const { document, documentData } = await useFetchPage('default_page')
 </template>
 
 <style lang="scss" module>
+.content {
+    margin-top: rem(42);
+    max-width: 62ch;
+    margin-inline: var(--gutter);
+
+    & *:last-child {
+        margin-bottom: 0;
+    }
+}
+
 .media {
-    margin-top: rem(60);
+    margin-top: rem(48);
 }
 </style>

@@ -19,6 +19,23 @@
             "placeholder": ""
           }
         },
+        "spacing": {
+          "type": "Select",
+          "config": {
+            "label": "Spacing",
+            "placeholder": "",
+            "options": [
+              "none",
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "xxl"
+            ],
+            "default_value": "none"
+          }
+        },
         "body": {
           "type": "Group",
           "config": {
@@ -39,33 +56,6 @@
                   "placeholder": "",
                   "allowTargetBlank": true,
                   "multi": "paragraph,strong,em,hyperlink"
-                }
-              }
-            }
-          }
-        },
-        "link_group": {
-          "type": "Group",
-          "config": {
-            "label": "Link group",
-            "repeat": false,
-            "fields": {
-              "label": {
-                "type": "Text",
-                "config": {
-                  "label": "label",
-                  "placeholder": ""
-                }
-              },
-              "link": {
-                "type": "Link",
-                "config": {
-                  "label": "Link",
-                  "placeholder": "",
-                  "select": null,
-                  "allowTargetBlank": true,
-                  "allowText": true,
-                  "repeat": false
                 }
               }
             }

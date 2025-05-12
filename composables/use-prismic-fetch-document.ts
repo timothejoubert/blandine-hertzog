@@ -12,7 +12,7 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
 
     const { documentId, isPreview } = usePrismicPreviewRoute()
 
-    const dataKey = `page-${prismicDocument}-${uid || documentId || 'single-document'}`
+    const dataKey = `page-${prismicDocument}-${uid || documentId.value || 'single-document'}`
 
     const prismicClient = usePrismic().client
     const { fetchLocaleOption } = useLocale()

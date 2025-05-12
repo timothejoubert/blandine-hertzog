@@ -21,7 +21,9 @@ const imageProps = computed(() => {
         ar: `${width}:${height}`,
         width,
         height,
-        sizes: isFullwidth ? 'xs:92vw sm:92vw md:92vw lg:92vw xl:92vw xxl:92vw hq:92vw qhd:92vw' : 'xs:92vw sm:92vw md:32vw lg:32vw xl:32vw xxl:32vw hq:32vw qhd:32vw',
+        sizes: isFullwidth 
+            ? 'xs:92vw md:92vw lg:92vw xl:92vw hq:92vw qhd:92vw' 
+            : 'xs:92vw md:92vw lg:45vw xl:45vw hq:45vw qhd:45vw',
     }
 })
 </script>

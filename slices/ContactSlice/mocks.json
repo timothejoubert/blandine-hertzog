@@ -8,36 +8,6 @@
 				"value": "satellites",
 				"type": "Text"
 			},
-			"link_group": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"label",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "toward",
-									"type": "Text"
-								}
-							],
-							[
-								"link",
-								{
-									"key": "756edc7b-9a23-460f-b096-1d01bd747c8e",
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://google.com",
-										"text": "topic"
-									}
-								}
-							]
-						]
-					}
-				]
-			},
 			"body": {
 				"__TYPE__": "GroupContentType",
 				"value": [
@@ -69,6 +39,11 @@
 						]
 					}
 				]
+			},
+			"spacing": {
+				"__TYPE__": "FieldContent",
+				"value": "xs",
+				"type": "Select"
 			}
 		},
 		"items": []

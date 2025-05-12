@@ -1,10 +1,14 @@
 <script  lang="ts" setup>
 import { parseDate } from '~/utils/prismic/prismic-date'
 import type { ArchivePageDocument, ProjectPageDocument } from '~/prismicio-types'
+import { components } from '~/slices'
 
 const { document, documentData } = await useFetchPage<ArchivePageDocument>('archive_page')
 
 const projects = await usePrismicArchivedProjects()
+watch(projects, (p) => {
+    console.log('watch project', p)
+})
 
 const projectGroups = computed(() => {
     const groups = projects.value.reduce((yearGroup, project) => {
@@ -38,42 +42,81 @@ const projectGroups = computed(() => {
             :class="$style.title"
             class="grid-width"
         />
+        <VText
+            v-if="documentData.content"
+            :content="documentData.content"
+            class="text-h5"
+            :class="$style['content']"
+        />
+        <VPrismicImage
+            v-if="documentData.image?.url"
+            :document="documentData.image"
+            :class="$style.media"
+            class="grid-width"
+            sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
+        />
         <main
             :id="document?.id"
-            class="grid"
-            :class="$style.root"
+            :class="$style.main"
         >
-            <div
-                v-for="group in projectGroups"
-                :key="group.year"
-                :class="$style['year-group']"
+            <ol
+                class="grid"
+                :class="$style.list"
             >
-                <div
-                    :class="$style.year"
-                    class="text-over-title-md"
+                <li
+                    v-for="group in projectGroups"
+                    :key="group.year"
+                    :class="$style['year-group']"
                 >
-                    {{ group.year }}
-                </div>
-                <ul
-                    v-if="group.projects.length"
-                    :class="$style.projects"
-                >
-                    <li
-                        v-for="(project, index) in group.projects"
-                        :key="project?.uid || index"
-                        :class="$style.item"
+                    <div
+                        :class="$style.year"
+                        class="text-over-title-md"
                     >
-                        <VProjectRow :project="project" />
-                    </li>
-                </ul>
-            </div>
+                        {{ group.year }}
+                    </div>
+                    <ol
+                        v-if="group.projects.length"
+                        :class="$style.projects"
+                    >
+                        <li
+                            v-for="(project, index) in group.projects"
+                            :key="project?.uid || index"
+                            :class="$style.item"
+                        >
+                            <VProjectRow
+                                :project="project"
+                                :class="$style.project"
+                            />
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+            <LazySliceZone
+                v-if="documentData.slices?.length"
+                :slices="documentData.slices"
+                :components="components"
+            />
         </main>
     </div>
 </template>
 
 <style lang="scss" module>
-.root {
-    margin-top: rem(120);
+.main {
+    margin-top: rem(72);
+}
+
+.content {
+    margin-top: rem(42);
+    max-width: 62ch;
+    margin-inline: var(--gutter);
+
+    & *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.media {
+    margin-top: rem(48);
 }
 
 .year-group {
@@ -82,14 +125,9 @@ const projectGroups = computed(() => {
 
     position: relative;
     display: grid;
-    flex-direction: row-reverse;
     align-items: baseline;
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
-
-    &:nth-last-child(1 of &) {
-        min-height: 30vh;
-    }
 
     &::before {
         position: absolute;
@@ -111,13 +149,24 @@ const projectGroups = computed(() => {
 }
 
 .projects {
-    // flex-grow: 1;
-    grid-column: 1 / 13;
+    grid-column: 3 / -1;
     grid-row: 1;
     margin-block: initial;
 }
 
 .item {
     list-style: none;
+}
+
+.project {
+    border-top: 1px solid var(--theme-color-line);
+
+    .item:first-child & {
+        border-top: none;
+    }
+
+    .year-group:last-child .item:last-child & {
+        border-bottom: 1px solid var(--theme-color-line);
+    }
 }
 </style>

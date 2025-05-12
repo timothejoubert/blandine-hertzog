@@ -5,7 +5,6 @@ export async function usePrismicArchivedProjects() {
 
     if (!projects.value.length || projects.value.every(p => !p)) {
         const fetchResponse = await usePrismicFetchProjects({}, true)
-
         projects.value = fetchResponse.data.value?.results || []
     }
 

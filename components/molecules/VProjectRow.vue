@@ -26,7 +26,7 @@ const { title, tags } = useProjectUtils(props.project)
             :key="tag"
             :label="tag"
         />
-        <VIcon name="fullscreen" />
+        <VIcon name="arrow-up-right" />
     </VPrismicLink>
 </template>
 
@@ -40,7 +40,6 @@ const { title, tags } = useProjectUtils(props.project)
     height: var(--v-project-row-height);
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--theme-color-line);
     color: inherit;
     gap: rem(14);
     padding-block: var(--v-project-row-padding-block, rem(14));

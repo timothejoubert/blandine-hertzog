@@ -57,7 +57,7 @@ watchEffect(() => {
 .root {
     position: relative;
 	display: flex;
-    overflow: hidden;
+    overflow-x: clip;
 	align-items: center;
     justify-content: center;
 
@@ -76,19 +76,22 @@ watchEffect(() => {
 	text-align: center;
 	text-decoration: none;
     transition: color 0.3s ease(out-quad);
-
 }
 
 .pill {
 	position: absolute;
     z-index: -1;
     pointer-events: none;
+    opacity: 0.8;
+    scale: 0.9;
+    transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
 
     // translate: -50% 50%;
 
     @media (hover: hover) {
-        .link:hover + & {
-            --v-text-ring-animation-play-state: running;
+        .root:hover & {
+            opacity: 1;
+            scale: 1;
         }
     }
 }

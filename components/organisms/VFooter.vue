@@ -167,6 +167,6 @@ const links = computed(() => menu.value?.data.links || [])
 
 .arrow-link {
     display: contents;
-    color: var(--theme-color-on-background);
+    color: var(--theme-color-primary);
 }
 </style>

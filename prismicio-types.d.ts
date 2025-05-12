@@ -944,31 +944,6 @@ export interface ContactSliceSliceDefaultPrimaryBodyItem {
 }
 
 /**
- * Item in *ContactSlice → Default → Primary → Link group*
- */
-export interface ContactSliceSliceDefaultPrimaryLinkGroupItem {
-  /**
-   * label field in *ContactSlice → Default → Primary → Link group*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_slice.default.primary.link_group[].label
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  label: prismic.KeyTextField;
-
-  /**
-   * Link field in *ContactSlice → Default → Primary → Link group*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_slice.default.primary.link_group[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
-/**
  * Primary content in *ContactSlice → Default → Primary*
  */
 export interface ContactSliceSliceDefaultPrimary {
@@ -983,6 +958,20 @@ export interface ContactSliceSliceDefaultPrimary {
   title: prismic.KeyTextField;
 
   /**
+   * Spacing field in *ContactSlice → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: contact_slice.default.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  spacing: prismic.SelectField<
+    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
+    "filled"
+  >;
+
+  /**
    * Body field in *ContactSlice → Default → Primary*
    *
    * - **Field Type**: Group
@@ -991,18 +980,6 @@ export interface ContactSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   body: prismic.GroupField<Simplify<ContactSliceSliceDefaultPrimaryBodyItem>>;
-
-  /**
-   * Link group field in *ContactSlice → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_slice.default.primary.link_group[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  link_group: prismic.GroupField<
-    Simplify<ContactSliceSliceDefaultPrimaryLinkGroupItem>
-  >;
 }
 
 /**
@@ -1550,7 +1527,6 @@ declare module "@prismicio/client" {
       AllDocumentTypes,
       ContactSliceSlice,
       ContactSliceSliceDefaultPrimaryBodyItem,
-      ContactSliceSliceDefaultPrimaryLinkGroupItem,
       ContactSliceSliceDefaultPrimary,
       ContactSliceSliceVariation,
       ContactSliceSliceDefault,

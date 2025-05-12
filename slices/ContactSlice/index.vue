@@ -19,7 +19,7 @@ const bodyContent = computed(() => {
         :slice="slice"
         :class="$style.root"
         class="grid"
-        spacing="xl"
+        :spacing="primary.spacing"
     >
         <VSectionTitle
             v-if="primary.title"
