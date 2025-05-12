@@ -106,8 +106,8 @@ const projectGroups = computed(() => {
 }
 
 .content {
-    margin-top: rem(42);
     max-width: 62ch;
+    margin-top: rem(42);
     margin-inline: var(--gutter);
 
     & *:last-child {

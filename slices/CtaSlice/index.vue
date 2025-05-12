@@ -57,9 +57,9 @@ watchEffect(() => {
 .root {
     position: relative;
 	display: flex;
-    overflow-x: clip;
 	align-items: center;
     justify-content: center;
+    overflow-x: clip;
 
     @media (hover: hover) {
         &:hover {
@@ -81,8 +81,8 @@ watchEffect(() => {
 .pill {
 	position: absolute;
     z-index: -1;
-    pointer-events: none;
     opacity: 0.8;
+    pointer-events: none;
     scale: 0.9;
     transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
 
