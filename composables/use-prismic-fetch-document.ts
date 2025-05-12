@@ -16,6 +16,7 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
 
     const prismicClient = usePrismic().client
     const { fetchLocaleOption } = useLocale()
+    
     const prismicFetchOptions = {
         ...fetchLocaleOption.value,
         brokenRoute: '/404',

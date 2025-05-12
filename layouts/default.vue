@@ -9,7 +9,9 @@ const route = useRoute()
 const isSliceSimulatorRoute = computed(() => route.name === 'slice-simulator')
 
 callOnce(async () => {
-    if(!isSliceSimulatorRoute.value) await useFetchPage()
+    if(isSliceSimulatorRoute.value) return 
+    
+    await useFetchPage()
 })
 
 const theme = useUiThemeState()

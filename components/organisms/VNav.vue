@@ -54,9 +54,6 @@ watch(page, () => {
 <style lang="scss" module>
 @use 'assets/scss/variables/fonts' as *;
 
-.root {
-}
-
 .toggle {
     @include media('>=lg') {
         display: none;

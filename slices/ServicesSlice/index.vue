@@ -84,18 +84,18 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 .body {
     position: relative;
     width: 100%;
+    padding-left: 20px;
     grid-column: 1 / -1;
     margin-block: 180px;
-    padding-left: 20px;
 
     &::before,
     &::after {
-        content: '';
         position: absolute;
+        z-index: -1;
         top: 0;
         left: 0;
         width: 1px;
-        z-index: -1;
+        content: '';
     }
 
     &::before {
@@ -106,9 +106,9 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 
     &::after {
         height: var(--target-height, calc(100% / var(--list-length, 5)));
-        translate: 0 var(--offset-top);
         background-color: var(--theme-color-primary);
         transition: translate 0.3s ease(out-quad);
+        translate: 0 var(--offset-top);
     }
 
     @include media('>=lg') {

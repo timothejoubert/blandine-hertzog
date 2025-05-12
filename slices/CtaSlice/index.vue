@@ -1,28 +1,48 @@
 <script setup lang="ts">
 import type { Content } from '@prismicio/client'
 import VSlice from '~/components/molecules/VSlice.vue'
+import { ease } from '~/utils/ease'
 
 const props = defineProps(
     getSliceComponentProps<Content.CtaSliceSlice>(),
 )
 
+// HYDRATION
 const primary = computed(() => props.slice.primary)
+
+// MOUSE FOLLOW
+const rootRef = ref<HTMLElement | null>(null) 
+const pill = ref<HTMLElement | null>(null)
+
+const { x, y, element, init } = useMouseFollow({ element: pill, container: rootRef })
+
+watchEffect(() => {
+    if(!element.value) return
+
+    element.value.animate(
+        { transform: `translate(${x.value}px, ${y.value}px)` },
+        { 
+            duration: init.value ? 200 : 400, 
+            fill: "forwards",
+            easing: ease('out-quad'),
+        },
+    );
+})
 </script>
 
 <template>
     <VSlice
+        ref="rootRef"
         :spacing="primary.spacing || 'xl'"
         :slice="slice"
         :class="$style.root"
     >
-        <!-- <VMouseFollow v-slot="{ x, y }"> -->
-        <!-- :style="{ transform: `translate(${x}px, ${y}px)` }" -->
         <VAsteriskPill
             v-if="primary.title"
+            ref="pill"
             :class="$style.pill"
             :label="primary.title"
         />
-        <!-- </VMouseFollow> -->
         <VPrismicLink
             :to="primary.link"
             :label="primary.link?.text || 'aucun label rempli'"
@@ -35,12 +55,17 @@ const primary = computed(() => props.slice.primary)
 
 <style lang="scss" module>
 .root {
+    position: relative;
 	display: flex;
     overflow: hidden;
-    max-width: 100%;
 	align-items: center;
     justify-content: center;
-    pointer-events: all;
+
+    @media (hover: hover) {
+        &:hover {
+            --v-text-ring-animation-play-state: running;
+        }
+    }
 }
 
 .link {
@@ -50,13 +75,16 @@ const primary = computed(() => props.slice.primary)
 	margin-inline: auto;
 	text-align: center;
 	text-decoration: none;
+    transition: color 0.3s ease(out-quad);
 
 }
 
 .pill {
 	position: absolute;
+    z-index: -1;
     pointer-events: none;
-    translate: -50% 50%;
+
+    // translate: -50% 50%;
 
     @media (hover: hover) {
         .link:hover + & {

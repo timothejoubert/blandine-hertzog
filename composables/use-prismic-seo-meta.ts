@@ -2,14 +2,12 @@ import { joinURL } from 'ufo'
 import { getText } from '~/utils/prismic/prismic-rich-field'
 import type { ReachableDocument } from '~/types/api'
 
-export async function usePrismicSeoMeta(document: ReachableDocument) {
-    // const settingDocument = await usePrismicSettingsDocument()
-    const configSite = useRuntimeConfig().public.site
+export function usePrismicSeoMeta(document: ReachableDocument) {
+    const config = useRuntimeConfig()
+    const siteName = config.public.site.name || ''
+    const siteUrl = config.public.site.url || ''
 
-    // const siteName = settingDocument?.data?.site_name || configSite.name || ''
-    const siteName = configSite.name || ''
     const title = document.data?.meta_title || document.data?.title || siteName
-
     const description = document.data?.meta_description || getText(document.data?.content)
     const apiImgUrl = document.data?.meta_image?.url || document.data?.image?.url
 
@@ -25,10 +23,10 @@ export async function usePrismicSeoMeta(document: ReachableDocument) {
                 provider: 'imgix',
             },
         )
-        : joinURL(configSite.url, '/share.jpg')
+        : joinURL(siteUrl, '/share.jpg')
 
     const { fullPath } = useRoute()
-    const canonicalUrl = joinURL(configSite.url, fullPath)
+    const canonicalUrl = joinURL(siteUrl, fullPath)
 
     useSeoMeta({
         ogSiteName: siteName,

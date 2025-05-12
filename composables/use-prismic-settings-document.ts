@@ -1,10 +1,10 @@
 const DATA_KEY = 'settings-document'
 
 export async function usePrismicSettingsDocument() {
-    const prismic = usePrismic()
+    const prismicClient = usePrismic().client
 
     const { data } = await useAsyncData(DATA_KEY, () => {
-        return prismic.client.getSingle('settings')
+        return prismicClient.getSingle('settings')
     }, {
         getCachedData: (key, nuxtApp) => nuxtApp.static.data[key] ?? nuxtApp.payload.data[key], 
         dedupe: 'defer',
