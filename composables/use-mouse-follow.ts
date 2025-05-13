@@ -1,4 +1,4 @@
-import { throttle } from 'lodash'
+import throttle from 'lodash/throttle'
 import { getHtmlElement, type TemplateElementRef } from '~/utils/ref/get-html-element'
 
 interface UseMouseFollowOptions {
