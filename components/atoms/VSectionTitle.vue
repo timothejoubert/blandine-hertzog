@@ -3,6 +3,8 @@ defineProps<{
     label: string
     rootTag?: string
 }>()
+
+const { y } = useWindowScroll()
 </script>
 
 <template>
@@ -10,7 +12,11 @@ defineProps<{
         :is="rootTag || 'div'"
         :class="$style.root"
     >
-        <VAsterisk :class="$style.icon" />
+        <VAsterisk
+            aria-hidden="true"
+            :class="$style.icon" 
+            :style="{ rotate: `${y / 10}deg` }"
+        />
         {{ label }}
     </component>
 </template>
@@ -28,5 +34,7 @@ defineProps<{
   width: 42px;
   height: auto;
   margin-right: 20px;
+  transform-origin: center;
+  transition: rotate 0.5s ease(out-quad);
 }
 </style>

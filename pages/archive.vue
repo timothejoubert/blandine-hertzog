@@ -27,10 +27,27 @@ const projectGroups = computed(() => {
 
         return yearGroup
     }, {} as Record<string, ProjectPageDocument[]>)
-
+    
     return Object.entries(groups).sort(([aKey], [bKey]) => {
         return Number(bKey) - Number(aKey)
-    }).map(([key, value]) => ({ year: key, projects: value }))
+    })
+})
+
+const projectsByYears = computed(() => {
+    let iterateIndex = 0
+
+    return projectGroups.value.map((group, index) => { 
+        const previousGroupProjectLength = projectGroups.value[index - 1]?.[1].length ?? 0
+        iterateIndex += previousGroupProjectLength
+
+        console.log('previousGroupProject', index, previousGroupProjectLength)
+
+        return {
+            year: group[0], 
+            projectList: group[1],
+            previousProjectLength: iterateIndex
+        }
+    })
 })
 </script>
 
@@ -60,11 +77,12 @@ const projectGroups = computed(() => {
             :class="$style.main"
         >
             <ol
+                ref="mainList"
                 class="grid"
-                :class="$style.list"
+                :class="$style['main-list']"
             >
                 <li
-                    v-for="group in projectGroups"
+                    v-for="group in projectsByYears"
                     :key="group.year"
                     :class="$style['year-group']"
                 >
@@ -75,12 +93,12 @@ const projectGroups = computed(() => {
                         {{ group.year }}
                     </div>
                     <ol
-                        v-if="group.projects.length"
+                        v-if="group.projectList?.length"
                         :class="$style.projects"
                     >
                         <li
-                            v-for="(project, index) in group.projects"
-                            :key="project?.uid || index"
+                            v-for="(project, projectIndex) in group.projectList"
+                            :key="project?.uid || projectIndex"
                             :class="$style.item"
                         >
                             <VProjectRow
@@ -101,12 +119,9 @@ const projectGroups = computed(() => {
 </template>
 
 <style lang="scss" module>
-.main {
-    margin-top: rem(72);
-}
-
 .content {
     max-width: 62ch;
+    padding-bottom: rem(72);
     margin-top: rem(42);
     margin-inline: var(--gutter);
 
@@ -117,6 +132,12 @@ const projectGroups = computed(() => {
 
 .media {
     margin-top: rem(48);
+}
+
+.main-list {
+    position: relative;
+    margin-bottom: rem(120);
+    margin-block: initial;
 }
 
 .year-group {
@@ -143,23 +164,50 @@ const projectGroups = computed(() => {
 .year {
     display: flex;
     align-items: center;
-    justify-content: center;
-    grid-column: span 2;
+    grid-column: span 1;
     grid-row: 1;
 }
 
 .projects {
-    grid-column: 3 / -1;
+    grid-column: 2 / -1;
     grid-row: 1;
     margin-block: initial;
 }
 
 .item {
+    position: relative;
+    overflow: hidden;
     list-style: none;
+
+    &::before {
+        position: absolute;
+        top: var(--archive-item-top, 0);
+        width: 100%;
+        height: var(--archive-item-height, rem(56));
+        background-color: color-mix(in srgb, var(--theme-color-primary), transparent 90%);
+        content: '';
+        transition: translate 0.3s ease(out-quad);
+        translate: 0 100%;
+    }
+
+    // select all items after element that is hovered or selected 
+    &:where(:hover, [data-active="true"]) ~ &::before,
+    .year-group:has(&:where(:hover, [data-active="true"])) ~ .year-group &::before {
+        translate: 0 -100%;
+    }
+
+    &:where(:hover, [data-active="true"])::before {
+        translate: 0 0;
+    }
+
+    *:hover ~ .main &::before {
+        translate: 0 -100%;
+    }
 }
 
 .project {
     border-top: 1px solid var(--theme-color-line);
+    padding-inline: var(--gutter);
 
     .item:first-child & {
         border-top: none;

@@ -1,10 +1,26 @@
-export function useActiveElementPosition() {
+import { getHtmlElement, type TemplateElementRef } from '~/utils/ref/get-html-element'
+
+interface UseActiveElementPositionOptions {
+  parentElement: TemplateElementRef
+}
+
+export function useActiveElementPosition(options?: UseActiveElementPositionOptions) {
   const list = useTemplateRefsList<HTMLDivElement>()
+
+
 
   const activeIndex = ref(0)
   const offsetTop = ref(0)
   const offsetLeft = ref(0)
   const targetRect = ref<DOMRect | null>(null)
+
+
+  function getParentElement(element: HTMLElement) {
+    if(options?.parentElement) return getHtmlElement(options?.parentElement)
+    return element?.parentElement
+  }
+
+  console.log('list', list.value)
 
   function onMouseEnter(event: Event) {
       const target = event.currentTarget as HTMLDivElement
@@ -20,7 +36,7 @@ export function useActiveElementPosition() {
       if (!target) return
   
       const targetBounding = target?.getBoundingClientRect()
-      const parentRect = target?.parentElement?.getBoundingClientRect()
+      const parentRect = getParentElement(target)?.getBoundingClientRect()
   
       offsetTop.value = targetBounding.top - (parentRect?.top ?? 0)
       offsetLeft.value = targetBounding.left - (parentRect?.left ?? 0)

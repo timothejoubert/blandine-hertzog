@@ -5,8 +5,11 @@ interface UseMouseFollowOptions {
   element: TemplateElementRef
   container: TemplateElementRef
 }
-export function useMouseFollow(options: UseMouseFollowOptions) {
 
+// Remplace by useMouseInElement from vueUse if work at same 
+// https://vueuse.org/core/useMouseInElement/
+
+export function useMouseFollow(options: UseMouseFollowOptions) {
   const { x: windowX, y: windowY } = useWindowScroll()
 
   const container = computed(() => getHtmlElement(options.container))

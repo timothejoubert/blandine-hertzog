@@ -18,6 +18,8 @@ const titleSplitted = computed(() => {
         return acc
     }, [[], []] as string[][])
 })
+
+const { y } = useWindowScroll()
 </script>
 
 <template>
@@ -29,6 +31,7 @@ const titleSplitted = computed(() => {
         <VAsterisk
             :class="$style.asterix"
             aria-hidden="true"
+            :style="{ rotate: `${y / 5}deg` }"
         />
         {{ titleSplitted[1].join(' ') }}
     </h1>
@@ -54,5 +57,7 @@ const titleSplitted = computed(() => {
     height: auto;
     margin-top: -40px;
     margin-inline: rem(20);
+    transform-origin: center;
+    transition: rotate 0.2s ease(out-quad);
 }
 </style>

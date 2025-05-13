@@ -56,9 +56,15 @@ export default defineComponent({
         })
 
         const sizes = computed(() => {
-            if (!provider.value) return undefined
-            else if (typeof props.sizes === 'string') return props.sizes
-            else if (!isPicture.value && !props.densities) return $img.options.presets?.default?.sizes || $img.options.screens
+            if (!provider.value) {
+                return undefined
+            }
+            else if (typeof props.sizes === 'string') {
+                return props.sizes
+            }
+            else if (!isPicture.value && !props.densities) {
+                return $img.options.presets?.default?.sizes || $img.options.screens
+            }
             return undefined
         })
 
