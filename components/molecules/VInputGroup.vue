@@ -19,8 +19,6 @@ defineOptions({
 const activeValue = defineModel<LocationQueryValue | LocationQueryValue[]>({ default: [] })
 
 function onChange(newValue: string) {
-    console.log('onChange', newValue)
-
     if (props.type === 'radio') {
         activeValue.value = newValue
     }

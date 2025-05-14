@@ -54,7 +54,7 @@ const imageProps = computed(() => {
         >
             <VPrismicImage
                 v-if="image"
-                :document="image"
+                :media="image"
                 :class="$style.image"
                 v-bind="imageProps"
             />

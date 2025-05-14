@@ -2,16 +2,16 @@ import type { EmbedField, FilledLinkToMediaField, ImageField, LinkToMediaField, 
 import type { MaybeRef } from 'vue'
 import { isFilledImageField, isFilledLinkToMediaField, isVideoEmbedField } from '~/utils/prismic/guard'
 
-export type staticMedia = {
+export type StaticMedia = {
     src: string
     width?: string | number
     height?: string | number
     type: 'image' | 'public_image' | 'video' | 'public_video' | 'embed_video' | 'audio'
     copyright?: string | RichTextField
 }
-
-export type PossibleMedia = LinkToMediaField | EmbedField | ImageField | staticMedia
-// export type PossibleVideoMedia =
+export type PossibleVideoMedia = LinkToMediaField | EmbedField | StaticMedia
+export type PossibleImageMedia = LinkToMediaField | ImageField | StaticMedia
+export type PossibleMedia = PossibleVideoMedia & PossibleImageMedia
 
 function getLinkToMediaFieldType(field: FilledLinkToMediaField) {
     const extIndex = field.url.lastIndexOf('.') + 1

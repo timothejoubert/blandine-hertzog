@@ -6,9 +6,6 @@ import { components } from '~/slices'
 const { document, documentData } = await useFetchPage<ArchivePageDocument>('archive_page')
 
 const projects = await usePrismicArchivedProjects()
-watch(projects, (p) => {
-    console.log('watch project', p)
-})
 
 const projectGroups = computed(() => {
     const groups = projects.value.reduce((yearGroup, project) => {
@@ -40,8 +37,6 @@ const projectsByYears = computed(() => {
         const previousGroupProjectLength = projectGroups.value[index - 1]?.[1].length ?? 0
         iterateIndex += previousGroupProjectLength
 
-        console.log('previousGroupProject', index, previousGroupProjectLength)
-
         return {
             year: group[0], 
             projectList: group[1],
@@ -53,25 +48,12 @@ const projectsByYears = computed(() => {
 
 <template>
     <div>
-        <VPageTitle
-            v-if="documentData?.title"
+        <VHeader
             :title="documentData.title"
-            :class="$style.title"
-            class="grid-width"
-        />
-        <VText
-            v-if="documentData.content"
             :content="documentData.content"
-            class="text-h5"
-            :class="$style['content']"
-        />
-        <VPrismicImage
-            v-if="documentData.image?.url"
-            :document="documentData.image"
-            :class="$style.media"
-            class="grid-width"
-            sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
-        />
+            :media="documentData.image"
+            :class="$style.header"
+        /> 
         <main
             :id="document?.id"
             :class="$style.main"
@@ -119,19 +101,8 @@ const projectsByYears = computed(() => {
 </template>
 
 <style lang="scss" module>
-.content {
-    max-width: 62ch;
+.header {
     padding-bottom: rem(72);
-    margin-top: rem(42);
-    margin-inline: var(--gutter);
-
-    & *:last-child {
-        margin-bottom: 0;
-    }
-}
-
-.media {
-    margin-top: rem(48);
 }
 
 .main-list {

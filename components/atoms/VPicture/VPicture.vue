@@ -29,6 +29,7 @@ export default defineComponent({
                 h(VImg, {
                     ...imgFilteredProps.value,
                     ...props.imgAttrs,
+                    sizes: undefined,
                 }),
             ])
     },
@@ -37,6 +38,6 @@ export default defineComponent({
 
 <style lang="scss" module>
 .root {
-    display: var(--v-picture-display, fit-content);
+    display: var(--v-picture-display, block);
 }
 </style>

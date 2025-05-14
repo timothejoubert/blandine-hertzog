@@ -2,15 +2,14 @@
 import type { HomePageDocument } from '~/prismicio-types'
 import { components } from '~/slices'
 import { getHtmlElement, type TemplateElement } from '~/utils/ref/get-html-element'
+import type { StaticMedia } from '~/composables/use-prismic-media'
 
 const { documentData } = await useFetchPage<HomePageDocument>('home_page')
 
-const { open } = useMediaViewer()
-
-const isPaused = ref(false)
 const videoInstance = ref<TemplateElement>(null)
 const videoEl = computed(() => getHtmlElement<HTMLVideoElement>(videoInstance))
 
+const isPaused = ref(false)
 function onVideoClicked(_event: MouseEvent) {
     if (!videoEl.value) return
 
@@ -24,8 +23,16 @@ function onVideoClicked(_event: MouseEvent) {
     isPaused.value = videoEl.value.paused
 }
 
+const showrealVideo: StaticMedia = {
+    src: "/showreel.mp4",
+    width: "1376",
+    height: "627",
+    type: 'public_video',
+}
+
+const { open } = useMediaViewer()
 function OpenMediaViewer() {
-    open([{ src: '/showreel.mp4', type: 'public_video' }])
+    open([showrealVideo])
 }
 </script>
 
@@ -67,12 +74,10 @@ function OpenMediaViewer() {
                         height="20"
                     />
                 </button>
-                <VVideoPlayer
+                <VPrismicVideo
                     ref="videoInstance"
-                    src="/showreel.mp4"
+                    :media="showrealVideo"
                     :class="$style.video"
-                    width="1376"
-                    height="627"
                     :controls="false"
                     muted
                     autoplay

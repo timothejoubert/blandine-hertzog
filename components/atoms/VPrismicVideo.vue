@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { commonVideoProps, videoAttributes } from '~/utils/video/video-props'
 import { VPrismicImage } from '#components'
-import type { PossibleMedia } from '~/composables/use-prismic-media'
+import type { PossibleImageMedia, PossibleVideoMedia } from '~/composables/use-prismic-media'
 import { isVideoEmbedField } from '~/utils/prismic/guard'
 
 type VImageProps = InstanceType<typeof VPrismicImage>['$props']
@@ -10,8 +10,8 @@ type VImageProps = InstanceType<typeof VPrismicImage>['$props']
 const props = defineProps({
     ...commonVideoProps,
     ...videoAttributes,
-    document: { type: Object as PropType<PossibleMedia> },
-    thumbnail: { type: Object as PropType<PossibleMedia> },
+    media: { type: Object as PropType<PossibleVideoMedia> },
+    thumbnail: { type: Object as PropType<PossibleImageMedia> },
     thumbnailProps: { type: Object as PropType<VImageProps> },
 })
 
@@ -25,12 +25,12 @@ const hasLazyVideoPlayer = computed(() => {
 const videoData = computed(() => {
     const embedData = {}
 
-    if (isVideoEmbedField(props.document)) {
-        const embedUrl = new URL(props.document.embed_url)
+    if (isVideoEmbedField(props.media)) {
+        const embedUrl = new URL(props.media.embed_url)
         const id = embedUrl?.pathname?.substring(1)
 
         Object.assign(embedData, {
-            embedPlatform: props.document.provider_name,
+            embedPlatform: props.media.provider_name,
             embedId: id === 'watch' ? embedUrl.searchParams.get('v') : id,
             autoplay: hasLazyVideoPlayer.value || props.autoplay,
         })
@@ -38,14 +38,14 @@ const videoData = computed(() => {
 
     return {
         ...embedData,
-        ...(props.document || {}),
-        src: props.document?.src || props.document?.url,
+        ...(props.media || {}),
+        src: props.media?.src || props.media?.url,
     }
 })
 
 const videoAttrs = computed(() => {
-    const width = props.document?.width || props?.width || 1920
-    const height = props.document?.height || props?.height || 1080
+    const width = props.media?.width || props?.width || 1920
+    const height = props.media?.height || props?.height || 1080
 
     const attrs = Object.entries(props).reduce((acc, [key, value]) => {
         if ((key in commonVideoProps || key in videoAttributes)) acc[key] = value
@@ -61,7 +61,7 @@ const videoAttrs = computed(() => {
 
 const thumbnailProps = computed(() => {
     const result = {
-        document: props.thumbnail,
+        media: props.thumbnail,
         ...(props.thumbnailProps || {}),
     }
 
@@ -107,13 +107,12 @@ const onVideoEnded = () => (hadInteraction.value = false)
     >
         <button
             :aria-label="$t('play_video')"
-            :class="$style.button"
+            :class="$style['play-button']"
             @click="onClick"
         >
             <VIcon
                 name="play"
-                width="18"
-                height="18"
+                :class="$style['play-icon']"
             />
         </button>
         <VPrismicImage
@@ -154,7 +153,7 @@ const onVideoEnded = () => (hadInteraction.value = false)
     justify-content: center;
 }
 
-.button {
+.play-button {
     --v-button-position: absolute;
 
     position: absolute;
@@ -162,8 +161,8 @@ const onVideoEnded = () => (hadInteraction.value = false)
     top: 50%;
     left: 50%;
     display: flex;
-    width: rem(32);
-    height: rem(32);
+    width: rem(38);
+    height: rem(38);
     align-items: center;
     justify-content: center;
     padding: initial;
@@ -172,11 +171,23 @@ const onVideoEnded = () => (hadInteraction.value = false)
     background-color: white;
     cursor: pointer;
     transform: translate(-50%, -50%);
+    transition: color 0.3s ease(out-quad), background-color 0.3s ease(out-quad);
 
     .root--had-interaction & {
         pointer-events: none;
         visibility: hidden;
     }
+
+    @media (hover: hover) {
+        .root:hover & {
+            background-color: var(--theme-color-background);
+            color: var(--themeo-color-on-background);
+        }
+    }
+}
+
+.play-icon {
+    font-size: rem(14);
 }
 
 .thumbnail {

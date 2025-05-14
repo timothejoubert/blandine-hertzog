@@ -20,8 +20,6 @@ export function useActiveElementPosition(options?: UseActiveElementPositionOptio
     return element?.parentElement
   }
 
-  console.log('list', list.value)
-
   function onMouseEnter(event: Event) {
       const target = event.currentTarget as HTMLDivElement
       const targetIndex = list.value.findIndex((item) => item === target)

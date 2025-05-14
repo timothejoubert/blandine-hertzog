@@ -65,15 +65,13 @@ const rootClasses = computed(() => {
             <VPrismicMedia
                 v-for="(document, index) in documents"
                 :key="index"
-                :document="document"
+                :media="document"
             />
         </div>
     </dialog>
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/mixins/include-media' as *;
-@use 'assets/scss/functions/rem' as *;
 @use 'assets/scss/functions/flex-grid' as *;
 
 .root {
@@ -114,7 +112,7 @@ const rootClasses = computed(() => {
 }
 
 .medias {
-    width: calc(100% - var(--gutter) * 4);
+    width: calc(100% - var(--gutter) * 2);
     max-height: 90vh;
 }
 </style>

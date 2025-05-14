@@ -47,27 +47,12 @@ const renderedProjects = computed(() => {
         :id="document?.id"
         :class="$style.root"
     >
-        <header class="grid-width">
-            <VPageTitle
-                v-if="documentData?.title"
-                :title="documentData.title"
-                :class="$style.title"
-            />
-            <VPrismicImage
-                v-if="documentData.image?.url"
-                :document="documentData.image"
-                :class="$style.media"
-                class="grid-width"
-                sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
-            />
-            <VText
-                v-if="documentData.content"
-                :content="documentData.content"
-                :class="$style.content"
-                tag="p"
-                class="text-h5"
-            />
-        </header>
+        <VHeader
+            :title="documentData.title"
+            :content="documentData.content"
+            :media="documentData.image"
+            :class="$style.header"
+        /> 
         <main>
             <div
                 :class="$style.filters"
@@ -122,15 +107,6 @@ const renderedProjects = computed(() => {
 
 .root {
     position: relative;
-}
-
-.media {
-    margin-top: rem(60);
-}
-
-.content {
-    max-width: 50ch;
-    margin-block: rem(60) 0;
 }
 
 .filters {

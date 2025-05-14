@@ -1,91 +1,50 @@
 <script  lang="ts" setup>
-import type { PropType } from 'vue'
 import type { VTextContent } from '~/components/atoms/VText.vue'
+import type { PossibleMedia } from '~/composables/use-prismic-media'
 
-const props = defineProps({
-    title: [String, null],
-    anchorTitle: Boolean,
-    anchorHref: String,
-    content: [String, null, Array] as PropType<VTextContent>,
-})
-
-const hasContent = computed(() => {
-    const c = props.content
-    return Array.isArray(c) ? !!c.length : !!c
-})
-
-const $style = useCssModule()
-const rootClasses = computed(() => {
-    return [$style.root, hasContent.value && $style['root--has-content']]
-})
+defineProps<{
+    title: string | null
+    content?: VTextContent
+    media?: PossibleMedia
+}>()
 
 // TODO: use VRevealText
-// const revealTitle = ref(true)
 </script>
 
 <template>
     <header
-        :class="rootClasses"
+        :class="$style.root"
         class="grid-width"
     >
-        <slot />
-        <LazyVTitleAnchor
-            v-if="title && anchorTitle"
+        <VPageTitle
+            v-if="title"
             :title="title"
-            :anchor-href="anchorHref"
             :class="$style.title"
         />
-        <h1
-            v-else
-            :class="$style.title"
-            class="text-h1"
-        >
-            {{ title }}
-        </h1>
         <VText
             v-if="content"
             :content="content"
+            class="text-h5"
             :class="$style.content"
-            class="text-body-lg"
             tag="p"
+        />
+        <VPrismicMedia
+            v-if="media?.url"
+            :media="media"
+            :class="$style.media"
+            :image="{ sizes: 'xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw' }"
         />
     </header>
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-@use 'assets/scss/functions/flex-grid' as *;
-@use 'assets/scss/mixins/include-media' as *;
-
-.root {
-    position: relative;
-    padding-block: rem(72) rem(44);
-
-    &::after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: var(--theme-color-line);
-        content: '';
-    }
-
-    @include media('>=md') {
-        &--has-content {
-            padding-block: rem(72) rem(26);
-        }
-    }
-}
-
-.title {
-    // display: flex;
-    // flex-wrap: wrap;
-    margin-block: initial;
-}
-
 .content {
-    width: calc(#{flex-grid-value(7, 11, '%', false)} + var(--gutter));
-    margin-block: rem(62) rem(22);
+    max-width: 62ch;
+    margin-block: initial;
+    padding-block: rem(42) 0;
+}
+
+.media {
+    margin-top: rem(48);
 }
 </style>

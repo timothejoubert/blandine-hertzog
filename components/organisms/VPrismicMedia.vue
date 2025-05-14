@@ -8,12 +8,12 @@ type VImageProps = InstanceType<typeof VPrismicImage>['$props']
 
 export default defineComponent({
     props: {
-        document: { type: Object as PropType<PossibleMedia>, required: true },
+        media: { type: Object as PropType<PossibleMedia>, required: true },
         image: Object as PropType<VImageProps>,
         video: Object as PropType<Omit<VVideoProps, 'document'>>,
     },
     setup(props, { slots }) {
-        const { mediaType } = usePrismicMedia(props.document)
+        const { mediaType } = usePrismicMedia(props.media)
 
         // Node data
         const tag = computed(() => {
@@ -31,7 +31,7 @@ export default defineComponent({
         })
 
         const nodeProps = computed(() => {
-            const result = { document: props.document }
+            const result = { media: props.media }
 
             if (mediaType.value === 'video') {
                 Object.assign(result, {

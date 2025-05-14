@@ -12,7 +12,7 @@ export const vPrismicImageProps = {
     ...imgProps,
     ...pictureProps,
     ...imgixProviderAttributes,
-    document: Object as PropType<PossibleMedia>,
+    media: Object as PropType<PossibleMedia>,
     tag: String as PropType<'picture' | 'img'>,
 }
 
@@ -20,7 +20,6 @@ export default defineComponent({
     props: vPrismicImageProps,
     setup(props, { slots }) {
         const $style = useCssModule()
-        const document = computed(() => props.document)
 
         const modifiers = computed(() => {
             return pick<Writeable<typeof props>, ImgixProviderPropsKeys>(
@@ -30,14 +29,15 @@ export default defineComponent({
         })
 
         const cropDimensions = computed(() => modifiers.value?.crop?.split('x') || props.ar?.split(':') || [])
-        const width = computed(() => cropDimensions.value[0] || props?.width || document.value?.dimensions?.width)
-        const height = computed(() => cropDimensions.value[1] || props?.height || document.value?.dimensions?.height)
+
+        const width = computed(() => cropDimensions.value[0] || props?.width || props.media?.dimensions?.width)
+        const height = computed(() => cropDimensions.value[1] || props?.height || props.media?.dimensions?.height)
 
         const isPicture = computed(() => !!slots.default || props.tag === 'picture')
         const src = computed(() => {
-            const src = document.value?.thumbnail?.relativePath 
-                || document.value?.url 
-                || document.value?.src 
+            const src = props.media?.thumbnail?.relativePath 
+                || props.media?.url 
+                || props.media?.src 
                 || props.src
                 
             if (!src) return
@@ -50,7 +50,7 @@ export default defineComponent({
 
         const provider = computed(() => {
             if (typeof props.provider === 'string') return props.provider
-            else if (props.document?.type === 'public_image') return undefined
+            else if (props.media?.type === 'public_image') return undefined
 
             return 'imgix'
         })
@@ -74,10 +74,11 @@ export default defineComponent({
                 src: src.value,
                 width: width.value,
                 height: height.value,
-                alt: props.alt || document.value?.alt || document.value?.name,
-                placeholder: document.value?.imageAverageColor || '#ddd',
+                alt: props.alt || props.media?.alt || props.media?.name,
+                placeholder: props.media?.imageAverageColor || '#ddd',
                 sizes: sizes.value,
                 provider: provider.value,
+                fit: props.fit || cropDimensions.value.length ? 'crop' : undefined,
                 modifiers: provider.value
                     ? {
                         ...modifiers.value,

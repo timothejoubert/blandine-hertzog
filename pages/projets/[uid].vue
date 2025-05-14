@@ -42,13 +42,22 @@ const content = computed(() => documentData.value?.short_content || documentData
                 :class="$style.date"
             />
         </header>
-        <VPrismicImage
+        <VPrismicImage 
             v-if="documentData.image?.url"
-            :document="documentData.image"
+            :media="documentData.image"
             :class="$style.media"
             class="grid-width"
-            sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
-        />
+        >
+            <VPictureSource
+                media="(max-width: 767px)"
+                sizes="xs:95vw sm:95vw md:95vw"
+                :modifiers="{ fit: 'crop', ar: '450:275' }"
+            />
+            <VPictureSource 
+                sizes="lg:95vw xl:95vw xxl:95vw qhd:95vw"
+                :modifiers="{ fit: 'crop', ar: '1368:476' }"
+            />
+        </VPrismicImage>
         <VText
             v-if="content"
             :content="content"
@@ -77,7 +86,7 @@ const content = computed(() => documentData.value?.short_content || documentData
     display: flex;
     align-items: flex-end;
     gap: rem(24) var(--gutter);
-    margin-block: rem(72);
+    margin-block: rem(72) rem(24);
 }
 
 .title {
@@ -85,6 +94,13 @@ const content = computed(() => documentData.value?.short_content || documentData
     line-height: 0.56;
     margin-block: 0;
     text-transform: uppercase;
+}
+
+.tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .tag {

@@ -16,7 +16,6 @@ export function useToast() {
             toasts.value[index].repeat = (toasts.value[index].repeat || 0) + 1
             return
         }
-        console.log('new toast')
 
         toasts.value.push({ ...newToast, repeat: 0 })
         if (newToast.duration) {
