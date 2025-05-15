@@ -118,7 +118,7 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 
 .item {
     margin-bottom: rem(48);
-    
+
     @include media('>=lg') {
         width: fit-content;
         margin-bottom: initial;
@@ -142,6 +142,7 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 
 .item__content {
     padding-block: rem(12) 0;
+    pointer-events: none;
 
     > * {
         max-width: 62ch;

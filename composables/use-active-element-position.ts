@@ -21,7 +21,7 @@ export function useActiveElementPosition(options?: UseActiveElementPositionOptio
   }
 
   function onMouseEnter(event: Event) {
-      const target = event.currentTarget as HTMLDivElement
+      const target = event.currentTarget as HTMLDivElement      
       const targetIndex = list.value.findIndex((item) => item === target)
       if (targetIndex === -1) return
   
