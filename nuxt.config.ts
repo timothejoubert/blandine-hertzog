@@ -77,9 +77,9 @@ export default defineNuxtConfig({
                     // https://developer.mozilla.org/fr/docs/Web/HTTP/CSP
                     'Content-Security-Policy': [
                         // Only allows these iframe origins
-                        'frame-src \'self\' https://blandine-hertzog.prismic.io *.youtube-nocookie.com *.youtube.com *.vimeo.com *.instagram.com *.soundcloud.com *.google.com *.deezer.com *.spotify.com',
+                        'frame-src \'self\' https://blandine-hertzog.prismic.io *.youtube-nocookie.com *.youtube.com *.vimeo.com',
                         // Only allows these script origins
-                        'script-src \'self\' \'unsafe-inline\' https://html2canvas.hertzen.com https://prismic.io https://static.cdn.prismic.io *.googletagmanager.com *.youtube.com *.google.com *.googleapis.com *.gstatic.com',
+                        'script-src \'self\' \'unsafe-inline\' https://html2canvas.hertzen.com https://prismic.io https://static.cdn.prismic.io *.youtube.com *.youtube-nocookie.com',
                         // Only allows these images origins
                         // "img-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com",
                     ].join('; '),

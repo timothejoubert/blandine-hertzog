@@ -74,9 +74,9 @@ function OpenMediaViewer() {
                         height="20"
                     />
                 </button>
-                <VPrismicVideo
+                <VVideoPlayer
                     ref="videoInstance"
-                    :media="showrealVideo"
+                    v-bind="showrealVideo"
                     :class="$style.video"
                     :controls="false"
                     muted

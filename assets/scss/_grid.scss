@@ -2,16 +2,16 @@
 @use './variables/grid' as *;
 @use './functions/breakpoint' as *;
 
-.grid-width {
-    @include grid-width;
+.grid-container {
+    @include grid-container;
 }
 
 .grid {
     @include grid;
 }
 
-.grid-fullwidth {
-    @include grid-fullwidth;
+.grid-extended {
+    @include grid-extended;
 }
 
 :root {

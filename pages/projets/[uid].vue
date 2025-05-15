@@ -16,7 +16,7 @@ const content = computed(() => documentData.value?.short_content || documentData
         :class="$style.root"
     >
         <header
-            class="grid-width"
+            class="grid-container"
             :class="$style.header"
         >
             <h1
@@ -44,24 +44,28 @@ const content = computed(() => documentData.value?.short_content || documentData
         </header>
         <VPrismicImage 
             v-if="documentData.image?.url"
-            :media="documentData.image"
+            :image-field="documentData.image"
             :class="$style.media"
-            class="grid-width"
+            class="grid-container"
         >
             <VPictureSource
                 media="(max-width: 767px)"
                 sizes="xs:95vw sm:95vw md:95vw"
+                width="450"
+                height="275"
                 :modifiers="{ fit: 'crop', ar: '450:275' }"
             />
             <VPictureSource 
                 sizes="lg:95vw xl:95vw xxl:95vw qhd:95vw"
+                width="1368"
+                height="476"
                 :modifiers="{ fit: 'crop', ar: '1368:476' }"
             />
         </VPrismicImage>
         <VText
             v-if="content"
             :content="content"
-            class="text-h5 grid-width"
+            class="text-h5 grid-container"
             :class="$style['intro-text']"
         />
         <LazySliceZone
@@ -70,7 +74,7 @@ const content = computed(() => documentData.value?.short_content || documentData
             :components="components"
             wrapper="main"
         />
-        <VCrossProjects :active-project-document="document" />
+        <VCrossProjects :current-project-document="document" />
     </div>
 </template>
 

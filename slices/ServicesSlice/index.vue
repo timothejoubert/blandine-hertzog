@@ -78,6 +78,7 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 }
 
 .title {
+    margin-bottom: rem(120);
     grid-column: 1 / -1;
 }
 
@@ -86,7 +87,6 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
     width: 100%;
     padding-left: 20px;
     grid-column: 1 / -1;
-    margin-block: 180px;
 
     &::before,
     &::after {

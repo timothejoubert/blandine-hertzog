@@ -1,18 +1,16 @@
 ## In progress
-- MouseMove component (https://developer.mozilla.org/en-US/docs/Web/API/Animation/remove_event)
-- layout header page project
-- Cross project nav
-- archive page
-- Responsive
-- sitemap 
 
 ## TODO
+- MouseMove component (https://developer.mozilla.org/en-US/docs/Web/API/Animation/remove_event)
+- MainNav responsive
+- check sitemap & robots.txt
+- responsive check
 - Schema.org (creative work)
-- Nav on mobile
-- Reveal on intersectionObserver 
+- Reveal on intersectionObserver (use vueUse isElementVisible)
+- Share img
 
 ## Need review
-
+- Cross project nav
 
 ## Done
 - Setup Github webhook on netlify

@@ -15,7 +15,7 @@ const canTrig = computed(() => {
 const rootStyle = computed(() => {
     const part = canTrig.value ? 'sin(var(--inner-angle))' : (Math.sin(360 / length.value / (180 / Math.PI)))
 
-    const spacing = (props.spacing || mapRange(length.value, 1, 100, 1, 6)).toFixed(1)
+    const spacing = (props.spacing || mapRange(length.value, 1, 100, 1.5, 3)).toFixed(1)
     const size = (props.size || mapRange(length.value, 1, 100, 1, 2)).toFixed(1)
 
     return {

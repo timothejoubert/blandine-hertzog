@@ -1,10 +1,5 @@
 import type { PropType } from 'vue'
 
-export const commonVideoProps = {
-    background: Boolean,
-    fit: { type: String as PropType<'cover' | 'contain'> },
-}
-
 export const videoAttributes = {
     width: { type: [Number, String] },
     height: { type: [Number, String] },
@@ -26,8 +21,13 @@ export const videoSrc = {
     altSources: { type: Array as PropType<(typeof videoFile)[]> },
 }
 
+export const videoProps = {
+    background: Boolean,
+    fit: { type: String as PropType<'cover' | 'contain'> },
+}
+
 export const embedVideoProps = {
-    embedPlatform: { type: String as PropType<'youtube' | 'vimeo'> },
+    embedPlatform: { type: String as PropType<string | 'youtube' | 'vimeo'> },
     embedId: { type: String },
     youtube: { type: Object as PropType<Record<string, string>> },
     vimeo: { type: Object as PropType<Record<string, string>> },

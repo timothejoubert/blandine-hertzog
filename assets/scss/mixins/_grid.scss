@@ -1,4 +1,4 @@
-@mixin grid-width {
+@mixin grid-container {
     width: var(--grid-width);
     max-width: var(--grid-max-width);
     margin-inline: auto;
@@ -9,13 +9,14 @@
     column-gap: var(--gutter);
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
 
-    @include grid-width;
+    @include grid-container;
 }
 
-@mixin grid-fullwidth {
+@mixin grid-extended {
     display: grid;
     width: 100%;
-    gap: 0 var(--gutter);
+    max-width: calc(var(--grid-max-width) - var(--gutter) * 2);
+    column-gap: var(--gutter);
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
     padding-inline: var(--gutter);
 }

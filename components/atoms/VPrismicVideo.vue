@@ -1,91 +1,77 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
-import { commonVideoProps, videoAttributes } from '~/utils/video/video-props'
+import type * as Prismic from "@prismicio/client";
+import pick from 'lodash/pick'
+import { videoProps, videoAttributes } from '~/utils/video/video-props'
 import { VPrismicImage } from '#components'
-import type { PossibleImageMedia, PossibleVideoMedia } from '~/composables/use-prismic-media'
-import { isVideoEmbedField } from '~/utils/prismic/guard'
 
 type VImageProps = InstanceType<typeof VPrismicImage>['$props']
 
 const props = defineProps({
-    ...commonVideoProps,
+    ...videoProps,
     ...videoAttributes,
-    media: { type: Object as PropType<PossibleVideoMedia> },
-    thumbnail: { type: Object as PropType<PossibleImageMedia> },
+    thumbnail: { type: Object as PropType<Prismic.ImageField> },
     thumbnailProps: { type: Object as PropType<VImageProps> },
+    embedField: { type: Object as PropType<Prismic.EmbedField> },
 })
 
-const hasThumbnail = computed(() => !!usePrismicMedia(props.thumbnail).url.value)
-
+// THUMBNAIL
+const hasThumbnail = computed(() => props.thumbnail?.url)
 const slots = useSlots()
-const hasLazyVideoPlayer = computed(() => {
-    return hasThumbnail.value || !!slots.default?.()
-})
+const hasLazyVideoPlayer = computed(() => hasThumbnail.value || !!slots.default?.())
 
-const videoData = computed(() => {
-    const embedData = {}
-
-    if (isVideoEmbedField(props.media)) {
-        const embedUrl = new URL(props.media.embed_url)
+const fieldData = computed(() => {
+    if (props.embedField) {
+        const embedUrl = new URL(props.embedField.embed_url)
         const id = embedUrl?.pathname?.substring(1)
 
-        Object.assign(embedData, {
-            embedPlatform: props.media.provider_name,
-            embedId: id === 'watch' ? embedUrl.searchParams.get('v') : id,
-            autoplay: hasLazyVideoPlayer.value || props.autoplay,
-        })
+        return {
+            embedPlatform: props.embedField.provider_name || undefined,
+            embedId: (id === 'watch' ? embedUrl.searchParams.get('v') : id) || undefined,
+        }
     }
 
-    return {
-        ...embedData,
-        ...(props.media || {}),
-        src: props.media?.src || props.media?.url,
-    }
+    return {}
 })
 
-const videoAttrs = computed(() => {
-    const width = props.media?.width || props?.width || 1920
-    const height = props.media?.height || props?.height || 1080
-
-    const attrs = Object.entries(props).reduce((acc, [key, value]) => {
-        if ((key in commonVideoProps || key in videoAttributes)) acc[key] = value
-        return acc
-    }, {})
-
+const dimensions = computed(() => {
     return {
-        ...attrs,
-        width,
-        height,
-    }
-})
-
-const thumbnailProps = computed(() => {
-    const result = {
-        media: props.thumbnail,
-        ...(props.thumbnailProps || {}),
-    }
-
-    if (videoAttrs.value.width && videoAttrs.value.height) {
-        Object.assign(result, {
-            fit: 'crop',
-            ar: `${videoAttrs.value.width}:${videoAttrs.value.height}`,
-            width: videoAttrs.value.width,
-            height: videoAttrs.value.height,
-        })
-    }
-
-    return result
-})
-
-const videoProps = computed(() => {
-    return {
-        ...videoData.value,
-        ...videoAttrs.value,
+        width: props?.width || props.embedField?.width as number || 1920,
+        height: props?.height || props.embedField?.height as number || 1080,
     }
 })
 
 const videoRatio = computed(() => {
-    return Number(videoAttrs.value.width) / Number(videoAttrs.value.height)
+    return Number(dimensions.value.width) / Number(dimensions.value.height)
+})
+
+const parsedProps = computed(() => {
+    const extractedVideoProps = pick(props, Object.keys(videoProps))
+    const extractedVideoAttrs = pick(props, Object.keys(videoAttributes))
+
+    return {
+        ...extractedVideoProps,
+        ...extractedVideoAttrs,
+        ...fieldData.value,
+        ...dimensions.value,
+    }
+})
+
+const thumbnailProps = computed(() => {
+    const { width, height } = dimensions.value
+    const thumbWidth = props.thumbnailProps?.width || width.toString()
+    const thumbHeight = props.thumbnailProps?.height || height.toString()
+
+    return {
+        ...(props.thumbnailProps || {}),
+        imageField: props.thumbnail,
+        modifiers: { 
+            fit: props.thumbnailProps?.modifiers?.fit || 'crop', 
+            ar: `${thumbWidth}:${thumbHeight}` 
+        },
+        width: thumbWidth,
+        height: thumbHeight,
+    } as VImageProps
 })
 
 // Video interaction
@@ -95,15 +81,13 @@ const onClick = (event: Event) => {
 
     hadInteraction.value = true
 }
-
-const onVideoEnded = () => (hadInteraction.value = false)
+// const onVideoEnded = () => (hadInteraction.value = false)
 </script>
 
 <template>
     <div
         v-if="hasLazyVideoPlayer"
         :class="[$style.root, hadInteraction && $style['root--had-interaction']]"
-        :style="!!videoRatio && { aspectRatio: videoRatio }"
     >
         <button
             :aria-label="$t('play_video')"
@@ -128,15 +112,14 @@ const onVideoEnded = () => (hadInteraction.value = false)
         />
         <VVideoPlayer
             v-if="hadInteraction"
-            v-bind="videoProps"
+            v-bind="parsedProps"
             :autoplay="true"
-            :plyr="{ listeners: { ended: onVideoEnded } }"
             :class="[$style.video, $style['video--with-thumbnail']]"
         />
     </div>
     <VVideoPlayer
         v-else
-        v-bind="videoProps"
+        v-bind="parsedProps"
         :class="$style.video"
     />
 </template>

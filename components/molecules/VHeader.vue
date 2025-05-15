@@ -1,11 +1,11 @@
 <script  lang="ts" setup>
+import type { ImageField } from '@prismicio/types'
 import type { VTextContent } from '~/components/atoms/VText.vue'
-import type { PossibleMedia } from '~/composables/use-prismic-media'
 
 defineProps<{
     title: string | null
     content?: VTextContent
-    media?: PossibleMedia
+    media?: ImageField
 }>()
 
 // TODO: use VRevealText
@@ -14,7 +14,7 @@ defineProps<{
 <template>
     <header
         :class="$style.root"
-        class="grid-width"
+        class="grid-container"
     >
         <VPageTitle
             v-if="title"
@@ -28,11 +28,15 @@ defineProps<{
             :class="$style.content"
             tag="p"
         />
-        <VPrismicMedia
+        <VImg
             v-if="media?.url"
-            :media="media"
+            :src="media.url"
+            :width="media.dimensions.width"
+            :height="media.dimensions.height"
+            sizes="xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw"
+            provider="imgix"
+            :alt="media.alt ?? undefined"
             :class="$style.media"
-            :image="{ sizes: 'xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw' }"
         />
     </header>
 </template>

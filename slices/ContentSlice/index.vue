@@ -35,7 +35,7 @@ const rootClasses = computed(() => {
         tag="div"
         :class="rootClasses"
         :spacing="primary.spacing"
-        class="grid-width"
+        class="grid-container"
         :style="{ '--content-slice-column-length': columnLength }"
     >
         <template
@@ -44,7 +44,7 @@ const rootClasses = computed(() => {
         >
             <VPrismicVideo
                 v-if="column.embed?.embed_url"
-                :media="column.embed"
+                :embed-field="column.embed"
                 :thumbnail="column.image"
                 :thumbnail-props="{
                     sizes: imgSizes,
@@ -53,10 +53,9 @@ const rootClasses = computed(() => {
             />
             <VPrismicImage
                 v-else-if="column.image?.url"
-                :media="column.image"
-                :class="[$style.item, $style['item--image']]"
-                :copyright="true"
+                :image-field="column.image"
                 :sizes="imgSizes"
+                :class="[$style.item, $style['item--image']]"
             />
             <VText
                 v-if="column.text"

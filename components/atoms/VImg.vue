@@ -21,13 +21,13 @@ export default defineComponent({
     },
     emits: ['load', 'error'],
     setup(props, context) {
+
         // PLACEHOLDER COLOR
-        const placeholderColor = computed(
-            () =>
-                typeof props.placeholder === 'string'
+        const placeholderColor = computed(() => {
+            return typeof props.placeholder === 'string'
                 && !props.placeholder.includes('.') // assumes a placeholder with a dot (i.e. a file extension) is a file (e.g. `image.png`)
-                && props.placeholder,
-        )
+                && props.placeholder
+        })
 
         // STYLE
         const $style = useCssModule()
@@ -36,6 +36,7 @@ export default defineComponent({
         // LOAD
         const root = ref<HTMLImageElement | null>(null)
         const loaded = ref(false)
+        
         const onLoad = (event?: Event) => {
             loaded.value = true
             if (event) context.emit('load', event)
@@ -51,9 +52,11 @@ export default defineComponent({
             if (root.value?.complete) onLoad()
         })
 
+        // DATA 
         const $img = useImage()
         const width = computed(() => parseSize(props.width))
         const height = computed(() => parseSize(props.height))
+
         const modifiers = computed<ImageOptions['modifiers']>(() => ({
             ...props.modifiers,
             width: width.value,
@@ -61,37 +64,35 @@ export default defineComponent({
             quality: getInt(props.quality || props.modifiers?.quality) || $img.options.quality,
             format: props.format || props.modifiers?.format,
         }))
+
         const options = computed<ImageOptions>(() => ({
             provider: props.provider,
             preset: props.preset,
             densities: props.densities,
             modifiers: modifiers.value,
         }))
-        const src = computed(() =>
-            $img(
-                props.src!,
-                {
-                    ...modifiers.value,
-                },
-                {
-                    ...options.value,
-                },
-            ))
+
+        const src = computed(() => {
+            if (!props.src) return 
+
+            return $img(props.src, modifiers.value, options.value)
+        })
+
         const responsiveImageData = computed(() => {
-            return (
-                (props.sizes || props.densities)
-                && $img.getSizes(props.src!, {
+            if((!props.sizes && !props.densities) || !props.src) return 
+
+            return $img.getSizes(props.src, 
+                {
                     ...options.value,
                     sizes: props.sizes,
                 })
-            )
         })
+
         const internalSizes = computed(() => {
             const result = responsiveImageData.value && responsiveImageData.value.sizes
-
-            if (result === '100vw') return // do not output sizes="100vw" as it is the default value
-
-            return result
+            
+            // do not output sizes="100vw" as it is the default value
+            return result === '100vw' ? undefined : result
         })
 
         // @see https://github.com/nuxt/image/blob/main/src/runtime/components/NuxtImg.vue

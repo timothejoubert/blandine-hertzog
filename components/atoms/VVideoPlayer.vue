@@ -1,7 +1,7 @@
 <script lang="ts">
 import type Plyr from 'plyr'
 import type { PropType } from 'vue'
-import { commonVideoProps, embedVideoProps, videoAttributes, videoSrc } from '~/utils/video/video-props'
+import { videoProps, embedVideoProps, videoAttributes, videoSrc } from '~/utils/video/video-props'
 import { getVideoAttrsValues } from '~/utils/video/video-attributes'
 import { getEmbedSrc } from '~/utils/embed'
 
@@ -9,7 +9,7 @@ export const vVideoPlayerProps = {
     ...videoSrc,
     ...videoAttributes,
     ...embedVideoProps,
-    ...commonVideoProps,
+    ...videoProps,
     plyr: { type: Object as PropType<Plyr.Options> },
 }
 
@@ -103,8 +103,8 @@ export default defineComponent({
         // STYLE
         const ratio = computed(() => {
             const validRatio = props.width && props.height && Number(props.width) / Number(props.height)
-            if (validRatio) return validRatio
-            else return 16 / 9
+            
+            return typeof validRatio === 'number' ? validRatio : 16 / 9
         })
 
         const playerSize = ref<number[]>([])

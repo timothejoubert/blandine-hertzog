@@ -56,7 +56,7 @@ const renderedProjects = computed(() => {
         <main>
             <div
                 :class="$style.filters"
-                class="grid-width"
+                class="grid-container"
             >
                 <VProjectTagFilter
                     v-model="activeTags"

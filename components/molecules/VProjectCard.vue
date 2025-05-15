@@ -11,20 +11,17 @@ interface VProjectCardProps {
 const props = defineProps<VProjectCardProps>()
 const { image, title, client } = useProjectUtils(props.project)
 
-const imageProps = computed(() => {
-    const isFullwidth = props.size === 'fullwidth'
-    const width = isFullwidth ? '1376' : '460'
-    const height = isFullwidth ? '768' : '248'
 
-    return {
-        fit: 'crop',
-        ar: `${width}:${height}`,
-        width,
-        height,
-        sizes: isFullwidth 
+const isFullwidth = computed(() => props.size === 'fullwidth')
+
+const imageSizes = computed(() => {
+    return isFullwidth.value
             ? 'xs:92vw md:92vw lg:92vw xl:92vw hq:92vw qhd:92vw' 
-            : 'xs:92vw md:92vw lg:45vw xl:45vw hq:45vw qhd:45vw',
-    }
+            : 'xs:92vw md:92vw lg:45vw xl:45vw hq:45vw qhd:45vw'
+})
+
+const imageDimension = computed(() => {
+    return isFullwidth.value ? { width: 1376, height: 768} : { width: 460, height: 248 }
 })
 </script>
 
@@ -52,11 +49,19 @@ const imageProps = computed(() => {
             rel="noopener nofollow"
             tabindex="-1"
         >
-            <VPrismicImage
+            <VImg
                 v-if="image"
-                :media="image"
+                :src="image.url"
+                :width="imageDimension.width"
+                :height="imageDimension.height"
+                :sizes="imageSizes"
+                provider="imgix"
+                :alt="image.alt ?? undefined"
+                :modifiers="{ 
+                    fit: 'crop', 
+                    ar: `${imageDimension.width}:${imageDimension.height}`, 
+                }"
                 :class="$style.image"
-                v-bind="imageProps"
             />
             <div
                 v-else
