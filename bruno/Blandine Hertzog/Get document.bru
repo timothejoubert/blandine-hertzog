@@ -1,0 +1,19 @@
+meta {
+  name: Get document
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{repo_url}}/{{document_search_path}}/?ref={{repo_ref}}&brokenRoute=/404
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ref: {{repo_ref}}
+  brokenRoute: /404
+  ~q: [[at(document.type, "project_page")]]
+  ~q: 
+  [[at(my.project_page.uid, "dermophil")]]
+}

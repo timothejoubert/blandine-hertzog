@@ -13,7 +13,6 @@ export function useMouseFollow(options: UseMouseFollowOptions) {
   const { x: windowX, y: windowY } = useWindowScroll()
 
   const container = computed(() => getHtmlElement(options.container))
-  console.log('container', container.value)
   const containerRect = computed(() => {
       if(!container.value) return { x: 0, y: 0 }
       

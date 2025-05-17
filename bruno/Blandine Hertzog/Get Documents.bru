@@ -1,0 +1,19 @@
+meta {
+  name: Get Documents
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{prismic_base_url}}/api/v2/documents/search?ref={{repo_ref}}&q=[[at(document.type, "project_page")]]&q=[[at(my.project_page.uid, "these-profressionnelle")]]
+[[at(document.type, "project_page")]]
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ref: {{repo_ref}}
+  q: [[at(document.type, "project_page")]]
+  q: [[at(my.project_page.uid, "these-profressionnelle")]]
+  [[at(document.type, "project_page")]]
+}

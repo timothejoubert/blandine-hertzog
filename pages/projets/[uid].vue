@@ -4,10 +4,9 @@ import type { ProjectPageDocument } from '~/prismicio-types'
 import VCrossProjects from '~/components/molecules/VCrossProjects.vue'
 
 const { document, documentData } = await useFetchPage<ProjectPageDocument>('project_page')
-const { tags, date } = useProjectUtils(document.value)
+const { tags, date, image, content } = useProjectUtils(document.value)
 
 const slices = computed(() => documentData.value?.slices || [])
-const content = computed(() => documentData.value?.short_content || documentData.value?.content)
 </script>
 
 <template>
@@ -43,8 +42,8 @@ const content = computed(() => documentData.value?.short_content || documentData
             />
         </header>
         <VPrismicImage 
-            v-if="documentData.image?.url"
-            :image-field="documentData.image"
+            v-if="image"
+            :image-field="image"
             :class="$style.media"
             class="grid-container"
         >

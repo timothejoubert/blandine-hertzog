@@ -1,0 +1,17 @@
+meta {
+  name: Get repo ref
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{prismic_base_url}}/api/v2
+  body: none
+  auth: inherit
+}
+
+script:post-response {
+  const body = res.getBody();
+  console.log('body', body.refs[0].ref)
+  bru.setEnvVar("repo_ref", body.refs[0].ref);
+}

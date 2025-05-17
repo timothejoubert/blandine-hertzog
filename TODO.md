@@ -8,6 +8,8 @@
 - Schema.org (creative work)
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
+- Nuxt fontaine
+- splash screen
 
 ## Need review
 - Cross project nav

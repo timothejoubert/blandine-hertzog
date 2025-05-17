@@ -21,7 +21,7 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
     if (!documentData.value) {
         throw createError({
             statusCode: 404,
-            message: 'Can\'t find page document',
+            message: `Can't find page document for ${internalRouteType} ${route.params.uid ? 'in ' + route.params.uid : ''}`,
         })
     }
     else if (error.value) {
