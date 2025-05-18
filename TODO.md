@@ -6,7 +6,6 @@
 - responsive check
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
-- Nuxt fontaine
 
 ## Later
 - Schema.org (creative work)
@@ -20,6 +19,7 @@
 - Check les redirections
 
 ## Done
+- Nuxt fontaine
 - Setup Github webhook on netlify
 - Use padding instead margin in VSlice (better slice-simulator view)
 - Resolve prismic document url from type
