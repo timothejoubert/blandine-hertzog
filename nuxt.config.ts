@@ -88,7 +88,7 @@ export default defineNuxtConfig({
             '/**': {
                 prerender: true,
                 ssr: true, // when prerendered, it will have the full html of the page present, not an empty div
-                isr: 3600 * 24, // 24 hours
+                isr: 3600 * 1, // 1 hours (https://developers.netlify.com/guides/isr-and-advanced-caching-with-nuxt-v4-on-netlify/)
                 headers: {
                     // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
                     'Access-Control-Allow-Origin': '*',
@@ -109,7 +109,7 @@ export default defineNuxtConfig({
             '/projets/**': { 
                 prerender: true,
                 ssr: true,
-                isr: 3600 * 24, // 24 hours
+                isr: 1 * 24, // 24 hours
             },
             [PREVIEW_PATH]: {
                 prerender: false,
