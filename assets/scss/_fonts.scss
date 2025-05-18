@@ -13,6 +13,53 @@
     src: url('~/assets/fonts/hanken-grotesk-variable.woff2') format('woff2-variations');
 }
 
+// Build result from nuxtjs/fontaine
+@font-face { 
+    font-family: "Mongo grotesk fallback"; 
+    src: local("Segoe UI"); 
+    size-adjust: 61.3498%; 
+    ascent-override: 122.2498%; 
+    descent-override: 34.23%; 
+    line-gap-override: 16.3%; 
+} 
+
+@font-face { 
+    font-family: "Mongo grotesk fallback";
+    src: local("Roboto");
+    size-adjust: 61.1477%;
+    ascent-override: 122.6537%;
+    descent-override: 34.343%;
+    line-gap-override:
+    16.3538%; 
+} 
+
+@font-face {
+    font-family:"Mongo grotesk fallback";
+    src: local("Helvetica Neue");
+    size-adjust: 60.4444%;
+    ascent-override: 124.0809%;
+    descent-override: 34.7426%;
+    line-gap-override: 16.5441%;
+}
+
+@font-face { 
+    font-family: "Mongo grotesk fallback";
+     src: local("Arial");
+     size-adjust: 61.0138%;
+     ascent-override: 122.923%;
+     descent-override: 34.4184%; 
+     line-gap-override: 16.3897%; 
+} 
+
+@font-face {
+    font-family: "Mongo grotesk fallback"; 
+    src: local("Noto Sans"); 
+    size-adjust: 57.384%; 
+    ascent-override: 130.6985%; 
+    descent-override: 36.5956%; 
+    line-gap-override: 17.4265%; 
+} 
+
 // TODO: convert variable font to woff2
 // @font-face {
 //     font-display: swap;

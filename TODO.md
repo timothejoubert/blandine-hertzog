@@ -3,16 +3,21 @@
 ## TODO
 - MouseMove component (https://developer.mozilla.org/en-US/docs/Web/API/Animation/remove_event)
 - MainNav responsive
-- check sitemap & robots.txt
 - responsive check
-- Schema.org (creative work)
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
 - Nuxt fontaine
+
+## Later
+- Schema.org (creative work)
 - splash screen
 
 ## Need review
 - Cross project nav
+
+## Releases check
+- check sitemap & robots.txt
+- Check les redirections
 
 ## Done
 - Setup Github webhook on netlify

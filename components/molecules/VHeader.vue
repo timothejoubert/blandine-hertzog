@@ -42,6 +42,10 @@ defineProps<{
 </template>
 
 <style lang="scss" module>
+.root {
+    overflow-x: clip; // Prevent horizontal scroll before Mango font face loaded
+}
+
 .content {
     max-width: 62ch;
     margin-block: initial;

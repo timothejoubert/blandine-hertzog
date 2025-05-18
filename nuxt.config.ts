@@ -17,8 +17,9 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@nuxt/icon',
         '@nuxtjs/i18n',
-        '@nuxtjs/robots', 
-        '@nuxtjs/sitemap',
+        '@nuxtjs/robots',
+        '@nuxtjs/sitemap', 
+        // '@nuxtjs/fontaine'
     ],
     plugins: [],
     components: [
@@ -163,6 +164,11 @@ export default defineNuxtConfig({
             },
         },
     },
+    // https://nuxt.com/modules/fontaine
+    // Only use generate !font-face build because it cause hydratation warning
+    // fontMetrics: {
+    //     fonts: ['Mango', { family: 'Mongo grotesk', src: '../assets/fonts/mango-grotesk-variable.ttf' }],
+    // },
     // https://i18n.nuxtjs.org/docs/getting-started
     i18n: {
         // strategy: 'prefix_except_default',
