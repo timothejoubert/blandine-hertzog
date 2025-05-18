@@ -1,3 +1,4 @@
+
 export const prismicDocumentRoutes = [
     {
         name: 'index',
@@ -31,12 +32,11 @@ export const prismicDocumentRoutes = [
     //     type: 'about_page',
     //     path: '/:lang?/a-propos',
     // },
-] as const
+] as const 
 
 export type PrismicDocumentRoutes = typeof prismicDocumentRoutes
 export type PrismicDocumentRoute = PrismicDocumentRoutes[number]
-
-export type PrismicDocumentType = Pick<PrismicDocumentRoute, 'type'>
+export type PrismicDocumentType = PrismicDocumentRoute['type']
 
 export const prismicDocumentName = prismicDocumentRoutes.reduce((acc, route) => {
     const type = route.type

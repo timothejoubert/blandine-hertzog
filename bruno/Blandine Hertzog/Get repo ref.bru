@@ -12,6 +12,5 @@ get {
 
 script:post-response {
   const body = res.getBody();
-  console.log('body', body.refs[0].ref)
   bru.setEnvVar("repo_ref", body.refs[0].ref);
 }

@@ -1,4 +1,5 @@
 import svgLoader from 'vite-svg-loader'
+import type { Route } from '@prismicio/client'
 import slicemachine from './slicemachine.config.json'
 import { version } from './package.json'
 import { I18N_DEFAULT_LOCALE, I18N_LOCALES } from './constants/i18n'
@@ -8,7 +9,17 @@ import { PREVIEW_PATH } from './constants/prismic-preview'
 const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
-    modules: ['@nuxt/image', '@nuxtjs/prismic', '@nuxt/image', '@nuxtjs/i18n', '@vueuse/nuxt', '@nuxt/eslint', '@rezo-zero/nuxt-stories', '@nuxtjs/sitemap', '@nuxtjs/robots', '@nuxt/icon'],
+    modules: [
+        '@nuxt/image',
+        '@nuxtjs/prismic',
+        '@nuxt/eslint',
+        '@rezo-zero/nuxt-stories',
+        '@vueuse/nuxt',
+        '@nuxt/icon',
+        '@nuxtjs/i18n',
+        '@nuxtjs/robots', 
+        '@nuxtjs/sitemap',
+    ],
     plugins: [],
     components: [
         '~/components/atoms',
@@ -48,8 +59,8 @@ export default defineNuxtConfig({
             version,
             site: {
                 name: 'Blandine hertzog dev',
-                url: 'http://localhost:3000',
-                environment: 'development',
+                url: '',
+                env: '',
             },
         },
     },
@@ -66,8 +77,17 @@ export default defineNuxtConfig({
     },
     compatibilityDate: '2024-07-09',
     nitro: {
+        prerender: {
+            // enabled by default with nuxt generate, not required
+            // crawlLinks: true,
+            // add any routes to prerender (usefull for sitemap generation)
+            routes: ['/']
+        },
         routeRules: {
             '/**': {
+                prerender: true,
+                ssr: true, // when prerendered, it will have the full html of the page present, not an empty div
+                isr: 3600 * 24, // 24 hours
                 headers: {
                     // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
                     'Access-Control-Allow-Origin': '*',
@@ -85,6 +105,11 @@ export default defineNuxtConfig({
                     ].join('; '),
                 },
             },
+            '/projets/**': { 
+                prerender: true,
+                ssr: true,
+                isr: 3600 * 24, // 24 hours
+            },
             [PREVIEW_PATH]: {
                 prerender: false,
                 ssr: false,
@@ -92,6 +117,7 @@ export default defineNuxtConfig({
             },
             '/slice-simulator': {
                 prerender: false,
+                ssr: false,
                 robots: false,
             },
         },
@@ -139,6 +165,7 @@ export default defineNuxtConfig({
     },
     // https://i18n.nuxtjs.org/docs/getting-started
     i18n: {
+        // strategy: 'prefix_except_default',
         strategy: I18N_LOCALES.length > 1 ? 'prefix_except_default' : 'no_prefix',
         detectBrowserLanguage: false,
         defaultLocale: I18N_DEFAULT_LOCALE,
@@ -198,17 +225,18 @@ export default defineNuxtConfig({
         preview: PREVIEW_PATH,
         toolbar: true,
         clientConfig: {
-            routes: prismicDocumentRoutes,
+            routes: prismicDocumentRoutes as unknown as Route[],
         },
     },
     robots: {
+        // enabled: false, // Enabled will prevent to generate sitemap urls
         // provide simple disallow rules for all robots `user-agent: *`
-        disallow: ['/slice-simulator', '/slice-smulator', '/prismic-preview'],
+        disallow: ['/slice-simulator', '/prismic-preview'],
     },
     // https://www.nuxtseo.com/sitemap/getting-started/installation
     sitemap: {
-        // enabled: !isGenerateMaintenance,
-        exclude: ['/slice-simulator', '/slice-smulator', '/prismic-preview'],
+        sources: ['/api/sitemap'],
+        exclude: ['/slice-simulator', PREVIEW_PATH],
     },
     // https://github.com/rezozero/nuxt-stories
     stories: {

@@ -13,7 +13,7 @@ if(document.value.url) {
     })
 } else {
     await navigateTo('/')
-}
+} 
 </script>
 
 <template>

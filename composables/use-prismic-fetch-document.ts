@@ -29,7 +29,6 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
                 return await prismicClient.getByID(documentId.value, prismicFetchOptions)
             }
             else if (uid && prismicDocument && isDynamicDocument(prismicDocument)) {
-                console.log('debug', prismicDocument, uid, prismicDocument && isDynamicDocument(prismicDocument))
                 return await prismicClient.getByUID(prismicDocument, uid, prismicFetchOptions)
             }
             else if (prismicDocument && isExistingDocumentType(prismicDocument)) {

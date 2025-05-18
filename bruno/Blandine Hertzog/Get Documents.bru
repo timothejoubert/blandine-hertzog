@@ -5,15 +5,15 @@ meta {
 }
 
 get {
-  url: {{prismic_base_url}}/api/v2/documents/search?ref={{repo_ref}}&q=[[at(document.type, "project_page")]]&q=[[at(my.project_page.uid, "these-profressionnelle")]]
-[[at(document.type, "project_page")]]
+  url: {{prismic_base_url}}/api/v2/documents/search?ref={{repo_ref}}&pageSize=100
   body: none
   auth: inherit
 }
 
 params:query {
   ref: {{repo_ref}}
-  q: [[at(document.type, "project_page")]]
-  q: [[at(my.project_page.uid, "these-profressionnelle")]]
+  pageSize: 100
+  ~q: [[at(document.type, "project_page")]]
+  ~q: [[at(my.project_page.uid, "these-professionnelle")]]
   [[at(document.type, "project_page")]]
 }
