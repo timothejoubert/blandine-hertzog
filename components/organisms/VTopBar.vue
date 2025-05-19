@@ -69,7 +69,7 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
     }
 
 
-    &--is-open::after {
+    &::after {
         position: fixed;
         background-color: rgba(0, 0, 0, 40%);
         content: '';
@@ -163,7 +163,7 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
 .slide-in {
     &:global(#{'-enter-active'}),
     &:global(#{'-leave-active'}) {
-        transition: translate 0.4s ease(out-quad);
+        transition: translate 0.3s ease(out-quad);
     }
 
     &:global(#{'-enter-from'}),
