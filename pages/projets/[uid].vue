@@ -86,8 +86,8 @@ const slices = computed(() => documentData.value?.slices || [])
 
 .header {
     display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;;
+    flex-wrap: wrap;
+    align-items: flex-end;;
     gap: rem(24) var(--gutter);
     margin-block: rem(72) rem(24);
 }
