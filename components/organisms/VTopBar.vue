@@ -56,6 +56,7 @@ $top-bar-height: rem(82);
     height: $top-bar-height;
     align-items: center;
     grid-column: 1 / -1;
+    margin-bottom: rem(12);
 
     &::before {
         position: absolute;
@@ -135,7 +136,7 @@ $top-bar-height: rem(82);
     grid-column: 1 / -1;
 
     @include media('>=md') {
-        grid-column: 4 / span 7;
+        grid-column: 4 / span 8;
     }
 }
 
@@ -154,7 +155,7 @@ $top-bar-height: rem(82);
     align-items: center;
     justify-content: center;
     gap: rem(12);
-    grid-column: 11 / -1;
+    grid-column: 12 / -1;
     justify-self: flex-end;
 }
 

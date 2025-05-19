@@ -59,6 +59,7 @@ export default defineComponent({
 
         const modifiers = computed<ImageOptions['modifiers']>(() => ({
             ...props.modifiers,
+            auto: 'format,compress',
             width: width.value,
             height: height.value,
             quality: getInt(props.quality || props.modifiers?.quality) || $img.options.quality,
@@ -72,16 +73,25 @@ export default defineComponent({
             modifiers: modifiers.value,
         }))
 
-        const src = computed(() => {
-            if (!props.src) return 
+        function getSrc() {
+            if (!props.src) return ''
 
-            return $img(props.src, modifiers.value, options.value)
+            // https://images.prismic.io/blandine-hertzog/Z6dXY5bqstJ9-ZAp_lustucru14.png?auto=format,compress
+            const autoParams = (new URL(props.src)).searchParams.get('auto')
+            return props.src.replace(`?auto=${autoParams}`, '') // remove auto params
+        }
+
+        const src = computed(() => {
+            const src = getSrc()
+            if (!src) return 
+
+            return $img(src, modifiers.value, options.value)
         })
 
         const responsiveImageData = computed(() => {
             if((!props.sizes && !props.densities) || !props.src) return 
 
-            return $img.getSizes(props.src, 
+            return $img.getSizes(getSrc(), 
                 {
                     ...options.value,
                     sizes: props.sizes,

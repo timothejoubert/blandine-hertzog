@@ -33,7 +33,7 @@ defineProps<{
 
     &--spacing-block-md {
       @include property-fluid('padding-block', (xs: 48, xl: 96));
-    }
+  }
 
     &--spacing-block-lg {
       @include property-fluid('padding-block', (xs: 96, xl: 144));

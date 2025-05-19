@@ -59,7 +59,7 @@ const imageDimension = computed(() => {
                 :alt="image.alt ?? undefined"
                 :modifiers="{ 
                     fit: 'crop', 
-                    ar: `${imageDimension.width}:${imageDimension.height}`, 
+                    ar: imageDimension.width / imageDimension.height, 
                 }"
                 :class="$style.image"
             />

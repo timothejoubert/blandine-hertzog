@@ -56,7 +56,6 @@ const renderedProjects = computed(() => {
         <main>
             <div
                 :class="$style.filters"
-                class="grid-container"
             >
                 <VProjectTagFilter
                     v-model="activeTags"
@@ -112,7 +111,12 @@ const renderedProjects = computed(() => {
 .filters {
     display: flex;
     justify-content: space-between;
-    margin-top: rem(60);
+    margin-top: rem(112);
+    margin-inline: var(--gutter);
+
+    @include media('>=lg') {
+        margin-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 2);
+    }
 }
 
 .reset {
@@ -135,14 +139,24 @@ const renderedProjects = computed(() => {
 
 .list {
     margin-top: rem(60);
-    row-gap: rem(24);
+    row-gap: rem(42);
 }
 
 .item {
     grid-column: 1 / -1;
 
-    @include media('>=lg') {
+    @include media('>=md') {
         grid-column: span 7;
+    }
+
+    @include media('>=lg') {
+        &:nth-child(odd) {
+            grid-column: 2 / span 6;
+        }
+        &:nth-child(even) {
+            grid-column: 8 / -2;
+        }
+
     }
 }
 </style>

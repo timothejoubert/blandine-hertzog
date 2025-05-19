@@ -71,7 +71,7 @@ const projects = computed(() => {
 
 .project {
     position: sticky;
-    top: rem(120);
+    top: rem(100);
     background-color: var(--theme-color-background);
     grid-column: 1 / -1;
     

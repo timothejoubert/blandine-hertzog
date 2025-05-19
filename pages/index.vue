@@ -106,7 +106,7 @@ function OpenMediaViewer() {
 
  <style lang="scss" module>
 .header {
-    row-gap: rem(24);
+    row-gap: rem(32);
  }
 
  .video-wrapper {

@@ -30,7 +30,7 @@ const bodyContent = computed(() => {
             v-if="bodyContent"
             :class="$style.body"
         >
-            <div :class="$style.title">
+            <div :class="$style['inner-title']">
                 {{ bodyContent.title }}
             </div>
             <VText
@@ -54,21 +54,25 @@ const bodyContent = computed(() => {
 
 .title {
     grid-column: 1 / -1;
+    margin-bottom: rem(94);
 
     @include media('>=lg') {
+        margin-bottom: initial;
         grid-column: 1 / span 4;
     }
 }
 
 .body {
     grid-column: 1 / -1;
+    margin-bottom: rem(64);
 
     @include media('>=lg') {
         grid-column: 6 / span 4;
+        margin-bottom: initial;
     }
 }
 
-.title {
+.inner-title {
     text-transform: uppercase;
 }
 
