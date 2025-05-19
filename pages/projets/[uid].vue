@@ -40,27 +40,26 @@ const slices = computed(() => documentData.value?.slices || [])
                 class="text-h5"
                 :class="$style.date"
             />
+            <VPrismicImage 
+                v-if="image"
+                :image-field="image"
+                :class="$style.media"
+            >
+                <VPictureSource
+                    media="(max-width: 1023px)"
+                    sizes="xs:95vw sm:95vw md:95vw"
+                    width="450"
+                    height="275"
+                    :modifiers="{ fit: 'crop', ar: '450:275' }"
+                />
+                <VPictureSource 
+                    sizes="lg:95vw xl:95vw xxl:95vw qhd:95vw"
+                    width="1368"
+                    height="520"
+                    :modifiers="{ fit: 'crop', ar: '1368:520' }"
+                />
+            </VPrismicImage>
         </header>
-        <VPrismicImage 
-            v-if="image"
-            :image-field="image"
-            :class="$style.media"
-            class="grid-container"
-        >
-            <VPictureSource
-                media="(max-width: 767px)"
-                sizes="xs:95vw sm:95vw md:95vw"
-                width="450"
-                height="275"
-                :modifiers="{ fit: 'crop', ar: '450:275' }"
-            />
-            <VPictureSource 
-                sizes="lg:95vw xl:95vw xxl:95vw qhd:95vw"
-                width="1368"
-                height="476"
-                :modifiers="{ fit: 'crop', ar: '1368:476' }"
-            />
-        </VPrismicImage>
         <VText
             v-if="content"
             :content="content"
@@ -88,11 +87,12 @@ const slices = computed(() => documentData.value?.slices || [])
 .header {
     display: flex;
     align-items: flex-end;
+    flex-wrap: wrap;;
     gap: rem(24) var(--gutter);
     margin-block: rem(72) rem(24);
 }
 
-.title {
+.root .title {
     margin-top: 2%;
     line-height: 0.56;
     margin-block: 0;
@@ -114,10 +114,19 @@ const slices = computed(() => documentData.value?.slices || [])
     }
 }
 
-.date {
+.root .date {
     margin-top: 2%;
     margin-left: auto;
     line-height: 0.56;
+}
+
+.media {
+    width: 100%;
+    grid-column: 1 / -1;
+
+    img {
+        width: 100%;
+    };
 }
 
 .intro-text {
