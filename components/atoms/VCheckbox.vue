@@ -79,10 +79,10 @@ $check-border-width: 2px;
 
 .icon {
     position: absolute;
+    z-index: 2;
     color: var(--v-checkbox-icon-color, var(--theme-color-background));
     font-size: 24px;
     visibility: hidden;
-    z-index: 2;
 
     :global(input)[type='radio']:checked + .root &,
     :global(input)[type='checkbox']:checked + .root & {
