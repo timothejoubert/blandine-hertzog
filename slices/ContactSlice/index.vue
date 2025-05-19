@@ -53,8 +53,8 @@ const bodyContent = computed(() => {
 }
 
 .title {
-    grid-column: 1 / -1;
     margin-bottom: rem(94);
+    grid-column: 1 / -1;
 
     @include media('>=lg') {
         margin-bottom: initial;
@@ -63,12 +63,12 @@ const bodyContent = computed(() => {
 }
 
 .body {
-    grid-column: 1 / -1;
     margin-bottom: rem(64);
+    grid-column: 1 / -1;
 
     @include media('>=lg') {
-        grid-column: 6 / span 4;
         margin-bottom: initial;
+        grid-column: 6 / span 4;
     }
 }
 

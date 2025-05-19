@@ -49,6 +49,7 @@ function isChecked(value: string) {
             @input="onChange(input.value)"
         >
         <VCheckbox
+            type="radio"
             :class="$style.checkbox"
             @click="onChange(input.value)"
         />
@@ -70,10 +71,6 @@ function isChecked(value: string) {
 .input {
     display: none;
 }
-
-// .checkbox {
-//     pointer-events: none;
-// }
 
 .label {
     cursor: inherit;

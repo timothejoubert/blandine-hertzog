@@ -1,13 +1,18 @@
 <script setup lang="ts">
+defineProps<{
+    customIcon?: boolean
+    type?: 'checkbox' | 'radio'
+}>()
 </script>
 
 <template>
     <span :class="$style.root">
         <VIcon
-            name="check"
+            v-if="customIcon"
+            :name="type === 'radio' ? 'asterix-5' : 'check'"
             :class="$style.icon"
-            width="24"
-            height="24"
+            width="12"
+            height="12"
         />
     </span>
 </template>
@@ -47,7 +52,7 @@ $check-border-width: 2px;
     }
 
     // Radio
-    :global(input)[type='radio'] + &::after {
+    :global(input)[type='radio'] + &:not(:has( .icon))::after {
         position: absolute;
         width: 8px;
         height: 8px;
@@ -56,7 +61,7 @@ $check-border-width: 2px;
     }
 
     :global(input)[type='radio']:checked + &::after {
-        background-color: currentcolor;
+        background-color: var(--theme-color-primary, currentcolor);
     }
 
     :global(input):focus-visible + &,
@@ -77,7 +82,9 @@ $check-border-width: 2px;
     color: var(--v-checkbox-icon-color, var(--theme-color-background));
     font-size: 24px;
     visibility: hidden;
+    z-index: 2;
 
+    :global(input)[type='radio']:checked + .root &,
     :global(input)[type='checkbox']:checked + .root & {
         visibility: inherit;
     }

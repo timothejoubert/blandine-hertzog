@@ -47,16 +47,17 @@ const links = computed(() => menu.value?.data.links)
 $background-color: var(--theme-color-background);
 $transparent-background: color-mix(in srgb, $background-color, transparent 100%);
 $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
-$top-bar-height: rem(82);
 
 .root {
+    --v-top-bar-height: #{rem(72)};
+
     position: sticky;
     z-index: 101;
     top: 0;
-    height: $top-bar-height;
+    height: var(--v-top-bar-height);
     align-items: center;
-    grid-column: 1 / -1;
     margin-bottom: rem(12);
+    grid-column: 1 / -1;
 
     &::before {
         position: absolute;
@@ -125,7 +126,7 @@ $top-bar-height: rem(82);
     box-shadow: 0 -10px 40px black;
     gap: rem(62) 0;
     grid-column: 1 / -1;
-    padding-block: #{$top-bar-height + rem(32)} rem(62);    
+    padding-block: calc(var(--v-top-bar-height) + rem(32)) rem(62);    
 
     @include media('>=md') {
         display: contents;

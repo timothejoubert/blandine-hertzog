@@ -32,9 +32,8 @@ const imageDimension = computed(() => {
     >
         <VPrismicLink
             :to="project"
-            :class="$style.title"
+            :class="[$style.title, isFullwidth ? 'text-h5' : 'text-h6']"
             :label="title"
-            class="text-h5"
         />
         <span
             v-if="client && size === 'fullwidth'"

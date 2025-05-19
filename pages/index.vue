@@ -30,9 +30,26 @@ const showrealVideo: StaticMedia = {
     type: 'public_video',
 }
 
-const { open } = useMediaViewer()
-function OpenMediaViewer() {
-    open([showrealVideo])
+useEventListener(videoEl, 'fullscreenchange', () => {
+    if(!videoEl.value) return 
+
+    videoEl.value.muted = !document.fullscreenElement
+})
+
+
+function openFullscreen() {
+    const vid = videoEl.value
+    if(!vid) return 
+    
+    vid.volume = 0.4
+
+    if (vid.requestFullscreen) {
+        vid.requestFullscreen();
+    } else if (vid.webkitRequestFullscreen) { /* Safari */
+        vid.webkitRequestFullscreen();
+    } else if (vid.msRequestFullscreen) { /* IE11 */
+        vid.msRequestFullscreen();
+    }
 }
 </script>
 
@@ -86,7 +103,7 @@ function OpenMediaViewer() {
                 <button
                     :class="[$style.button, $style['button--fullscreen']]"
                     :aria-label="$t('media_viewer.open')"
-                    @click="OpenMediaViewer"
+                    @click="openFullscreen"
                 >
                     <VIcon
                         name="fullscreen"

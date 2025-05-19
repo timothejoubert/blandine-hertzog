@@ -153,6 +153,7 @@ const renderedProjects = computed(() => {
         &:nth-child(odd) {
             grid-column: 2 / span 6;
         }
+
         &:nth-child(even) {
             grid-column: 8 / -2;
         }
