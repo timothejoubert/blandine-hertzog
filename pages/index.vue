@@ -149,7 +149,7 @@ function OpenMediaViewer() {
      background-color: initial;
      cursor: pointer;
 
-     > svg {
+     > span {
          flex-shrink: 0;
      }
 

@@ -8,9 +8,9 @@ import elementId from '~/constants/element-id'
 const route = useRoute()
 const isSliceSimulatorRoute = computed(() => route.name === 'slice-simulator')
 
-// callOnce(async () => {
-if(!isSliceSimulatorRoute.value) await useFetchPage()
-// })
+callOnce(async () => {
+    if(!isSliceSimulatorRoute.value) await useFetchPage()
+})
 
 const theme = useUiThemeState()
 const primaryColor = computed(() => themeProperties[`${theme.value}-color-primary`])
