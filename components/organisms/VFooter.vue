@@ -108,16 +108,15 @@ const links = computed(() => menu.value?.data.links || [])
 
 .copyright {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    grid-column: 1 / -1;
+    flex-flow: column wrap;
     gap: rem(4);
+    grid-column: 1 / -1;
     opacity: 0.7;
     
     @include media('>=md') {
+        flex-direction: initial;
         align-items: center;
         gap: var(--gutter);
-        flex-direction: initial;
         grid-column: 1 / span 8;
     }
 }

@@ -8,6 +8,7 @@ const props = defineProps(
 
 // HYDRATION
 const primary = computed(() => props.slice.primary)
+const isMinified = computed(() => props.slice.variation === 'minified')
 </script>
 
 <template>
@@ -16,7 +17,15 @@ const primary = computed(() => props.slice.primary)
         :slice="slice"
         :class="$style.root"
     >
+        <VCta
+            v-if="isMinified && primary.link?.url"
+            :to="primary.link.url"
+            :label="primary.link.text"
+            :class="$style.cta"
+            icon-name="auto"
+        />
         <VLinkMouseFollow
+            v-else
             :title="primary.title"
             :link-label="primary.link?.text || 'aucun label rempli'"
             :href="primary.link?.url"
@@ -26,11 +35,8 @@ const primary = computed(() => props.slice.primary)
 </template>
 
 <style lang="scss" module>
-.root {
-    // background-color: red;
-}
-
-.link-follow {
-
+.cta {
+    width: fit-content;
+    margin-inline: auto;
 }
 </style>

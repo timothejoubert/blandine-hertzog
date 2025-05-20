@@ -73,6 +73,7 @@ watchEffect(() => {
 .root {
   position: relative;
   display: flex;
+
   /* flex-wrap: wrap; */
   align-items: center;
   justify-content: center;
@@ -89,8 +90,8 @@ watchEffect(() => {
 .link {
   z-index: 1;
   display: block;
-  color: inherit;
   width: 100%;
+  color: inherit;
   text-align: center;
   text-decoration: none;
   transition: color 0.3s ease(out-quad);

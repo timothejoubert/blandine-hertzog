@@ -89,8 +89,8 @@ const projects = computed(() => {
 }
 
 .cta {
+    width: fit-content;
     margin-top: rem(72);
     margin-inline: auto;
-    width: fit-content;
 }
 </style>

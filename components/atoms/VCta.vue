@@ -44,10 +44,10 @@ const _iconName = computed(() => {
 .root {
   display: flex;
   align-items: center;
+  color: var(--theme-color-primary);
+  font-weight: 700;
   gap: rem(8);
   text-decoration: none;
-  color: var(--theme-color-primary);
   text-transform: uppercase;
-  font-weight: 700;
 }
 </style>

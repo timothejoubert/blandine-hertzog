@@ -38,6 +38,7 @@ export default defineComponent({
     line-height: 1;
     padding-block: rem(8) rem(7);
     padding-inline: rem(16);
+
     // text-transform: uppercase;
 
     @include sizes(v-tag.$vars, 'v-tag');
