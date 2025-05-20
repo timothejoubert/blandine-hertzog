@@ -948,16 +948,6 @@ export interface ContactSliceSliceDefaultPrimaryBodyItem {
  */
 export interface ContactSliceSliceDefaultPrimary {
   /**
-   * Title field in *ContactSlice → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: contact_slice.default.primary.title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
-
-  /**
    * Spacing field in *ContactSlice → Default → Primary*
    *
    * - **Field Type**: Select
@@ -970,6 +960,16 @@ export interface ContactSliceSliceDefaultPrimary {
     "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
     "filled"
   >;
+
+  /**
+   * Title field in *ContactSlice → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: contact_slice.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
 
   /**
    * Body field in *ContactSlice → Default → Primary*
@@ -1133,6 +1133,20 @@ export type ContentSliceSlice = prismic.SharedSlice<
  */
 export interface CtaSliceSliceDefaultPrimary {
   /**
+   * Spacing field in *CtaSlice → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: cta_slice.default.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  spacing: prismic.SelectField<
+    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
+    "filled"
+  >;
+
+  /**
    * Title field in *CtaSlice → Default → Primary*
    *
    * - **Field Type**: Text
@@ -1151,20 +1165,6 @@ export interface CtaSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-
-  /**
-   * Spacing field in *CtaSlice → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: none
-   * - **API ID Path**: cta_slice.default.primary.spacing
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  spacing: prismic.SelectField<
-    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
-    "filled"
-  >;
 }
 
 /**
@@ -1181,9 +1181,61 @@ export type CtaSliceSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *CtaSlice → Minified → Primary*
+ */
+export interface CtaSliceSliceMinifiedPrimary {
+  /**
+   * Spacing field in *CtaSlice → Minified → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: cta_slice.minified.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  spacing: prismic.SelectField<
+    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
+    "filled"
+  >;
+
+  /**
+   * Title field in *CtaSlice → Minified → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_slice.minified.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Link field in *CtaSlice → Minified → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_slice.minified.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Minified variation for CtaSlice Slice
+ *
+ * - **API ID**: `minified`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSliceSliceMinified = prismic.SharedSliceVariation<
+  "minified",
+  Simplify<CtaSliceSliceMinifiedPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *CtaSlice*
  */
-type CtaSliceSliceVariation = CtaSliceSliceDefault;
+type CtaSliceSliceVariation = CtaSliceSliceDefault | CtaSliceSliceMinified;
 
 /**
  * CtaSlice Shared Slice
@@ -1438,6 +1490,20 @@ export type ServicesSliceSlice = prismic.SharedSlice<
  */
 export interface SimpleTextSliceSliceDefaultPrimary {
   /**
+   * Spacing field in *SimpleTextSlice → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: simple_text_slice.default.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  spacing: prismic.SelectField<
+    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
+    "filled"
+  >;
+
+  /**
    * Title field in *SimpleTextSlice → Default → Primary*
    *
    * - **Field Type**: Text
@@ -1456,20 +1522,6 @@ export interface SimpleTextSliceSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   content: prismic.RichTextField;
-
-  /**
-   * Spacing field in *SimpleTextSlice → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: none
-   * - **API ID Path**: simple_text_slice.default.primary.spacing
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  spacing: prismic.SelectField<
-    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
-    "filled"
-  >;
 }
 
 /**
@@ -1563,8 +1615,10 @@ declare module "@prismicio/client" {
       ContentSliceSliceDefault,
       CtaSliceSlice,
       CtaSliceSliceDefaultPrimary,
+      CtaSliceSliceMinifiedPrimary,
       CtaSliceSliceVariation,
       CtaSliceSliceDefault,
+      CtaSliceSliceMinified,
       ProjectFeedSliceSlice,
       ProjectFeedSliceSliceDefaultPrimaryCustomProjectsItem,
       ProjectFeedSliceSliceDefaultPrimary,

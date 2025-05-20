@@ -84,11 +84,12 @@ const bodyContent = computed(() => {
     width: fit-content;
     flex-direction: column;
     align-items: flex-start;
-    gap: rem(8);
+    gap: rem(14);
     grid-column: 1 / -1;
     text-transform: uppercase;
 
     @include media('>=lg') {
+        gap: rem(8);
         grid-column: 11 / -1;
     }
 }

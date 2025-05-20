@@ -86,9 +86,10 @@ const links = computed(() => menu.value?.data.links || [])
 .root {
     position: relative;
     display: grid;
-    height: $v-footer-height;
     align-items: center;
     margin-top: $v-footer-margin-top;
+    padding-block: rem(42) rem(36);
+    row-gap: rem(32);
 
     &::after {
         position: absolute;
@@ -99,17 +100,24 @@ const links = computed(() => menu.value?.data.links || [])
         background-color: var(--theme-color-line);
         content: '';
     }
+
+    @include media('>=md') {
+        padding-block: rem(22);
+    }
 }
 
 .copyright {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: var(--gutter);
+    flex-direction: column;
     grid-column: 1 / -1;
+    gap: rem(4);
     opacity: 0.7;
-
-    @include media('>=lg') {
+    
+    @include media('>=md') {
+        align-items: center;
+        gap: var(--gutter);
+        flex-direction: initial;
         grid-column: 1 / span 8;
     }
 }
@@ -131,12 +139,13 @@ const links = computed(() => menu.value?.data.links || [])
 .nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     gap: rem(42);
     grid-column: 1 / -1;
     grid-row: 1;
 
-    @include media('>=lg') {
+    
+    @include media('>=md') {
+        justify-content: flex-end;
         grid-column: 9 / -1;
         grid-row: initial;
     }
@@ -145,8 +154,9 @@ const links = computed(() => menu.value?.data.links || [])
 .list {
     display: flex;
     gap: rem(42);
+    margin-block: initial;
 
-    @include media('>=lg') {
+    @include media('>=md') {
         justify-content: flex-end;
     }
 }
@@ -168,5 +178,15 @@ const links = computed(() => menu.value?.data.links || [])
 .arrow-link {
     display: contents;
     color: var(--theme-color-primary);
+}
+
+.icon-arrow {
+    @include media('<md') {
+        position: absolute;
+        right: var(--gutter);
+        bottom: rem(36);
+        width: rem(32);
+        height: rem(32);
+    }
 }
 </style>

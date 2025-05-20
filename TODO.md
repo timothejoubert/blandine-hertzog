@@ -8,6 +8,7 @@
 - Share img
 - Bug display topBar 
 - Animation sticky (blur and scale) projectFeedSlice
+- CTA variant minified
 
 ## Later
 - Schema.org (creative work)

@@ -79,7 +79,7 @@ const rootClasses = computed(() => {
 .root {
     display: grid;
     grid-template-columns: 1fr;
-    row-gap: rem(32);
+    row-gap: calc(var(--v-slice-spacing-mobile, 10px));
 
     @include media('>=md') {
         column-gap: var(--gutter);
