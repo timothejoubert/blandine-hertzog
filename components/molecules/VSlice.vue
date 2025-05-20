@@ -18,7 +18,7 @@ defineProps<{
         <slot />
     </component>
 </template>
-
+  
 <style lang="scss" module>
 @use "assets/scss/mixins/property-fluid" as *;
 

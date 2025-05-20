@@ -57,6 +57,11 @@
 						]
 					}
 				]
+			},
+			"spacing": {
+				"__TYPE__": "FieldContent",
+				"value": "xs",
+				"type": "Select"
 			}
 		},
 		"items": []

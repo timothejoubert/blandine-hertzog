@@ -31,8 +31,8 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
     <VSlice
         :slice="slice"
         :class="$style.root"
-        spacing="xxl"
         class="grid"
+        :spacing="primary.spacing"
     >
         <VSectionTitle
             v-if="primary.title"

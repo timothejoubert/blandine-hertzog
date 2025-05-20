@@ -1217,6 +1217,18 @@ export interface ProjectFeedSliceSliceDefaultPrimaryCustomProjectsItem {
  */
 export interface ProjectFeedSliceSliceDefaultPrimary {
   /**
+   * Spacing field in *ProjectFeedSlice → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project_feed_slice.default.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  spacing: prismic.SelectField<
+    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"
+  >;
+
+  /**
    * Title field in *ProjectFeedSlice → Default → Primary*
    *
    * - **Field Type**: Text
@@ -1318,6 +1330,20 @@ export interface ServicesSliceSliceDefaultPrimaryServicesItem {
  * Primary content in *ServicesSlice → Default → Primary*
  */
 export interface ServicesSliceSliceDefaultPrimary {
+  /**
+   * Spacing field in *ServicesSlice → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: none
+   * - **API ID Path**: services_slice.default.primary.spacing
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  spacing: prismic.SelectField<
+    "none" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl",
+    "filled"
+  >;
+
   /**
    * Title field in *ServicesSlice → Default → Primary*
    *

@@ -55,6 +55,7 @@ function openFullscreen() {
 
 <template>
     <div
+        v-if="documentData"
         :class="$style.root"
     >
         <header

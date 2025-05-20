@@ -35,6 +35,7 @@ const projects = computed(() => {
 <template>
     <VSlice
         :slice="slice"
+        :spacing="primary.spacing"
     >
         <VSectionTitle
             v-if="primary.title"

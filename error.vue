@@ -36,6 +36,8 @@ const homeUrl = config.public.site.url
 
 // Log the error for debugging purposes
 console.error('Error page:', props.error)
+
+// TODO: add seo page title
 </script>
 
 <template>
