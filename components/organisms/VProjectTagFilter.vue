@@ -1,29 +1,34 @@
 <script lang="ts" setup>
 import type { LocationQueryValue } from '#vue-router'
+import type { VInputProps } from '~/components/molecules/VInputGroup.vue'
 
-defineProps<{
+const props = defineProps<{
     query: string
+    defaultInput?: VInputProps
 }>()
 
-const activeValue = defineModel<LocationQueryValue | LocationQueryValue[]>({ default: [] })
+const activeValue = defineModel<LocationQueryValue | LocationQueryValue[]>()
 
 const projects = await usePrismicMainProjects()
-
-const allTags = computed(() => {
+const projectTags = computed(() => {
     return projects.value
         .filter(project => project?.tags?.length)
         .map(project => project!.tags).flat(2) as string[]
 })
 
-const tags = computed(() => [...new Set(allTags.value)])
-
 const inputs = computed(() => {
-    return tags.value.map((tag) => {
+    const uniqueTags = [...new Set(projectTags.value)]
+
+    const tagInputs = uniqueTags.map((tag) => {
         return {
             value: tag,
             label: tag,
         }
     })
+
+    if (props.defaultInput) tagInputs.unshift(props.defaultInput)
+
+    return tagInputs
 })
 </script>
 

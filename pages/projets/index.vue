@@ -4,22 +4,24 @@ import { components } from '~/slices'
 
 const { document, documentData } = await useFetchPage<ProjectListingPageDocument>('project_listing_page')
 
-// Filters
+// COMMONS
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
-const TAG_QUERY_KEY = 'tags'
-const DEFAULT_VALUE = 'all'
 
-const { queryValues, hasQuery } = useRouteQuery(TAG_QUERY_KEY)
-const activeTags = ref(queryValues.value)
+// Filters
+const TAG_QUERY_KEY = 'tags'
+
+const { queryValues } = useRouteQuery(TAG_QUERY_KEY)
+
+const DEFAULT_TAG_INPUT = { label: t('all'), value: 'all' }
+const activeTags = ref(queryValues.value?.length ? queryValues.value : [DEFAULT_TAG_INPUT.value])
 
 const isDefaultSelected = computed(() => {
-    return Array.isArray(activeTags.value) ? activeTags.value[0] === DEFAULT_VALUE : activeTags.value === DEFAULT_VALUE
-})
+    const activeValue = Array.isArray(activeTags.value) ? activeTags.value[0] : activeTags.value
 
-function resetTags() {
-    activeTags.value = []
-}
+    return activeValue === DEFAULT_TAG_INPUT.value || !activeValue
+})
 
 watch(activeTags, (value) => {
     router.replace({ ...route, query: { ...route.query, [TAG_QUERY_KEY]: value } })
@@ -54,25 +56,12 @@ const renderedProjects = computed(() => {
             :class="$style.header"
         /> 
         <main>
-            <div
+            <VProjectTagFilter
+                v-model="activeTags"
+                :default-input="DEFAULT_TAG_INPUT"
                 :class="$style.filters"
-            >
-                <VProjectTagFilter
-                    v-model="activeTags"
-                    :query="TAG_QUERY_KEY"
-                />
-                <button
-                    :class="$style.reset"
-                    :disabled="hasQuery ? undefined : 'true'"
-                    @click="resetTags"
-                >
-                    {{ $t('reset') }}
-                    <VIcon
-                        name="refresh"
-                        size="1.2rem"
-                    />
-                </button>
-            </div>
+                :query="TAG_QUERY_KEY"
+            />
             <ul
                 v-if="renderedProjects.length"
                 :class="$style.list"
@@ -110,13 +99,8 @@ const renderedProjects = computed(() => {
 
 .filters {
     display: flex;
-    justify-content: space-between;
     margin-top: rem(112);
     margin-inline: var(--gutter);
-
-    @include media('>=lg') {
-        margin-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 2);
-    }
 }
 
 .reset {
@@ -147,17 +131,6 @@ const renderedProjects = computed(() => {
 
     @include media('>=md') {
         grid-column: span 7;
-    }
-
-    @include media('>=lg') {
-        &:nth-child(odd) {
-            grid-column: 2 / span 6;
-        }
-
-        &:nth-child(even) {
-            grid-column: 8 / -2;
-        }
-
     }
 }
 </style>

@@ -1,22 +1,42 @@
 <script  lang="ts" setup>
 import type { LocationQueryValue } from '#vue-router'
 
-interface VInputProps {
+export interface VInputProps {
     value: string
     label: string
 }
+
+defineOptions({
+    inheritAttrs: false,
+})
 
 const props = defineProps<{
     name: string
     type: 'checkbox' | 'radio'
     inputs: VInputProps[]
 }>()
+const activeValue = defineModel<LocationQueryValue | LocationQueryValue[]>()
 
-defineOptions({
-    inheritAttrs: false,
+
+
+function isChecked(value: string) {
+    if (Array.isArray(activeValue.value) && props.type === 'checkbox') {
+        return !!activeValue.value?.find(v => v === value)
+    }
+    else if (Array.isArray(activeValue.value) && props.type === 'radio') {
+        return activeValue.value?.[0] === value
+    }
+    else return activeValue.value === value
+}
+
+const inputList = computed(() => {
+    return props.inputs.map((input) => {
+        return {
+            ...input,
+            checked: isChecked(input.value),
+        }
+    })
 })
-
-const activeValue = defineModel<LocationQueryValue | LocationQueryValue[]>({ default: [] })
 
 function onChange(newValue: string) {
     if (props.type === 'radio') {
@@ -26,16 +46,11 @@ function onChange(newValue: string) {
         // TODO: mutate activeValue depending if value already exist in activeValue
     }
 }
-
-function isChecked(value: string) {
-    if (Array.isArray(activeValue.value)) return !!activeValue?.value.find(v => v === value)
-    else return activeValue.value === value
-}
 </script>
 
 <template>
     <div
-        v-for="input in inputs"
+        v-for="input in inputList"
         :key="input.value"
         :class="[$style.root, $attrs.class]"
     >
@@ -44,7 +59,7 @@ function isChecked(value: string) {
             :type="type"
             :name="name"
             :value="input.value"
-            :checked="isChecked(input.value)"
+            :checked="input.checked"
             :class="$style.input"
             @input="onChange(input.value)"
         >
