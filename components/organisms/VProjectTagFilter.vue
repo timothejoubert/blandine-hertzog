@@ -48,6 +48,7 @@ const inputs = computed(() => {
 <style lang="scss" module>
 .root {
     display: flex; // display: flex; not working with fieldset
+    flex-wrap: wrap;
     align-items: center;
     padding: inherit;
     border: none;

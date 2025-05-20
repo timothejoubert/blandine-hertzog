@@ -57,6 +57,13 @@ const projects = computed(() => {
                 size="fullwidth"
             />
         </ul>
+        <VCta
+            v-if="primary.link?.url"
+            :to="primary.link.url"
+            :label="primary.link.text || primary.link.url"
+            :class="$style.cta"
+            icon-name="auto"
+        />
     </VSlice>
 </template>
 
@@ -79,5 +86,11 @@ const projects = computed(() => {
     @include media('>=lg') {
         grid-column: 3 / -3;
     }
+}
+
+.cta {
+    margin-top: rem(72);
+    margin-inline: auto;
+    width: fit-content;
 }
 </style>

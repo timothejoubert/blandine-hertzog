@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
+import { getHtmlElement } from '~/utils/ref/get-html-element';
+import { ease } from '~/utils/ease'
 
 defineProps<{
   rootTag?: string | Component
-  title: string | undefined
+  title: string | undefined | null
   href?: string
   linkLabel: string | undefined
 }>()
@@ -11,14 +13,31 @@ defineProps<{
 // MOUSE FOLLOW
 const rootRef = ref<HTMLElement | null>(null) 
 const pill = ref<HTMLElement | null>(null)
+const pillElement = computed(() => getHtmlElement(pill))
 
-const { x, y, element, init } = useMouseFollow({ element: pill, container: rootRef })
+// watch(rootRef, (value) => {
+//     console.log('link mouse container', value)
+// })
+// const { elementX, elementY, isOutside } = useMouseInElement(rootRef)
+// const { x, y, width, height } = useElementBounding(pillElement)
+// const posX = computed(() => {
+//   const initX = x.value - width.value / 2
+//   if(isOutside.value) return initX
+//   return elementX.value - initX
+// })
+// const posY = computed(() => {
+//   const initY = y.value - height.value / 2
+//   if(isOutside.value) return initY
+//   return elementY.value - initY
+// })
+
+const { x: posX, y: posY, init } = useMouseFollow({ element: pill, container: rootRef })
 
 watchEffect(() => {
-    if(!element.value) return
+    if(!pillElement.value) return
 
-    element.value.animate(
-        { transform: `translate(${x.value}px, ${y.value}px)` },
+    pillElement.value.animate(
+        { transform: `translate(${posX.value}px, ${posY.value}px)` },
         { 
             duration: init.value ? 200 : 400, 
             fill: "forwards",
@@ -54,6 +73,7 @@ watchEffect(() => {
 .root {
   position: relative;
   display: flex;
+  /* flex-wrap: wrap; */
   align-items: center;
   justify-content: center;
   overflow-x: clip;
@@ -70,7 +90,7 @@ watchEffect(() => {
   z-index: 1;
   display: block;
   color: inherit;
-  margin-inline: auto;
+  width: 100%;
   text-align: center;
   text-decoration: none;
   transition: color 0.3s ease(out-quad);

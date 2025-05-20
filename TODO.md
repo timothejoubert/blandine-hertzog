@@ -9,6 +9,7 @@
 - Bug display topBar 
 - Animation sticky (blur and scale) projectFeedSlice
 - CTA variant minified
+- titre header responsive
 
 ## Later
 - Schema.org (creative work)

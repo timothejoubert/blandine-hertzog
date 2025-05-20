@@ -63,11 +63,12 @@ const rootClasses = computed(() => {
                 class="text-body-md"
                 :class="[$style.item, $style['item--text']]"
             />
-            <VPrismicLink
+            <VCta
                 v-if="column.external_url"
                 :to="column.external_url"
-                label="Static link label"
+                :label="column.link_label"
                 :class="[$style.item, $style['item--link']]"
+                icon-name="auto"
             />
         </template>
     </VSlice>
