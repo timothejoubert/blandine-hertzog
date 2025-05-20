@@ -7,6 +7,7 @@
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
 - Bug display topBar 
+- Animation sticky (blur and scale) projectFeedSlice
 
 ## Later
 - Schema.org (creative work)

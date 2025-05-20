@@ -136,8 +136,9 @@ export default defineComponent({
         <iframe
             :src="src"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
             :class="$style.iframe"
+            allowfullscreen
         />
         <!--        <VSpinner v-if="!videoReady" :class="$style.spinner" /> -->
     </div>
@@ -173,7 +174,7 @@ export default defineComponent({
 
     &--no-controls {
         // Scroll on element make smooth scroll buggy
-        pointer-events: none;
+        // pointer-events: none;
     }
 
     .video,
