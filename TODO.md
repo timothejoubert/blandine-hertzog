@@ -6,6 +6,7 @@
 - responsive check
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
+- Bug display topBar 
 
 ## Later
 - Schema.org (creative work)

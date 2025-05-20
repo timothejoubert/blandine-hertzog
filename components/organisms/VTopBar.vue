@@ -49,7 +49,7 @@ $transparent-background: color-mix(in srgb, $background-color, transparent 100%)
 $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
 
 .root {
-    --v-top-bar-height: #{rem(72)};
+    --v-top-bar-height: #{rem(62)};
 
     position: sticky;
     z-index: 101;
@@ -61,10 +61,11 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
 
     &::before {
         position: absolute;
-        backdrop-filter: blur(1px);
-        background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
+        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, $background-color, transparent 20%);
+        // background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
         content: '';
-        inset: 0;
+        inset: 0 calc(var(--gutter) * -1);
         pointer-events: none;
     }
 

@@ -47,7 +47,7 @@ defineProps<{
 }
 
 .content {
-    max-width: 62ch;
+    // max-width: 62ch;
     margin-block: initial;
     padding-block: rem(52) 0;
 }

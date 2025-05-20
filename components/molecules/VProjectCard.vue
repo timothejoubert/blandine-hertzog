@@ -21,7 +21,7 @@ const imageSizes = computed(() => {
 })
 
 const imageDimension = computed(() => {
-    return isFullwidth.value ? { width: 1376, height: 768} : { width: 460, height: 248 }
+    return isFullwidth.value ? { width: 1376, height: 668} : { width: 460, height: 248 }
 })
 </script>
 
