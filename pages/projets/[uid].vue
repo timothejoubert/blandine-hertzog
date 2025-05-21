@@ -4,9 +4,9 @@ import type { ProjectPageDocument } from '~/prismicio-types'
 import VCrossProjects from '~/components/molecules/VCrossProjects.vue'
 
 const { document, documentData } = await useFetchPage<ProjectPageDocument>('project_page')
-const { tags, date, image, content } = useProjectUtils(document.value)
+const { tags, date, image, content } = useProjectUtils(document)
 
-const slices = computed(() => documentData.value?.slices || [])
+const slices = computed(() => documentData?.slices || [])
 </script>
 
 <template>
