@@ -2,7 +2,7 @@
 import VLogo from '~/assets/images/logo.svg?component'
 
 const navWrapper = ref<HTMLElement | null>(null)
-const { isOpen } = useMainMenu(navWrapper)
+const { isOpen } = useMobileMenu(navWrapper)
 
 const menu = await usePrismicMenuDocument()
 const links = computed(() => menu.value?.data.links)
@@ -10,7 +10,7 @@ const links = computed(() => menu.value?.data.links)
 
 <template>
     <div
-        ref="navWrapper"
+        
         :class="[$style.root, isOpen && $style['root--is-open']]"
         class="grid"
     >
@@ -21,25 +21,22 @@ const links = computed(() => menu.value?.data.links)
             <VLogo :class="$style.logo" />
         </NuxtLink>
         <VMenuButton :class="$style['menu-button']" />
-        <Transition :name="$style['slide-in']">
-            <div
-                v-show="isOpen"
-                
-                :class="$style['nav-wrapper']"
+        <div
+            ref="navWrapper"
+            :class="$style['nav-wrapper']"
+        >
+            <nav
+                v-if="links?.length"
+                aria-label="Main"
+                :class="$style.nav"
             >
-                <nav
-                    v-if="links?.length"
-                    aria-label="Main"
-                    :class="$style.nav"
-                >
-                    <VMainNavList
-                        :links="links"
-                        :class="$style['nav-list']"
-                    />
-                </nav>
-                <VSocials :class="$style.socials" />
-            </div>
-        </Transition>
+                <VMainNavList
+                    :links="links"
+                    :class="$style['nav-list']"
+                />
+            </nav>
+            <VSocials :class="$style.socials" />
+        </div>
     </div>
 </template>
 
@@ -129,6 +126,12 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
     gap: rem(62) 0;
     grid-column: 1 / -1;
     padding-block: calc(var(--v-top-bar-height) + rem(32)) rem(62);    
+    translate: 0 -100%;
+    transition: translate 0.3s ease(out-quad);
+
+    .root--is-open & {
+        translate: 0;
+    }
 
     @include media('>=md') {
         display: contents;
