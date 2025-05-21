@@ -21,7 +21,6 @@ const isMinified = computed(() => props.slice.variation === 'minified')
             v-if="isMinified && primary.link?.url"
             :to="primary.link.url"
             :label="primary.link.text"
-            :class="$style.cta"
             icon-name="auto"
         />
         <VLinkMouseFollow
@@ -35,8 +34,8 @@ const isMinified = computed(() => props.slice.variation === 'minified')
 </template>
 
 <style lang="scss" module>
-.cta {
-    width: fit-content;
-    margin-inline: auto;
+.root {
+    display: flex;
+    justify-content: center;
 }
 </style>

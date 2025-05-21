@@ -15,31 +15,32 @@ const rootRef = ref<HTMLElement | null>(null)
 const pill = ref<HTMLElement | null>(null)
 const pillElement = computed(() => getHtmlElement(pill))
 
-// watch(rootRef, (value) => {
-//     console.log('link mouse container', value)
-// })
-// const { elementX, elementY, isOutside } = useMouseInElement(rootRef)
-// const { x, y, width, height } = useElementBounding(pillElement)
-// const posX = computed(() => {
-//   const initX = x.value - width.value / 2
-//   if(isOutside.value) return initX
-//   return elementX.value - initX
-// })
-// const posY = computed(() => {
-//   const initY = y.value - height.value / 2
-//   if(isOutside.value) return initY
-//   return elementY.value - initY
-// })
+const { elementX, elementY, isOutside } = useMouseInElement(rootRef)
+const initPos = ref({ x: 0, y: 0 })
 
-const { x: posX, y: posY, init } = useMouseFollow({ element: pill, container: rootRef })
+function setInitPos() {
+  const parentBound = rootRef.value?.getBoundingClientRect()
+  const targetBound = pillElement.value?.getBoundingClientRect()
+
+  if (!parentBound || !targetBound) return { x: 0, y: 0 }
+
+  initPos.value.x = targetBound.left - parentBound.left + targetBound.width / 2
+  initPos.value.y = targetBound.y - parentBound.y + targetBound.height / 2 
+}
+
+onMounted(setInitPos)
+useResizeObserver(rootRef, setInitPos)
 
 watchEffect(() => {
     if(!pillElement.value) return
+  const x = isOutside.value ? 0 : elementX.value - initPos.value.x
+  const y = isOutside.value ? 0 : elementY.value - initPos.value.y
 
     pillElement.value.animate(
-        { transform: `translate(${posX.value}px, ${posY.value}px)` },
+        { transform: `translate(${x}px, ${y}px)` },
         { 
-            duration: init.value ? 200 : 400, 
+            duration: isOutside.value ? 400 : 200, 
+            // duration: init.value ? 200 : 400, 
             fill: "forwards",
             easing: ease('out-quad'),
         },
@@ -53,12 +54,6 @@ watchEffect(() => {
         ref="rootRef"
         :class="$style.root"
     >
-        <VAsteriskPill
-            v-if="title"
-            ref="pill"
-            :class="$style.pill"
-            :label="title"
-        />
         <VPrismicLink
             v-if="linkLabel || href"
             :to="href"
@@ -66,47 +61,56 @@ watchEffect(() => {
             :class="$style.link"
             class="text-h2"
         />
+        <VAsteriskPill
+            v-if="title"
+            ref="pill"
+            :class="$style.pill"
+            :label="title"
+        />
     </component>
 </template>
 
 <style lamg="scss" module>
 .root {
   position: relative;
-  display: flex;
-
-  /* flex-wrap: wrap; */
-  align-items: center;
+  display: flex;;
+  min-width: 80%;
   justify-content: center;
-  overflow-x: clip;
+
+  /* overflow-x: clip; */
 
   @media (hover: hover) {
-    *:has( > .root--container-interactive):hover &,
-      &:hover {
+    &:hover {
           --v-text-ring-animation-play-state: running;
       }
   }
 }
 
 .link {
+  position: relative;
   z-index: 1;
   display: block;
   width: 100%;
   color: inherit;
+  padding-block: 120px;
+  padding-inline: max(var(--gutter), 6%);
   text-align: center;
   text-decoration: none;
   transition: color 0.3s ease(out-quad);
+  white-space: nowrap;
 }
 
 .pill {
   position: absolute;
   z-index: -1;
+  bottom: 0;
+  margin-inline: auto;
   opacity: 0.8;
   pointer-events: none;
   scale: 0.9;
   transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
 
   @media (hover: hover) {
-    *:has( > .root--container-interactive):hover &,
       .root:hover & {
           opacity: 1;
           scale: 1;
