@@ -44,8 +44,8 @@ export async function usePrismicFetchDocument<T extends AllDocumentTypes>(prismi
         deep: false,
     })
 
-    const document = computed(() => data.value as T)
-    const documentData = computed(() => data.value?.data as T['data'] | null)
+    const document = computed(() => data.value as T | null)
+    const documentData = computed(() => data.value?.data)
 
     return {
         document,

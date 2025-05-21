@@ -10,6 +10,7 @@
 - Animation sticky (blur and scale) projectFeedSlice
 - CTA variant minified
 - titre header responsive
+- Bug titre hove on archive card 
 
 ## Later
 - Schema.org (creative work)

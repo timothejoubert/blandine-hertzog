@@ -44,10 +44,22 @@ const projectsByYears = computed(() => {
         }
     })
 })
+
+const mouseOnBottom = ref(false)
+const onmouseenter = () => mouseOnBottom.value = false
+const onmouseleave = (event: MouseEvent) => {
+    const target = event.target as HTMLElement
+    const { top, height } =target.getBoundingClientRect()
+    mouseOnBottom.value = event.clientY >= top + height / 2
+}
 </script>
 
 <template>
-    <div>
+    <div
+        :style="{
+            '--v-archive-item-bg-translate-y-init': mouseOnBottom ? '100%' : '-100%',
+        }"
+    >
         <VHeader
             :title="documentData.title"
             :content="documentData.content"
@@ -62,6 +74,8 @@ const projectsByYears = computed(() => {
                 ref="mainList"
                 class="grid"
                 :class="$style['main-list']"
+                @mouseenter="onmouseenter"
+                @mouseleave="onmouseleave"
             >
                 <li
                     v-for="group in projectsByYears"
@@ -109,17 +123,19 @@ const projectsByYears = computed(() => {
     position: relative;
     margin-bottom: rem(120);
     margin-block: initial;
+    padding-top: 24px;;
 }
 
 .year-group {
     --v-project-row-height: #{rem(56)};
-    --v-project-row-padding-block: #{rem(14)};
+    --v-project-row-padding-block: #{rem(8)};
 
     position: relative;
     display: grid;
     align-items: baseline;
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
+    margin-top: rem(28);
 
     &::before {
         position: absolute;
@@ -129,20 +145,37 @@ const projectsByYears = computed(() => {
         height: 1px;
         background-color: var(--theme-color-line);
         content: '';
+        pointer-events: none;
+    }
+
+    @include media('>=md') {
+        --v-project-row-padding-block: #{rem(14)};
+        margin-top: initial;
     }
 }
 
 .year {
     display: flex;
     align-items: center;
-    grid-column: span 1;
-    grid-row: 1;
+    grid-column: 1 / -1;
+    padding-block: var(--v-project-row-padding-block);
+    background-color: color-mix(in srgb, var(--theme-color-primary), transparent 95%);
+
+    @include media('>=md') {
+        grid-row: 1;
+        grid-column: span 1;
+        background-color: initial;
+    }
 }
 
 .projects {
-    grid-column: 2 / -1;
-    grid-row: 1;
+    grid-column: 1 / -1;
     margin-block: initial;
+
+    @include media('>=md') {
+        grid-column: 2 / -1;
+        grid-row: 1;
+    }
 }
 
 .item {
@@ -150,35 +183,45 @@ const projectsByYears = computed(() => {
     overflow: hidden;
     list-style: none;
 
-    &::before {
-        position: absolute;
-        top: var(--archive-item-top, 0);
-        width: 100%;
-        height: var(--archive-item-height, rem(56));
-        background-color: color-mix(in srgb, var(--theme-color-primary), transparent 90%);
-        content: '';
-        transition: translate 0.3s ease(out-quad);
-        translate: 0 100%;
-    }
+    @include media('>=md') {
+        &::before {
+            position: absolute;
+            top: var(--archive-item-top, 0);
+            width: 100%;
+            height: var(--archive-item-height, rem(56));
+            background-color: color-mix(in srgb, var(--theme-color-primary), transparent 90%);
+            content: '';
+            translate: 0 100%;
+            pointer-events: none;
+            transition: translate 0.3s ease(out-quart);
+        }
+        
+        .main-list:not(:has(&:hover)) &::before {
+            translate: 0 var(--v-archive-item-bg-translate-y-init, -100%);
+        }
 
-    // select all items after element that is hovered or selected 
-    &:where(:hover, [data-active="true"]) ~ &::before,
-    .year-group:has(&:where(:hover, [data-active="true"])) ~ .year-group &::before {
-        translate: 0 -100%;
-    }
+        @media(hover: hover) {
+            /// select all items after element that is hovered or selected 
+            // Actual item has previous sibling hovered or selected
+            &:where(:hover, [data-active="true"]) ~ &::before {
+                translate: 0 -100%;
+            }
 
-    &:where(:hover, [data-active="true"])::before {
-        translate: 0 0;
-    }
+            // Previous year-group has hovered or selected item
+            .year-group:has(&:where(:hover, [data-active="true"])) ~ .year-group &::before {
+                translate: 0 -100%;
+            }
 
-    *:hover ~ .main &::before {
-        translate: 0 -100%;
+            // Active item
+            &:where(:hover, [data-active="true"])::before {
+                translate: 0 0;
+            }
+        }
     }
 }
 
 .project {
     border-top: 1px solid var(--theme-color-line);
-    padding-inline: var(--gutter);
 
     .item:first-child & {
         border-top: none;
@@ -186,6 +229,10 @@ const projectsByYears = computed(() => {
 
     .year-group:last-child .item:last-child & {
         border-bottom: 1px solid var(--theme-color-line);
+    }
+
+    @include media('>=md') {
+        padding-inline: var(--gutter);
     }
 }
 </style>

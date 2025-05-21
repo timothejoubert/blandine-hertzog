@@ -32,9 +32,9 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
         throw createError({ message: 'can\'t interpret route name during page fetch', status: 500 })
     }
 
-    const { document, documentData, error } = await usePrismicFetchDocument<T>(internalRouteType)
+    const { document, error } = await usePrismicFetchDocument<T>(internalRouteType)
 
-    if (!documentData.value) {
+    if (!document.value) {
         throw createError({
             statusCode: 404,
             message: `Can't find page document for ${internalRouteType} ${route.params.uid ? 'in ' + route.params.uid : ''}`,
@@ -52,13 +52,12 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
     usePrismicSeoMeta(document.value)
 
     useHead({
-        title: `${documentData.value.meta_title || documentData.value.title} | ${useRuntimeConfig().public.site.name}`,
+        title: `${document.value.data?.meta_title || document.value.data.title} | ${useRuntimeConfig().public.site.name}`,
     })
 
-    // as ComputedRef<Required<T['data']>>
     return { 
-        document, 
-        documentData,
+        document: document.value as T, 
+        documentData: document.value.data as T['data'],  
         error 
     }
 }

@@ -48,5 +48,8 @@ const { title, tags } = useProjectUtils(props.project)
 
 .title {
     margin-right: auto;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 </style>
