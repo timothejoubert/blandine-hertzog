@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Component } from 'vue';
+import throttle from 'lodash/throttle'
 import { getHtmlElement } from '~/utils/ref/get-html-element';
 import { ease } from '~/utils/ease'
 
@@ -31,20 +32,29 @@ function setInitPos() {
 onMounted(setInitPos)
 useResizeObserver(rootRef, setInitPos)
 
-watchEffect(() => {
+
+function setAnimation(x: number, y: number) {
     if(!pillElement.value) return
-  const x = isOutside.value ? 0 : elementX.value - initPos.value.x
-  const y = isOutside.value ? 0 : elementY.value - initPos.value.y
 
     pillElement.value.animate(
         { transform: `translate(${x}px, ${y}px)` },
         { 
-            duration: isOutside.value ? 400 : 200, 
-            // duration: init.value ? 200 : 400, 
+            duration: 400, 
             fill: "forwards",
             easing: ease('out-quad'),
         },
-    );
+    )
+}
+
+const setAnimationCallBack = throttle(setAnimation, 50)
+
+watchEffect(() => {
+    if(!pillElement.value) return
+
+    const x = isOutside.value ? 0 : elementX.value - initPos.value.x
+    const y = isOutside.value ? 0 : elementY.value - initPos.value.y
+
+    setAnimationCallBack(x, y)
 })
 </script>
 

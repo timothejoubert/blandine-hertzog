@@ -55,6 +55,7 @@ defineProps<{
 }
 
 .link {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,19 +63,18 @@ defineProps<{
     font-family: $font-hanken-grostesk-family;
     font-size: rem(15);
     font-weight: 600;
-    text-transform: uppercase;
-    position: relative;
     text-decoration: none;
+    text-transform: uppercase;
     transition: color 0.3s ease(out-quad);
 
     &::after {
         position: absolute;
-        content: '';
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: color-mix(in srgb, var(--theme-color-on-background), transparent 70%);
         height: 1px;
+        background-color: color-mix(in srgb, var(--theme-color-on-background), transparent 70%);
+        content: '';
         scale: 0 1;
         transform-origin: right;
         transition: scale 0.3s ease(out-quad), background-color 0.3s ease(out-quad);
@@ -85,8 +85,8 @@ defineProps<{
             color: color-mix(in srgb, var(--theme-color-on-background), transparent 10%);
 
             &::after {
-                transform-origin: left;
                 scale: 1;
+                transform-origin: left;
             }
         }
     }
@@ -95,8 +95,8 @@ defineProps<{
         color: var(--theme-color-on-background);
 
         &::after {
-            scale: 1;
             background-color: color-mix(in srgb, var(--theme-color-primary), transparent 30%);
+            scale: 1;
         }
     }
 }

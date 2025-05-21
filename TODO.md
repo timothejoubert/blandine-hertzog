@@ -1,29 +1,28 @@
 ## In progress
 
 ## TODO
-- MouseMove component (https://developer.mozilla.org/en-US/docs/Web/API/Animation/remove_event)
-- MainNav responsive
+
 - responsive check
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
-- Bug display topBar 
 - Animation sticky (blur and scale) projectFeedSlice
-- CTA variant minified
-- titre header responsive
-- Bug titre hove on archive card 
 
 ## Later
 - Schema.org (creative work)
 - splash screen
-
-## Need review
-- Cross project nav
 
 ## Releases check
 - check sitemap & robots.txt
 - Check les redirections
 
 ## Done
+- Cross project nav
+- titre header responsive
+- Bug titre hove on archive card 
+- CTA variant minified
+- Bug display topBar 
+- MainNav responsive
+- MouseMove component (https://developer.mozilla.org/en-US/docs/Web/API/Animation/remove_event)
 - Nuxt fontaine
 - Setup Github webhook on netlify
 - Use padding instead margin in VSlice (better slice-simulator view)
