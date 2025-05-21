@@ -60,5 +60,14 @@ const socials = computed(() => {
     padding: var(--v-socials-link-padding);
     color: inherit;
     text-decoration: none;
+    transition: opacity 0.3s ease(out-quad);
+
+    .list:has(&:hover) & {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        opacity: 1 !important;
+    }
 }
 </style>
