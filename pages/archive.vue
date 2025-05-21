@@ -121,9 +121,9 @@ const onmouseleave = (event: MouseEvent) => {
 
 .main-list {
     position: relative;
+    padding-top: 24px;
     margin-bottom: rem(120);
-    margin-block: initial;
-    padding-top: 24px;;
+    margin-block: initial;;
 }
 
 .year-group {
@@ -133,9 +133,9 @@ const onmouseleave = (event: MouseEvent) => {
     position: relative;
     display: grid;
     align-items: baseline;
+    margin-top: rem(28);
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
-    margin-top: rem(28);
 
     &::before {
         position: absolute;
@@ -150,6 +150,7 @@ const onmouseleave = (event: MouseEvent) => {
 
     @include media('>=md') {
         --v-project-row-padding-block: #{rem(14)};
+
         margin-top: initial;
     }
 }
@@ -157,14 +158,14 @@ const onmouseleave = (event: MouseEvent) => {
 .year {
     display: flex;
     align-items: center;
+    background-color: color-mix(in srgb, var(--theme-color-primary), transparent 95%);
     grid-column: 1 / -1;
     padding-block: var(--v-project-row-padding-block);
-    background-color: color-mix(in srgb, var(--theme-color-primary), transparent 95%);
 
     @include media('>=md') {
-        grid-row: 1;
-        grid-column: span 1;
         background-color: initial;
+        grid-column: span 1;
+        grid-row: 1;
     }
 }
 
@@ -191,9 +192,9 @@ const onmouseleave = (event: MouseEvent) => {
             height: var(--archive-item-height, rem(56));
             background-color: color-mix(in srgb, var(--theme-color-primary), transparent 90%);
             content: '';
-            translate: 0 100%;
             pointer-events: none;
             transition: translate 0.3s ease(out-quart);
+            translate: 0 100%;
         }
         
         .main-list:not(:has(&:hover)) &::before {

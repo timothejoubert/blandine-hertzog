@@ -23,16 +23,16 @@ import { MAIN_MENU_ID } from '~/composables/use-mobile-menu'
 
 <style lang="scss" module>
 .root {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 40px;
     height: 40px;
-    position: relative;
-    transition: 0.2s;
-    background: initial;
+    align-items: center;
+    justify-content: center;
     border: initial;
+    background: initial;
     cursor: pointer;
+    transition: 0.2s;
 
     @include media('>=lg') {
         display: none;
@@ -42,23 +42,26 @@ import { MAIN_MENU_ID } from '~/composables/use-mobile-menu'
 @mixin icon-line-style {
   position: absolute;
   display: block;
-  background-color: color-mix(in srgb, var(--theme-color-on-background), transparent 20%);
-  height: 3px;
   width: 30px;
+  height: 3px;
+  background-color: color-mix(in srgb, var(--theme-color-on-background), transparent 20%);
 }
 
 .span {
   pointer-events: none;
+
   @include icon-line-style;
 
   &::before, &::after {
     content: '';
     transition: 0.2s;
+
     @include icon-line-style;
   }
 
   &::before {
       transform: translateY(-8px);
+
     // background-color: red;
   }
 

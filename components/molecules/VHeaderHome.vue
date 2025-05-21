@@ -125,10 +125,10 @@ function openFullscreen() {
     width: 100%;
     align-items: center;
     justify-content: center;
+    margin-top: rem(24);
     aspect-ratio: 375 / 300;
     background-color: color-mix(in srgb, var(--theme-color-on-background) 10%, transparent);
     grid-column: 1 / -1;
-    margin-top: rem(24);
 
     &::after {
         position: absolute;
@@ -161,22 +161,22 @@ function openFullscreen() {
     }
         
     &--play-state {
-        background-color: initial;
         position: absolute;
+        padding: rem(10);
         border-radius: 3px;
         backdrop-filter: blur(7px);
+        background-color: initial;
         color: var(--theme-color-on-background);
-        padding: rem(10);
         transition: background-color 0.3s; 
     }
 
      &--fullscreen {
         right: var(--gutter);
         bottom: var(--gutter);
-        color: var(--theme-color-on-primary);
-        background-color: var(--theme-color-primary);
-        border-radius: 100%;
         padding: rem(8);
+        border-radius: 100%;
+        background-color: var(--theme-color-primary);
+        color: var(--theme-color-on-primary);
         transition: background-color 0.3s, color 0.3s; 
      }
 
@@ -220,8 +220,8 @@ function openFullscreen() {
  }
 
  .tagline {
-     grid-column: 1 / -1;
      margin-top: rem(24);
+     grid-column: 1 / -1;
 
     @include media('>=md') {
         grid-column: 1 / span 6;
@@ -232,8 +232,8 @@ function openFullscreen() {
     grid-column: 1 / -1;
 
     @include media('>=md') {
-        grid-column: 7 / -1;
         margin-top: rem(24);
+        grid-column: 7 / -1;
         text-align: right;
     }
  }

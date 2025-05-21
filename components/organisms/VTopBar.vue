@@ -125,9 +125,9 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
     box-shadow: 0 -10px 40px black;
     gap: rem(62) 0;
     grid-column: 1 / -1;
-    padding-block: calc(var(--v-top-bar-height) + rem(32)) rem(62);    
+    padding-block: calc(var(--v-top-bar-height) + rem(32)) rem(62);
+    transition: translate 0.3s ease(out-quad);    
     translate: 0 -100%;
-    transition: translate 0.3s ease(out-quad);
 
     .root--is-open & {
         translate: 0;

@@ -47,9 +47,9 @@ const { title, tags } = useProjectUtils(props.project)
 }
 
 .title {
+    overflow: hidden;
     margin-right: auto;
-    overflow: hidden; 
+    text-overflow: ellipsis; 
     white-space: nowrap;
-    text-overflow: ellipsis;
 }
 </style>
