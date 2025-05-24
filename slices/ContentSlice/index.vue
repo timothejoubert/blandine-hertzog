@@ -18,8 +18,9 @@ const columns = computed(() => {
 const columnLength = computed(() => columns.value.length)
 
 const imgSizes = computed(() => {
-    if (columnLength.value === 2) return 'xs:90vw md:90vw lg:35vw xl:35vw xxl:35vw qhd:35vw'
-    else if (columnLength.value === 3) return 'xs:90vw md:90vw lg:22vw xl:22vw xxl:22vw qhd:22vw'
+    if (columnLength.value === 1) return 'xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw'
+    if (columnLength.value === 2) return 'xs:90vw md:90vw lg:40vw xl:40vw xxl:40vw qhd:40vw'
+    else if (columnLength.value === 3) return 'xs:90vw md:90vw lg:25vw xl:25vw xxl:25vw qhd:25vw'
     else return 'xs:90vw md:90vw lg:75vw vl:75vw xl:75vw xxl:75vw qhd:75vw'
 })
 
