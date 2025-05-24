@@ -18,8 +18,7 @@ function getPrismicClient(endpoint: string, config: ClientConfig) {
 }
 
 export default defineSitemapEventHandler(async (event) => {
-  console.log('----- event ------', event)
-
+//   console.log('----- event ------', event)
   const runtimeConfig = event.context.nitro.runtimeConfig
   const prismicData = runtimeConfig.public.prismic
   
