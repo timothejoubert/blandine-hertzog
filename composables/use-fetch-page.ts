@@ -3,7 +3,7 @@ import type { PrismicDocumentType, ReachableDocument } from '~/types/api'
 import { I18N_LOCALES } from '~/constants/i18n'
 
 
-function findPrismicRouteType(routeName: string, routesNameSeparator?: string) {
+function findLocalizedPrismicRouteType(routeName: string | undefined, routesNameSeparator?: string) {
     return prismicDocumentRoutes.find((registerPrismicRoute) => {
         const storedName = registerPrismicRoute.name
         if (storedName === routeName) return true
@@ -23,8 +23,7 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
     const i18nConfig = config.public.i18n
     const routesNameSeparator = i18nConfig.strategy !== 'no_prefix' ? i18nConfig.routesNameSeparator : undefined
 
-    const internalRouteType = type || (route.name ? findPrismicRouteType(route.name.toString(), routesNameSeparator) : undefined)
-
+    const internalRouteType = type || findLocalizedPrismicRouteType(route.name?.toString(), routesNameSeparator)
 
     const { isPreview } = usePrismicPreviewRoute()
     
@@ -52,7 +51,7 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
     usePrismicSeoMeta(document.value)
 
     useHead({
-        title: `${document.value.data?.meta_title || document.value.data.title} | ${useRuntimeConfig().public.site.name}`,
+        title: `${document.value.data?.meta_title || document.value.data.title} | ${config.public.site.name}`,
     })
 
     return { 

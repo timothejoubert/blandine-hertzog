@@ -109,7 +109,7 @@ export default defineNuxtConfig({
             '/projets/**': { 
                 prerender: true,
                 ssr: true,
-                isr: 1 * 24, // 24 hours
+                isr:  3600 * 2, // 1 hours
             },
             [PREVIEW_PATH]: {
                 prerender: false,
@@ -117,8 +117,8 @@ export default defineNuxtConfig({
                 robots: false,
             },
             '/slice-simulator': {
+                // ssr: false,
                 prerender: false,
-                ssr: false,
                 robots: false,
             },
         },

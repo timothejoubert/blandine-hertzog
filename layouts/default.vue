@@ -8,8 +8,10 @@ import elementId from '~/constants/element-id'
 const route = useRoute()
 const isSliceSimulatorRoute = computed(() => route.name === 'slice-simulator')
 
+
+// useRuntimeConfig in callOnce create [nuxt] instance unavailable error
 // callOnce(async () => {
-//     if(!isSliceSimulatorRoute.value) await useFetchPage()
+if (!isSliceSimulatorRoute.value) await useFetchPage()
 // })
 
 const theme = useUiThemeState()
@@ -21,17 +23,17 @@ const commonSlices = computed(() => settings?.data.slices)
 </script>
 
 <template>
-    <ClientOnly v-if="!isSliceSimulatorRoute">
-        <VGridVisualizer />
-        <VMediaViewer />
-        <NuxtLoadingIndicator :color="primaryColor" />
-        <VToast />
-    </ClientOnly>
-
-    <!-- <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
-
-    <VTopBar v-if="!isSliceSimulatorRoute" />
-    <slot v-if="!isSliceSimulatorRoute">
+    <template v-if="!isSliceSimulatorRoute">
+        <ClientOnly>
+            <VGridVisualizer />
+            <VMediaViewer />
+            <NuxtLoadingIndicator :color="primaryColor" />
+            <VToast />
+        </ClientOnly>
+        <!-- <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
+        <VTopBar />
+    </template>
+    <slot>
         <NuxtPage :id="elementId?.PAGE_CONTENT" />
     </slot>
     <LazySliceZone
