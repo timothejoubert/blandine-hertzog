@@ -137,30 +137,33 @@ const onmouseleave = (event: MouseEvent) => {
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
 
-    &::before {
-        position: absolute;
-        top: -1px;
-        left: 0;
-        width: 100%;;
-        height: 1px;
-        background-color: var(--theme-color-line);
-        content: '';
-        pointer-events: none;
-    }
-
     @include media('>=md') {
         --v-project-row-padding-block: #{rem(14)};
 
         margin-top: initial;
+
+        &::before {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;;
+            height: 1px;
+            background-color: var(--theme-color-line);
+            content: '';
+            pointer-events: none;
+        }
     }
 }
 
 .year {
     display: flex;
     align-items: center;
-    background-color: color-mix(in srgb, var(--theme-color-primary), transparent 95%);
+    background-color: color-mix(in srgb, var(--theme-color-on-background), transparent 95%);
     grid-column: 1 / -1;
     padding-block: var(--v-project-row-padding-block);
+    width: calc(100% + var(--gutter) * 2);
+    margin-left: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
 
     @include media('>=md') {
         background-color: initial;
