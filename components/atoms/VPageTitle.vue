@@ -24,7 +24,7 @@ const { y } = useWindowScroll()
 
 <template>
     <h1
-        :class="$style.title"
+        :class="$style.root"
         class="text-h1"
     >
         {{ titleSplitted[0].join(' ') }}
@@ -43,10 +43,10 @@ const { y } = useWindowScroll()
 @use 'sass:math';
 @use 'sass:map';
 
-.title {
+.root {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: var(--v-page-title-justify-content, space-between);
     margin-top: 2%;
     margin-bottom: -3%;
     text-transform: uppercase;

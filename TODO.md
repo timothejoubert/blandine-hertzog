@@ -1,21 +1,22 @@
 ## In progress
+- Page error 
 
 ## TODO
-
 - responsive check
-- Reveal on intersectionObserver (use vueUse isElementVisible)
 - Share img
 - Animation sticky (blur and scale) projectFeedSlice
 
 ## Later
 - Schema.org (creative work)
 - splash screen
+- Page transition
 
 ## Releases check
 - check sitemap & robots.txt
 - Check les redirections
 
 ## Done
+- Reveal on intersectionObserver (use vueUse isElementVisible)
 - Cross project nav
 - titre header responsive
 - Bug titre hove on archive card 

@@ -49,7 +49,7 @@ defineProps<{
 .content {
     // max-width: 62ch;
     margin-block: initial;
-    padding-block: rem(52) 0;
+    padding-block: rem(38) 0;
 }
 
 .media {

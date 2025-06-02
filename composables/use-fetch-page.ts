@@ -33,10 +33,10 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
 
     const { document, error } = await usePrismicFetchDocument<T>(internalRouteType)
 
-    if (!document.value) {
+    if (!document.value || !document.value?.data) {
         throw createError({
             statusCode: 404,
-            message: `Can't find page document for ${internalRouteType} ${route.params.uid ? 'in ' + route.params.uid : ''}`,
+            message: `Can't find page document for ${internalRouteType} ${route.params.uid ? 'with uid ' + route.params.uid : ''}`,
         })
     }
     else if (error.value) {
@@ -51,7 +51,7 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
     usePrismicSeoMeta(document.value)
 
     useHead({
-        title: `${document.value.data?.meta_title || document.value.data.title} | ${config.public.site.name}`,
+        title: `${document.value.data?.meta_title || document.value?.data?.title} | ${config.public.site.name}`,
     })
 
     return { 

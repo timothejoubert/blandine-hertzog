@@ -182,7 +182,7 @@ const links = computed(() => menu.value?.data.links || [])
 .icon-arrow {
     @include media('<md') {
         position: absolute;
-        right: var(--gutter);
+        right: 0;
         bottom: rem(36);
         width: rem(32);
         height: rem(32);
