@@ -59,7 +59,13 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
                     class="text-h6"
                     tag="h3"
                     :title="service.title"
-                />
+                >
+                    <VIcon
+                        :name="activeIndex === index ? 'minus' : 'plus'"
+                        :class="$style.icon"
+                        size="20px"
+                    />   
+                </VTitleTranslate>
                 <VText
                     :class="$style.item__content"
                     class="text-body-md"
@@ -107,7 +113,8 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
     &::after {
         height: var(--target-height, calc(100% / var(--list-length, 5)));
         background-color: var(--theme-color-primary);
-        transition: translate 0.3s ease(out-quad);
+        transform-origin: top;
+        transition: translate 0.3s ease(out-quad), height 0.3s ease(out-quad);
         translate: 0 var(--offset-top);
     }
 
@@ -117,7 +124,14 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 }
 
 .item {
+    display: grid;
     margin-bottom: rem(48);
+    grid-template-rows: min-content 0fr;
+    transition: grid-template-rows 0.3s ease(out-quad);
+
+    &[data-active="true"] {
+        grid-template-rows: min-content 1fr;
+    }
 
     @include media('>=lg') {
         width: fit-content;
@@ -128,6 +142,9 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 .item__title {
     --v-title-translate-wrapper-padding-block: 4px;
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-block: 0;
 
     @include media('>=lg') {
@@ -140,12 +157,20 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
     }
 }
 
+.icon {
+    @include media('>=lg') {
+        display: none;
+    }
+}
+
 .item__content {
-    padding-block: rem(12) 0;
+	overflow: hidden;
     pointer-events: none;
 
     > * {
         max-width: 62ch;
+        margin-bottom: initial;
+        padding-block: rem(12) 0;
     }
 
     @include media('>=lg') {
@@ -160,8 +185,6 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
         margin-block: 0;
         opacity: 0;
         padding-block: rem(40);
-
-        // padding-inline: calc(#{flex-grid-value(1, 14)} + var(--gutter) * 0.5);
         transition: opacity 0s, translate 0.4s;
         translate: 0 rem(8);
 

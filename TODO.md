@@ -1,8 +1,8 @@
 ## In progress
-- Page error 
+- responsive check
 
 ## TODO
-- responsive check
+- Showreal prismic img ? 
 - Share img
 - Animation sticky (blur and scale) projectFeedSlice
 
@@ -16,6 +16,7 @@
 - Check les redirections
 
 ## Done
+- Page error 
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Cross project nav
 - titre header responsive

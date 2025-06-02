@@ -1,3 +1,4 @@
+import throttle from 'lodash/throttle'
 import { getHtmlElement, type TemplateElementRef } from '~/utils/ref/get-html-element'
 
 interface UseActiveElementPositionOptions {
@@ -5,74 +6,58 @@ interface UseActiveElementPositionOptions {
 }
 
 export function useActiveElementPosition(options?: UseActiveElementPositionOptions) {
-  const list = useTemplateRefsList<HTMLDivElement>()
+    const list = useTemplateRefsList<HTMLDivElement>()
 
+    const activeIndex = ref(0)
+    const offsetTop = ref(0)
+    const offsetLeft = ref(0)
+    const targetRect = ref<DOMRect | null>(null)
 
-
-  const activeIndex = ref(0)
-  const offsetTop = ref(0)
-  const offsetLeft = ref(0)
-  const targetRect = ref<DOMRect | null>(null)
-
-
-  function getParentElement(element: HTMLElement) {
-    if(options?.parentElement) return getHtmlElement(options?.parentElement)
-    return element?.parentElement
-  }
-
-  function onMouseEnter(event: Event) {
-      const target = event.currentTarget as HTMLDivElement      
-      const targetIndex = list.value.findIndex((item) => item === target)
-      if (targetIndex === -1) return
-  
-      activeIndex.value = targetIndex
-  }
-
-  
-  watch(activeIndex, (index) => {
-      const target = list.value[index]
-      if (!target) return
-  
-      const targetBounding = target?.getBoundingClientRect()
-      const parentRect = getParentElement(target)?.getBoundingClientRect()
-  
-      offsetTop.value = targetBounding.top - (parentRect?.top ?? 0)
-      offsetLeft.value = targetBounding.left - (parentRect?.left ?? 0)
-      targetRect.value = targetBounding
-  })
-  
-  function initListener() {
-    if(!list.value.length) return
-
-    list.value.forEach((item) => {
-        item.addEventListener('mouseenter', onMouseEnter)
+    const parentElement = computed(() => {
+        if (options?.parentElement) return getHtmlElement(options?.parentElement)
+        return list.value[activeIndex.value]?.parentElement
     })
 
-    const parent = list.value[0]?.parentElement
-    if(parent) {
-      useResizeObserver(parent, onResize)
-    }    
-  }
+    function updateValues() {
+        const target = list.value[activeIndex.value]
+        if (!target) return
 
-  function onResize() {
-    targetRect.value = list.value[0]?.getBoundingClientRect()
-   }
+        const _targetRect = target.getBoundingClientRect()
+        const parentRect = parentElement.value?.getBoundingClientRect()
 
-  onMounted(initListener)
+        // console.log('_targetRect', _targetRect);
+        // console.log('parentRect', parentRect);
 
-  onBeforeUnmount(() => {
-      if(!list.value.length) return
+        offsetTop.value = _targetRect.top - (parentRect?.top ?? 0)
+        offsetLeft.value = _targetRect.left - (parentRect?.left ?? 0)
+        targetRect.value = _targetRect
+    }
+
+    watch(activeIndex, updateValues)
   
-      list.value.forEach((item) => {
-          item.removeEventListener('mouseenter', onMouseEnter)
-      })
-  })
-  
-  return {
-    setRefList: list.value.set,
-    activeIndex,
-    offsetTop, 
-    offsetLeft,
-    targetRect
-  }
+    function onMouseEnter(event: Event) {
+        const target = event.currentTarget as HTMLDivElement      
+        const targetIndex = list.value.findIndex((item) => item === target)
+        if (targetIndex === -1) return
+
+        activeIndex.value = targetIndex
+    }
+
+    // INIT LISTENERS
+    useEventListener(list, 'mouseenter', onMouseEnter)
+
+    const parentResizeCallback = throttle(() => {
+        console.log('parent resize', parentElement.value)
+        updateValues()
+    }, 200)
+    
+    useResizeObserver(parentElement, parentResizeCallback)
+
+    return {
+        setRefList: list.value.set,
+        activeIndex,
+        offsetTop, 
+        offsetLeft,
+        targetRect
+    }
 }

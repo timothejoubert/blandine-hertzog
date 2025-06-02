@@ -5,7 +5,7 @@ export default defineComponent({
         title: [String, null],
         active: Boolean,
     },
-    setup(props) {
+    setup(props, { slots }) {
         const tag = props.tag || 'div'
         const $style = useCssModule()
 
@@ -36,7 +36,7 @@ export default defineComponent({
         const mountedNode = h('span', { class: $style.item }, title.value)
 
         const childrenNode = computed(() => {
-            return renderClientChildren.value ? h('div', { class: $style.wrapper }, [mountedNode, mountedNode, mountedNode]) : title.value
+            return renderClientChildren.value ? [h('div', { class: $style.wrapper }, [mountedNode, mountedNode, mountedNode]), slots.default?.()] : title.value
         })
 
         const enterDirection = ref('top')

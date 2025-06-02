@@ -157,12 +157,12 @@ const onmouseleave = (event: MouseEvent) => {
 
 .year {
     display: flex;
+    width: calc(100% + var(--gutter) * 2);
     align-items: center;
+    margin-left: calc(var(--gutter) * -1);
     background-color: color-mix(in srgb, var(--theme-color-on-background), transparent 95%);
     grid-column: 1 / -1;
     padding-block: var(--v-project-row-padding-block);
-    width: calc(100% + var(--gutter) * 2);
-    margin-left: calc(var(--gutter) * -1);
     padding-inline: var(--gutter);
 
     @include media('>=md') {
