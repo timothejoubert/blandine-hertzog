@@ -25,9 +25,6 @@ export function useActiveElementPosition(options?: UseActiveElementPositionOptio
         const _targetRect = target.getBoundingClientRect()
         const parentRect = parentElement.value?.getBoundingClientRect()
 
-        // console.log('_targetRect', _targetRect);
-        // console.log('parentRect', parentRect);
-
         offsetTop.value = _targetRect.top - (parentRect?.top ?? 0)
         offsetLeft.value = _targetRect.left - (parentRect?.left ?? 0)
         targetRect.value = _targetRect
@@ -46,11 +43,7 @@ export function useActiveElementPosition(options?: UseActiveElementPositionOptio
     // INIT LISTENERS
     useEventListener(list, 'mouseenter', onMouseEnter)
 
-    const parentResizeCallback = throttle(() => {
-        console.log('parent resize', parentElement.value)
-        updateValues()
-    }, 200)
-    
+    const parentResizeCallback = throttle(updateValues, 200)
     useResizeObserver(parentElement, parentResizeCallback)
 
     return {

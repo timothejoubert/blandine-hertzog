@@ -20,7 +20,8 @@ const manualProjectRelations = computed(() => {
 
 const projects = computed(() => {
     if (!manualProjectRelations.value.length) {
-        return allProjects.value.slice(0, primary.value.automatic_projects_length || 3)
+        const t = allProjects.value.slice(0, primary.value.automatic_projects_length || 3)
+        return t.filter(p => p) as ProjectPageDocument[]
     }
 
     // Keep same order as contentRelationField
@@ -30,12 +31,16 @@ const projects = computed(() => {
         return acc
     }, [])
 })
+
+// SCROLL EFFECT 
+// const projectRefs = useTemplateRef<HTMLDivElement[]>('templateProjects')
 </script>
 
 <template>
     <VSlice
+        ref="root"
         :slice="slice"
-        :spacing="primary.spacing"
+        :spacing="primary.spacing || 'none'"
     >
         <VSectionTitle
             v-if="primary.title"
@@ -49,8 +54,9 @@ const projects = computed(() => {
             class="grid"
         >
             <VProjectCard
-                v-for="(project, index) in projects"
-                :key="project?.id || index"
+                v-for="project in projects"
+                :key="project?.id"
+                ref="templateProjects"
                 root-tag="li"
                 :project="project"
                 :class="$style.project"
