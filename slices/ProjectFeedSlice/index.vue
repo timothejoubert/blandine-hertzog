@@ -32,8 +32,59 @@ const projects = computed(() => {
     }, [])
 })
 
+// CSS VALUE 
+const cssValues = ref({
+    rowGap: '70px',
+    stickyTopSM: '60px',
+    stickyTopMD: '100px',
+})
+
 // SCROLL EFFECT 
-// const projectRefs = useTemplateRef<HTMLDivElement[]>('templateProjects')
+const { y } = useWindowScroll()
+
+const projectRefs = useTemplateRef<HTMLDivElement[]>('templateProjects')
+const projectEls = computed(() => {
+    if(!projectRefs.value?.length) return []
+
+    return projectRefs.value
+        .filter(comp => unrefElement(comp))
+        .map(comp => unrefElement(comp) as HTMLElement)
+})
+
+// const listEl = useTemplateRef<HTMLDivElement>('listRef')
+// TODO: make data consistant when user start with scrollY setup by default
+const projectElData = computed(() => {
+    return projectEls.value.map((el, index, list) => {
+        const start = el.offsetTop
+        const nextEl = list[index + 1]        
+
+        return { 
+            el, 
+            start, 
+            end: nextEl ? nextEl.offsetTop : start + el.offsetHeight 
+        }
+    })
+})
+
+// watch(projectElData, () => {
+//     console.log('list', listEl.value, listEl.value?.getBoundingClientRect().top)
+//     console.log('projectElData', projectElData.value)
+// }, {deep: true})
+
+const mapNumRange = (num:number, inMin:number, inMax:number, outMin:number, outMax:number) => {
+    const value = ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
+    return Math.min(Math.max(value, 0), 1)
+}
+
+const projectScrollDist = ref([0,0,0])
+
+watch(y, () => {
+    projectElData.value.forEach((data, index) => {
+        const value = mapNumRange(data.el.offsetTop, data.start, data.end, 0, 1.2)  
+        // if(index === 1) console.log('data', data.el.offsetTop, data.start, data.end, value)
+        projectScrollDist.value[index] = value
+    })
+})
 </script>
 
 <template>
@@ -50,17 +101,19 @@ const projects = computed(() => {
         />
         <ul
             v-if="projects?.length"
+            ref="listRef"
             :class="$style.list"
             class="grid"
         >
             <VProjectCard
-                v-for="project in projects"
+                v-for="(project, index) in projects"
                 :key="project?.id"
                 ref="templateProjects"
                 root-tag="li"
                 :project="project"
                 :class="$style.project"
                 size="fullwidth"
+                :style="{ '--card-scroll-percent': projectScrollDist[index] }"
             />
         </ul>
         <VCta
@@ -79,18 +132,22 @@ const projects = computed(() => {
 }
 
 .list {
+    position: relative;
     margin-block: initial;
-    row-gap: 70px;
+    row-gap: v-bind('cssValues.rowGap');
 }
 
 .project {
     position: sticky;
-    top: rem(100);
-    background-color: var(--theme-color-background);
+    top: v-bind('cssValues.stickyTopSM');
     grid-column: 1 / -1;
-    
+    filter: blur(calc(var(--card-scroll-percent) * 15px));
+    opacity: calc(1 - var(--card-scroll-percent));
+    scale: clamp(1 - (var(--card-scroll-percent) * 0.1), 0.85, 1);
+
     @include media('>=lg') {
         grid-column: 3 / -3;
+        top: v-bind('cssValues.stickyTopMD');
     }
 }
 

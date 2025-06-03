@@ -40,8 +40,9 @@ const links = computed(() => menu.value?.data.links || [])
                 {{ $t('code_by') }}
                 <VPrismicLink
                     :to="developerCopyright.url"
-                    :label="developerCopyright.label"
-                />
+                >
+                    {{ developerCopyright.label }}
+                </VPrismicLink>
             </div>
         </div>
         <nav
@@ -62,8 +63,9 @@ const links = computed(() => menu.value?.data.links || [])
                         :url="link.external_url"
                         :class="$style.link"
                         class="text-body-xs"
-                        :label="link.label"
-                    />
+                    >
+                        {{ link.label }}
+                    </VPrismicLink>
                 </li>
             </ul>
             <a

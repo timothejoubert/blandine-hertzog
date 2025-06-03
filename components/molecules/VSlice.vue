@@ -8,7 +8,7 @@ defineProps<{
 }>()
 
 const root = ref<HTMLElement | null>(null)
-const isVisible = useElementVisibility(root)
+const isVisible = useElementVisibility(root, { rootMargin: '-20% 0px -20% 0px' })
 const isShowed = ref(false)
 
 watch(isVisible, (value) => {
@@ -33,7 +33,7 @@ watch(isVisible, (value) => {
 
 .root {
     opacity: 0;
-    transition: 0.6s 0.3s ease(out-quad);
+    transition: 0.6s 0.1s ease(out-quad);
     translate: 0 40px;
 
     &--is-visible {
