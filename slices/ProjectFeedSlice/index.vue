@@ -140,14 +140,14 @@ watch(y, () => {
 .project {
     position: sticky;
     top: v-bind('cssValues.stickyTopSM');
-    grid-column: 1 / -1;
     filter: blur(calc(var(--card-scroll-percent) * 15px));
+    grid-column: 1 / -1;
     opacity: calc(1 - var(--card-scroll-percent));
     scale: clamp(1 - (var(--card-scroll-percent) * 0.1), 0.85, 1);
 
     @include media('>=lg') {
-        grid-column: 3 / -3;
         top: v-bind('cssValues.stickyTopMD');
+        grid-column: 3 / -3;
     }
 }
 

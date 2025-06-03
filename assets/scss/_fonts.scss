@@ -1,32 +1,32 @@
 @use 'assets/scss/variables/fonts' as *;
 
 @font-face {
-    font-family: $font-mango;
     font-display: swap;
+    font-family: $font-mango;
     src: url('~/assets/fonts/mango-grotesk-variable.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: $hanken-grostesk;
     font-display: swap;
+    font-family: $hanken-grostesk;
     font-weight: 100 900;
     src: url('~/assets/fonts/hanken-grotesk-variable.woff2') format('woff2-variations');
 }
 
 // Build result from nuxtjs/fontaine
 @font-face { 
-    font-family: $font-mango-fallback; 
     ascent-override: 122.2498%; 
     descent-override: 34.23%; 
+    font-family: $font-mango-fallback; 
     line-gap-override: 16.3%; 
     size-adjust: 61.3498%; 
     src: local("Segoe UI"); 
 } 
 
 @font-face {
-    font-family: $font-mango-fallback;
     ascent-override: 122.6537%;
-    descent-override: 34.343%; 
+    descent-override: 34.343%;
+    font-family: $font-mango-fallback; 
     line-gap-override:
     16.3538%;
     size-adjust: 61.1477%;
@@ -34,27 +34,27 @@
 } 
 
 @font-face {
-    font-family:$font-mango-fallback;
     ascent-override: 124.0809%;
     descent-override: 34.7426%;
+    font-family:$font-mango-fallback;
     line-gap-override: 16.5441%;
     size-adjust: 60.4444%;
     src: local("Helvetica Neue");
 }
 
-@font-face {
-    font-family: $font-mango-fallback; 
+@font-face { 
      ascent-override: 122.923%;
-     descent-override: 34.4184%; 
+     descent-override: 34.4184%;
+    font-family: $font-mango-fallback; 
      line-gap-override: 16.3897%;
      size-adjust: 61.0138%;
      src: local("Arial"); 
 } 
 
 @font-face { 
-    font-family: $font-mango-fallback; 
     ascent-override: 130.6985%; 
-    descent-override: 36.5956%;
+    descent-override: 36.5956%; 
+    font-family: $font-mango-fallback;
     line-gap-override: 17.4265%; 
     size-adjust: 57.384%; 
     src: local("Noto Sans"); 
