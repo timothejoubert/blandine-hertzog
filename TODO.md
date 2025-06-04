@@ -1,10 +1,10 @@
 ## In progress
 - responsive check
+- Animation sticky (blur and scale) projectFeedSlice
 
 ## TODO
 - Showreal prismic img ? 
 - Share img
-- Animation sticky (blur and scale) projectFeedSlice
 
 ## Later
 - Schema.org (creative work)

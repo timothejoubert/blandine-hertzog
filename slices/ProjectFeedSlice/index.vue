@@ -3,9 +3,19 @@ import type { Content } from '@prismicio/client'
 import { isFilled } from '@prismicio/client'
 import type { ProjectPageDocument } from '~/prismicio-types'
 
+
+// UTILS
+const mapNumRange = (num:number, inMin:number, inMax:number, outMin:number, outMax:number) => {
+    const value = ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
+    return Math.min(Math.max(value, 0), 1)
+}
+
+// SETUP
 const props = defineProps(
     getSliceComponentProps<Content.ProjectFeedSliceSlice>(),
 )
+
+// HYDRATION
 const primary = computed(() => props.slice.primary)
 
 const allProjects = await usePrismicMainProjects()
@@ -34,16 +44,18 @@ const projects = computed(() => {
 
 // CSS VALUE 
 const cssValues = ref({
-    rowGap: '70px',
+    rowGap: '120px',
     stickyTopSM: '60px',
     stickyTopMD: '100px',
 })
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+const stickyValue = computed(() => {
+    return parseInt(cssValues.value[isLargeScreen.value ? 'stickyTopMD' : 'stickyTopSM'])
+})
 
 // SCROLL EFFECT 
-const { y } = useWindowScroll()
-
 const projectRefs = useTemplateRef<HTMLDivElement[]>('templateProjects')
-const projectEls = computed(() => {
+const projectEls = computed<[] | HTMLElement[]>(() => {
     if(!projectRefs.value?.length) return []
 
     return projectRefs.value
@@ -51,37 +63,84 @@ const projectEls = computed(() => {
         .map(comp => unrefElement(comp) as HTMLElement)
 })
 
-// const listEl = useTemplateRef<HTMLDivElement>('listRef')
-// TODO: make data consistant when user start with scrollY setup by default
-const projectElData = computed(() => {
-    return projectEls.value.map((el, index, list) => {
-        const start = el.offsetTop
-        const nextEl = list[index + 1]        
+const getDistanceToTop = (el: HTMLElement) => window.scrollY + el.getBoundingClientRect().top
+// const getDistanceToTop = (element: HTMLElement) => {
+//   const scrollOnWindow = window.pageYOffset !== undefined
+//       ? window.pageYOffset
+//       : (document.documentElement || document.body.parentNode || document.body).scrollTop
+
+//   const rect = element.getBoundingClientRect();
+//   let distanceFromTopOfPage = rect.top;
+
+//   if (scrollOnWindow !== 0) {
+//     distanceFromTopOfPage = rect.top + scrollOnWindow;
+//   }
+
+//   return distanceFromTopOfPage;
+// };
+
+
+const parentData = ref<{topDist: number, rectTop: number,hasReachSticky: boolean}>()
+const listEL = useTemplateRef('listRef')
+function setParentData() {
+    const el = unrefElement(listEL)
+    if(!el) return
+
+    const rectTop = el.getBoundingClientRect().top
+
+    parentData.value = {
+        topDist: getDistanceToTop(el),
+        rectTop: rectTop,
+        hasReachSticky: rectTop < stickyValue.value,
+    }
+}
+
+useResizeObserver(listEL, setParentData)
+watch(parentData, (v) => {
+    // console.log('watch parentData', v)
+    setProjectDate()
+})
+
+onMounted(async () => {
+    await nextTick()
+    setProjectDate()
+})
+
+const projectElData = ref<{el: HTMLElement, start: number, end: number}[]>()
+
+function setProjectDate() {
+    if (!parentData.value) return 
+    const { topDist, hasReachSticky, rectTop} = parentData.value
+
+    projectElData.value = projectEls.value.map((el) => {
+        const top = topDist + el.offsetTop
+        const start = top - stickyValue.value + (hasReachSticky ? rectTop : 0)
 
         return { 
             el, 
+            offsetTop: el.offsetTop,
+            threshold: rectTop + el.offsetTop,
+            defaultStart: top - stickyValue.value,
             start, 
-            end: nextEl ? nextEl.offsetTop : start + el.offsetHeight 
+            end: start + el.offsetHeight,
         }
     })
-})
-
-// watch(projectElData, () => {
-//     console.log('list', listEl.value, listEl.value?.getBoundingClientRect().top)
-//     console.log('projectElData', projectElData.value)
-// }, {deep: true})
-
-const mapNumRange = (num:number, inMin:number, inMax:number, outMin:number, outMax:number) => {
-    const value = ((num - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin
-    return Math.min(Math.max(value, 0), 1)
 }
 
-const projectScrollDist = ref([0,0,0])
+// watch(projectElData, (v) => {
+//     console.log('watch projectElData', v)
+// })
 
+const projectScrollDist = ref([0,0,0])
+const { y } = useWindowScroll()
 watch(y, () => {
+    if(!projectElData.value?.length) return 
+
+    const topDist = y.value
+    // console.log(topDist)
+
     projectElData.value.forEach((data, index) => {
-        const value = mapNumRange(data.el.offsetTop, data.start, data.end, 0, 1.2)  
-        // if(index === 1) console.log('data', data.el.offsetTop, data.start, data.end, value)
+        const value = mapNumRange(topDist, data.start, data.end, 0, 1)  
         projectScrollDist.value[index] = value
     })
 })
@@ -115,6 +174,7 @@ watch(y, () => {
                 size="fullwidth"
                 :style="{ '--card-scroll-percent': projectScrollDist[index] }"
             />
+            <!-- :style="index !== projects.length -1 && { '--card-scroll-percent': projectScrollDist[index] }" -->
         </ul>
         <VCta
             v-if="primary.link?.url"
@@ -140,10 +200,10 @@ watch(y, () => {
 .project {
     position: sticky;
     top: v-bind('cssValues.stickyTopSM');
-    filter: blur(calc(var(--card-scroll-percent) * 15px));
+    filter: blur(calc(var(--card-scroll-percent) * 10px));
     grid-column: 1 / -1;
     opacity: calc(1 - var(--card-scroll-percent));
-    scale: clamp(1 - (var(--card-scroll-percent) * 0.1), 0.85, 1);
+    scale: clamp(1 - (var(--card-scroll-percent) * 0.1), 0.88, 1);
 
     @include media('>=lg') {
         top: v-bind('cssValues.stickyTopMD');

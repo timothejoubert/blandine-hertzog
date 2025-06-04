@@ -34,7 +34,7 @@ watch(isVisible, (value) => {
 .root {
     opacity: 0;
     transition: 0.6s 0.1s ease(out-quad);
-    translate: 0 40px;
+    // translate: 0 40px;
 
     &--is-visible {
       opacity: 1;

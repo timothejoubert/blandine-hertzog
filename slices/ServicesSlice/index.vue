@@ -125,7 +125,7 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
 
 .item {
     display: grid;
-    margin-bottom: rem(48);
+    margin-bottom: rem(18);
     grid-template-rows: min-content 0fr;
     transition: grid-template-rows 0.3s ease(out-quad);
 
@@ -134,6 +134,7 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
     }
 
     @include media('>=lg') {
+        margin-bottom: rem(48);
         width: fit-content;
         margin-bottom: initial;
     }
