@@ -32,9 +32,11 @@ const showrealVideo: StaticMedia = {
     type: 'public_video',
 }
 
+const isFullScreen = ref(false)
 useEventListener(videoEl, 'fullscreenchange', () => {
-    if(!videoEl.value) return 
+    isFullScreen.value = !!document.fullscreenElement;
 
+    if(!videoEl.value) return 
     videoEl.value.muted = !document.fullscreenElement
 })
 
@@ -78,7 +80,7 @@ function openFullscreen() {
             :class="$style.location"
         />
         <div
-            :class="$style['video-wrapper']"
+            :class="[$style['video-wrapper']]"
         >
             <button
                 :class="[$style.button, $style['button--play-state']]"
@@ -93,7 +95,7 @@ function openFullscreen() {
             <VVideoPlayer
                 ref="videoInstance"
                 v-bind="showrealVideo"
-                :class="$style.video"
+                :class="[$style.video, isFullScreen && $style['video--fullscreen-displayed']]"
                 :controls="false"
                 muted
                 autoplay
@@ -204,6 +206,10 @@ function openFullscreen() {
      --v-player-video-width: 100%;
      --v-player-video-height: 100%;
      --v-player-video-object-fit: cover;
+
+    &--fullscreen-displayed {
+        --v-player-video-object-fit: contain;
+    }
  }
 
 .title {

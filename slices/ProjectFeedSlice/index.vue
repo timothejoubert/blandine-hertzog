@@ -44,7 +44,8 @@ const projects = computed(() => {
 
 // CSS VALUE 
 const cssValues = ref({
-    rowGap: '120px',
+    rowGapSM: '40px',
+    rowGapMD: '120px',
     stickyTopSM: '60px',
     stickyTopMD: '100px',
 })
@@ -194,7 +195,11 @@ watch(y, () => {
 .list {
     position: relative;
     margin-block: initial;
-    row-gap: v-bind('cssValues.rowGap');
+    row-gap: v-bind('cssValues.rowGapSM');
+    
+    @include media('>=lg') {
+        row-gap: v-bind('cssValues.rowGapMD');
+    }
 }
 
 .project {
