@@ -82,49 +82,55 @@ watchEffect(() => {
 
 <style lamg="scss" module>
 .root {
-  position: relative;
-  display: flex;;
-  min-width: 80%;
-  justify-content: center;
+    position: relative;
+    display: flex;;
+    min-width: 80%;
+    justify-content: center;
 
-  /* overflow-x: clip; */
-
-  @media (hover: hover) {
-    &:hover {
-          --v-text-ring-animation-play-state: running;
-      }
-  }
+    @media (hover: hover) {
+        &:hover {
+            --v-text-ring-animation-play-state: running;
+        }
+    }
 }
 
 .link {
-  position: relative;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  color: inherit;
-  padding-block: 120px;
-  padding-inline: max(var(--gutter), 6%);
-  text-align: center;
-  text-decoration: none;
-  transition: color 0.3s ease(out-quad);
-  white-space: nowrap;
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    color: inherit;
+    padding-block: 120px;
+    padding-inline: max(var(--gutter), 6%);
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.3s ease(out-quad);
+    white-space: nowrap;
+    
+    @media (hover: hover) {
+        opacity: 0.7;
+
+        .root:hover & {
+            opacity: 1;  
+        }
+    }
 }
 
 .pill {
-  position: absolute;
-  z-index: -1;
-  bottom: 0;
-  margin-inline: auto;
-  opacity: 0.8;
-  pointer-events: none;
-  scale: 0.9;
-  transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    margin-inline: auto;
+    opacity: 0.8;
+    pointer-events: none;
+    scale: 0.9;
+    transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
 
-  @media (hover: hover) {
-      .root:hover & {
-          opacity: 1;
-          scale: 1;
-      }
-  }
+    @media (hover: hover) {
+        .root:hover & {
+            opacity: 1;
+            scale: 1;
+        }
+    }
 }
 </style>
