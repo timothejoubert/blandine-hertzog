@@ -134,8 +134,8 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
     }
 
     @include media('>=lg') {
-        margin-bottom: rem(48);
         width: fit-content;
+        margin-bottom: rem(48);
         margin-bottom: initial;
     }
 }

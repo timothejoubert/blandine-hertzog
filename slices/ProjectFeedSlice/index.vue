@@ -96,8 +96,8 @@ function setParentData() {
 }
 
 useResizeObserver(listEL, setParentData)
-watch(parentData, (v) => {
-    // console.log('watch parentData', v)
+watch(parentData, () => {
+    // console.log('watch parentData', parentData.value)
     setProjectDate()
 })
 
