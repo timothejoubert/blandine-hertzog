@@ -23,11 +23,14 @@ const imageSizes = computed(() => {
 const imageDimension = computed(() => {
     return isFullwidth.value ? { width: 1376, height: 668} : { width: 460, height: 248 }
 })
+
+// const rootEl = useTemplateRef<HTMLElement>('rootRef')
 </script>
 
 <template>
     <component
         :is="rootTag || 'div'"
+        ref="rootRef"
         :class="[$style.root, skeleton && $style['root--skeleton']]"
     >
         <VPrismicLink
@@ -93,12 +96,35 @@ const imageDimension = computed(() => {
 }
 
 .media-wrapper {
-    display: contents;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin-top: rem(12);
+
+    &::after {
+        position: absolute;
+        content: '';
+        inset: 0;
+        background: linear-gradient(20deg, color-mix(in srgb, var(--theme-color-background), transparent 50%), transparent 40%);
+        transition: all 0.3s ease(out-quad);
+
+        @media (hover: hover) {
+            .root:hover & {
+                opacity: 0;
+            }
+        }
+    }
 }
 
 .image {
     width: 100%;
-    margin-top: rem(12);
+    transition: scale 0.3s ease(out-quad);
+
+    @media (hover: hover) {
+        .root:hover & {
+            scale: 1.015;
+        }
+    }
 
     &--placeholder {
         aspect-ratio: 460 / 248;
