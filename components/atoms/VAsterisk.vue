@@ -18,6 +18,7 @@ const VIcon = defineAsyncComponent({
     <VIcon
         :data-index="index"
         :class="$style.root"
+        mode="css"
     />
 </template>
 

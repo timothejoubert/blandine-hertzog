@@ -18,7 +18,14 @@ const links = computed(() => menu.value?.data.links)
             to="/"
             :class="$style.link"
         >
-            <VLogo :class="$style.logo" />
+            <VIcon
+                name="logo"
+                :class="[$style.logo, $style['logo--mask']]"
+            />
+            <VLogo
+                :class="[$style.logo, $style['logo--default']]"
+            />
+            
         </NuxtLink>
         <VMenuButton :class="$style['menu-button']" />
         <div
@@ -60,7 +67,6 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         position: absolute;
         backdrop-filter: blur(10px);
         background: color-mix(in srgb, $background-color, transparent 20%);
-
         // background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
         content: '';
         inset: 0 calc(var(--gutter) * -1);
@@ -91,13 +97,48 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
 }
 
 .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    width: fit-content;
+    overflow: hidden;
     z-index: 101;
 }
 
 .logo {
-    width: rem(36);
-    height: auto;
+    &--mask {
+        width: 36px;
+        height: 40px;
+        position: absolute;
+        background-repeat: no-repeat;
+        color: transparent;
+        background-position: 40px 0;
+        background-size: 100% 100%;
+        background-image: linear-gradient(110deg,
+            #fff, #fff 10%, 
+            var(--theme-color-primary) 10.1%, var(--theme-color-primary) 60%, 
+            #fff 60.1%, #fff 70%,
+            var(--theme-color-primary) 70.1%, var(--theme-color-primary) 95%, 
+            #fff 95.1%
+         );
+        transition: background-position 0s ease(out-quart);
+        // mix-blend-mode: hard-light;
+        
+        @media (hover: hover) {
+            
+            .link:hover & {
+                transition-duration: 0.4s;
+                background-position: -40px 0;
+            }
+        }
+    }
+
+    &--default {
+        // opacity: 0;
+        width: 36px;
+        height: auto;
+    }
 }
 
 .menu-button {

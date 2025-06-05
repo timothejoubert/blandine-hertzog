@@ -30,7 +30,6 @@ const { y } = useWindowScroll()
         {{ titleSplitted[0].join(' ') }}
         <VAsterisk
             :class="$style.asterix"
-            aria-hidden="true"
             :style="{ rotate: `${y / 5}deg` }"
         />
         {{ titleSplitted[1].join(' ') }}
@@ -49,15 +48,25 @@ const { y } = useWindowScroll()
     justify-content: var(--v-page-title-justify-content, space-between);
     margin-top: 2%;
     margin-bottom: -3%;
+    column-gap: rem(10);
     text-transform: uppercase;
+    white-space: nowrap;
+    
+    @include media('>=md') {   
+        column-gap: rem(22);
+    }
 }
 
 .asterix {
-    width: rem(70);
+    max-width: max(8%, rem(20));
+    margin-top: -3.5%;
     height: auto;
-    margin-top: -40px;
-    margin-inline: rem(20);
     transform-origin: center;
     transition: rotate 0.2s ease(out-quad);
+    
+    @include media('>=md') {
+        flex-grow: 1;
+        max-width: rem(100);
+    }
 }
 </style>
