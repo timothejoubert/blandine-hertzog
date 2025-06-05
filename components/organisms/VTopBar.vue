@@ -67,10 +67,10 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         position: absolute;
         backdrop-filter: blur(10px);
         background: color-mix(in srgb, $background-color, transparent 20%);
-        // background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
         content: '';
         inset: 0 calc(var(--gutter) * -1);
         pointer-events: none;
+        // background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
     }
 
 
@@ -97,24 +97,20 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
 }
 
 .link {
+    position: relative;
+    z-index: 101;
     display: flex;
+    overflow: hidden;
+    width: fit-content;
     align-items: center;
     justify-content: center;
-    position: relative;
-    width: fit-content;
-    overflow: hidden;
-    z-index: 101;
 }
 
 .logo {
     &--mask {
+        position: absolute;
         width: 36px;
         height: 40px;
-        position: absolute;
-        background-repeat: no-repeat;
-        color: transparent;
-        background-position: 40px 0;
-        background-size: 100% 100%;
         background-image: linear-gradient(110deg,
             #fff, #fff 10%, 
             var(--theme-color-primary) 10.1%, var(--theme-color-primary) 60%, 
@@ -122,14 +118,18 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
             var(--theme-color-primary) 70.1%, var(--theme-color-primary) 95%, 
             #fff 95.1%
          );
+        background-position: 40px 0;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        color: transparent;
         transition: background-position 0s ease(out-quart);
+
         // mix-blend-mode: hard-light;
         
         @media (hover: hover) {
-            
             .link:hover & {
-                transition-duration: 0.4s;
                 background-position: -40px 0;
+                transition-duration: 0.4s;
             }
         }
     }

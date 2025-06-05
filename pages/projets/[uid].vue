@@ -88,8 +88,12 @@ const slices = computed(() => documentData?.slices || [])
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;;
-    gap: rem(24) var(--gutter);
+    gap: rem(12) var(--gutter);
     margin-block: rem(72) rem(24);
+
+    @include media('>=md') {
+        gap: var(--gutter);
+    }
 }
 
 .root .title {
@@ -97,13 +101,20 @@ const slices = computed(() => documentData?.slices || [])
     line-height: 0.56;
     margin-block: 0;
     text-transform: uppercase;
+
+    @include media('<md') {
+        width: 100%;
+    }
 }
 
 .tags {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+
+    @include media('>=md') {
+        flex-direction: column;
+    }
 }
 
 .tag {
@@ -123,10 +134,15 @@ const slices = computed(() => documentData?.slices || [])
 .media {
     width: 100%;
     grid-column: 1 / -1;
+    margin-top: rem(12);
 
     img {
         width: 100%;
     };
+
+    @include media('>=md') {
+        margin-top: initial;
+    }
 }
 
 .intro-text {

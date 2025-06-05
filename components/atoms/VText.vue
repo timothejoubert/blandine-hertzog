@@ -71,6 +71,7 @@ const flatRichTextContent = computed(() => {
 
     a {
         color: var(--theme-color-primary);
+
         // text-decoration: underline;
         // text-decoration-thickness: 0.5px;
         // text-underline-offset: 2px;

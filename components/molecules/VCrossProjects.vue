@@ -5,7 +5,13 @@ const props = defineProps<{
     currentProjectDocument?: ProjectPageDocument
 }>()
 
-const projectList = await usePrismicMainProjects()
+const isProjectArchived = computed(() => props.currentProjectDocument?.data.archived)
+const archivedProjects = await usePrismicArchivedProjects()
+const mainProjects = await usePrismicMainProjects()
+
+const projectList = computed(() => {
+    return isProjectArchived.value ? archivedProjects.value : mainProjects.value
+})
 const currentProjectIndex = computed(() => projectList.value.findIndex(p => p?.id === props.currentProjectDocument?.id))
 
 const nextProject = computed(() => {

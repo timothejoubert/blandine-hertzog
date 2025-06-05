@@ -104,8 +104,8 @@ watchEffect(() => {
     padding-inline: max(var(--gutter), 6%);
     text-align: center;
     text-decoration: none;
-    white-space: nowrap;
     transition: opacity 0.3s ease(out-quad);
+    white-space: nowrap;
     
     @media (hover: hover) {
         opacity: 0.7;

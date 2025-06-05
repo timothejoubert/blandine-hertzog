@@ -59,14 +59,14 @@ const { y } = useWindowScroll()
 
 .asterix {
     max-width: max(8%, rem(20));
-    margin-top: -3.5%;
     height: auto;
+    margin-top: -3.5%;
     transform-origin: center;
     transition: rotate 0.2s ease(out-quad);
     
     @include media('>=md') {
-        flex-grow: 1;
         max-width: rem(100);
+        flex-grow: 1;
     }
 }
 </style>
