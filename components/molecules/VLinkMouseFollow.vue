@@ -80,10 +80,10 @@ watchEffect(() => {
     </component>
 </template>
 
-<style lamg="scss" module>
+<style lang="scss" module>
 .root {
     position: relative;
-    display: flex;;
+    display: flex;
     min-width: 80%;
     justify-content: center;
 
@@ -104,8 +104,8 @@ watchEffect(() => {
     padding-inline: max(var(--gutter), 6%);
     text-align: center;
     text-decoration: none;
-    transition: opacity 0.3s ease(out-quad);
     white-space: nowrap;
+    transition: opacity 0.3s ease(out-quad);
     
     @media (hover: hover) {
         opacity: 0.7;
