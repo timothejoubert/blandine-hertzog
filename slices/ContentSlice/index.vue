@@ -93,7 +93,7 @@ const rootClasses = computed(() => {
     &--image {
         width: 100%;
     }
-    
+
     &--video {
         iframe {
             --v-player-video-height: 100%;
@@ -104,8 +104,6 @@ const rootClasses = computed(() => {
 
     &--text {
         max-width: 44ch;
-
-        // margin-block: fluid((xs: 50, xl: 110));
     }
 
     &--link {

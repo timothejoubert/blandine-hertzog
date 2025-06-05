@@ -112,7 +112,7 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         position: absolute;
         width: 36px;
         height: 40px;
-        background-image: linear-gradient(110deg,
+        background-image: linear-gradient(100deg,
             #fff, #fff 10%, 
             var(--theme-color-primary) 10.1%, var(--theme-color-primary) 60%, 
             #fff 60.1%, #fff 70%,
@@ -124,7 +124,7 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         background-size: 100% 100%;
         color: transparent;
         transition: background-position 0s ease(out-quart);
-
+        opacity: 0.7;
         // mix-blend-mode: hard-light;
         
         @media (hover: hover) {
