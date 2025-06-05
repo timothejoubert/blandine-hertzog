@@ -90,6 +90,10 @@ const rootClasses = computed(() => {
 }
 
 .item {
+    &--image {
+        width: 100%;
+    }
+    
     &--video {
         iframe {
             --v-player-video-height: 100%;
