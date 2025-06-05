@@ -133,8 +133,8 @@ const slices = computed(() => documentData?.slices || [])
 
 .media {
     width: 100%;
-    grid-column: 1 / -1;
     margin-top: rem(12);
+    grid-column: 1 / -1;
 
     img {
         width: 100%;

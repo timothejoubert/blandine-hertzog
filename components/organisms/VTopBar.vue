@@ -70,6 +70,7 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         content: '';
         inset: 0 calc(var(--gutter) * -1);
         pointer-events: none;
+
         // background: linear-gradient(to bottom, $flatter-background 50%, $transparent-background 80%);
     }
 
