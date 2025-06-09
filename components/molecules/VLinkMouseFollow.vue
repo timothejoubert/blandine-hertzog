@@ -47,9 +47,10 @@ function setAnimation(x: number, y: number) {
 }
 
 const setAnimationCallBack = throttle(setAnimation, 50)
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 
 watchEffect(() => {
-    if(!pillElement.value) return
+    if(!pillElement.value || !isLargeScreen.value) return
 
     const x = isOutside.value ? 0 : elementX.value - initPos.value.x
     const y = isOutside.value ? 0 : elementY.value - initPos.value.y
@@ -87,6 +88,10 @@ watchEffect(() => {
     min-width: 80%;
     justify-content: center;
 
+    @media not (hover: hover) {
+        --v-text-ring-animation-play-state: running;
+    }
+
     @media (hover: hover) {
         &:hover {
             --v-text-ring-animation-play-state: running;
@@ -100,7 +105,7 @@ watchEffect(() => {
     display: block;
     width: 100%;
     color: inherit;
-    padding-block: 120px;
+    padding-block: 100px 140px;
     padding-inline: max(var(--gutter), 6%);
     text-align: center;
     text-decoration: none;
@@ -114,6 +119,10 @@ watchEffect(() => {
             opacity: 1;  
         }
     }
+
+    @include media('>=lg') {
+        padding-block: 120px;
+    }
 }
 
 .pill {
@@ -121,12 +130,13 @@ watchEffect(() => {
     z-index: -1;
     bottom: 0;
     margin-inline: auto;
-    opacity: 0.8;
     pointer-events: none;
     scale: 0.9;
-    transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
-
+    
     @media (hover: hover) {
+        opacity: 0.8;
+        transition: opacity 0.3s ease(out-quad), scale 0.3s ease(out-quad);
+
         .root:hover & {
             opacity: 1;
             scale: 1;
