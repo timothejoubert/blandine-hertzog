@@ -24,7 +24,7 @@ const services = computed(() => {
     })
 })
 
-const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosition()
+const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActiveElementPosition()
 </script>
 
 <template>
@@ -56,6 +56,7 @@ const { setRefList, activeIndex, offsetTop, targetRect } = useActiveElementPosit
                 <VTitleTranslate
                     :active="activeIndex === index"
                     :class="[$style.item__title]"
+                    :hover-element="listElements[index]"
                     class="text-h6"
                     tag="h3"
                     :title="service.title"

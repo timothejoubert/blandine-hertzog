@@ -47,6 +47,7 @@ export function useActiveElementPosition(options?: UseActiveElementPositionOptio
     useResizeObserver(parentElement, parentResizeCallback)
 
     return {
+        listElements: list,
         setRefList: list.value.set,
         activeIndex,
         offsetTop, 

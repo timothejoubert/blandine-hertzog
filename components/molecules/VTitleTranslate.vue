@@ -1,89 +1,104 @@
 <script  lang="ts">
+import type { MaybeRefOrGetter } from 'vue'
+import { ClientOnly } from '#components'
+import {ease} from '~/utils/ease'
+
 export default defineComponent({
+    inheritAttrs: false,
     props: {
         tag: String,
         title: [String, null],
-        active: Boolean,
+        hoverElement: [Object, null] as PropType<MaybeRefOrGetter<HTMLElement> | null>,
     },
-    setup(props, { slots }) {
-        const tag = props.tag || 'div'
+    setup(props, { slots, attrs }) {
+        // COMMONS
         const $style = useCssModule()
 
+        // TEMPLATE REFS
         const root = ref<HTMLElement | null>(null)
-        const renderClientChildren = ref(false)
-        let intersectionObs: null | IntersectionObserver = null
+        const wrapper = ref<HTMLElement | null>(null)
 
-        const unwatch = watch(root, (element) => {
-            if (!element) return
-            intersectionObs = new IntersectionObserver(([entries]) => {
-                if (entries.isIntersecting) {
-                    renderClientChildren.value = true
-                    clearIntersectionObs()
-                }
-            })
-            intersectionObs.observe(element)
-            unwatch()
+        watch(() => props.hoverElement, (target) => {
+            if(!target) return 
+            useEventListener(target, 'mouseenter', onMouseEnter)
         })
 
-        function clearIntersectionObs() {
-            intersectionObs?.disconnect()
-            intersectionObs = null
-        }
-
-        onBeforeUnmount(clearIntersectionObs)
-
-        const title = computed(() => props.title || '')
-        const mountedNode = h('span', { class: $style.item }, title.value)
-
-        const childrenNode = computed(() => {
-            return renderClientChildren.value ? [h('div', { class: $style.wrapper }, [mountedNode, mountedNode, mountedNode]), slots.default?.()] : title.value
-        })
-
+        // HOVER DIRECTION
         const enterDirection = ref('top')
 
         function onMouseEnter(event: MouseEvent) {
-            const el = event.target as HTMLElement
-            if (!el) return
-            const elCenter = el.getBoundingClientRect().top + el.getBoundingClientRect().height / 2
+            const customEl = unrefElement(props.hoverElement)
+            const el = event.target === customEl ? customEl : event.target as HTMLElement
 
+            if (!el) return
+            
+            const elCenter = el.getBoundingClientRect().top + el.getBoundingClientRect().height / 2
             enterDirection.value = event.clientY > elCenter ? 'bottom' : 'top'
+
+            if (enterDirection.value === 'bottom') slideBottom()
+            else slideTop()
         }
 
-        return () => h(tag, {
-            ref: root,
-            onMouseenter: onMouseEnter,
-            onMouseleave: onMouseEnter,
-            class: [
-                $style.root,
-                renderClientChildren.value && $style['root--render-client-children'],
-                renderClientChildren.value && $style[`root--translate-direction-${enterDirection.value}`],
-                renderClientChildren.value && props.active && $style['root--active'],
-            ],
-        }, childrenNode.value)
+        // ANIMATIONS
+        const animationOptions = {
+            duration: 300,
+            easing: ease('out-quad'),
+            fill: 'forwards'
+        } as const
+
+        function slideBottom() {
+            if(!wrapper.value) return 
+
+            wrapper.value.style.translate = '0 0'
+            wrapper.value.animate([
+                { translate: '0 0'}, 
+                { translate: '0 -100%'}
+            ], animationOptions)
+        }
+
+        function slideTop() {
+            if(!wrapper.value) return 
+
+            wrapper.value.style.translate = '0 0'
+            wrapper.value.animate([
+                { translate: '0 0'}, 
+                { translate: '0 100%'}
+            ], animationOptions)
+        }
+
+        return () => {
+            const clienComponent = h(props.tag || 'div', 
+                    {
+                        ...attrs,
+                        ref: root,
+                        onMouseenter: props.hoverElement ? undefined : onMouseEnter,
+                        class: [ attrs.class, $style.root ],
+                    }, 
+                    [
+                        h('div', 
+                            { 
+                                ref: (el) => wrapper.value = el, 
+                                class: $style.wrapper,
+                            }, 
+                            Array.from({ length: 3 }).map(() => {
+                                return h('div', { class: $style.item }, props.title || '')
+                            })
+                        ), 
+                        slots.default?.()
+                    ]
+                )
+
+            return h(ClientOnly, null, { default: () => clienComponent, placeholder: () => (props.title || slots.default?.()) })
+
+            }
     },
 })
 </script>
 
-<template>
-    <component
-        :is="tag || 'div'"
-        :class="$style.root"
-    >
-        <span>{{ title }}</span>
-    </component>
-</template>
-
 <style lang="scss" module>
-@use 'assets/scss/functions/ease' as *;
-
 .root {
     position: relative;
-    padding-block: var(--v-title-translate-wrapper-padding-block);
-
-    &--render-client-children {
-        overflow: hidden;
-        padding-block: initial;
-    }
+    overflow: hidden;
 }
 
 .wrapper {
@@ -91,23 +106,11 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     padding-block: var(--v-title-translate-wrapper-padding-block);
-    transition: translate 0.3s ease(out-quad);
-
-    .root--translate-direction-top:not(.root--active) & {
-        translate: 0 -100%;
-    }
-
-    .root--translate-direction-bottom:not(.root--active) & {
-        translate: 0 100%;
-    }
-
-    .root--active & {
-        translate: 0 0;
-    }
 }
 
 .item {
     height: 100%;
+    translate: 0 var(--v-title-translate-item-offset-top, 0px); // add extra space for accent character
 
     &:first-child,
     &:last-child {
@@ -115,11 +118,12 @@ export default defineComponent({
     }
 
     &:first-child {
-        translate: 0 -100%;
+        translate: 0 calc(-100% + var(--v-title-translate-item-offset-top, 0px));
     }
 
     &:last-child {
         translate: 0 100%;
+        translate: 0 calc(100% + var(--v-title-translate-item-offset-top, 0px));
     }
 }
 </style>

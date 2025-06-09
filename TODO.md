@@ -1,6 +1,6 @@
 ## In progress
-- responsive check
-- Animation sticky (blur and scale) projectFeedSlice
+- ServiceSlice: responsive
+- projectFeedSlice: Finish Animation sticky (blur and scale) 
 
 ## TODO
 - Showreal prismic img ? 
@@ -16,6 +16,7 @@
 - Check les redirections
 
 ## Done
+- MouseFollow responsive
 - Page error 
 - Reveal on intersectionObserver (use vueUse isElementVisible)
 - Cross project nav

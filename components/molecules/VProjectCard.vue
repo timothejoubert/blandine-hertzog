@@ -24,7 +24,7 @@ const imageDimension = computed(() => {
     return isFullwidth.value ? { width: 1376, height: 668} : { width: 460, height: 248 }
 })
 
-// const rootEl = useTemplateRef<HTMLElement>('rootRef')
+const rootEl = useTemplateRef<HTMLElement>('rootRef')
 </script>
 
 <template>
@@ -37,7 +37,12 @@ const imageDimension = computed(() => {
             :to="project"
             :class="[$style.title, isFullwidth ? 'text-h5' : 'text-h6']"
             :label="title"
-        />
+        >
+            <VTitleTranslate
+                :hover-element="rootEl"
+                :title="title"
+            />
+        </VPrismicLink>
         <span
             v-if="client && size === 'fullwidth'"
             class="text-body-md"
@@ -82,12 +87,19 @@ const imageDimension = computed(() => {
 }
 
 .title {
+    --v-title-translate-item-offset-top: #{rem(7)};
+
     display: inline-block;
-    margin-top: 2%;
     color: inherit;
-    line-height: 0.75;
+    // margin-top: 2%;
+    // line-height: 0.75;
     text-decoration: none;
     text-transform: uppercase;
+
+    &:not(:has(> div)) {
+        margin-top: var(--v-title-translate-item-offset-top);
+        background-color: red;
+    }
 }
 
 .client {
@@ -99,7 +111,7 @@ const imageDimension = computed(() => {
     position: relative;
     display: block;
     overflow: hidden;
-    margin-top: rem(12);
+    margin-top: rem(6);
 
     &::after {
         position: absolute;
