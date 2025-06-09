@@ -88,9 +88,12 @@ export default defineComponent({
                     ]
                 )
 
-            return h(ClientOnly, null, { default: () => clienComponent, placeholder: () => (props.title || slots.default?.()) })
+            return h(ClientOnly, null, { 
+                default: () => clienComponent, 
+                placeholder: () => (props.title || slots.default?.()) 
+            })
 
-            }
+        }
     },
 })
 </script>
@@ -110,7 +113,7 @@ export default defineComponent({
 
 .item {
     height: 100%;
-    translate: 0 var(--v-title-translate-item-offset-top, 0px); // add extra space for accent character
+    translate: 0 var(--v-title-translate-item-offset-top, 0); // add extra space for accent character
 
     &:first-child,
     &:last-child {

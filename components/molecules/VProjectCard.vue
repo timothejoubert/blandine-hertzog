@@ -91,6 +91,7 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
 
     display: inline-block;
     color: inherit;
+
     // margin-top: 2%;
     // line-height: 0.75;
     text-decoration: none;
@@ -115,9 +116,9 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
 
     &::after {
         position: absolute;
+        background: linear-gradient(20deg, color-mix(in srgb, var(--theme-color-background), transparent 50%), transparent 40%);
         content: '';
         inset: 0;
-        background: linear-gradient(20deg, color-mix(in srgb, var(--theme-color-background), transparent 50%), transparent 40%);
         transition: all 0.3s ease(out-quad);
 
         @media (hover: hover) {

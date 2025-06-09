@@ -123,8 +123,9 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         background-repeat: no-repeat;
         background-size: 100% 100%;
         color: transparent;
-        transition: background-position 0s ease(out-quart);
         opacity: 0.7;
+        transition: background-position 0s ease(out-quart);
+
         // mix-blend-mode: hard-light;
         
         @media (hover: hover) {
