@@ -2,7 +2,7 @@
 import type { SharedSlice } from '@prismicio/types'
 
 defineProps<{
-    slice: SharedSlice
+    slice?: SharedSlice
     tag?: string
     spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'none'
 }>()
@@ -21,8 +21,8 @@ watch(isVisible, (value) => {
         :is="tag || 'section'"
         ref="root"
         :class="[$style.root, $style[`root--spacing-block-${spacing}`], isShowed && $style['root--is-visible']]"
-        :data-slice-type="slice.slice_type"
-        :data-slice-variation="slice.variation"
+        :data-slice-type="slice?.slice_type"
+        :data-slice-variation="slice?.variation"
     >
         <slot />
     </component>
@@ -30,8 +30,12 @@ watch(isVisible, (value) => {
   
 <style lang="scss" module>
 @use "assets/scss/mixins/property-fluid" as *;
+@use "assets/scss/functions/fluid" as *;
 
 .root {
+	--v-slice-padding-block-xs: #{fluid((xs: 10, xl: 24))}; 
+
+    margin-block: var(--v-slice-padding-block);
     opacity: 0;
     transition: 0.6s 0.1s ease(out-quad);
 
@@ -43,39 +47,27 @@ watch(isVisible, (value) => {
     }
 
     &--spacing-block-xs {
-      --v-slice-spacing-mobile: var(--gutter) * 0.5;
-
-      @include property-fluid('padding-block', (xs: 10, xl: 24));
+		--v-slice-padding-block: #{fluid((xs: 10, xl: 24))};
     }
     
     &--spacing-block-sm {
-      --v-slice-spacing-mobile: rem(24);
-
-      @include property-fluid('padding-block', (xs: 24, xl: 48));
+        --v-slice-padding-block: #{fluid((xs: 24, xl: 48))};
     }
     
     &--spacing-block-md {
-      --v-slice-spacing-mobile: rem(48);
-
-      @include property-fluid('padding-block', (xs: 48, xl: 96));
+        --v-slice-padding-block: #{fluid((xs: 48, xl: 96))};
     }
     
     &--spacing-block-lg {
-      --v-slice-spacing-mobile: rem(96);
-
-      @include property-fluid('padding-block', (xs: 96, xl: 144));
+        --v-slice-padding-block: #{fluid((xs: 86, xl: 144))};
     }
     
     &--spacing-block-xl {
-      --v-slice-spacing-mobile: rem(144);
-
-      @include property-fluid('padding-block', (xs: 144, xl: 222));
-    }
-    
+        --v-slice-padding-block: #{fluid((xs: 112, xl: 222))};
+	}
+      
     &--spacing-block-xxl {
-      --v-slice-spacing-mobile: rem(194);
-
-      @include property-fluid('padding-block', (xs: 194, xl: 322));
+		--v-slice-padding-block: #{fluid((xs: 194, xl: 322))};
     }
 }
 </style>

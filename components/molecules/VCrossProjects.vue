@@ -32,7 +32,10 @@ const nextProject = computed(() => {
 </template>
 
 <style lang="scss" module>
+@use "assets/scss/mixins/property-fluid" as *;
+
 .root {
-    padding-block: rem(100) rem(140);
+    @include property-fluid('margin-top', (xs: 10, xl: 100));
+    @include property-fluid('margin-bottom', (xs: 100, xl: 180));
 }
 </style>

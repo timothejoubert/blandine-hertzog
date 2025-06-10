@@ -15,7 +15,7 @@ const columns = computed(() => {
     }) || []
 })
 
-const columnLength = computed(() => columns.value.length)
+const columnLength = computed(() => columns.value.length || 1)
 
 const imgSizes = computed(() => {
     if (columnLength.value === 1) return 'xs:95vw md:95vw lg:95vw xl:95vw xxl:95vw qhd:95vw'
@@ -37,7 +37,6 @@ const rootClasses = computed(() => {
         :class="rootClasses"
         :spacing="primary.spacing"
         class="grid-container"
-        :style="{ '--content-slice-column-length': columnLength }"
     >
         <template
             v-for="(column, columnIndex) in columns"
@@ -80,12 +79,11 @@ const rootClasses = computed(() => {
 
 .root {
     display: grid;
+    gap: var(--v-slice-padding-block) var(--v-slice-padding-block-xs, var(--gutter));
     grid-template-columns: 1fr;
-    row-gap: calc(var(--v-slice-spacing-mobile, 10px));
 
     @include media('>=md') {
-        column-gap: var(--gutter);
-        grid-template-columns: repeat(var(--content-slice-column-length, 1), 1fr);
+        grid-template-columns: repeat(v-bind('columnLength'), 1fr);
     }
 }
 

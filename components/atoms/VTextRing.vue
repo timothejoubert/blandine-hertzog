@@ -1,11 +1,18 @@
 <script lang="ts" setup>
 const props = defineProps<{
     label: string
+    minLength?: number
+    maxLength?: number
     size?: number
     spacing?: number
 }>()
 
-const formattedLabel = computed(() => `${props.label} • `)
+const duplicateTitle = computed(() => props.label.length < 20)
+
+const formattedLabel = computed(() => {
+    if(duplicateTitle.value) return `${props.label} • ${props.label} • `
+    return `${props.label} • `
+})
 const length = computed(() => formattedLabel.value.length)
 
 const canTrig = computed(() => {
@@ -15,13 +22,19 @@ const canTrig = computed(() => {
 const rootStyle = computed(() => {
     const part = canTrig.value ? 'sin(var(--inner-angle))' : (Math.sin(360 / length.value / (180 / Math.PI)))
 
-    const spacing = (props.spacing || mapRange(length.value, 1, 100, 1.5, 3)).toFixed(1)
-    const size = (props.size || mapRange(length.value, 1, 100, 1, 2)).toFixed(1)
+    const spacing = props.spacing || mapRange(
+        props.label.length, 
+        props.minLength || 6, 
+        props.maxLength || 40, 
+        duplicateTitle.value ? 1.7 : 2,
+        duplicateTitle.value ? 1 : 1.3
+    )
+    const size = props.size || 1 // mapRange(props.label.length, props.minLength || 4, props.maxLength || 40, 2, 1)
 
     return {
         '--char-count': length.value,
         '--inner-angle': `calc((360 / ${length.value}) * 1deg)`,
-        '--character-width': spacing,
+        '--character-width': spacing.toFixed(1),
         '--font-size': size,
         '--radius': `calc((${spacing} / ${part}) * -1ch)`,
     }
