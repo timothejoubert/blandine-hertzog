@@ -1,6 +1,6 @@
 ## In progress
-- ServiceSlice: responsive
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
+- VPageTitle: Reveal animation (and others elements)
 
 ## TODO
 - Showreal prismic img ? 
@@ -16,6 +16,7 @@
 - Check les redirections
 
 ## Done
+- ServiceSlice: responsive
 - MouseFollow responsive
 - Page error 
 - Reveal on intersectionObserver (use vueUse isElementVisible)

@@ -24,7 +24,28 @@ const services = computed(() => {
     })
 })
 
-const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActiveElementPosition()
+const {
+    setRefList,
+    listElements,
+    activeIndex,
+    offsetTop,
+    targetRect
+} = useActiveElementPosition({ defaultIndex: 0, resetOnLeave: false })
+
+const activeElementHeight = computed(() => {
+    if (!targetRect.value?.height || typeof activeIndex.value !== 'number') return '0px'
+
+    return Math.floor(targetRect.value.height) + 'px'
+})
+
+const activeElementTopDist = computed(() => {
+    return Math.floor(offsetTop.value) + 'px'
+})
+
+function toggleActiveIndex(index: number) {
+    if (index === activeIndex.value) activeIndex.value = null
+    else activeIndex.value = index
+}
 </script>
 
 <template>
@@ -40,10 +61,6 @@ const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActi
             :class="$style.title"
         />
         <div
-            :style="{
-                '--offset-top': `${Math.floor(offsetTop)}px`,
-                '--target-height': targetRect?.height ? `${Math.floor(targetRect.height)}px` : undefined,
-            }"
             :class="$style.body"
         >
             <div
@@ -52,6 +69,7 @@ const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActi
                 :ref="setRefList"
                 :class="$style.item"
                 :data-active="activeIndex === index"
+                @click="toggleActiveIndex(index)"
             >
                 <VTitleTranslate
                     :active="activeIndex === index"
@@ -112,11 +130,11 @@ const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActi
     }
 
     &::after {
-        height: var(--target-height, calc(100% / var(--list-length, 5)));
+        height: v-bind('activeElementHeight');
         background-color: var(--theme-color-primary);
         transform-origin: top;
         transition: translate 0.3s ease(out-quad), height 0.3s ease(out-quad);
-        translate: 0 var(--offset-top);
+        translate: 0 v-bind('activeElementTopDist');
     }
 
     @include media('>=lg') {
@@ -128,7 +146,11 @@ const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActi
     display: grid;
     margin-bottom: rem(18);
     grid-template-rows: min-content 0fr;
-    transition: grid-template-rows 0.3s ease(out-quad);
+    transition: grid-template-rows 0.4s ease(out-quad);
+
+    &:last-child {
+        margin-bottom: initial;
+    }
 
     &[data-active="true"] {
         grid-template-rows: min-content 1fr;
@@ -138,6 +160,7 @@ const { setRefList, listElements, activeIndex, offsetTop, targetRect } = useActi
         width: fit-content;
         margin-bottom: rem(48);
         margin-bottom: initial;
+        transition: initial;
     }
 }
 
