@@ -4,7 +4,7 @@ import type { ProjectPageDocument } from '~/prismicio-types'
 import VCrossProjects from '~/components/molecules/VCrossProjects.vue'
 
 const { document, documentData } = await useFetchPage<ProjectPageDocument>('project_page')
-const { tags, date, image, content } = useProjectUtils(document)
+const { tags, date, image, content, client } = useProjectUtils(document)
 
 const slices = computed(() => documentData?.slices || [])
 </script>
@@ -24,22 +24,31 @@ const slices = computed(() => documentData?.slices || [])
             >
                 {{ documentData?.title }}
             </h1>
-            <div
-                v-if="tags?.length"
-                :class="$style.tags"
+            <span
+                v-if="client"
+                class="text-body-md"
+                :class="$style.client"
             >
-                <VTag
-                    v-for="tag in tags"
-                    :key="tag"
-                    :class="$style.tag"
-                    :label="tag"
+                {{ client }}
+            </span>
+            <div :class="$style['items-right']">
+                <div
+                    v-if="tags?.length"
+                    :class="$style.tags"
+                >
+                    <VTag
+                        v-for="tag in tags"
+                        :key="tag"
+                        :class="$style.tag"
+                        :label="tag"
+                    />
+                </div>
+                <VTime
+                    :date="date"
+                    class="text-h5"
+                    :class="$style.date"
                 />
             </div>
-            <VTime
-                :date="date"
-                class="text-h5"
-                :class="$style.date"
-            />
             <VPrismicImage 
                 v-if="image"
                 :image-field="image"
@@ -89,7 +98,7 @@ const slices = computed(() => documentData?.slices || [])
     flex-wrap: wrap;
     align-items: flex-end;;
     gap: rem(12) var(--gutter);
-    margin-block: rem(72) rem(24);
+    margin-block: rem(22) rem(24);
 
     @include media('>=md') {
         gap: var(--gutter);
@@ -97,38 +106,40 @@ const slices = computed(() => documentData?.slices || [])
 }
 
 .root .title {
-    margin-top: 2%;
-    line-height: 0.56;
+    width: 100%;
     margin-block: 0;
     text-transform: uppercase;
+    translate: 0 16%;
 
-    @include media('<md') {
-        width: 100%;
+    @include media('>=md') {
+        width: initial;
     }
 }
 
 .tags {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: rem(8) rem(12);
+}
 
+.items-right {
+    display: flex;
+    align-items: flex-end;
+    margin-left: auto;
+    gap: rem(8) rem(12);
+    
     @include media('>=md') {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 }
 
-.tag {
-    margin-right: rem(18);
-
-    &:last-child {
-        margin-right: 0;
-    }
+.client {
+    text-align: right;
 }
 
 .root .date {
-    margin-top: 2%;
-    margin-left: auto;
-    line-height: 0.56;
+    // compensate for descending capital height
+    translate: 0 20%;
 }
 
 .media {

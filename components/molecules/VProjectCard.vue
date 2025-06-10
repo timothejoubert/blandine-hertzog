@@ -44,7 +44,7 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
             />
         </VPrismicLink>
         <span
-            v-if="client && size === 'fullwidth'"
+            v-if="client"
             class="text-body-md"
             :class="$style.client"
         >
@@ -91,15 +91,15 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
 
     display: inline-block;
     color: inherit;
-
-    // margin-top: 2%;
-    // line-height: 0.75;
     text-decoration: none;
     text-transform: uppercase;
 
+    // margin-top: 2%;
+    // line-height: 0.75;
+
+    // TODO: fis layout shift
     &:not(:has(> div)) {
         margin-top: var(--v-title-translate-item-offset-top);
-        background-color: red;
     }
 }
 
@@ -112,6 +112,7 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
     position: relative;
     display: block;
     overflow: hidden;
+    width: 100%;
     margin-top: rem(6);
 
     &::after {
