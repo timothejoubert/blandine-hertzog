@@ -90,11 +90,11 @@ export default defineComponent({
             if (isEmbed.value) return []
 
             const altSources = (props.altSources || [])
-                .filter(file => !!file.relativePath)
+                .filter(file => !!file.relativePath && !!file.mimeType)
                 .map((file) => {
                     return {
-                        src: file.relativePath,
-                        type: file.mimeType,
+                        src: file.relativePath as unknown as string,
+                        type: file.mimeType as unknown as string,
                     }
                 })
             return [{ src: src.value, type: props.mimeType || 'video/mp4' }, ...altSources]
@@ -128,64 +128,40 @@ export default defineComponent({
 </script>
 
 <template>
-    <div
+    <iframe
         v-if="isEmbed"
         :style="playerStyle"
-        :class="[$style['iframe-wrapper'], !controls && $style['iframe-wrapper--no-controls']]"
-    >
-        <iframe
-            :src="src"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
-            :class="$style.iframe"
-            allowfullscreen
-        />
-        <!--        <VSpinner v-if="!videoReady" :class="$style.spinner" /> -->
-    </div>
+        :class="[$style['iframe'], !controls && $style['iframe-wrapper--no-controls']]"
+        :src="src"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
+        allowfullscreen
+    />
     <video
         v-else
         v-bind="videoAttrs"
         ref="playerComponent"
         :class="$style.video"
     >
-        <source
-            v-for="source in videoSources"
-            :key="source.src"
-            :src="source.src"
-            :type="source.type"
-        >
+        <template v-if="videoSources.length">
+            <source
+                v-for="source in videoSources"
+                :key="source.src"
+                :src="source.src"
+                :type="source.type"
+            >
+        </template>
     </video>
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/functions/rem' as *;
-
-@mixin video-properties {
+.iframe,
+.video {
     position: var(--v-player-video-position);
     width: var(--v-player-video-width, 100%);
     max-width: var(--v-player-video-max-width, 100%);
     height: var(--v-player-video-height, auto);
     object-fit: var(--v-player-video-object-fit);
-}
-
-.iframe-wrapper {
-    width: 100%;
-    height: 100%;
-
-    &--no-controls {
-        // Scroll on element make smooth scroll buggy
-        // pointer-events: none;
-    }
-
-    .video,
-    .iframe {
-        @include video-properties;
-    }
-}
-
-.iframe,
-.video {
-    @include video-properties;
 }
 
 .spinner {

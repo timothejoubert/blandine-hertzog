@@ -37,7 +37,7 @@ watch(isVisible, (value) => {
 
     margin-block: var(--v-slice-padding-block);
     opacity: 0;
-    transition: 0.6s 0.1s ease(out-quad);
+    transition: opacity 0.6s 0.1s ease(out-quad), translate 0.6s 0.1s ease(out-quad);
 
     // translate: 0 40px;
 

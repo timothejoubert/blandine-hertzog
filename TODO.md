@@ -1,15 +1,14 @@
 ## In progress
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
-- VPageTitle: Reveal animation (and others elements)
 
 ## TODO
 - Showreal prismic img ? 
 - Share img
+- Page transition (VPageTitle: Reveal animation (and others elements))
+- splash screen
 
 ## Later
-- Schema.org (creative work)
-- splash screen
-- Page transition
+- Schema.org (CreativeWork > VisualArtwork)
 
 ## Releases check
 - check sitemap & robots.txt

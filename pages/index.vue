@@ -11,6 +11,8 @@ const { documentData } = await useFetchPage<HomePageDocument>('home_page')
             :title="documentData.title"
             :tagline="documentData.tagline"
             :location="documentData.location"
+            :embed-field="documentData.media[0]?.video_embed"
+            :image-field="documentData.media[0]?.image"
         />
         <LazySliceZone
             v-if="documentData.slices?.length"

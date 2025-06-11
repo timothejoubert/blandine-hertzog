@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import type { ImageField, EmbedField } from "@prismicio/client";
+
+
 import { getHtmlElement, type TemplateElement } from '~/utils/ref/get-html-element'
 import type { StaticMedia } from '~/composables/use-prismic-media'
 
@@ -6,6 +9,8 @@ defineProps<{
   title: string | null
   tagline: string | null
   location: string | null
+  imageField?: ImageField  
+  embedField?: EmbedField
 }>()
 
 const videoInstance = ref<TemplateElement>(null)
@@ -49,11 +54,12 @@ function openFullscreen() {
 
     if (vid.requestFullscreen) {
         vid.requestFullscreen();
-    } else if (vid.webkitRequestFullscreen) { /* Safari */
-        vid.webkitRequestFullscreen();
-    } else if (vid.msRequestFullscreen) { /* IE11 */
-        vid.msRequestFullscreen();
-    }
+    } 
+    // else if (vid.webkitRequestFullscreen) { /* Safari */
+    //     vid.webkitRequestFullscreen();
+    // } else if (vid.msRequestFullscreen) { /* IE11 */
+    //     vid.msRequestFullscreen();
+    // }
 }
 </script>
 
@@ -116,9 +122,9 @@ function openFullscreen() {
 </template>
 
 <style lang="scss" module>
-.header {
+// .header {
     // row-gap: rem(32);
- }
+//  }
 
  .video-wrapper {
     position: relative;
@@ -138,6 +144,7 @@ function openFullscreen() {
         content: '';
         inset: 0;
         opacity: 0.5;
+        pointer-events: none;
     }
 
      @include media('>=md') {
@@ -206,6 +213,11 @@ function openFullscreen() {
      --v-player-video-width: 100%;
      --v-player-video-height: 100%;
      --v-player-video-object-fit: cover;
+
+     &--embed  iframe video {
+            object-fit: cover !important;
+            background-color: red !important;
+     }
 
     &--fullscreen-displayed {
         --v-player-video-object-fit: contain;

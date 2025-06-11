@@ -82,6 +82,8 @@ const onClick = (event: Event) => {
     hadInteraction.value = true
 }
 // const onVideoEnded = () => (hadInteraction.value = false)
+
+// TODO: simplify and use Plyr fro customize video, controls, brands etc
 </script>
 
 <template>
