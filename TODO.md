@@ -2,13 +2,15 @@
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
 ## TODO
-- Showreal prismic img ? 
 - Share img
 - Page transition (VPageTitle: Reveal animation (and others elements))
 - splash screen
 
 ## Later
 - Schema.org (CreativeWork > VisualArtwork)
+
+## Abandoned
+- Showreal prismic img ? 
 
 ## Releases check
 - check sitemap & robots.txt

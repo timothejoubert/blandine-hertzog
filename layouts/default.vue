@@ -20,6 +20,8 @@ const primaryColor = computed(() => themeProperties[`${theme.value}-color-primar
 // COMMON SLICES
 const settings = await usePrismicSettingsDocument()
 const commonSlices = computed(() => settings?.data.slices)
+
+const state = useSplashScreenState()
 </script>
 
 <template>
@@ -30,16 +32,20 @@ const commonSlices = computed(() => settings?.data.slices)
             <NuxtLoadingIndicator :color="primaryColor" />
             <VToast />
         </ClientOnly>
-        <!-- <VSplashScreen v-if="splashScreenState !== 'done'" /> -->
+
+        <LazyVSplashScreen v-if="state !== 'disabled'" />
         <VTopBar />
     </template>
+
     <slot>
         <NuxtPage :id="elementId?.PAGE_CONTENT" />
     </slot>
+
     <LazySliceZone
         v-if="commonSlices?.length"
         :slices="commonSlices"
         :components="components"
     />
+
     <VFooter id="footer" />
 </template>

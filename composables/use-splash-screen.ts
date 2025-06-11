@@ -1,7 +1,8 @@
-type SplashScreenState = 'pending' | 'enter' | 'leave' | 'done'
-
 export function useSplashScreen() {
-    const state = useState<SplashScreenState>('splashScreenState', () => 'pending')
+    const state = useSplashScreenState()
+    const isHidden = computed(() => state.value === 'disabled' || state.value === 'done')
 
-    return state
+    return { 
+        isHidden 
+    }
 }

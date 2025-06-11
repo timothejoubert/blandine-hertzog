@@ -1,76 +1,122 @@
 <script lang="ts" setup>
-const settingsDocument = await usePrismicSettingsDocument()
-const siteName = settingsDocument?.data.site_name
+import VLogo from '~/assets/images/logo.svg?component'
+import type VTitleTranslate from '~/components/molecules/VTitleTranslate.vue'
 
-const state = useSplashScreen()
+const state = useSplashScreenState()
 
-const reveal = ref(false)
+const LOCK_CLASS = 'splash-screen-displayed'
+const isScrollLocked = computed(() => {
+    return state.value === 'pending' || state.value === 'enter' || state.value === 'leave'
+})
 
-// Style
-const $style = useCssModule()
-const rootClasses = computed(() => {
-    return [
-        $style.root,
-        reveal.value && $style['root--reveal'],
-        state.value !== 'pending' && $style['root--started'],
-        state.value === 'leave' && $style['root--leave'],
-    ]
+watch(isScrollLocked, (isLock) => {
+    if (!isLock) {
+        document.body.classList.remove(LOCK_CLASS)
+    }
+    else if(isLock && !document.body.classList.contains(LOCK_CLASS)) {
+        document.body.classList.add(LOCK_CLASS)
+    }
+})
+
+useServerHead({
+    bodyAttrs: {
+        class: {
+            [LOCK_CLASS]: isScrollLocked.value
+        }
+    }
+})
+
+
+const scrollToTop = () => (window.scrollTo({ top: 0 }))
+
+function onAfterLeave() {
+    state.value = 'done'
+}
+
+const vTitleTranslate = useTemplateRef<InstanceType<typeof VTitleTranslate>>('vTitleTranslate')
+const counter = ref(0)
+const { pause, resume } = useIntervalFn(
+    () => {
+        counter.value = counter.value + 1
+        console.log('Loading counter:', counter.value)
+
+        if (counter.value >= 4) {
+            pause()
+            state.value = 'done'
+        }
+        else if(vTitleTranslate.value) {
+            const fnDirection = counter.value % 2 ? 'slideTop' : 'slideTop'
+            vTitleTranslate.value[fnDirection]?.()
+        }
+    }, 
+    1000
+)
+
+onMounted(() => {
+    window.scrollTo({ top: 0 })
+    state.value = 'enter'
+    resume()
 })
 </script>
 
 <template>
-    <div
-        :class="rootClasses"
+    <Transition
+        :name="$style.root"
+        @after-leave="onAfterLeave"
+        @leave="scrollToTop"
     >
-        <button @click="() => reveal = !reveal">
-            Reveal : {{ reveal }}
-        </button>
-        <br>
-        <br>
-        <br>
-        <br>
-        <VRevealText
-            v-model="reveal"
-            :content="siteName"
-            class="text-h1"
-            :class="$style.text"
-        />
-    </div>
+        <div
+            v-if="state !== 'done'"
+            class="body-lg"
+            :class="$style.body"
+        >
+            <VLogo />
+            <VTitleTranslate
+                ref="vTitleTranslate"
+                :class="$style.loading"
+                class="text-h4"
+                title="Loading"
+            />
+        </div>
+    </Transition>
 </template>
+
+ <style lang="scss">
+ body.splash-screen-displayed {
+     overflow: hidden;
+     max-height: 100vh;
+ }
+ </style>
 
 <style lang="scss" module>
 .root {
+    &:global(#{'-enter-active'}),
+    &:global(#{'-leave-active'}) {
+        transition: opacity 0.8s ease(out-quad) 0.4s, translate 0.8s ease(out-quad) 0.4s;
+    }
+
+    &:global(#{'-enter-from'}),
+    &:global(#{'-leave-to'}) {
+        // opacity: 0;
+        translate: 0 -100%;
+    }
+}
+
+.body {
     position: fixed;
     z-index: 1001;
     display: flex;
     height: 100svh;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: var(--theme-color-background);
     inset: 0;
 }
 
-.text {
-    > *[data-char-content] {
-        position: relative;
-        display: inline-block;
-        overflow: hidden;
-        color: transparent;
-        opacity: 1;
-    }
+.loading {
+    --v-title-translate-position: absolute;
 
-    > *[data-char-content]::after {
-        position: absolute;
-        color: var(--color-main-darker-80);
-        content: attr(data-char-content);
-        inset: 0;
-        transition: translate 0.3s calc(var(--data-char-index, 1) * 50ms) ease(out-quart);
-        translate: 0 110%;
-    }
-
-    .root--reveal & *[data-char-content]::after {
-        translate: 0 10%;
-    }
+    right: var(--gutter);
+    bottom: var(--gutter);
 }
 </style>

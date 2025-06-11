@@ -1,4 +1,7 @@
 export default defineAppConfig({
-    themes: ['light', 'dark'] as const,
-    defaultTheme: 'dark' as const,
+    themes: ['light', 'dark'],
+    defaultTheme: 'dark',
+    featureFlags: {
+        splashScreen: true,
+    },
 })

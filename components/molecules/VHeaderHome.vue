@@ -214,11 +214,6 @@ function openFullscreen() {
      --v-player-video-height: 100%;
      --v-player-video-object-fit: cover;
 
-     &--embed  iframe video {
-            object-fit: cover !important;
-            background-color: red !important;
-     }
-
     &--fullscreen-displayed {
         --v-player-video-object-fit: contain;
     }

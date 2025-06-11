@@ -10,7 +10,13 @@ export default defineComponent({
         title: [String, null],
         hoverElement: [Object, null] as PropType<MaybeRefOrGetter<HTMLElement> | null>,
     },
-    setup(props, { slots, attrs }) {
+    ctx: {
+        expose: {
+            slideBottom: Function,
+            slideTop: Function,
+        }
+    },
+    setup(props, { slots, attrs, expose }) {
         // COMMONS
         const $style = useCssModule()
 
@@ -66,6 +72,8 @@ export default defineComponent({
             ], animationOptions)
         }
 
+        expose({ slideTop, slideBottom })
+
         return () => {
             const clienComponent = h(props.tag || 'div', 
                     {
@@ -90,7 +98,7 @@ export default defineComponent({
 
             return h(ClientOnly, null, { 
                 default: () => clienComponent, 
-                placeholder: () => (props.title || slots.default?.()) 
+                placeholder: () => h(props.tag || 'div', { ...attrs, class: [ attrs.class, $style.root ], }, props.title || slots.default?.()) 
             })
 
         }
@@ -100,7 +108,7 @@ export default defineComponent({
 
 <style lang="scss" module>
 .root {
-    position: relative;
+    position: var(--v-title-translate-position, relative);
     overflow: hidden;
 }
 
