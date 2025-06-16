@@ -120,8 +120,8 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
         background: linear-gradient(20deg, color-mix(in srgb, var(--theme-color-background), transparent 50%), transparent 40%);
         content: '';
         inset: 0;
-        transition: all 0.3s ease(out-quad);
         opacity: 0.4;
+        transition: all 0.3s ease(out-quad);
 
         @media (hover: hover) {
             .root:hover & {
