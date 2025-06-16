@@ -1,0 +1,36 @@
+meta {
+  name: Trigger GH actions | deploy
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://blandine-hertzog.netlify.app/api/run-gh-dispatches
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: application/vnd.github+json
+  Authorization: token {{GITHUB_ACCESS_TOKEN}}
+}
+
+body:json {
+  {
+    "event_type": "prismic_publish_trigger",
+    "client_payload": {
+      "unit": "false",
+      "integration": "true"
+    }
+  }
+}
+
+body:text {
+  { 
+    "event_type": "{{WEBHOOK_NAME}}",
+    "client_payload": {
+      "unit": "false",
+      "integration": "true"
+    }
+  }
+}

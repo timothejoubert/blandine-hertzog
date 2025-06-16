@@ -1,0 +1,21 @@
+meta {
+  name: Run preprod route to GH actions
+  type: http
+  seq: 3
+}
+
+post {
+  url: https://blandine-hertzog.netlify.app/api/run-gh-dispatches
+  body: none
+  auth: inherit
+}
+
+body:text {
+  { 
+    "event_type": "{{WEBHOOK_NAME}}",
+    "client_payload": {
+      "unit": "false",
+      "integration": "true"
+    }
+  }
+}
