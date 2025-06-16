@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import VLogo from '~/assets/images/logo.svg?component'
 import type VTitleTranslate from '~/components/molecules/VTitleTranslate.vue'
 
 const state = useSplashScreenState()
@@ -40,7 +39,7 @@ const { pause, resume } = useIntervalFn(
         counter.value = counter.value + 1
         console.log('Loading counter:', counter.value)
 
-        if (counter.value >= 4) {
+        if (counter.value >= 3) {
             pause()
             state.value = 'done'
         }
@@ -51,6 +50,14 @@ const { pause, resume } = useIntervalFn(
     }, 
     1000
 )
+
+const rootStyle = computed(() => {
+    if (state.value === 'done') return {}
+
+    return {
+        '--v-main-logo-background-position-x': counter.value % 2 ? '-60px' : '60px'
+    }
+})
 
 onMounted(() => {
     window.scrollTo({ top: 0 })
@@ -68,15 +75,24 @@ onMounted(() => {
         <div
             v-if="state !== 'done'"
             class="body-lg"
+            :style="rootStyle"
             :class="$style.body"
         >
-            <VLogo />
-            <VTitleTranslate
-                ref="vTitleTranslate"
-                :class="$style.loading"
-                class="text-h4"
-                title="Loading"
+            <VMainLogo
+                :class="$style.logo"
+                size="100px"
             />
+            <div :class="$style.loading">
+                <VTitleTranslate
+                    ref="vTitleTranslate"
+                    class="text-h6"
+                    title="Loading"
+                />
+                <VSpinner
+                    :class="$style.spinner"
+                    size="32"
+                />
+            </div>
         </div>
     </Transition>
 </template>
@@ -113,10 +129,22 @@ onMounted(() => {
     inset: 0;
 }
 
-.loading {
-    --v-title-translate-position: absolute;
+.logo {
+    --v-main-logo-size: #{rem(60)};
+}
 
+.loading {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: rem(12);
     right: var(--gutter);
     bottom: var(--gutter);
+    // text-transform: uppercase;
+}
+
+.spinner {
+    margin-top: -4%;
+    opacity: 0.3;
 }
 </style>

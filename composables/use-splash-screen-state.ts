@@ -1,8 +1,10 @@
+import { toBoolean } from '~/utils/to-boolean'
+
 type SplashScreenState = 'disabled' | 'pending' | 'enter' | 'leave' | 'done'
 
 export function useSplashScreenState() {
-    const appConfig = useAppConfig()
-    const enabled = appConfig.featureFlags.splashScreen
+    const config = useRuntimeConfig()
+    const enabled = toBoolean(config.public.featureflag.splashscreen)
 
     return useState<SplashScreenState>('splashScreenState', () => enabled ? 'pending' : 'disabled')
 }

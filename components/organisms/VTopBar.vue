@@ -1,6 +1,4 @@
 <script  lang="ts" setup>
-import VLogo from '~/assets/images/logo.svg?component'
-
 const navWrapper = ref<HTMLElement | null>(null)
 const { isOpen } = useMobileMenu(navWrapper)
 
@@ -14,19 +12,10 @@ const links = computed(() => menu.value?.data.links)
         :class="[$style.root, isOpen && $style['root--is-open']]"
         class="grid"
     >
-        <NuxtLink
-            to="/"
+        <VMainLogo
             :class="$style.link"
-        >
-            <VIcon
-                name="logo"
-                :class="[$style.logo, $style['logo--mask']]"
-            />
-            <VLogo
-                :class="[$style.logo, $style['logo--default']]"
-            />
-            
-        </NuxtLink>
+            to="/"
+        />
         <VMenuButton :class="$style['menu-button']" />
         <div
             ref="navWrapper"
@@ -94,52 +83,6 @@ $flatter-background: color-mix(in srgb, $background-color, transparent 20%);
         &::after {
             display: none !important
         }
-    }
-}
-
-.link {
-    position: relative;
-    z-index: 101;
-    display: flex;
-    overflow: hidden;
-    width: fit-content;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    &--mask {
-        position: absolute;
-        width: 36px;
-        height: 40px;
-        background-image: linear-gradient(100deg,
-            #fff, #fff 10%, 
-            var(--theme-color-primary) 10.1%, var(--theme-color-primary) 60%, 
-            #fff 60.1%, #fff 70%,
-            var(--theme-color-primary) 70.1%, var(--theme-color-primary) 95%, 
-            #fff 95.1%
-         );
-        background-position: 40px 0;
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        color: transparent;
-        opacity: 0.7;
-        transition: background-position 0s ease(out-quart);
-
-        // mix-blend-mode: hard-light;
-        
-        @media (hover: hover) {
-            .link:hover & {
-                background-position: -40px 0;
-                transition-duration: 0.4s;
-            }
-        }
-    }
-
-    &--default {
-        // opacity: 0;
-        width: 36px;
-        height: auto;
     }
 }
 

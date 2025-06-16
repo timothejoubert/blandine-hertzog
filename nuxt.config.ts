@@ -59,10 +59,13 @@ export default defineNuxtConfig({
         public: {
             version,
             site: {
-                name: 'Blandine hertzog dev',
+                name: 'Blandine hertzog staging',
                 url: '',
                 env: '',
             },
+            featureflag: {
+                splashscreen: '0',
+            }
         },
     },
     alias: {
