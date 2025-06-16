@@ -56,6 +56,10 @@ export default defineNuxtConfig({
     },
     css: ['~/assets/scss/main.scss'],
     runtimeConfig: {
+        github: {
+            repo: '',
+            userToken: '',
+        },
         public: {
             version,
             site: {
@@ -63,9 +67,9 @@ export default defineNuxtConfig({
                 url: '',
                 env: '',
             },
-            featureflag: {
-                splashscreen: '0',
-            }
+            featureFlag: {
+                splashScreen: '0',
+            },
         },
     },
     alias: {

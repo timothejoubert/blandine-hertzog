@@ -37,7 +37,6 @@ const counter = ref(0)
 const { pause, resume } = useIntervalFn(
     () => {
         counter.value = counter.value + 1
-        console.log('Loading counter:', counter.value)
 
         if (counter.value >= 3) {
             pause()

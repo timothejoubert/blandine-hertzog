@@ -4,7 +4,7 @@ type SplashScreenState = 'disabled' | 'pending' | 'enter' | 'leave' | 'done'
 
 export function useSplashScreenState() {
     const config = useRuntimeConfig()
-    const enabled = toBoolean(config.public.featureflag.splashscreen)
+    const enabled = toBoolean(config.public.featureFlag.splashScreen)
 
     return useState<SplashScreenState>('splashScreenState', () => enabled ? 'pending' : 'disabled')
 }
