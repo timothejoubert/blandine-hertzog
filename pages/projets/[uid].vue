@@ -135,6 +135,7 @@ const slices = computed(() => documentData?.slices || [])
 
 .client {
     text-align: right;
+    text-transform: uppercase;
 }
 
 .root .date {

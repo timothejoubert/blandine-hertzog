@@ -41,7 +41,6 @@ defineProps<{
 .logo {
 	&--mask {
 		position: absolute;
-		font-size: var(--v-main-logo-height);
 		background-image: linear-gradient(100deg,
 			#fff, #fff 10%, 
 			var(--theme-color-primary) 10.1%, var(--theme-color-primary) 60%, 
@@ -53,6 +52,7 @@ defineProps<{
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		color: transparent;
+		font-size: var(--v-main-logo-height);
 		opacity: 0.7;
         transition: background-position 0.4s ease(out-quart);
 

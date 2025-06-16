@@ -121,11 +121,18 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
         content: '';
         inset: 0;
         transition: all 0.3s ease(out-quad);
+        opacity: 0.4;
 
         @media (hover: hover) {
             .root:hover & {
                 opacity: 0;
             }
+        }
+    }
+
+    @include media('>=md') {
+        &::after {
+            opacity: 1;
         }
     }
 }

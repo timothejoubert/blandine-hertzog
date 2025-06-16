@@ -135,11 +135,12 @@ onMounted(() => {
 
 .loading {
     position: absolute;
+    right: var(--gutter);
+    bottom: var(--gutter);
     display: flex;
     align-items: center;
     gap: rem(12);
-    right: var(--gutter);
-    bottom: var(--gutter);
+
     // text-transform: uppercase;
 }
 
