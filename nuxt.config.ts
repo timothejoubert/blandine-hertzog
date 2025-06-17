@@ -79,21 +79,6 @@ export default defineNuxtConfig({
         isDev ? undefined : 'pages/_stories/**',
         'assets/backup/**',
     ],
-    routeRules: {
-        // Redirection
-        "/portfolio/**": {
-            redirect: {
-                to: "/projets",
-                statusCode: 301,
-            },
-        },
-        "/timeline-cv/**": {
-            redirect: {
-                to: "/a-propos",
-                statusCode: 301,
-            },
-        },
-    },
     experimental: {
         payloadExtraction: false, // Page prerendering don't need payload to keep data persistant between SSR and client
         asyncContext: true,
