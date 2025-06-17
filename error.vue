@@ -74,11 +74,12 @@ useHead({
 <style lang="scss" module>
 .root {
     --v-footer-margin-top: auto;
-    
-    min-height: 100vh;
+
     display: flex;
+    min-height: 100vh;
     flex-direction: column;
 }
+
 .header {
     --v-page-title-justify-content: flex-start;
 }
