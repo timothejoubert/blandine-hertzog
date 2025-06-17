@@ -94,5 +94,6 @@ jobs:
                   remote-path: /blandinehertzog
                   # Transfer all files (useful for first deploy)
                   sync: full
+                  artifacts: true
                   # Port for SFTP access to server
                   remote-port: 22
