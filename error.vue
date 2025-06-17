@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from 'nuxt/app'
 
-import { components } from '~/slices'
 
 useSeoMeta({ robots: 'noindex, nofollow' })
 
@@ -36,24 +35,21 @@ onMounted(() => {
 const config = useRuntimeConfig()
 const homeUrl = config.public.site.url
 
-// COMMON SLICES
-// commonSlices aren't displayed in default layout because
-// useFetchPage throw error prevent usePrismicSettingsDocument to load
-const settings = await usePrismicSettingsDocument()
-const commonSlices = computed(() => settings?.data.slices)
+
 
 // Log the error for debugging purposes
 console.error('Error page:', props.error)
 
 useHead({
     title: `${t('error_page.title')} | ${config.public.site.name}`,
+    meta: [{ name: 'robots', content: 'noindex' }],
+
 })
 </script>
 
 <template>
-    <NuxtLayout
-        name="default"
-    >
+    <div :class="$style.root">
+        <VTopBar />
         <VHeader
             :title="title"
             :content="message"
@@ -69,16 +65,20 @@ useHead({
                 :class="$style.cta"
                 icon-name="auto"
             />
-            <LazySliceZone
-                v-if="commonSlices?.length"
-                :slices="commonSlices"
-                :components="components"
-            />
+            <VCommonSlices />
         </main>
-    </NuxtLayout>
+        <VFooter />
+    </div>
 </template>
 
 <style lang="scss" module>
+.root {
+    --v-footer-margin-top: auto;
+    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 .header {
     --v-page-title-justify-content: flex-start;
 }

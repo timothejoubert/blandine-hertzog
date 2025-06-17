@@ -1,25 +1,18 @@
 <script  lang="ts" setup>
-import { components } from '~/slices'
 import themeProperties from '~/assets/scss/export/_themes.module.scss'
 import elementId from '~/constants/element-id'
 
-// const splashScreenState = useSplashScreen()
-
 const route = useRoute()
 const isSliceSimulatorRoute = computed(() => route.name === 'slice-simulator')
-
 
 // useRuntimeConfig in callOnce create [nuxt] instance unavailable error
 // callOnce(async () => {
 if (!isSliceSimulatorRoute.value) await useFetchPage()
 // })
 
+// TODO: use composable tyo get current color theme dictionnary 
 const theme = useUiThemeState()
 const primaryColor = computed(() => themeProperties[`${theme.value}-color-primary`])
-
-// COMMON SLICES
-const settings = await usePrismicSettingsDocument()
-const commonSlices = computed(() => settings?.data.slices)
 
 const state = useSplashScreenState()
 </script>
@@ -37,18 +30,11 @@ const state = useSplashScreenState()
         <VTopBar />
     </template>
 
-    <slot>
-        <NuxtPage :id="elementId?.PAGE_CONTENT" />
-    </slot>
-
-    <LazySliceZone
-        v-if="commonSlices?.length"
-        :slices="commonSlices"
-        :components="components"
-        :context="{ attrs: { 'data-nosnippet': '' } }"
-    />
-
-    <VFooter
+    <NuxtPage :id="elementId?.PAGE_CONTENT" />
+    <VCommonSlices />
+    
+    <LazyVFooter
+        v-if="!isSliceSimulatorRoute"
         id="footer"
         data-nosnippet
     />

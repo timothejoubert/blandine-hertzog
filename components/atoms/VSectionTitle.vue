@@ -28,6 +28,7 @@ const { y } = useWindowScroll()
     font-family: $font-hanken-grostesk-family;
     font-size: 16px;
     text-transform: uppercase;
+    margin-top: initial;
 }
 
 .icon {

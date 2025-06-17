@@ -83,13 +83,11 @@ const links = computed(() => menu.value?.data.links || [])
 </template>
 
 <style lang="scss" module>
-@use 'assets/scss/v-footer' as *;
-
 .root {
     position: relative;
     display: grid;
     align-items: center;
-    margin-top: $v-footer-margin-top;
+    margin-top: var(--v-footer-margin-top, rem(172));
     padding-block: rem(42) rem(36);
     row-gap: rem(32);
 
