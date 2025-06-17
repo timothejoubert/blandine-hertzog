@@ -91,7 +91,7 @@ jobs:
                   remote-password: ${{ secrets.FTP_PASSWORD }}
                   # Path for specific folder on server for files deployment
                   local-path: .output/public
-                  remote-path: /kunden/homepages/43/d753987156/htdocs//blandinehertzog
+                  remote-path: /blandinehertzog
                   # Transfer all files (useful for first deploy)
                   sync: full
                   # Port for SFTP access to server
