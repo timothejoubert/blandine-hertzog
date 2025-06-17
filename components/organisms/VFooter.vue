@@ -71,11 +71,11 @@ const links = computed(() => menu.value?.data.links || [])
             <a
                 href="#body"
                 :class="$style['arrow-link']"
+                :aria-label="$t('scroll_to_top')"
             >
                 <VIcon
                     name="arrow-up"
                     :class="$style['icon-arrow']"
-                    :aria-label="$t('scroll_to_top')"
                 />
             </a>
         </nav>
