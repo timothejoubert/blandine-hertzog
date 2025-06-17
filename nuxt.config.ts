@@ -79,6 +79,21 @@ export default defineNuxtConfig({
         isDev ? undefined : 'pages/_stories/**',
         'assets/backup/**',
     ],
+    routeRules: {
+        // Redirection
+        "/portfolio/**": {
+            redirect: {
+                to: "/projets",
+                statusCode: 301,
+            },
+        },
+        "/timeline-cv/**": {
+            redirect: {
+                to: "/a-propos",
+                statusCode: 301,
+            },
+        },
+    },
     experimental: {
         payloadExtraction: false, // Page prerendering don't need payload to keep data persistant between SSR and client
         asyncContext: true,
@@ -98,7 +113,8 @@ export default defineNuxtConfig({
             '/**': {
                 prerender: true,
                 ssr: true, // when prerendered, it will have the full html of the page present, not an empty div
-                isr: 3600 * 1, // 1 hours (https://developers.netlify.com/guides/isr-and-advanced-caching-with-nuxt-v4-on-netlify/)
+                isr: true, // 2 hours (https://developers.netlify.com/guides/isr-and-advanced-caching-with-nuxt-v4-on-netlify/)
+                // isr: 3600 * 2, // 2 hours (https://developers.netlify.com/guides/isr-and-advanced-caching-with-nuxt-v4-on-netlify/)
                 headers: {
                     // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
                     'Access-Control-Allow-Origin': '*',
@@ -119,7 +135,7 @@ export default defineNuxtConfig({
             '/projets/**': { 
                 prerender: true,
                 ssr: true,
-                isr:  3600 * 2, // 1 hours
+                isr:  true, // Similar as 'static: true' but revalidate cache when new deploy is done
             },
             [PREVIEW_PATH]: {
                 prerender: false,
@@ -130,19 +146,6 @@ export default defineNuxtConfig({
                 // ssr: false,
                 prerender: false,
                 robots: false,
-            },
-            // Redirection
-            "/portfolio/**": {
-                redirect: {
-                    to: "/projets",
-                    statusCode: 301,
-                },
-            },
-            "/timeline-cv/**": {
-                redirect: {
-                    to: "/a-propos",
-                    statusCode: 301,
-                },
             },
         },
     },
