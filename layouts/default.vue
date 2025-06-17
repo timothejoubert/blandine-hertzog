@@ -45,7 +45,11 @@ const state = useSplashScreenState()
         v-if="commonSlices?.length"
         :slices="commonSlices"
         :components="components"
+        :context="{ attrs: { 'data-nosnippet': '' } }"
     />
 
-    <VFooter id="footer" />
+    <VFooter
+        id="footer"
+        data-nosnippet
+    />
 </template>

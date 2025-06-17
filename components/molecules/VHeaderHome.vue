@@ -75,13 +75,13 @@ function openFullscreen() {
         />
         <VText
             v-if="tagline"
-            tag="h2"
+            tag="div"
             :content="tagline"
             :class="$style.tagline"
         />
         <VText
             v-if="location"
-            tag="h2"
+            tag="div"
             :content="location"
             :class="$style.location"
         />
@@ -90,6 +90,7 @@ function openFullscreen() {
         >
             <button
                 :class="[$style.button, $style['button--play-state']]"
+                :aria-label="isPaused ? $t('play_video') : $t('pause_video')"
                 @click="onVideoClicked"
             >
                 <VIcon

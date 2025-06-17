@@ -16,7 +16,7 @@
 - Schema.org (CreativeWork > VisualArtwork)
 
 ## Abandoned
-- Showreal prismic img ? 
+- Showreal prismic img ? (to much loading time)
 
 ## Releases check
 - check sitemap & robots.txt

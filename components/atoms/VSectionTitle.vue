@@ -9,7 +9,7 @@ const { y } = useWindowScroll()
 
 <template>
     <component
-        :is="rootTag || 'div'"
+        :is="rootTag || 'h2'"
         :class="$style.root"
     >
         <VAsterisk

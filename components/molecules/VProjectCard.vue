@@ -16,8 +16,8 @@ const isFullwidth = computed(() => props.size === 'fullwidth')
 
 const imageSizes = computed(() => {
     return isFullwidth.value
-            ? 'xs:92vw md:92vw lg:92vw xl:92vw hq:92vw qhd:92vw' 
-            : 'xs:92vw md:92vw lg:45vw xl:45vw hq:45vw qhd:45vw'
+            ? 'xs:92vw sm:92vw md:92vw lg:92vw xl:92vw hq:92vw qhd:92vw' 
+            : 'xs:92vw sm:92vw md:92vw lg:45vw xl:45vw hq:45vw qhd:45vw'
 })
 
 const imageDimension = computed(() => {
@@ -55,6 +55,7 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
             :class="$style['media-wrapper']"
             rel="noopener nofollow"
             tabindex="-1"
+            :aria-label="title"
         >
             <VImg
                 v-if="image"
@@ -63,7 +64,7 @@ const rootEl = useTemplateRef<HTMLElement>('rootRef')
                 :height="imageDimension.height"
                 :sizes="imageSizes"
                 provider="imgix"
-                :alt="image.alt ?? undefined"
+                :alt="image.alt ?? `image principale du projet: ${title}`"
                 :modifiers="{ 
                     fit: 'crop', 
                     ar: imageDimension.width / imageDimension.height, 

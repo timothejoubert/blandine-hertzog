@@ -5,6 +5,13 @@ import { isFilled } from '@prismicio/client'
 const props = defineProps(
     getSliceComponentProps<Content.ContactSliceSlice>(),
 )
+
+const contextAttrs = computed(() => {
+    if (!props.context || typeof props.context !== 'object') return 
+
+    return 'attrs' in props.context && typeof props.context.attrs === 'object' ? props.context.attrs : undefined
+})
+
 const primary = computed(() => props.slice.primary)
 
 const bodyContent = computed(() => {
@@ -20,6 +27,7 @@ const bodyContent = computed(() => {
         :class="$style.root"
         class="grid"
         :spacing="primary.spacing"
+        v-bind="contextAttrs"
     >
         <VSectionTitle
             v-if="primary.title"
