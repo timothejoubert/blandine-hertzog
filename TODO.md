@@ -1,8 +1,14 @@
 ## In progress
+- Dynamique deploy on ionos 
+- Share img
+- Redirection
+- Check lightSpeed
+- Check og meta
+- Page error not displayed
+
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
 ## TODO
-- Share img
 - Page transition (VPageTitle: Reveal animation (and others elements))
 - splash screen
 

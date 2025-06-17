@@ -85,6 +85,8 @@ export default defineNuxtConfig({
     },
     compatibilityDate: '2024-07-09',
     nitro: {
+        compressPublicAssets: true,
+        minify: true,
         prerender: {
             // enabled by default with nuxt generate, not required
             // crawlLinks: true,
@@ -127,6 +129,19 @@ export default defineNuxtConfig({
                 // ssr: false,
                 prerender: false,
                 robots: false,
+            },
+            // Redirection
+            "/portfolio/**": {
+                redirect: {
+                    to: "/projets",
+                    statusCode: 301,
+                },
+            },
+            "/timeline-cv/**": {
+                redirect: {
+                    to: "/a-propos",
+                    statusCode: 301,
+                },
             },
         },
     },
@@ -233,6 +248,7 @@ export default defineNuxtConfig({
             },
         },
     },
+    // minify: true,
     prismic: {
         endpoint: slicemachine.endpoint,
         preview: PREVIEW_PATH,
@@ -249,7 +265,7 @@ export default defineNuxtConfig({
     // https://www.nuxtseo.com/sitemap/getting-started/installation
     sitemap: {
         sources: ['/api/sitemap'],
-        exclude: ['/slice-simulator', PREVIEW_PATH],
+        exclude: ['/slice-simulator', PREVIEW_PATH, '/404', '/200'],
     },
     // https://github.com/rezozero/nuxt-stories
     stories: {
