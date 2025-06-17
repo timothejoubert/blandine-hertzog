@@ -1,8 +1,8 @@
 ## In progress
+- Check lightSpeed
 - Dynamique deploy on ionos 
 - Share img
 - Redirection
-- Check lightSpeed
 - Check og meta
 - Page error not displayed
 
