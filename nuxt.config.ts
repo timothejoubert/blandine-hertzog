@@ -80,6 +80,7 @@ export default defineNuxtConfig({
         'assets/backup/**',
     ],
     experimental: {
+        payloadExtraction: false, // Page prerendering don't need payload to keep data persistant between SSR and client
         asyncContext: true,
         appManifest: false, // We don't need client route rules for now, and Nuxt makes an extra request to get them.
     },
