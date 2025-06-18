@@ -89,17 +89,14 @@ export default defineNuxtConfig({
         compressPublicAssets: true,
         minify: true,
         prerender: {
-            // enabled by default with nuxt generate, not required
-            // crawlLinks: true,
-            // add any routes to prerender (usefull for sitemap generation)
-            routes: ['/']
+            // crawlLinks: true, // enabled by default with nuxt generate, not required
+            routes: ['/'] // add any routes to prerender (usefull for sitemap generation)
         },
         routeRules: {
             '/**': {
-                prerender: true,
+                prerender: true, // pre-rendered at build time
                 ssr: true, // when prerendered, it will have the full html of the page present, not an empty div
-                isr: true, // 2 hours (https://developers.netlify.com/guides/isr-and-advanced-caching-with-nuxt-v4-on-netlify/)
-                // isr: 3600 * 2, // 2 hours (https://developers.netlify.com/guides/isr-and-advanced-caching-with-nuxt-v4-on-netlify/)
+                isr: true, //  generated on demand once until next deployment, cached on CDN
                 headers: {
                     // 'Access-Control-Allow-Origin': 'Same-Origin \'self\' \'http://localhost:3000\' \'https://i.ytimg.com\'',
                     'Access-Control-Allow-Origin': '*',
@@ -117,19 +114,14 @@ export default defineNuxtConfig({
                     ].join('; '),
                 },
             },
-            '/projets/**': { 
-                prerender: true,
-                ssr: true,
-                isr:  true, // Similar as 'static: true' but revalidate cache when new deploy is done
-            },
             [PREVIEW_PATH]: {
                 prerender: false,
-                ssr: false,
+                ssr: false, // Client-Side rendered
                 robots: false,
             },
             '/slice-simulator': {
-                // ssr: false,
                 prerender: false,
+                ssr: false, // Client-Side rendered
                 robots: false,
             },
         },
