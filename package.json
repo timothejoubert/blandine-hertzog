@@ -51,6 +51,7 @@
         "vite-svg-loader": "^5.1.0"
     },
     "dependencies": {
+        "@netlify/functions": "^4.1.6",
         "lodash": "^4.17.21",
         "plyr": "^3.7.8",
         "tiny-emitter": "^2.1.0"

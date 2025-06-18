@@ -1,0 +1,21 @@
+meta {
+  name: Run netlify function to GH actions
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://blandine-hertzog.netlify.app/.netlify/functions/run-gh-dispatches
+  body: none
+  auth: none
+}
+
+body:text {
+  { 
+    "event_type": "{{WEBHOOK_NAME}}",
+    "client_payload": {
+      "unit": "false",
+      "integration": "true"
+    }
+  }
+}
