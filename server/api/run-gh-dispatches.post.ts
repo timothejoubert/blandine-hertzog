@@ -1,13 +1,11 @@
 export default defineEventHandler((event) => {
     const runtimeConfig = useRuntimeConfig(event)
 
-    if (!runtimeConfig.github.userToken || !runtimeConfig.github.repo) {
-      return setResponseStatus(event, 503, 'Missing userToken or github repo to run github dispatch event')
+    if (!runtimeConfig.github.userToken) {
+      return setResponseStatus(event, 503, 'Missing userToken to run github dispatch event')
     }
-    
-    const githubDispatchUrl = `${runtimeConfig.github.repo}/dispatches`
 
-    return $fetch(githubDispatchUrl, {
+    return $fetch('https://api.github.com/repos/timothejoubert/blandine-hertzog/dispatches', {
         method: 'POST',
         headers: {
             Accept: 'application/vnd.github+json',
