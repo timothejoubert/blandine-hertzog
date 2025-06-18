@@ -9,6 +9,7 @@ on:
     repository_dispatch:
         types:
             - prismic_publish_trigger
+            - custom_bruno_trigger
 
 jobs:
     # Cancel previous builds to avoid build stacking
