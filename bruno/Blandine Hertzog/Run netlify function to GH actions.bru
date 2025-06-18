@@ -5,9 +5,17 @@ meta {
 }
 
 post {
-  url: https://blandine-hertzog.netlify.app/.netlify/functions/run-gh-dispatches
-  body: none
+  url: {{webhook_url}}/.netlify/functions/run-gh-dispatches
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "source": {
+      "secret": {{NUXT_PRISMIC_WEBHOOK_PASSWORD}} 
+    }
+  }
 }
 
 body:text {

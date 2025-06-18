@@ -25,3 +25,6 @@ logs
 !.env.sample
 !.env.stories
 
+
+# Local Netlify folder
+.netlify

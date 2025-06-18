@@ -2,18 +2,19 @@
 import type { Context } from "@netlify/functions";
 
 export default async (req: Request, _context: Context) => {
-    console.log(req)
+    console.log('netlify function')
 
     if (req.method !== 'POST') {
         return new Response("wrong method to netlify function.", { status: 401 });
-        return 
     }    
 
-    // const prismicWebhookPsw = Netlify.env.get("NUXT_PRISMIC_WEBHOOK_PASSWORD") || process.env.NUXT_PRISMIC_WEBHOOK_PASSWORD
-    // if (req.donKnow !== prismicWebhookPsw) {
-    //     console.log(req, 'Webhook passphrase invalid')
-    //     return new Response("Webhook passphrase invalid", { status: 403 }); 
-    // }
+    const prismicWebhookPsw = Netlify.env.get("NUXT_PRISMIC_WEBHOOK_PASSWORD") || process.env.NUXT_PRISMIC_WEBHOOK_PASSWORD
+    const rawBody = JSON.parse(req.body?.source)
+    console.log(req.body, rawBody)
+
+    if (rawBody?.["secret"] !== prismicWebhookPsw) {
+        return new Response(`Webhook passphrase invalid, ${JSON.stringify(rawBody?.secret)}`, { status: 403, body: 'WIP', }); 
+    }
     
 
     return fetch('https://api.github.com/repos/timothejoubert/blandine-hertzog/dispatches', {
