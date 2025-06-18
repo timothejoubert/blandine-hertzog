@@ -9,18 +9,19 @@ export default async (req: Request, _context: Context) => {
     }    
 
     const prismicWebhookPsw = Netlify.env.get("NUXT_PRISMIC_WEBHOOK_PASSWORD") || process.env.NUXT_PRISMIC_WEBHOOK_PASSWORD
-    const rawBody = req.body
-    console.log(req.body, rawBody)
 
-    if (rawBody?.["secret"] !== prismicWebhookPsw) {
-        return Response.json({...req, _context});
-        // return new Response(`Webhook passphrase invalid, ${JSON.stringify(rawBody)}`, { 
-        //     status: 403,
-        //     headers: { 
-        //         "content-type": "application/json" 
-        //     },
-        //     body: JSON.parse(req.body), 
-        // }); 
+    const requestBody = await req.json()
+    const data = requestBody?.source
+    console.log('data', req.body, requestBody, data)
+
+    if (typeof data !== 'object') {
+        return new Response(`Can't find body content, ${data}`); 
+    }
+
+    if (typeof data === 'object' && data?.["secret"] !== prismicWebhookPsw) {
+        return new Response(`Webhook passphrase invalid`, { 
+            status: 403,
+        }); 
     }
     
 
