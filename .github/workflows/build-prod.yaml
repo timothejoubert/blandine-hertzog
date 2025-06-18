@@ -8,9 +8,9 @@ on:
 
     repository_dispatch:
         types:
-            - preprod_api_publish_trigger
-            - custom_bruno_trigger
-            # - netlify_function_publish_trigger
+            - custom_bruno_trigger # use for manual or test purpose (bruno)
+            - preprod_api_publish_trigger # send by nuxt api route (/server/api/run-gh-dispatched.post.ts)
+            - netlify_function_publish_trigger # send by netlify function (/netlify/functions/run-gh-dispatched.mts)
 
 jobs:
     # Cancel previous builds to avoid build stacking
