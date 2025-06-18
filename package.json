@@ -6,6 +6,7 @@
     "scripts": {
         "slicemachine": "start-slicemachine",
         "dev": "nuxi dev",
+        "dev:netlify": "netlify dev",
         "build": "nuxi build",
         "analyze": "nuxi analyze",
         "generate": "nuxi generate --dotenv .env.prod",

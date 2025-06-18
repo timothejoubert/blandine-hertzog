@@ -17,7 +17,7 @@ export function usePrismicSeoMeta(document: ReachableDocument) {
             apiImgUrl,
             {
                 fit: 'crop',
-                width: 800,
+                width: 720,
             },
             {
                 provider: 'imgix',

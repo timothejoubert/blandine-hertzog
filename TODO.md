@@ -3,7 +3,9 @@
 - Check lightSpeed
 - Share img
 - Check og meta
+- ajouter lazyHydration on visible
 - Add apache Cache-Control in .htaccess
+- .htaccess not automatly transfert to ionos
 
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
