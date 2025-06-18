@@ -4,6 +4,7 @@
 - Share img
 - Redirection
 - Check og meta
+- Add apache Cache-Control in .htaccess
 - Page error not displayed
 
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
