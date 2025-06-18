@@ -1,11 +1,9 @@
 ## In progress
+- Page error not displayed
 - Check lightSpeed
-- Dynamique deploy on ionos 
 - Share img
-- Redirection
 - Check og meta
 - Add apache Cache-Control in .htaccess
-- Page error not displayed
 
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
@@ -17,12 +15,14 @@
 ## Later
 - Schema.org (CreativeWork > VisualArtwork)
 
-## Abandoned
-- Showreal prismic img ? (to much loading time)
-
-## Releases check
+## Releases check (done)
 - check sitemap & robots.txt
 - Check les redirections
+- Redirection
+- Dynamique deploy on ionos 
+
+## Abandoned
+- Showreal prismic img ? (to much loading time)
 
 ## Done
 - ServiceSlice: responsive
