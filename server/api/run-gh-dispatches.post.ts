@@ -12,7 +12,7 @@ export default defineEventHandler((event) => {
             Authorization: `token ${runtimeConfig.github.userToken}`,
         },
         body: {
-            event_type: 'prismic_publish_trigger',
+            event_type: 'preprod_api_publish_trigger',
             client_payload: {
                 unit: false,
                 integration: true,

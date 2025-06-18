@@ -8,8 +8,9 @@ on:
 
     repository_dispatch:
         types:
-            - prismic_publish_trigger
+            - preprod_api_publish_trigger
             - custom_bruno_trigger
+            # - netlify_function_publish_trigger
 
 jobs:
     # Cancel previous builds to avoid build stacking
