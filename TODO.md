@@ -12,6 +12,7 @@
 ## TODO
 - Page transition (VPageTitle: Reveal animation (and others elements))
 - splash screen
+- update and compress showreel video (aviff ?)
 
 ## Later
 - Schema.org (CreativeWork > VisualArtwork)

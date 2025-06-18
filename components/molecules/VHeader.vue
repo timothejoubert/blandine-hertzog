@@ -37,6 +37,8 @@ defineProps<{
             provider="imgix"
             :alt="media.alt ?? undefined"
             :class="$style.media"
+            loading="eager"
+            fetchpriority="high"
         />
     </header>
 </template>
