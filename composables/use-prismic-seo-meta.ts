@@ -17,7 +17,8 @@ export function usePrismicSeoMeta(document: ReachableDocument) {
             apiImgUrl,
             {
                 fit: 'crop',
-                width: 720,
+                width: 1200,
+                height: 700,
             },
             {
                 provider: 'imgix',
@@ -37,6 +38,8 @@ export function usePrismicSeoMeta(document: ReachableDocument) {
         twitterCard: 'summary',
         twitterTitle: title,
         ogImage: image,
+        ogImageWidth: '1200',
+        ogImageHeight: '700',
         twitterImage: image,
         ogUrl: canonicalUrl,
     })

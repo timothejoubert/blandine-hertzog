@@ -1,12 +1,6 @@
 ## In progress
 - Page error not displayed
-- Check pagespeed
-- Share img
 - Check og meta
-- ajouter lazyHydration on visible
-- Add apache Cache-Control in .htaccess
-- .htaccess not automatly transfert to ionos
-
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
 ## TODO
@@ -15,6 +9,9 @@
 - update and compress showreel video (aviff ?)
 
 ## Later
+- .htaccess not automatly transfert to ionos
+- Add apache Cache-Control in .htaccess
+- ajouter lazyHydration on visible
 - Schema.org (CreativeWork > VisualArtwork)
 
 ## Releases check (done)
@@ -22,11 +19,14 @@
 - Check les redirections
 - Redirection
 - Dynamique deploy on ionos 
+- Balise alt img
 
 ## Abandoned
 - Showreal prismic img ? (to much loading time)
 
 ## Done
+- Check pagespeed
+- Share img
 - ServiceSlice: responsive
 - MouseFollow responsive
 - Page error 
