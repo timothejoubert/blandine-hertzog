@@ -1,6 +1,6 @@
 ## In progress
 - Page error not displayed
-- Check lightSpeed
+- Check pagespeed
 - Share img
 - Check og meta
 - ajouter lazyHydration on visible
