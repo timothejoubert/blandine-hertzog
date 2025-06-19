@@ -48,6 +48,7 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
         document: document.value,
     }
 
+    usePrismicHead(document.value)
     usePrismicSeoMeta(document.value)
 
     useHead({

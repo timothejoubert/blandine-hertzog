@@ -1,15 +1,16 @@
 import { joinURL } from 'ufo'
 import type { Link, Script } from '@unhead/schema'
-import type { PrismicWebResponse } from '~/composables/use-prismic-fetch-document'
 import { getFormattedLocale } from '~/composables/use-locale'
 import { I18N_DEFAULT_LOCALE } from '~/constants/i18n'
+import type { ReachableDocument } from '~/types/api'
 
-export function usePrismicHead(webResponse?: PrismicWebResponse) {
+
+export function usePrismicHead(webResponse?: ReachableDocument) {
     const nuxtApp = useNuxtApp()
     const route = useRoute()
     const runtimeConfig = useRuntimeConfig()
 
-    const { $i18n } = nuxtApp
+
 
     const script: (Script<['script']> | string)[] = []
     const link: Link[] = [
@@ -20,22 +21,25 @@ export function usePrismicHead(webResponse?: PrismicWebResponse) {
     ]
 
     // ALTERNATE LINKS
-    const currentAlternateLink = { id: 'default', type: webResponse?.type || '', lang: I18N_DEFAULT_LOCALE }
-    const alternateLinks = [...webResponse?.alternate_languages || [], currentAlternateLink]
+    const alternateLinks = [
+        ...(webResponse?.alternate_languages || []), 
+        { id: 'default', type: webResponse?.type || '', lang: I18N_DEFAULT_LOCALE }
+    ]
 
-    const alternateLinksHead = alternateLinks.map((alternateLink) => {
+    alternateLinks.forEach((alternateLink) => {
         const formattedLocale = getFormattedLocale(alternateLink.lang)
         const locale = formattedLocale === I18N_DEFAULT_LOCALE ? '' : formattedLocale
-        return {
+
+        link.push({
             hid: `alternate-${alternateLink.lang}`,
             rel: 'alternate',
             hreflang: alternateLink.lang,
             href: joinURL(runtimeConfig.public.site.url, locale, route.fullPath),
-        }
+        })
     })
-    if (alternateLinksHead.length) link.push(...alternateLinksHead)
 
     //
+    const { $i18n } = nuxtApp
     useHead({
         htmlAttrs: {
             lang: $i18n.locale.value,
@@ -46,6 +50,4 @@ export function usePrismicHead(webResponse?: PrismicWebResponse) {
             { name: 'version', content: runtimeConfig.public.version },
         ],
     })
-
-    return alternateLinks
 }

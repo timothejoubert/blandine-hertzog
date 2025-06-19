@@ -1,6 +1,5 @@
 ## In progress
 - Page error not displayed
-- Check og meta
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
 ## TODO
@@ -25,6 +24,7 @@
 - Showreal prismic img ? (to much loading time)
 
 ## Done
+- Check og meta
 - Check pagespeed
 - Share img
 - ServiceSlice: responsive
