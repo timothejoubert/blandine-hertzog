@@ -2,16 +2,19 @@
 - Page error not displayed
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 
+
 ## TODO
 - Page transition (VPageTitle: Reveal animation (and others elements))
 - splash screen
 - update and compress showreel video (aviff ?)
+
 
 ## Later
 - .htaccess not automatly transfert to ionos
 - Add apache Cache-Control in .htaccess
 - ajouter lazyHydration on visible
 - Schema.org (CreativeWork > VisualArtwork)
+
 
 ## Releases check (done)
 - check sitemap & robots.txt
@@ -20,8 +23,10 @@
 - Dynamique deploy on ionos 
 - Balise alt img
 
+
 ## Abandoned
 - Showreal prismic img ? (to much loading time)
+
 
 ## Done
 - Check og meta

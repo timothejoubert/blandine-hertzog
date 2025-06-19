@@ -52,7 +52,7 @@ export async function useFetchPage<T extends ReachableDocument>(type?: PrismicDo
     usePrismicSeoMeta(document.value)
 
     useHead({
-        title: `${document.value.data?.meta_title || document.value?.data?.title} | ${config.public.site.name}`,
+        title: document.value.data?.meta_title || `${document.value?.data?.title} | ${config.public.site.name}`,
     })
 
     return { 
