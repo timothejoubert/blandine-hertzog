@@ -16,7 +16,7 @@ export function usePrismicHead(webResponse?: ReachableDocument) {
     const link: Link[] = [
         {
             rel: 'canonical',
-            href: joinURL(runtimeConfig.public.site.url, webResponse?.url || route.fullPath),
+            href: joinURL(runtimeConfig.public.site.url, webResponse?.url || route.path),
         },
     ]
 

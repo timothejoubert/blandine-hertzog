@@ -4,8 +4,8 @@ import type { ReachableDocument } from '~/types/api'
 
 export function usePrismicSeoMeta(document: ReachableDocument) {
     const config = useRuntimeConfig()
-    const siteName = config.public.site.name || ''
-    const siteUrl = config.public.site.url || ''
+    const siteName = config.public.site.name
+    const siteUrl = config.public.site.url
 
     const title = document.data?.meta_title || document.data?.title || siteName
     const description = document.data?.meta_description || getText(document.data?.content)
@@ -26,8 +26,7 @@ export function usePrismicSeoMeta(document: ReachableDocument) {
         )
         : joinURL(siteUrl, '/share.jpg')
 
-    const { fullPath } = useRoute()
-    const canonicalUrl = joinURL(siteUrl, fullPath)
+    const { path } = useRoute()
 
     useSeoMeta({
         ogSiteName: siteName,
@@ -41,6 +40,6 @@ export function usePrismicSeoMeta(document: ReachableDocument) {
         ogImageWidth: '1200',
         ogImageHeight: '700',
         twitterImage: image,
-        ogUrl: canonicalUrl,
+        ogUrl: joinURL(siteUrl, document.url || path),
     })
 }
