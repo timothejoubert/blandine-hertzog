@@ -19,6 +19,7 @@ const state = useSplashScreenState()
 
 <template>
     <template v-if="!isSliceSimulatorRoute">
+        <NuxtRouteAnnouncer />
         <ClientOnly>
             <VGridVisualizer />
             <VMediaViewer />
