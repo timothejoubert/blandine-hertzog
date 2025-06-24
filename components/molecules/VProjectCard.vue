@@ -16,7 +16,7 @@ const isFullwidth = computed(() => props.size === 'fullwidth')
 
 const imageSizes = computed(() => {
     return isFullwidth.value
-            ? 'xs:92vw sm:92vw md:92vw lg:92vw xl:92vw hq:92vw qhd:92vw' 
+            ? 'xs:92vw sm:92vw md:92vw lg:70vw xl:70vw hq:70vw qhd:70vw' 
             : 'xs:92vw sm:92vw md:92vw lg:45vw xl:45vw hq:45vw qhd:45vw'
 })
 
