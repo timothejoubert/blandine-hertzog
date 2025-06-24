@@ -19,6 +19,12 @@ export default async (request: Request, _context: Context) => {
     try {
         const data = await request.json()
 
+        // Check payload type
+        // Sometime body secret isn't a string
+        if (!data || typeof data !== 'object') {
+            return new Response("Invalid JSON payload.", { status: 400 });
+        }
+
        if (data?.secret !== prismicWebhookPsw) {
             return new Response("Invalid webhook secret.", { status: 403 });
         }
