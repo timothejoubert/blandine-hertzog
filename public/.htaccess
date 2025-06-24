@@ -49,3 +49,6 @@ RewriteRule ^portfolio\.html$ /projets [R=301,L]
 # Redirection de toutes les variantes de /timeline-cv vers /a-propos
 RewriteRule ^timeline-cv(/index\.html)?$ /a-propos [R=301,L]
 RewriteRule ^timeline-cv\.html$ /a-propos [R=301,L]
+
+# Affichage de la page 404 générée par Nuxt
+ErrorDocument 404 /404.html
