@@ -7,6 +7,7 @@ import { prismicDocumentRoutes } from './constants/prismic-page'
 import { PREVIEW_PATH } from './constants/prismic-preview'
 
 const isDev = process.env.NODE_ENV === 'development'
+const isProd = process.env.NUXT_PUBLIC_SITE_ENV === 'production'
 
 export default defineNuxtConfig({
     modules: [
@@ -46,7 +47,7 @@ export default defineNuxtConfig({
                 { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#fff' },
             ],
             script: [
-                {
+                isProd ? undefined : {
                     src: `https://static.cdn.prismic.io/prismic.js?new=true&repo=${slicemachine.repositoryName}`,
                     async: true,
                     defer: true,
@@ -236,7 +237,7 @@ export default defineNuxtConfig({
     prismic: {
         endpoint: slicemachine.endpoint,
         preview: PREVIEW_PATH,
-        toolbar: true,
+        toolbar: !isProd,
         clientConfig: {
             routes: prismicDocumentRoutes as unknown as Route[],
         },
