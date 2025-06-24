@@ -6,8 +6,18 @@ meta {
 
 post {
   url: {{webhook_url}}/api/run-gh-dispatches
-  body: none
+  body: json
   auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "secret": {{NUXT_PRISMIC_WEBHOOK_PASSWORD}}
+  }
 }
 
 body:text {

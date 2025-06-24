@@ -1,8 +1,6 @@
 ## In progress
-- Enlever prismic toolbar sur la prod (enlever cookie et external js) 
 - Page error not displayed
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
-
 
 ## TODO
 - Page transition (VPageTitle: Reveal animation (and others elements))
@@ -30,6 +28,7 @@
 
 
 ## Done
+- Enlever prismic toolbar sur la prod (enlever cookie et external js) 
 - Check og meta
 - Check pagespeed
 - Share img
