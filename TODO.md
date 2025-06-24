@@ -1,4 +1,5 @@
 ## In progress
+- Enlever prismic toolbar sur la prod (enlever cookie et external js) 
 - Page error not displayed
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
 

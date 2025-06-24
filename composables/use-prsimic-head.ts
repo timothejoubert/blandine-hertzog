@@ -9,16 +9,18 @@ export function usePrismicHead(webResponse?: ReachableDocument) {
     const nuxtApp = useNuxtApp()
     const route = useRoute()
     const runtimeConfig = useRuntimeConfig()
-
+    const siteUrl = runtimeConfig.public.site.url
 
 
     const script: (Script<['script']> | string)[] = []
     const link: Link[] = [
         {
             rel: 'canonical',
-            href: joinURL(runtimeConfig.public.site.url, webResponse?.url || route.path),
+            href: joinURL(siteUrl, webResponse?.url || route.path),
         },
     ]
+
+    // console.log('usePrimicHead', siteUrl, webResponse?.url || route.path, link)
 
     // ALTERNATE LINKS
     const alternateLinks = [
@@ -34,7 +36,7 @@ export function usePrismicHead(webResponse?: ReachableDocument) {
             hid: `alternate-${alternateLink.lang}`,
             rel: 'alternate',
             hreflang: alternateLink.lang,
-            href: joinURL(runtimeConfig.public.site.url, locale, route.fullPath),
+            href: joinURL(siteUrl, locale, route.path),
         })
     })
 
