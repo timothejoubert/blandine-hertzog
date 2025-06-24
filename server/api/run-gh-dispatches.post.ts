@@ -1,3 +1,5 @@
+// Use for trigger github action (Deploy to prod)
+// This route need to be deploy with a hosting with server (in preprod for example)
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig(event)
 
