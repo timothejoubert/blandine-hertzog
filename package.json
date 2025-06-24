@@ -3,6 +3,9 @@
     "name": "blandine-hertzog",
     "description": "Blandine Hertzog personal website",
     "author": "Timothé Joubert",
+    "engines": {
+        "node": "22.14.0"
+    },
     "scripts": {
         "slicemachine": "start-slicemachine",
         "dev": "nuxi dev",
