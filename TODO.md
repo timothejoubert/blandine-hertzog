@@ -1,33 +1,28 @@
 ## In progress
-- Page error not displayed
 - projectFeedSlice: Finish Animation sticky (blur and scale) 
+- Page transition (VPageTitle: Reveal animation (and others elements))
 
 ## TODO
-- Page transition (VPageTitle: Reveal animation (and others elements))
-- splash screen
-- update and compress showreel video (aviff ?)
-
 
 ## Later
-- .htaccess not automatly transfert to ionos
+- .htaccess not automatly transfert to ionos (le github action qui s'occupe du transfert de fichier semble ignorer les fichers commencant par .)
 - Add apache Cache-Control in .htaccess
 - ajouter lazyHydration on visible
 - Schema.org (CreativeWork > VisualArtwork)
+- Better splash screen
 
+## Abandoned
+- Showreal prismic img ? (to much loading time)
+- update and compress showreel video (aviff ?)
 
 ## Releases check (done)
 - check sitemap & robots.txt
 - Check les redirections
-- Redirection
 - Dynamique deploy on ionos 
 - Balise alt img
 
-
-## Abandoned
-- Showreal prismic img ? (to much loading time)
-
-
 ## Done
+- Page error not displayed
 - Enlever prismic toolbar sur la prod (enlever cookie et external js) 
 - Check og meta
 - Check pagespeed
