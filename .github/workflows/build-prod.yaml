@@ -14,6 +14,7 @@ on:
 
 jobs:
     # Cancel previous builds to avoid build stacking
+    # Depracated: use concurrency instead https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#concurrency
     pre-job:
         name: Pre-job
         runs-on: ubuntu-latest
@@ -48,7 +49,7 @@ jobs:
               run: pnpm generate
               env:
                   NUXT_PUBLIC_SITE_NAME: Blandine Hertzog
-                  NUXT_PUBLIC_SITE_URL: https://blandinehertzog.com/index.html
+                  NUXT_PUBLIC_SITE_URL: https://blandinehertzog.com
                   NUXT_PUBLIC_SITE_ENV: production
                   NUXT_PUBLIC_FEATURE_FLAG_SPLASH_SCREEN: 1
 
@@ -95,7 +96,8 @@ jobs:
                   # Path for specific folder on server for files deployment
                   local-path: .output/public
                   remote-path: /blandinehertzog
-                  # Transfer all files (useful for first deploy)
+                  # full: Transfer all files (Does not delete files on remote host)
+                  # delta:  Transfer only changed files (upload and delete) since last revision
                   sync: full
                   artifacts: true
                   # Port for SFTP access to server
