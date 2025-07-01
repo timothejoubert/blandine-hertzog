@@ -4,7 +4,7 @@ const { document } = await usePrismicFetchDocument(undefined)
 // /prismic-preview?token=https://blandine-hertzog.prismic.io/previews/aApAZBEAACMAygXb?websitePreviewId=ZzUxtBIAACwAI9Jj&documentId=ZzTWWxIAACgAI0P5
 
 const route = useRoute()
-if(document.value.url) {
+if(document.value?.url) {
     await navigateTo({ 
         path: document.value.url, 
         query: { 
